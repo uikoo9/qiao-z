@@ -1,5 +1,5 @@
 // ua
-import ua from 'qiao-ua';
+import ua from 'qiao-z-ua';
 
 /**
  * handle useragent
