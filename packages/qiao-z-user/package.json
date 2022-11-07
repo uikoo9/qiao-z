@@ -12,10 +12,10 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/uikoo9/qiao-monorepo.git"
+        "url": "git+https://github.com/uikoo9/qiao-z.git"
     },
     "bugs": {
-        "url": "https://github.com/uikoo9/qiao-monorepo/issues"
+        "url": "https://github.com/uikoo9/qiao-z/issues"
     },
     "scripts": {},
     "dependencies": {
