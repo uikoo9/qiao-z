@@ -7,15 +7,29 @@
 
 ## api
 ```javascript
-const upload = require('qiao-z-upload');
+// config
+const config = require('./server/config.json');
 
-app.post('/upload', (req, res) => {
-    const body = upload.uploadSync(req.request);
-    console.log(body);
-});
+// qz
+const qz = require('qiao-z');
+
+// options
+const options = {
+    // upload，处理文件上传请求，会将文件信息返回到req.body
+    upload: require('qiao-z-upload')
+};
+
+// app
+const app = qz(options);
+
+// listen
+app.listen(config.port);
 ```
 
 ## version
+### 0.0.6.20221107
+1. qiao-z-upload
+   
 ### 0.0.5.20220513
 1. lerna
 
