@@ -1,0 +1,20 @@
+{
+    "name": "root",
+    "private": true,
+    "scripts": {
+        "check": "qlerna ncu ./packages",
+        "ncu": "lerna exec --ignore=qiao-cli 'ncu -u'",
+        "clean": "lerna clean -y",
+        "init": "lerna bootstrap --ignore=qiao-electron-demo --ignore-prepublish",
+        "dc": "qlerna dc ./packages",
+        "pkg": "qlerna pkg ./packages",
+        "dpkg": "qlerna pkg ./packages 1",
+        "ls": "lerna ls -l",
+        "show": "lerna ls --graph"
+    },
+    "devDependencies": {
+        "eslint": "^8.27.0",
+        "qiao-lerna": "^1.1.2",
+        "rollup": "^3.2.5"
+    }
+}
