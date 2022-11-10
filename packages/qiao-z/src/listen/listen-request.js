@@ -5,7 +5,6 @@ import reqFn from '../server/req/req.js';
 import resFn from '../server/res/res.js';
 
 // handle
-import handleCros from './handle-cros.js';
 import handleOptions from './handle-options.js';
 import handleRouters from './handle-routers.js';
 import handleStatic from './handle-static.js';
@@ -26,9 +25,6 @@ const listenRequest = async (request, response, routers, app) => {
     // req res
     const req = await reqFn(request, app._upload);
     const res = resFn(response, app._cros);
-
-    // handle cros
-    handleCros(res, app._cros);
 
     // handle options
     const optionsRes = handleOptions(req, res);

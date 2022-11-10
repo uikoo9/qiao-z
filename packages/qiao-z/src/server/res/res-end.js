@@ -14,17 +14,13 @@ const end = (res, msg) => {
     }
 
     // heads
-    if (res.heads && res.heads.length) {
-        res.heads.forEach((v) => {
-            // opt
-            let opt = v.options;
+    if (res.heads) {
+        const status = res.heads.status;
+        const options = res.heads.options;
+        const opt = (res.cros && status == 200) ? Object.assign({}, res.cros, options) : options;
 
-            // cros
-            if (res.cros && v.status == 200) opt = Object.assign({}, res.cros, v.options);
-
-            // head
-            res.response.writeHead(v.status, opt);
-        });
+        // head
+        res.response.writeHead(status, opt);
 
         // delete
         delete res.cros;

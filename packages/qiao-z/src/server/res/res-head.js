@@ -11,11 +11,10 @@ const head = (res, status, options) => {
     if(!res) return;
 
     // heads
-    res.heads = res.heads || [];
-    res.heads.push({
+    res.heads = {
         status: status,
         options: options
-    });
+    };
 };
 
 export default head;
