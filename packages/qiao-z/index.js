@@ -319,13 +319,14 @@ const end = (res, msg) => {
 
         // head
         res.response.writeHead(status, opt);
-
-        // delete
-        delete res.cros;
-        delete res.heads;
+    }else {
+        // only cros
+        if(res.cros) res.response.writeHead(200, res.cros);
     }
-
+    
     // delete
+    delete res.cros;
+    delete res.heads;
     delete res.head;
     delete res.end;
 
