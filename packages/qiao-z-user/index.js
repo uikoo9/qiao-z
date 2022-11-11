@@ -1,10 +1,8 @@
-'use strict';
-
-var ucenterUserController = require('./src/ucenter/controller/UcenterUserController.js');
-var ucenterMenuController = require('./src/ucenter/controller/UcenterMenuController.js');
-var ucenterRoleController = require('./src/ucenter/controller/UcenterRoleController.js');
-var ucenterRoleRMenuController = require('./src/ucenter/controller/UcenterRoleRMenuController.js');
-var ucenterRoleRUserController = require('./src/ucenter/controller/UcenterRoleRUserController.js');
+const ucenterUserController = require('./src/ucenter/controller/UcenterUserController.js');
+const ucenterMenuController = require('./src/ucenter/controller/UcenterMenuController.js');
+const ucenterRoleController = require('./src/ucenter/controller/UcenterRoleController.js');
+const ucenterRoleRMenuController = require('./src/ucenter/controller/UcenterRoleRMenuController.js');
+const ucenterRoleRUserController = require('./src/ucenter/controller/UcenterRoleRUserController.js');
 
 /**
  * check user
