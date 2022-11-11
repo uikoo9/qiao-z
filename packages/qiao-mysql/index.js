@@ -5,6 +5,11 @@ var mysql = require('mysql');
 // mysql
 
 /**
+ * lib
+ */
+const lib = mysql;
+
+/**
  * get connection
  * @param {*} app 
  * @returns 
@@ -132,6 +137,7 @@ const init = (config) => {
     // app
     const app = {};
     app.config = config;
+    app.mysql = lib;
     app.connection = getConnection(app);
     app.pool = getPool(app);
     app.query = async (sql, params) => { return await query(app, sql, params); };

@@ -47,6 +47,11 @@ const initApp = (app, options) => {
     if (options.upload) {
         app._upload = options.upload;
     }
+
+    // mysql
+    if(options.mysql && options.config && options.config.db){
+        app._db = options.mysql(options.config.db);
+    }
 };
 
 // methods
@@ -262,10 +267,10 @@ async function getBodyString(req) {
 /**
  * req
  * @param {*} request 
- * @param {*} upload 
+ * @param {*} app 
  * @returns 
  */
-const handleRequest = async (request, upload) => {
+const handleRequest = async (request, app) => {
     const req = {};
     req.request = request;
     req.url = parseurl(request);
@@ -273,7 +278,8 @@ const handleRequest = async (request, upload) => {
     req.cookies = handleCookies(req);
     req.useragent = handleUseragent(req);
     req.query = handleQuery(req);
-    req.body = await handleBody(req, upload);
+    req.body = await handleBody(req, app._upload);
+    req.db = app._db;
 
     return req;
 };
@@ -727,7 +733,7 @@ const handleParams = (routers, req, res) => {
  */
 const listenRequest = async (request, response, routers, app) => {
     // req res
-    const req = await handleRequest(request, app._upload);
+    const req = await handleRequest(request, app);
     const res = handleRes(response, app._cros);
 
     // handle options

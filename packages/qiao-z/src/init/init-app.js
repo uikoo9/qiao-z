@@ -35,6 +35,11 @@ const initApp = (app, options) => {
     if (options.upload) {
         app._upload = options.upload;
     }
+
+    // mysql
+    if(options.mysql && options.config && options.config.db){
+        app._db = options.mysql(options.config.db);
+    }
 };
 
 export default initApp;

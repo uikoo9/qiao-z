@@ -2,6 +2,11 @@
 import mysql from 'mysql';
 
 /**
+ * lib
+ */
+export const lib = mysql;
+
+/**
  * get connection
  * @param {*} app 
  * @returns 

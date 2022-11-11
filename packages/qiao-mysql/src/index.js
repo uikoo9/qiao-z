@@ -1,5 +1,5 @@
 // util
-import { getConnection, getPool, query, getColumns, getTypes } from './util.js';
+import { lib, getConnection, getPool, query, getColumns, getTypes } from './util.js';
 
 /**
  * init
@@ -13,6 +13,7 @@ const init = (config) => {
     // app
     const app = {};
     app.config = config;
+    app.mysql = lib;
     app.connection = getConnection(app);
     app.pool = getPool(app);
     app.query = async (sql, params) => { return await query(app, sql, params); };
