@@ -25,28 +25,28 @@ exports.ucenterMenuList = async (req, res) => {
         sqlcount.push(' and t.ucenter_menu_parent = ?');
         paramscount.push(ucenterMenuParent);
 
-        sqlquery.push(" and t.ucenter_menu_parent = ?");
+        sqlquery.push(' and t.ucenter_menu_parent = ?');
         paramsquery.push(ucenterMenuParent);
     }
     if (ucenterMenuSn) {
         sqlcount.push(' and t.ucenter_menu_sn = ?');
         paramscount.push(ucenterMenuSn);
 
-        sqlquery.push(" and t.ucenter_menu_sn = ?");
+        sqlquery.push(' and t.ucenter_menu_sn = ?');
         paramsquery.push(ucenterMenuSn);
     }
     if (ucenterMenuTitle) {
         sqlcount.push(' and t.ucenter_menu_title = ?');
         paramscount.push(ucenterMenuTitle);
 
-        sqlquery.push(" and t.ucenter_menu_title = ?");
+        sqlquery.push(' and t.ucenter_menu_title = ?');
         paramsquery.push(ucenterMenuTitle);
     }
     if (ucenterMenuUrl) {
         sqlcount.push(' and t.ucenter_menu_url = ?');
         paramscount.push(ucenterMenuUrl);
 
-        sqlquery.push(" and t.ucenter_menu_url = ?");
+        sqlquery.push(' and t.ucenter_menu_url = ?');
         paramsquery.push(ucenterMenuUrl);
     }
 

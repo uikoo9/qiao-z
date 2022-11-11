@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
     // db
     try {
         // consts for code
-        const type = 'forget'
+        const type = 'forget';
         const username = req.body.username;
         const usercode = req.body.usercode;
 

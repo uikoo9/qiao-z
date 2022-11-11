@@ -17,7 +17,11 @@
     "bugs": {
         "url": "https://github.com/uikoo9/qiao-z/issues"
     },
-    "scripts": {},
+    "scripts": {
+        "eslint": "eslint . --ext .js -c _config.eslint.js",
+        "eslintfix": "eslint . --ext .js --fix -c _config.eslint.js",
+        "prepublish": "npm run eslintfix"
+    },
     "dependencies": {
         "qiao-encode": "^1.0.0",
         "qiao-mysql": "^1.0.4",

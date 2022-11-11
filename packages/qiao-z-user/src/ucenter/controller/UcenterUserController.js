@@ -1,5 +1,3 @@
-const service = require('../service/UcenterUserService.js');
-
 // ucenter user
 const ucenterUserReg = require('../service/ucenter-user/user-reg.js');
 const ucenterUserLogin = require('../service/ucenter-user/user-login.js');

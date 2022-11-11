@@ -23,14 +23,14 @@ exports.ucenterRoleList = async (req, res) => {
         sqlcount.push(' and t.ucenter_role_name = ?');
         paramscount.push(ucenterRoleName);
 
-        sqlquery.push(" and t.ucenter_role_name = ?");
+        sqlquery.push(' and t.ucenter_role_name = ?');
         paramsquery.push(ucenterRoleName);
     }
     if (ucenterRoleUrl) {
         sqlcount.push(' and t.ucenter_role_url = ?');
         paramscount.push(ucenterRoleUrl);
 
-        sqlquery.push(" and t.ucenter_role_url = ?");
+        sqlquery.push(' and t.ucenter_role_url = ?');
         paramsquery.push(ucenterRoleUrl);
     }
 
