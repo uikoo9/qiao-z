@@ -11,10 +11,9 @@
     "eslintfix": "eslint . --ext .js --fix",
     "prepublish": "npm run build && npm run prettier && npm run eslintfix",
     "dc": "qlerna dc ./packages",
-    "pkg": "qlerna pkg ./packages",
-    "dpkg": "qlerna pkg ./packages 1",
     "ls": "lerna ls -l",
-    "show": "lerna ls --graph"
+    "pkg": "qlerna pkg ./packages",
+    "dpkg": "qlerna pkg ./packages 1"
   },
   "devDependencies": {
     "eslint": "^8.27.0",
