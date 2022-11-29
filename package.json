@@ -6,13 +6,15 @@
     "ncu": "lerna exec 'ncu -u'",
     "clean": "lerna clean -y",
     "init": "lerna bootstrap --hoist",
+    "build": "lerna run build",
+    "prettier": "prettier --write .",
+    "eslintfix": "eslint . --ext .js --fix",
+    "prepublish": "npm run build && npm run prettier && npm run eslintfix",
     "dc": "qlerna dc ./packages",
     "pkg": "qlerna pkg ./packages",
     "dpkg": "qlerna pkg ./packages 1",
     "ls": "lerna ls -l",
-    "show": "lerna ls --graph",
-    "eslintfix": "lerna exec 'npm run eslintfix'",
-    "prettier": "prettier --write ."
+    "show": "lerna ls --graph"
   },
   "devDependencies": {
     "eslint": "^8.27.0",

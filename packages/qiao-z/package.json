@@ -25,10 +25,7 @@
     "url": "https://github.com/uikoo9/qiao-z/issues"
   },
   "scripts": {
-    "build": "rollup --config _config.rollup.js",
-    "eslint": "eslint . --ext .js",
-    "eslintfix": "eslint . --ext .js --fix",
-    "prepublish": "npm run build && npm run eslintfix"
+    "build": "rollup --config _config.rollup.js"
   },
   "dependencies": {
     "art-template": "^4.13.2",
