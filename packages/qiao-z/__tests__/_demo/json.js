@@ -1,20 +1,20 @@
 // http
-const http = require('http');
+const http = require("http");
 
 // server
 const server = http.createServer();
 
 // request
-server.on('request', (request, response) => {
-    console.log('request');
+server.on("request", (request, response) => {
+  console.log("request");
 
-    const obj = {
-        name: 'jack'
-    };
-    const json = JSON.stringify(obj);
+  const obj = {
+    name: "jack",
+  };
+  const json = JSON.stringify(obj);
 
-    response.writeHead(200, { 'Content-Type': 'application/json' });
-    response.end(json);
+  response.writeHead(200, { "Content-Type": "application/json" });
+  response.end(json);
 });
 
 // listen

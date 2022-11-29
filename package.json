@@ -1,21 +1,23 @@
 {
-    "name": "root",
-    "private": true,
-    "scripts": {
-        "check": "qlerna ncu ./packages",
-        "ncu": "lerna exec 'ncu -u'",
-        "clean": "lerna clean -y",
-        "init": "lerna bootstrap --hoist",
-        "dc": "qlerna dc ./packages",
-        "pkg": "qlerna pkg ./packages",
-        "dpkg": "qlerna pkg ./packages 1",
-        "ls": "lerna ls -l",
-        "show": "lerna ls --graph",
-        "eslintfix": "lerna exec 'npm run eslintfix'"
-    },
-    "devDependencies": {
-        "eslint": "^8.27.0",
-        "qiao-lerna": "^1.1.8",
-        "rollup": "^3.2.5"
-    }
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "check": "qlerna ncu ./packages",
+    "ncu": "lerna exec 'ncu -u'",
+    "clean": "lerna clean -y",
+    "init": "lerna bootstrap --hoist",
+    "dc": "qlerna dc ./packages",
+    "pkg": "qlerna pkg ./packages",
+    "dpkg": "qlerna pkg ./packages 1",
+    "ls": "lerna ls -l",
+    "show": "lerna ls --graph",
+    "eslintfix": "lerna exec 'npm run eslintfix'",
+    "prettier": "prettier --write ."
+  },
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "prettier": "^2.8.0",
+    "qiao-lerna": "^1.1.8",
+    "rollup": "^3.2.5"
+  }
 }

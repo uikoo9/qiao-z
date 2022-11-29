@@ -1,28 +1,28 @@
 // sql
-const sql = require('../../sql/ucenter-user-sql.json');
+const sql = require("../../sql/ucenter-user-sql.json");
 
 /**
  * ucenter user menus
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
 module.exports = async (req, res) => {
-    // check
-    if (!req.body) {
-        res.jsonFail('缺少参数！');
-        return;
-    }
-    if (!req.body.id) {
-        res.jsonFail('缺少参数id！');
-        return;
-    }
+  // check
+  if (!req.body) {
+    res.jsonFail("缺少参数！");
+    return;
+  }
+  if (!req.body.id) {
+    res.jsonFail("缺少参数id！");
+    return;
+  }
 
-    // db
-    try {
-        const rows = await req.db.query(sql.ucenterUserMenus, [req.body.id]);
+  // db
+  try {
+    const rows = await req.db.query(sql.ucenterUserMenus, [req.body.id]);
 
-        res.jsonSuccess('query success', { rows: rows });
-    } catch (e) {
-        res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
-    }
+    res.jsonSuccess("query success", { rows: rows });
+  } catch (e) {
+    res.jsonFail("query failed", { errName: e.name, errMsg: e.message });
+  }
 };

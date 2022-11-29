@@ -1,8 +1,8 @@
 // config
-const config = require('./config.json');
+const config = require("./config.json");
 
 // client
-const client = require('../index.js')(config);
+const client = require("../index.js")(config);
 
-const type = client.getTypes('varchar(10)');
+const type = client.getTypes("varchar(10)");
 console.log(type);

@@ -1,36 +1,36 @@
 // path
-import { resolve } from 'path';
+import { resolve } from "path";
 
 /**
  * init static
  */
 const initStatic = (app, routers) => {
-    // check
-    if (!app || !routers) return;
+  // check
+  if (!app || !routers) return;
 
-    // static
-    app.static = (router, filePath) => {
-        // router and callback
-        const mpath = `${router}/:opath`;
-        const callback = (req, res) => {
-            const opath = req.params.opath;
-            const rpath = `${filePath}/${opath}`;
-            const fpath = resolve(process.cwd(), rpath);
+  // static
+  app.static = (router, filePath) => {
+    // router and callback
+    const mpath = `${router}/:opath`;
+    const callback = (req, res) => {
+      const opath = req.params.opath;
+      const rpath = `${filePath}/${opath}`;
+      const fpath = resolve(process.cwd(), rpath);
 
-            res.render(fpath);
-        };
-
-        // get
-        routers.get = routers.get || [];
-        routers.get.push({
-            path: mpath,
-            callback: callback,
-            static: true
-        });
+      res.render(fpath);
     };
 
-    // acme
-    app.static('/.well-known', './.well-known');
+    // get
+    routers.get = routers.get || [];
+    routers.get.push({
+      path: mpath,
+      callback: callback,
+      static: true,
+    });
+  };
+
+  // acme
+  app.static("/.well-known", "./.well-known");
 };
 
 export default initStatic;

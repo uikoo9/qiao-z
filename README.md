@@ -1,18 +1,22 @@
 # qiao-z
-nodejs下极简的web框架
 
-## 官网 
+nodejs 下极简的 web 框架
+
+## 官网
+
 [https://code.insistime.com/qiao-z](https://code.insistime.com/qiao-z)
 
 ## 安装
+
 ```bash
 npm i qiao-z
 ```
 
 ## 使用
+
 ```javascript
 // qz
-const qz = require('qiao-z');
+const qz = require("qiao-z");
 
 // app
 const app = qz();
@@ -22,6 +26,7 @@ app.listen();
 ```
 
 ## 示例
+
 ```bash
 git clone ...
 cd packages/qiao-z/__tests__

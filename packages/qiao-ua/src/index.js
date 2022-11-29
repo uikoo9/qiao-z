@@ -1,21 +1,22 @@
 // parser
-import Parser from './parser.js';
+import Parser from "./parser.js";
 
 /**
  * parseUserAgent
- * @param {*} useragent 
- * @returns 
+ * @param {*} useragent
+ * @returns
  */
 function parseUserAgent(useragent) {
-    // check
-    if (!useragent) return {};
+  // check
+  if (!useragent) return {};
 
-    // parse
-    const parserRes = (new Parser(useragent)).getResult();
+  // parse
+  const parserRes = new Parser(useragent).getResult();
 
-    // res
-    parserRes.isMobile = parserRes && parserRes.platform && parserRes.platform.type == 'mobile';
-    return parserRes;
+  // res
+  parserRes.isMobile =
+    parserRes && parserRes.platform && parserRes.platform.type == "mobile";
+  return parserRes;
 }
 
 export default parseUserAgent;

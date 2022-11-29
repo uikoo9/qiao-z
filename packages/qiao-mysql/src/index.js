@@ -1,27 +1,38 @@
 // util
-import { lib, getConnection, getPool, query, getColumns, getTypes } from './util.js';
+import {
+  lib,
+  getConnection,
+  getPool,
+  query,
+  getColumns,
+  getTypes,
+} from "./util.js";
 
 /**
  * init
- * @param {*} config 
- * @returns 
+ * @param {*} config
+ * @returns
  */
 const init = (config) => {
-    // check
-    if (!config) return;
+  // check
+  if (!config) return;
 
-    // app
-    const app = {};
-    app.config = config;
-    app.mysql = lib;
-    app.connection = getConnection(app);
-    app.pool = getPool(app);
-    app.query = async (sql, params) => { return await query(app, sql, params); };
-    app.getColumns = async (tableName) => { return await getColumns(app, tableName); };
-    app.getTypes = getTypes;
+  // app
+  const app = {};
+  app.config = config;
+  app.mysql = lib;
+  app.connection = getConnection(app);
+  app.pool = getPool(app);
+  app.query = async (sql, params) => {
+    return await query(app, sql, params);
+  };
+  app.getColumns = async (tableName) => {
+    return await getColumns(app, tableName);
+  };
+  app.getTypes = getTypes;
 
-    // return
-    return app;
+  // return
+  return app;
 };
 
 export default init;

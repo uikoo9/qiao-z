@@ -1,13 +1,15 @@
 // ua
-import ua from 'qiao-ua';
+import ua from "qiao-ua";
 
 /**
  * handle useragent
- * @param {*} req 
- * @returns 
+ * @param {*} req
+ * @returns
  */
 const handleUseragent = (req) => {
-    return (!req || !req.headers || !req.headers['user-agent']) ? {} : ua(req.headers['user-agent']);
+  return !req || !req.headers || !req.headers["user-agent"]
+    ? {}
+    : ua(req.headers["user-agent"]);
 };
 
 export default handleUseragent;

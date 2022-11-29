@@ -2,5 +2,5 @@
  * app get
  */
 module.exports = function (app) {
-    app.static('/static', './static');
+  app.static("/static", "./static");
 };
