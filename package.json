@@ -16,10 +16,10 @@
     "dpkg": "qlerna pkg ./packages 1"
   },
   "devDependencies": {
-    "eslint": "^8.27.0",
+    "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.8.0",
-    "qiao-lerna": "^1.1.8",
-    "rollup": "^3.2.5"
+    "qiao-lerna": "^1.1.9",
+    "rollup": "^3.5.0"
   }
 }
