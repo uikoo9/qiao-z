@@ -18,8 +18,8 @@
     "url": "https://github.com/uikoo9/qiao-z/issues"
   },
   "scripts": {
-    "eslint": "eslint . --ext .js -c _config.eslint.js",
-    "eslintfix": "eslint . --ext .js --fix -c _config.eslint.js",
+    "eslint": "eslint . --ext .js",
+    "eslintfix": "eslint . --ext .js --fix",
     "prepublish": "npm run eslintfix"
   },
   "dependencies": {

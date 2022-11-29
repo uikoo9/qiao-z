@@ -24,8 +24,8 @@
   },
   "scripts": {
     "build": "rollup --config _config.rollup.js",
-    "eslint": "eslint . --ext .js -c _config.eslint.js",
-    "eslintfix": "eslint . --ext .js --fix -c _config.eslint.js",
+    "eslint": "eslint . --ext .js",
+    "eslintfix": "eslint . --ext .js --fix",
     "prepublish": "npm run build && npm run eslintfix"
   }
 }
