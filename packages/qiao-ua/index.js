@@ -156,28 +156,28 @@ class Utils {
 
   static getWindowsVersionName(version) {
     switch (version) {
-    case "NT":
-      return "NT";
-    case "XP":
-      return "XP";
-    case "NT 5.0":
-      return "2000";
-    case "NT 5.1":
-      return "XP";
-    case "NT 5.2":
-      return "2003";
-    case "NT 6.0":
-      return "Vista";
-    case "NT 6.1":
-      return "7";
-    case "NT 6.2":
-      return "8";
-    case "NT 6.3":
-      return "8.1";
-    case "NT 10.0":
-      return "10";
-    default:
-      return undefined;
+      case "NT":
+        return "NT";
+      case "XP":
+        return "XP";
+      case "NT 5.0":
+        return "2000";
+      case "NT 5.1":
+        return "XP";
+      case "NT 5.2":
+        return "2003";
+      case "NT 6.0":
+        return "Vista";
+      case "NT 6.1":
+        return "7";
+      case "NT 6.2":
+        return "8";
+      case "NT 6.3":
+        return "8.1";
+      case "NT 10.0":
+        return "10";
+      default:
+        return undefined;
     }
   }
 
@@ -209,30 +209,30 @@ class Utils {
     v.push(0);
     if (v[0] !== 10) return undefined;
     switch (v[1]) {
-    case 5:
-      return "Leopard";
-    case 6:
-      return "Snow Leopard";
-    case 7:
-      return "Lion";
-    case 8:
-      return "Mountain Lion";
-    case 9:
-      return "Mavericks";
-    case 10:
-      return "Yosemite";
-    case 11:
-      return "El Capitan";
-    case 12:
-      return "Sierra";
-    case 13:
-      return "High Sierra";
-    case 14:
-      return "Mojave";
-    case 15:
-      return "Catalina";
-    default:
-      return undefined;
+      case 5:
+        return "Leopard";
+      case 6:
+        return "Snow Leopard";
+      case 7:
+        return "Lion";
+      case 8:
+        return "Mountain Lion";
+      case 9:
+        return "Mavericks";
+      case 10:
+        return "Yosemite";
+      case 11:
+        return "El Capitan";
+      case 12:
+        return "Sierra";
+      case 13:
+        return "High Sierra";
+      case 14:
+        return "Mojave";
+      case 15:
+        return "Catalina";
+      default:
+        return undefined;
     }
   }
 
