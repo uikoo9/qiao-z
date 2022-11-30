@@ -1,5 +1,5 @@
 // methods
-const methods = ["get", "post"];
+const methods = ['get', 'post'];
 
 /**
  * init methods

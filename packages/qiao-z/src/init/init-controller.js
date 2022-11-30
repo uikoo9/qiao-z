@@ -1,5 +1,5 @@
 // qiao
-import { lsdir } from "qiao-file";
+import { lsdir } from 'qiao-file';
 
 /**
  * init controller
@@ -11,7 +11,7 @@ const initController = (app) => {
   if (!app) return;
 
   // files
-  const serverFiles = lsdir(process.cwd() + "/");
+  const serverFiles = lsdir(process.cwd() + '/');
   if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
 
   // init

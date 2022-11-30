@@ -9,15 +9,15 @@
 
 ```javascript
 // config
-const config = require("./server/config.json");
+const config = require('./server/config.json');
 
 // qz
-const qz = require("qiao-z");
+const qz = require('qiao-z');
 
 // options
 const options = {
   // upload，处理文件上传请求，会将文件信息返回到req.body
-  upload: require("qiao-z-upload"),
+  upload: require('qiao-z-upload'),
 };
 
 // app

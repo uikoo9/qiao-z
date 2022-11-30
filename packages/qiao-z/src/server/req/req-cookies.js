@@ -1,5 +1,5 @@
 // cookie
-import cookie from "cookie";
+import cookie from 'cookie';
 
 // default cookie
 const defaultCookies = {};
@@ -11,10 +11,10 @@ const defaultCookies = {};
  */
 const handleCookies = (req) => {
   // check
-  if (!req || !req.headers || !req.headers["cookie"]) return defaultCookies;
+  if (!req || !req.headers || !req.headers['cookie']) return defaultCookies;
 
   // return
-  return cookie.parse(req.headers["cookie"]);
+  return cookie.parse(req.headers['cookie']);
 };
 
 export default handleCookies;

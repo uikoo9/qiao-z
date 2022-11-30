@@ -16,7 +16,7 @@ npm i qiao-z
 
 ```javascript
 // qz
-const qz = require("qiao-z");
+const qz = require('qiao-z');
 
 // app
 const app = qz();

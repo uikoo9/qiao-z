@@ -1,8 +1,8 @@
-import browserParsersList from "./parser-browsers.js";
-import osParsersList from "./parser-os.js";
-import platformParsersList from "./parser-platforms.js";
-import enginesParsersList from "./parser-engines.js";
-import Utils from "./utils.js";
+import browserParsersList from './parser-browsers.js';
+import osParsersList from './parser-os.js';
+import platformParsersList from './parser-platforms.js';
+import enginesParsersList from './parser-engines.js';
+import Utils from './utils.js';
 
 /**
  * The main class that arranges the whole parsing process.
@@ -21,8 +21,8 @@ export default class Parser {
    * @constructor
    */
   constructor(UA, skipParsing = false) {
-    if (UA === void 0 || UA === null || UA === "") {
-      throw new Error("UserAgent parameter can't be empty");
+    if (UA === void 0 || UA === null || UA === '') {
+      throw new Error('UserAgent parameter can\'t be empty');
     }
 
     this._ua = UA;
@@ -83,7 +83,7 @@ export default class Parser {
     this.parsedResult.browser = {};
 
     const browserDescriptor = Utils.find(browserParsersList, (_browser) => {
-      if (typeof _browser.test === "function") {
+      if (typeof _browser.test === 'function') {
         return _browser.test(this);
       }
 
@@ -91,7 +91,7 @@ export default class Parser {
         return _browser.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (browserDescriptor) {
@@ -123,9 +123,9 @@ export default class Parser {
    */
   getBrowserName(toLowerCase) {
     if (toLowerCase) {
-      return String(this.getBrowser().name).toLowerCase() || "";
+      return String(this.getBrowser().name).toLowerCase() || '';
     }
-    return this.getBrowser().name || "";
+    return this.getBrowser().name || '';
   }
 
   /**
@@ -165,7 +165,7 @@ export default class Parser {
     this.parsedResult.os = {};
 
     const os = Utils.find(osParsersList, (_os) => {
-      if (typeof _os.test === "function") {
+      if (typeof _os.test === 'function') {
         return _os.test(this);
       }
 
@@ -173,7 +173,7 @@ export default class Parser {
         return _os.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (os) {
@@ -192,10 +192,10 @@ export default class Parser {
     const { name } = this.getOS();
 
     if (toLowerCase) {
-      return String(name).toLowerCase() || "";
+      return String(name).toLowerCase() || '';
     }
 
-    return name || "";
+    return name || '';
   }
 
   /**
@@ -227,10 +227,10 @@ export default class Parser {
     const { type } = this.getPlatform();
 
     if (toLowerCase) {
-      return String(type).toLowerCase() || "";
+      return String(type).toLowerCase() || '';
     }
 
-    return type || "";
+    return type || '';
   }
 
   /**
@@ -241,7 +241,7 @@ export default class Parser {
     this.parsedResult.platform = {};
 
     const platform = Utils.find(platformParsersList, (_platform) => {
-      if (typeof _platform.test === "function") {
+      if (typeof _platform.test === 'function') {
         return _platform.test(this);
       }
 
@@ -249,7 +249,7 @@ export default class Parser {
         return _platform.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (platform) {
@@ -279,9 +279,9 @@ export default class Parser {
    */
   getEngineName(toLowerCase) {
     if (toLowerCase) {
-      return String(this.getEngine().name).toLowerCase() || "";
+      return String(this.getEngine().name).toLowerCase() || '';
     }
-    return this.getEngine().name || "";
+    return this.getEngine().name || '';
   }
 
   /**
@@ -292,7 +292,7 @@ export default class Parser {
     this.parsedResult.engine = {};
 
     const engine = Utils.find(enginesParsersList, (_engine) => {
-      if (typeof _engine.test === "function") {
+      if (typeof _engine.test === 'function') {
         return _engine.test(this);
       }
 
@@ -300,7 +300,7 @@ export default class Parser {
         return _engine.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (engine) {
@@ -359,10 +359,10 @@ export default class Parser {
 
     allDefinitions.forEach((key) => {
       const currentDefinition = checkTree[key];
-      if (typeof currentDefinition === "string") {
+      if (typeof currentDefinition === 'string') {
         browsers[key] = currentDefinition;
         browsersCounter += 1;
-      } else if (typeof currentDefinition === "object") {
+      } else if (typeof currentDefinition === 'object') {
         platformsAndOSes[key] = currentDefinition;
         platformsAndOSCounter += 1;
       }
@@ -370,9 +370,7 @@ export default class Parser {
 
     if (platformsAndOSCounter > 0) {
       const platformsAndOSNames = Object.keys(platformsAndOSes);
-      const OSMatchingDefinition = Utils.find(platformsAndOSNames, (name) =>
-        this.isOS(name)
-      );
+      const OSMatchingDefinition = Utils.find(platformsAndOSNames, (name) => this.isOS(name));
 
       if (OSMatchingDefinition) {
         const osResult = this.satisfies(platformsAndOSes[OSMatchingDefinition]);
@@ -382,14 +380,9 @@ export default class Parser {
         }
       }
 
-      const platformMatchingDefinition = Utils.find(
-        platformsAndOSNames,
-        (name) => this.isPlatform(name)
-      );
+      const platformMatchingDefinition = Utils.find(platformsAndOSNames, (name) => this.isPlatform(name));
       if (platformMatchingDefinition) {
-        const platformResult = this.satisfies(
-          platformsAndOSes[platformMatchingDefinition]
-        );
+        const platformResult = this.satisfies(platformsAndOSes[platformMatchingDefinition]);
 
         if (platformResult !== void 0) {
           return platformResult;
@@ -399,9 +392,7 @@ export default class Parser {
 
     if (browsersCounter > 0) {
       const browserNames = Object.keys(browsers);
-      const matchingDefinition = Utils.find(browserNames, (name) =>
-        this.isBrowser(name, true)
-      );
+      const matchingDefinition = Utils.find(browserNames, (name) => this.isBrowser(name, true));
 
       if (matchingDefinition !== void 0) {
         return this.compareVersion(browsers[matchingDefinition]);
@@ -435,35 +426,31 @@ export default class Parser {
 
     const currentBrowserVersion = this.getBrowserVersion();
 
-    if (typeof currentBrowserVersion !== "string") {
+    if (typeof currentBrowserVersion !== 'string') {
       return void 0;
     }
 
-    if (version[0] === ">" || version[0] === "<") {
+    if (version[0] === '>' || version[0] === '<') {
       comparableVersion = version.substr(1);
-      if (version[1] === "=") {
+      if (version[1] === '=') {
         isLoose = true;
         comparableVersion = version.substr(2);
       } else {
         expectedResults = [];
       }
-      if (version[0] === ">") {
+      if (version[0] === '>') {
         expectedResults.push(1);
       } else {
         expectedResults.push(-1);
       }
-    } else if (version[0] === "=") {
+    } else if (version[0] === '=') {
       comparableVersion = version.substr(1);
-    } else if (version[0] === "~") {
+    } else if (version[0] === '~') {
       isLoose = true;
       comparableVersion = version.substr(1);
     }
 
-    return (
-      expectedResults.indexOf(
-        Utils.compareVersions(currentBrowserVersion, comparableVersion, isLoose)
-      ) > -1
-    );
+    return expectedResults.indexOf(Utils.compareVersions(currentBrowserVersion, comparableVersion, isLoose)) > -1;
   }
 
   isOS(osName) {
@@ -486,11 +473,7 @@ export default class Parser {
    * @returns {Boolean}
    */
   is(anything, includingAlias = false) {
-    return (
-      this.isBrowser(anything, includingAlias) ||
-      this.isOS(anything) ||
-      this.isPlatform(anything)
-    );
+    return this.isBrowser(anything, includingAlias) || this.isOS(anything) || this.isPlatform(anything);
   }
 
   /**

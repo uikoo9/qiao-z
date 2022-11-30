@@ -1,4 +1,4 @@
-import { BROWSER_MAP, BROWSER_ALIASES_MAP } from "./constants.js";
+import { BROWSER_MAP, BROWSER_ALIASES_MAP } from './constants.js';
 
 export default class Utils {
   /**
@@ -9,7 +9,7 @@ export default class Utils {
    */
   static getFirstMatch(regexp, ua) {
     const match = ua.match(regexp);
-    return (match && match.length > 0 && match[1]) || "";
+    return (match && match.length > 0 && match[1]) || '';
   }
 
   /**
@@ -20,7 +20,7 @@ export default class Utils {
    */
   static getSecondMatch(regexp, ua) {
     const match = ua.match(regexp);
-    return (match && match.length > 1 && match[2]) || "";
+    return (match && match.length > 1 && match[2]) || '';
   }
 
   /**
@@ -39,26 +39,26 @@ export default class Utils {
 
   static getWindowsVersionName(version) {
     switch (version) {
-      case "NT":
-        return "NT";
-      case "XP":
-        return "XP";
-      case "NT 5.0":
-        return "2000";
-      case "NT 5.1":
-        return "XP";
-      case "NT 5.2":
-        return "2003";
-      case "NT 6.0":
-        return "Vista";
-      case "NT 6.1":
-        return "7";
-      case "NT 6.2":
-        return "8";
-      case "NT 6.3":
-        return "8.1";
-      case "NT 10.0":
-        return "10";
+      case 'NT':
+        return 'NT';
+      case 'XP':
+        return 'XP';
+      case 'NT 5.0':
+        return '2000';
+      case 'NT 5.1':
+        return 'XP';
+      case 'NT 5.2':
+        return '2003';
+      case 'NT 6.0':
+        return 'Vista';
+      case 'NT 6.1':
+        return '7';
+      case 'NT 6.2':
+        return '8';
+      case 'NT 6.3':
+        return '8.1';
+      case 'NT 10.0':
+        return '10';
       default:
         return undefined;
     }
@@ -86,34 +86,34 @@ export default class Utils {
    */
   static getMacOSVersionName(version) {
     const v = version
-      .split(".")
+      .split('.')
       .splice(0, 2)
       .map((s) => parseInt(s, 10) || 0);
     v.push(0);
     if (v[0] !== 10) return undefined;
     switch (v[1]) {
       case 5:
-        return "Leopard";
+        return 'Leopard';
       case 6:
-        return "Snow Leopard";
+        return 'Snow Leopard';
       case 7:
-        return "Lion";
+        return 'Lion';
       case 8:
-        return "Mountain Lion";
+        return 'Mountain Lion';
       case 9:
-        return "Mavericks";
+        return 'Mavericks';
       case 10:
-        return "Yosemite";
+        return 'Yosemite';
       case 11:
-        return "El Capitan";
+        return 'El Capitan';
       case 12:
-        return "Sierra";
+        return 'Sierra';
       case 13:
-        return "High Sierra";
+        return 'High Sierra';
       case 14:
-        return "Mojave";
+        return 'Mojave';
       case 15:
-        return "Catalina";
+        return 'Catalina';
       default:
         return undefined;
     }
@@ -145,25 +145,25 @@ export default class Utils {
    */
   static getAndroidVersionName(version) {
     const v = version
-      .split(".")
+      .split('.')
       .splice(0, 2)
       .map((s) => parseInt(s, 10) || 0);
     v.push(0);
     if (v[0] === 1 && v[1] < 5) return undefined;
-    if (v[0] === 1 && v[1] < 6) return "Cupcake";
-    if (v[0] === 1 && v[1] >= 6) return "Donut";
-    if (v[0] === 2 && v[1] < 2) return "Eclair";
-    if (v[0] === 2 && v[1] === 2) return "Froyo";
-    if (v[0] === 2 && v[1] > 2) return "Gingerbread";
-    if (v[0] === 3) return "Honeycomb";
-    if (v[0] === 4 && v[1] < 1) return "Ice Cream Sandwich";
-    if (v[0] === 4 && v[1] < 4) return "Jelly Bean";
-    if (v[0] === 4 && v[1] >= 4) return "KitKat";
-    if (v[0] === 5) return "Lollipop";
-    if (v[0] === 6) return "Marshmallow";
-    if (v[0] === 7) return "Nougat";
-    if (v[0] === 8) return "Oreo";
-    if (v[0] === 9) return "Pie";
+    if (v[0] === 1 && v[1] < 6) return 'Cupcake';
+    if (v[0] === 1 && v[1] >= 6) return 'Donut';
+    if (v[0] === 2 && v[1] < 2) return 'Eclair';
+    if (v[0] === 2 && v[1] === 2) return 'Froyo';
+    if (v[0] === 2 && v[1] > 2) return 'Gingerbread';
+    if (v[0] === 3) return 'Honeycomb';
+    if (v[0] === 4 && v[1] < 1) return 'Ice Cream Sandwich';
+    if (v[0] === 4 && v[1] < 4) return 'Jelly Bean';
+    if (v[0] === 4 && v[1] >= 4) return 'KitKat';
+    if (v[0] === 5) return 'Lollipop';
+    if (v[0] === 6) return 'Marshmallow';
+    if (v[0] === 7) return 'Nougat';
+    if (v[0] === 8) return 'Oreo';
+    if (v[0] === 9) return 'Pie';
     return undefined;
   }
 
@@ -177,7 +177,7 @@ export default class Utils {
    * @return {number}
    */
   static getVersionPrecision(version) {
-    return version.split(".").length;
+    return version.split('.').length;
   }
 
   /**
@@ -209,19 +209,15 @@ export default class Utils {
       const delta = precision - Utils.getVersionPrecision(version);
 
       // 2) "9" -> "9.0" (for precision = 2)
-      const _version = version + new Array(delta + 1).join(".0");
+      const _version = version + new Array(delta + 1).join('.0');
 
       // 3) "9.0" -> ["000000000"", "000000009"]
-      return Utils.map(
-        _version.split("."),
-        (chunk) => new Array(20 - chunk.length).join("0") + chunk
-      ).reverse();
+      return Utils.map(_version.split('.'), (chunk) => new Array(20 - chunk.length).join('0') + chunk).reverse();
     });
 
     // adjust precision for loose comparison
     if (isLoose) {
-      lastPrecision =
-        precision - Math.min(versionAPrecision, versionBPrecision);
+      lastPrecision = precision - Math.min(versionAPrecision, versionBPrecision);
     }
 
     // iterate in reverse order by reversed chunks array
@@ -304,7 +300,7 @@ export default class Utils {
     }
     for (i = 0, l = assigners.length; i < l; i += 1) {
       const assigner = assigners[i];
-      if (typeof assigner === "object" && assigner !== null) {
+      if (typeof assigner === 'object' && assigner !== null) {
         const keys = Object.keys(assigner);
         keys.forEach((key) => {
           result[key] = assigner[key];
@@ -337,6 +333,6 @@ export default class Utils {
    * @return {string}
    */
   static getBrowserTypeByAlias(browserAlias) {
-    return BROWSER_MAP[browserAlias] || "";
+    return BROWSER_MAP[browserAlias] || '';
   }
 }

@@ -1,18 +1,18 @@
 // http
-const http = require("http");
+const http = require('http');
 
 // server
 const server = http.createServer();
 
 // request
-server.on("request", (request, response) => {
-  console.log("request");
+server.on('request', (request, response) => {
+  console.log('request');
 
-  const cookies = "test=hello";
-  const obj = require("cookie").parse(cookies);
-  console.log("cookies:", obj);
+  const cookies = 'test=hello';
+  const obj = require('cookie').parse(cookies);
+  console.log('cookies:', obj);
 
-  response.end("hello world");
+  response.end('hello world');
 });
 
 // listen

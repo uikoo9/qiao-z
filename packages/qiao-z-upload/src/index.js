@@ -1,5 +1,5 @@
 // handle
-import handle from "./handle.js";
+import handle from './handle.js';
 
 /**
  * upload

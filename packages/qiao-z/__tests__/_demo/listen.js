@@ -1,12 +1,12 @@
 // http
-const http = require("http");
+const http = require('http');
 
 // server
 const server = http.createServer();
 
 // request
-server.on("request", () => {
-  console.log("request");
+server.on('request', () => {
+  console.log('request');
 });
 
 // listen

@@ -1,13 +1,13 @@
-const ucenterUserController = require("./src/ucenter/controller/UcenterUserController.js");
-const ucenterMenuController = require("./src/ucenter/controller/UcenterMenuController.js");
-const ucenterRoleController = require("./src/ucenter/controller/UcenterRoleController.js");
-const ucenterRoleRMenuController = require("./src/ucenter/controller/UcenterRoleRMenuController.js");
-const ucenterRoleRUserController = require("./src/ucenter/controller/UcenterRoleRUserController.js");
+const ucenterUserController = require('./src/ucenter/controller/UcenterUserController.js');
+const ucenterMenuController = require('./src/ucenter/controller/UcenterMenuController.js');
+const ucenterRoleController = require('./src/ucenter/controller/UcenterRoleController.js');
+const ucenterRoleRMenuController = require('./src/ucenter/controller/UcenterRoleRMenuController.js');
+const ucenterRoleRUserController = require('./src/ucenter/controller/UcenterRoleRUserController.js');
 
 /**
  * check user
  */
-exports.checkUser = require("./src/_check.js");
+exports.checkUser = require('./src/_check.js');
 
 /**
  * init
@@ -16,7 +16,7 @@ exports.checkUser = require("./src/_check.js");
 exports.init = function (app, config) {
   // check app and config
   if (!app || !config) {
-    console.log("need app and config");
+    console.log('need app and config');
     return;
   }
 

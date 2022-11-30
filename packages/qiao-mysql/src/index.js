@@ -1,12 +1,5 @@
 // util
-import {
-  lib,
-  getConnection,
-  getPool,
-  query,
-  getColumns,
-  getTypes,
-} from "./util.js";
+import { lib, getConnection, getPool, query, getColumns, getTypes } from './util.js';
 
 /**
  * init

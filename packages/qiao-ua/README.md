@@ -15,9 +15,9 @@ npm i qiao-ua
 
 ```javascript
 // ua
-var ua = require("qiao-ua");
+var ua = require('qiao-ua');
 
-var useragent = "xxx";
+var useragent = 'xxx';
 var res = ua(useragent);
 console.log(res);
 ```

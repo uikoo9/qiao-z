@@ -32,10 +32,10 @@ npm i qiao-mysql
 
 ```javascript
 // config
-const config = require("./config.json");
+const config = require('./config.json');
 
 // client
-const client = require("qiao-mysql")(config);
+const client = require('qiao-mysql')(config);
 ```
 
 ## api
@@ -45,7 +45,7 @@ const client = require("qiao-mysql")(config);
 获取表的列属性
 
 ```javascript
-const res = await client.getColumns("t_todo_item");
+const res = await client.getColumns('t_todo_item');
 console.log(res);
 ```
 
@@ -54,7 +54,7 @@ console.log(res);
 获取表字段类型对应的 js 类型
 
 ```javascript
-const type = client.getTypes("varchar(10)");
+const type = client.getTypes('varchar(10)');
 console.log(type);
 ```
 
@@ -67,7 +67,7 @@ console.log(type);
 |-- 如果配置文件中有 connectionLimit，则使用 connection pool 查询
 
 ```javascript
-const rows = await client.query("select * from t_todo_item where id=?", [8]);
+const rows = await client.query('select * from t_todo_item where id=?', [8]);
 console.log(rows);
 ```
 

@@ -1,8 +1,8 @@
 // raw body
-import getRawBody from "raw-body";
+import getRawBody from 'raw-body';
 
 // qs
-import qs from "qs";
+import qs from 'qs';
 
 // default body
 const defaultBody = {};
@@ -15,16 +15,16 @@ const defaultBody = {};
  */
 const handleBody = async (req, upload) => {
   // check
-  if (!req || !req.headers || !req.headers["content-type"]) return defaultBody;
+  if (!req || !req.headers || !req.headers['content-type']) return defaultBody;
 
   // body
   let body;
   try {
     // content type
-    const contentType = req.headers["content-type"];
+    const contentType = req.headers['content-type'];
 
     // upload
-    if (contentType.indexOf("multipart/form-data") > -1) {
+    if (contentType.indexOf('multipart/form-data') > -1) {
       if (!upload) return defaultBody;
 
       return await upload.uploadSync(req.request);
@@ -34,12 +34,12 @@ const handleBody = async (req, upload) => {
       if (!bodyString) return defaultBody;
 
       // xfrom
-      if (contentType.indexOf("application/x-www-form-urlencoded") > -1) {
+      if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
         body = qs.parse(bodyString);
       }
 
       // json
-      if (contentType.indexOf("application/json") > -1) {
+      if (contentType.indexOf('application/json') > -1) {
         body = JSON.parse(bodyString);
       }
     }
@@ -56,8 +56,8 @@ async function getBodyString(req) {
   try {
     // options
     const options = {
-      length: req.headers["content-length"],
-      limit: "1mb",
+      length: req.headers['content-length'],
+      limit: '1mb',
       encoding: true,
     };
 

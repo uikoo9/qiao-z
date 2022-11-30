@@ -1,5 +1,5 @@
 // cookie
-import cookie from "cookie";
+import cookie from 'cookie';
 
 /**
  * res.clearCookie
@@ -11,7 +11,7 @@ const clearCookie = (res, name) => {
   if (!res || !name) return;
 
   // clear cookies
-  const str = cookie.serialize(name, "", { expires: new Date(1), path: "/" });
+  const str = cookie.serialize(name, '', { expires: new Date(1), path: '/' });
   res.clearCookies = res.clearCookies || [];
   res.clearCookies.push(str);
 };

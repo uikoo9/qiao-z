@@ -1,20 +1,20 @@
-"use strict";
+'use strict';
 
-var path = require("path");
-var qiaoFile = require("qiao-file");
-var http = require("http");
-var parseurl = require("parseurl");
-var cookie = require("cookie");
-var ua = require("qiao-ua");
-var qs = require("qs");
-var getRawBody = require("raw-body");
-var template = require("art-template");
+var path = require('path');
+var qiaoFile = require('qiao-file');
+var http = require('http');
+var parseurl = require('parseurl');
+var cookie = require('cookie');
+var ua = require('qiao-ua');
+var qs = require('qs');
+var getRawBody = require('raw-body');
+var template = require('art-template');
 
 // cros options
 const crosOptions = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "*",
-  "Access-Control-Allow-Headers": "*",
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': '*',
+  'Access-Control-Allow-Headers': '*',
 };
 
 /**
@@ -55,7 +55,7 @@ const initApp = (app, options) => {
 };
 
 // methods
-const methods = ["get", "post"];
+const methods = ['get', 'post'];
 
 /**
  * init methods
@@ -110,7 +110,7 @@ const initStatic = (app, routers) => {
   };
 
   // acme
-  app.static("/.well-known", "./.well-known");
+  app.static('/.well-known', './.well-known');
 };
 
 // qiao
@@ -125,7 +125,7 @@ const initController = (app) => {
   if (!app) return;
 
   // files
-  const serverFiles = qiaoFile.lsdir(process.cwd() + "/");
+  const serverFiles = qiaoFile.lsdir(process.cwd() + '/');
   if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
 
   // init
@@ -167,10 +167,10 @@ const defaultCookies = {};
  */
 const handleCookies = (req) => {
   // check
-  if (!req || !req.headers || !req.headers["cookie"]) return defaultCookies;
+  if (!req || !req.headers || !req.headers['cookie']) return defaultCookies;
 
   // return
-  return cookie.parse(req.headers["cookie"]);
+  return cookie.parse(req.headers['cookie']);
 };
 
 // ua
@@ -181,9 +181,7 @@ const handleCookies = (req) => {
  * @returns
  */
 const handleUseragent = (req) => {
-  return !req || !req.headers || !req.headers["user-agent"]
-    ? {}
-    : ua(req.headers["user-agent"]);
+  return !req || !req.headers || !req.headers['user-agent'] ? {} : ua(req.headers['user-agent']);
 };
 
 // qs
@@ -210,16 +208,16 @@ const defaultBody = {};
  */
 const handleBody = async (req, upload) => {
   // check
-  if (!req || !req.headers || !req.headers["content-type"]) return defaultBody;
+  if (!req || !req.headers || !req.headers['content-type']) return defaultBody;
 
   // body
   let body;
   try {
     // content type
-    const contentType = req.headers["content-type"];
+    const contentType = req.headers['content-type'];
 
     // upload
-    if (contentType.indexOf("multipart/form-data") > -1) {
+    if (contentType.indexOf('multipart/form-data') > -1) {
       if (!upload) return defaultBody;
 
       return await upload.uploadSync(req.request);
@@ -229,12 +227,12 @@ const handleBody = async (req, upload) => {
       if (!bodyString) return defaultBody;
 
       // xfrom
-      if (contentType.indexOf("application/x-www-form-urlencoded") > -1) {
+      if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
         body = qs.parse(bodyString);
       }
 
       // json
-      if (contentType.indexOf("application/json") > -1) {
+      if (contentType.indexOf('application/json') > -1) {
         body = JSON.parse(bodyString);
       }
     }
@@ -251,8 +249,8 @@ async function getBodyString(req) {
   try {
     // options
     const options = {
-      length: req.headers["content-length"],
-      limit: "1mb",
+      length: req.headers['content-length'],
+      limit: '1mb',
       encoding: true,
     };
 
@@ -315,7 +313,7 @@ const end = (res, msg) => {
 
   // clear cookies
   if (res.clearCookies && res.clearCookies.length) {
-    res.response.setHeader("Set-Cookie", res.clearCookies);
+    res.response.setHeader('Set-Cookie', res.clearCookies);
     delete res.clearCookies;
   }
 
@@ -323,10 +321,7 @@ const end = (res, msg) => {
   if (res.heads) {
     const status = res.heads.status;
     const options = res.heads.options;
-    const opt =
-      res.cros && status == 200
-        ? Object.assign({}, res.cros, options)
-        : options;
+    const opt = res.cros && status == 200 ? Object.assign({}, res.cros, options) : options;
 
     // head
     res.response.writeHead(status, opt);
@@ -369,7 +364,7 @@ const redirect = (res, url) => {
 const send = (res, msg) => {
   if (!res || !msg) return;
 
-  res.head(200, { "Content-Type": "text/plain" });
+  res.head(200, { 'Content-Type': 'text/plain' });
   res.end(msg);
 };
 
@@ -386,11 +381,11 @@ const json = (res, obj) => {
   // json
   try {
     const msg = JSON.stringify(obj);
-    res.head(200, { "Content-Type": "application/json" });
+    res.head(200, { 'Content-Type': 'application/json' });
     res.end(msg);
   } catch (error) {
     console.log(error);
-    res.send("res.json obj error");
+    res.send('res.json obj error');
   }
 };
 
@@ -454,7 +449,7 @@ const clearCookie = (res, name) => {
   if (!res || !name) return;
 
   // clear cookies
-  const str = cookie.serialize(name, "", { expires: new Date(1), path: "/" });
+  const str = cookie.serialize(name, '', { expires: new Date(1), path: '/' });
   res.clearCookies = res.clearCookies || [];
   res.clearCookies.push(str);
 };
@@ -474,33 +469,33 @@ const render = (res, filePath, data) => {
 
   // check
   if (!filePath) {
-    res.send("render: please check file path!");
+    res.send('render: please check file path!');
     return;
   }
 
   // final path
   const finalPath = path.resolve(process.cwd(), filePath);
   if (!qiaoFile.isExists(filePath)) {
-    res.send("render: file path is not exists");
+    res.send('render: file path is not exists');
     return;
   }
 
   // file
   let file;
   let contentType;
-  if (qiaoFile.extname(finalPath) == ".html") {
+  if (qiaoFile.extname(finalPath) == '.html') {
     file = template(finalPath, data || {});
-    contentType = "text/html";
+    contentType = 'text/html';
   } else {
     file = qiaoFile.readFile(finalPath);
-    contentType = "text/plain";
+    contentType = 'text/plain';
   }
   if (!file) {
-    res.send("render: read file error");
+    res.send('render: read file error');
     return;
   }
 
-  res.response.writeHeader(200, { "Content-Type": contentType });
+  res.response.writeHeader(200, { 'Content-Type': contentType });
   res.response.write(file);
   res.end();
 };
@@ -556,10 +551,10 @@ const handleRes = (response, cros) => {
 const handleOptions = (req, res) => {
   // check
   const reqMethod = req.request.method.toLowerCase();
-  if (reqMethod != "options") return;
+  if (reqMethod != 'options') return;
 
   // return
-  res.end("");
+  res.end('');
   return true;
 };
 
@@ -576,7 +571,7 @@ const handleRouters = (routers, req, res) => {
   if (reqRouters && reqRouters.length) return;
 
   // return
-  res.send("no routers");
+  res.send('no routers');
   return true;
 };
 
@@ -589,10 +584,10 @@ const handleRouters = (routers, req, res) => {
  */
 const handleParamsRouter = (router, req, res) => {
   // check :
-  if (router.path.indexOf(":") == -1) return;
+  if (router.path.indexOf(':') == -1) return;
 
   // check start
-  const f = router.path.split(":")[0];
+  const f = router.path.split(':')[0];
   if (req.url.pathname.indexOf(f) !== 0) return;
 
   // params
@@ -654,7 +649,7 @@ const handleAll = (routers, req, res) => {
   let check;
   for (let i = 0; i < routers.length; i++) {
     const router = routers[i];
-    if (router.path != "/*") continue;
+    if (router.path != '/*') continue;
 
     router.callback(req, res);
     check = true;
@@ -792,7 +787,7 @@ const listenRequest = async (request, response, routers, app) => {
   if (paramsRes) return;
 
   // other
-  res.send("can not get router");
+  res.send('can not get router');
   return;
 };
 
@@ -812,30 +807,30 @@ const listen = (port, routers, app) => {
   const server = http.createServer();
 
   // on
-  server.on("checkContinue", () => {
-    console.log("checkContinue");
+  server.on('checkContinue', () => {
+    console.log('checkContinue');
   });
-  server.on("checkExpectation", () => {
-    console.log("checkExpectation");
+  server.on('checkExpectation', () => {
+    console.log('checkExpectation');
   });
-  server.on("clientError", (err) => {
-    console.log("clientError", err);
+  server.on('clientError', (err) => {
+    console.log('clientError', err);
   });
-  server.on("close", () => {
-    console.log("close");
+  server.on('close', () => {
+    console.log('close');
   });
-  server.on("connect", () => {
-    console.log("connect");
+  server.on('connect', () => {
+    console.log('connect');
   });
-  server.on("dropRequest", () => {
-    console.log("dropRequest");
+  server.on('dropRequest', () => {
+    console.log('dropRequest');
   });
-  server.on("upgrade", () => {
-    console.log("upgrade");
+  server.on('upgrade', () => {
+    console.log('upgrade');
   });
 
   // request
-  server.on("request", (request, response) => {
+  server.on('request', (request, response) => {
     listenRequest(request, response, routers, app);
   });
 
@@ -868,7 +863,7 @@ var app = (options) => {
 
   // listen
   app.listen = (port) => {
-    listen(port || "5277", routers, app);
+    listen(port || '5277', routers, app);
   };
 
   return app;

@@ -1,8 +1,8 @@
 // encode
-const encode = require("qiao-encode");
+const encode = require('qiao-encode');
 
 // sql
-const sql = require("./ucenter/sql/ucenter-user-sql.json");
+const sql = require('./ucenter/sql/ucenter-user-sql.json');
 
 /**
  * check user
@@ -13,11 +13,7 @@ const sql = require("./ucenter/sql/ucenter-user-sql.json");
 module.exports = async function (req, res) {
   // normal visit
   let normalVisit = false;
-  if (
-    global.QIAO_USER_CONFIG &&
-    global.QIAO_USER_CONFIG.paths &&
-    global.QIAO_USER_CONFIG.paths.length
-  ) {
+  if (global.QIAO_USER_CONFIG && global.QIAO_USER_CONFIG.paths && global.QIAO_USER_CONFIG.paths.length) {
     const normalVisitPath = global.QIAO_USER_CONFIG.paths;
     for (let i = 0; i < normalVisitPath.length; i++) {
       if (req.url.pathname == normalVisitPath[i]) normalVisit = true;
@@ -29,7 +25,7 @@ module.exports = async function (req, res) {
   const userid = req.headers.userid || req.cookies.insistime_userid;
   const usertoken = req.headers.usertoken || req.cookies.insistime_usertoken;
   if (!userid || !usertoken) {
-    res.jsonFail("缺少token！");
+    res.jsonFail('缺少token！');
     return;
   }
 
@@ -38,33 +34,30 @@ module.exports = async function (req, res) {
     // get user
     const rows = await req.db.query(sql.ucenterUserGetById, [userid]);
     if (!rows || rows.length != 1) {
-      res.jsonFail("缺少用户信息！");
+      res.jsonFail('缺少用户信息！');
       return;
     }
 
     // check token
     const user = rows[0];
-    const username = user["ucenter_user_name"];
-    const password = user["ucenter_user_password"];
-    const rUsertoken = encode.AESEncrypt(
-      username + password,
-      global.QIAO_USER_CONFIG.encryptKey
-    );
+    const username = user['ucenter_user_name'];
+    const password = user['ucenter_user_password'];
+    const rUsertoken = encode.AESEncrypt(username + password, global.QIAO_USER_CONFIG.encryptKey);
 
     // send
     if (usertoken != rUsertoken) {
-      res.jsonFail("非法token！");
+      res.jsonFail('非法token！');
       return;
     }
 
     // set userinfo
-    req.body["express_userid"] = userid;
-    req.body["express_username"] = username;
+    req.body['express_userid'] = userid;
+    req.body['express_username'] = username;
 
     // return
     return true;
   } catch (e) {
-    res.jsonFail("校验token失败！", { errName: e.name, errMsg: e.message });
+    res.jsonFail('校验token失败！', { errName: e.name, errMsg: e.message });
     return;
   }
 };

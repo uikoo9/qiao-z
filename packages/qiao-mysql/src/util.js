@@ -1,5 +1,5 @@
 // mysql
-import mysql from "mysql";
+import mysql from 'mysql';
 
 /**
  * lib
@@ -96,7 +96,7 @@ function queryByPool(pool, sql, params) {
  * @returns
  */
 export const getColumns = async (app, tableName) => {
-  return await query(app, "SHOW COLUMNS FROM ?", mysql.raw(tableName));
+  return await query(app, 'SHOW COLUMNS FROM ?', mysql.raw(tableName));
 };
 
 /**
@@ -106,16 +106,16 @@ export const getColumns = async (app, tableName) => {
  */
 export const getTypes = (mysqlType) => {
   // check
-  if (!mysqlType) return "string";
+  if (!mysqlType) return 'string';
 
   // char, varchar
-  if (mysqlType.indexOf("char") > -1) return "string";
+  if (mysqlType.indexOf('char') > -1) return 'string';
 
   // int
-  if (mysqlType.indexOf("int") > -1) return "number";
+  if (mysqlType.indexOf('int') > -1) return 'number';
 
   // date, datetime
-  if (mysqlType.indexOf("date") > -1) return "date";
+  if (mysqlType.indexOf('date') > -1) return 'date';
 
-  return "string";
+  return 'string';
 };

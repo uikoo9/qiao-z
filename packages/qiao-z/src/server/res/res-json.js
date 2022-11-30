@@ -11,11 +11,11 @@ export const json = (res, obj) => {
   // json
   try {
     const msg = JSON.stringify(obj);
-    res.head(200, { "Content-Type": "application/json" });
+    res.head(200, { 'Content-Type': 'application/json' });
     res.end(msg);
   } catch (error) {
     console.log(error);
-    res.send("res.json obj error");
+    res.send('res.json obj error');
   }
 };
 

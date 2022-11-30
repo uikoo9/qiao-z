@@ -1,26 +1,26 @@
 // http
-const http = require("http");
+const http = require('http');
 
 // server
 const server = http.createServer();
 
 // request
-server.on("request", async (request, response) => {
-  console.log("request");
+server.on('request', async (request, response) => {
+  console.log('request');
 
   // headers
   const headers = handleHeaders(request);
 
   // content type
-  const contentType = headers["content-type"];
+  const contentType = headers['content-type'];
 
   // body
-  if (contentType.indexOf("multipart/form-data") > -1) {
-    const body = await require("qiao-z-upload").uploadSync(request);
+  if (contentType.indexOf('multipart/form-data') > -1) {
+    const body = await require('qiao-z-upload').uploadSync(request);
     console.log(contentType, body);
   }
 
-  response.end("hello world");
+  response.end('hello world');
 });
 
 // listen

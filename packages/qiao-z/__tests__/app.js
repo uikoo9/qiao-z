@@ -1,5 +1,5 @@
 // qz
-const qz = require("../index.js");
+const qz = require('../index.js');
 
 // app
 const app = qz();

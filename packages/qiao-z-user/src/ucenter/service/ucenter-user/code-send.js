@@ -1,11 +1,11 @@
 // encode
-const encode = require("qiao-encode");
+const encode = require('qiao-encode');
 
 // sms
-const sms = require("qiao-sms");
+const sms = require('qiao-sms');
 
 // sql
-const sql = require("../../sql/ucenter-user-sql.json");
+const sql = require('../../sql/ucenter-user-sql.json');
 
 /**
  * ucenter code send
@@ -15,19 +15,19 @@ const sql = require("../../sql/ucenter-user-sql.json");
 module.exports = async (req, res) => {
   // check
   if (!req.body) {
-    res.jsonFail("缺少参数！");
+    res.jsonFail('缺少参数！');
     return;
   }
   if (!req.body.type) {
-    res.jsonFail("缺少参数type！");
+    res.jsonFail('缺少参数type！');
     return;
   }
   if (!req.body.sign) {
-    res.jsonFail("缺少参数sign！");
+    res.jsonFail('缺少参数sign！');
     return;
   }
   if (!req.body.mobile) {
-    res.jsonFail("缺少参数mobile！");
+    res.jsonFail('缺少参数mobile！');
     return;
   }
 
@@ -39,12 +39,12 @@ module.exports = async (req, res) => {
 
     // type service
     const users = await req.db.query(sql.ucenterUserGetByMobile, [mobile]);
-    if (type == "reg" && users && users.length) {
-      res.jsonFail("手机号已注册！");
+    if (type == 'reg' && users && users.length) {
+      res.jsonFail('手机号已注册！');
       return;
     }
-    if (type == "forget" && users && !users.length) {
-      res.jsonFail("手机号未注册！");
+    if (type == 'forget' && users && !users.length) {
+      res.jsonFail('手机号未注册！');
       return;
     }
 
@@ -69,20 +69,20 @@ module.exports = async (req, res) => {
       appkey: appkey,
       sign: sign,
       mobile: mobile,
-      msg: "您的验证码是：" + code + "，如非本人操作，请忽略此短信。",
+      msg: '您的验证码是：' + code + '，如非本人操作，请忽略此短信。',
       // 验证码：{1}（切勿向任何人透露）。
       // 您的验证码是：{1}，如非本人操作，请忽略此短信。
     });
 
     // check send
-    if (msg != "ok") {
+    if (msg != 'ok') {
       res.jsonFail(msg);
       return;
     }
 
     // suc
-    res.jsonSuccess("验证码发送成功！");
+    res.jsonSuccess('验证码发送成功！');
   } catch (e) {
-    res.jsonFail("验证码发送失败！", { errName: e.name, errMsg: e.message });
+    res.jsonFail('验证码发送失败！', { errName: e.name, errMsg: e.message });
   }
 };

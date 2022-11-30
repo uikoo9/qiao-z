@@ -1,5 +1,5 @@
 // parser
-import Parser from "./parser.js";
+import Parser from './parser.js';
 
 /**
  * parseUserAgent
@@ -14,8 +14,7 @@ function parseUserAgent(useragent) {
   const parserRes = new Parser(useragent).getResult();
 
   // res
-  parserRes.isMobile =
-    parserRes && parserRes.platform && parserRes.platform.type == "mobile";
+  parserRes.isMobile = parserRes && parserRes.platform && parserRes.platform.type == 'mobile';
   return parserRes;
 }
 

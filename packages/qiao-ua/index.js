@@ -1,120 +1,120 @@
-"use strict";
+'use strict';
 
 // NOTE: this list must be up-to-date with browsers listed in
 // test/acceptance/useragentstrings.yml
 const BROWSER_ALIASES_MAP = {
-  "Amazon Silk": "amazon_silk",
-  "Android Browser": "android",
-  Bada: "bada",
-  BlackBerry: "blackberry",
-  Chrome: "chrome",
-  Chromium: "chromium",
-  Electron: "electron",
-  Epiphany: "epiphany",
-  Firefox: "firefox",
-  Focus: "focus",
-  Generic: "generic",
-  "Google Search": "google_search",
-  Googlebot: "googlebot",
-  "Internet Explorer": "ie",
-  "K-Meleon": "k_meleon",
-  Maxthon: "maxthon",
-  "Microsoft Edge": "edge",
-  "MZ Browser": "mz",
-  "NAVER Whale Browser": "naver",
-  Opera: "opera",
-  "Opera Coast": "opera_coast",
-  PhantomJS: "phantomjs",
-  Puffin: "puffin",
-  QupZilla: "qupzilla",
-  QQ: "qq",
-  QQLite: "qqlite",
-  Safari: "safari",
-  Sailfish: "sailfish",
-  "Samsung Internet for Android": "samsung_internet",
-  SeaMonkey: "seamonkey",
-  Sleipnir: "sleipnir",
-  Swing: "swing",
-  Tizen: "tizen",
-  "UC Browser": "uc",
-  Vivaldi: "vivaldi",
-  "WebOS Browser": "webos",
-  WeChat: "wechat",
-  "Yandex Browser": "yandex",
-  Roku: "roku",
+  'Amazon Silk': 'amazon_silk',
+  'Android Browser': 'android',
+  Bada: 'bada',
+  BlackBerry: 'blackberry',
+  Chrome: 'chrome',
+  Chromium: 'chromium',
+  Electron: 'electron',
+  Epiphany: 'epiphany',
+  Firefox: 'firefox',
+  Focus: 'focus',
+  Generic: 'generic',
+  'Google Search': 'google_search',
+  Googlebot: 'googlebot',
+  'Internet Explorer': 'ie',
+  'K-Meleon': 'k_meleon',
+  Maxthon: 'maxthon',
+  'Microsoft Edge': 'edge',
+  'MZ Browser': 'mz',
+  'NAVER Whale Browser': 'naver',
+  Opera: 'opera',
+  'Opera Coast': 'opera_coast',
+  PhantomJS: 'phantomjs',
+  Puffin: 'puffin',
+  QupZilla: 'qupzilla',
+  QQ: 'qq',
+  QQLite: 'qqlite',
+  Safari: 'safari',
+  Sailfish: 'sailfish',
+  'Samsung Internet for Android': 'samsung_internet',
+  SeaMonkey: 'seamonkey',
+  Sleipnir: 'sleipnir',
+  Swing: 'swing',
+  Tizen: 'tizen',
+  'UC Browser': 'uc',
+  Vivaldi: 'vivaldi',
+  'WebOS Browser': 'webos',
+  WeChat: 'wechat',
+  'Yandex Browser': 'yandex',
+  Roku: 'roku',
 };
 
 const BROWSER_MAP = {
-  amazon_silk: "Amazon Silk",
-  android: "Android Browser",
-  bada: "Bada",
-  blackberry: "BlackBerry",
-  chrome: "Chrome",
-  chromium: "Chromium",
-  electron: "Electron",
-  epiphany: "Epiphany",
-  firefox: "Firefox",
-  focus: "Focus",
-  generic: "Generic",
-  googlebot: "Googlebot",
-  google_search: "Google Search",
-  ie: "Internet Explorer",
-  k_meleon: "K-Meleon",
-  maxthon: "Maxthon",
-  edge: "Microsoft Edge",
-  mz: "MZ Browser",
-  naver: "NAVER Whale Browser",
-  opera: "Opera",
-  opera_coast: "Opera Coast",
-  phantomjs: "PhantomJS",
-  puffin: "Puffin",
-  qupzilla: "QupZilla",
-  qq: "QQ Browser",
-  qqlite: "QQ Browser Lite",
-  safari: "Safari",
-  sailfish: "Sailfish",
-  samsung_internet: "Samsung Internet for Android",
-  seamonkey: "SeaMonkey",
-  sleipnir: "Sleipnir",
-  swing: "Swing",
-  tizen: "Tizen",
-  uc: "UC Browser",
-  vivaldi: "Vivaldi",
-  webos: "WebOS Browser",
-  wechat: "WeChat",
-  yandex: "Yandex Browser",
+  amazon_silk: 'Amazon Silk',
+  android: 'Android Browser',
+  bada: 'Bada',
+  blackberry: 'BlackBerry',
+  chrome: 'Chrome',
+  chromium: 'Chromium',
+  electron: 'Electron',
+  epiphany: 'Epiphany',
+  firefox: 'Firefox',
+  focus: 'Focus',
+  generic: 'Generic',
+  googlebot: 'Googlebot',
+  google_search: 'Google Search',
+  ie: 'Internet Explorer',
+  k_meleon: 'K-Meleon',
+  maxthon: 'Maxthon',
+  edge: 'Microsoft Edge',
+  mz: 'MZ Browser',
+  naver: 'NAVER Whale Browser',
+  opera: 'Opera',
+  opera_coast: 'Opera Coast',
+  phantomjs: 'PhantomJS',
+  puffin: 'Puffin',
+  qupzilla: 'QupZilla',
+  qq: 'QQ Browser',
+  qqlite: 'QQ Browser Lite',
+  safari: 'Safari',
+  sailfish: 'Sailfish',
+  samsung_internet: 'Samsung Internet for Android',
+  seamonkey: 'SeaMonkey',
+  sleipnir: 'Sleipnir',
+  swing: 'Swing',
+  tizen: 'Tizen',
+  uc: 'UC Browser',
+  vivaldi: 'Vivaldi',
+  webos: 'WebOS Browser',
+  wechat: 'WeChat',
+  yandex: 'Yandex Browser',
 };
 
 const PLATFORMS_MAP = {
-  tablet: "tablet",
-  mobile: "mobile",
-  desktop: "desktop",
-  tv: "tv",
+  tablet: 'tablet',
+  mobile: 'mobile',
+  desktop: 'desktop',
+  tv: 'tv',
 };
 
 const OS_MAP = {
-  WindowsPhone: "Windows Phone",
-  Windows: "Windows",
-  MacOS: "macOS",
-  iOS: "iOS",
-  Android: "Android",
-  WebOS: "WebOS",
-  BlackBerry: "BlackBerry",
-  Bada: "Bada",
-  Tizen: "Tizen",
-  Linux: "Linux",
-  ChromeOS: "Chrome OS",
-  PlayStation4: "PlayStation 4",
-  Roku: "Roku",
+  WindowsPhone: 'Windows Phone',
+  Windows: 'Windows',
+  MacOS: 'macOS',
+  iOS: 'iOS',
+  Android: 'Android',
+  WebOS: 'WebOS',
+  BlackBerry: 'BlackBerry',
+  Bada: 'Bada',
+  Tizen: 'Tizen',
+  Linux: 'Linux',
+  ChromeOS: 'Chrome OS',
+  PlayStation4: 'PlayStation 4',
+  Roku: 'Roku',
 };
 
 const ENGINE_MAP = {
-  EdgeHTML: "EdgeHTML",
-  Blink: "Blink",
-  Trident: "Trident",
-  Presto: "Presto",
-  Gecko: "Gecko",
-  WebKit: "WebKit",
+  EdgeHTML: 'EdgeHTML',
+  Blink: 'Blink',
+  Trident: 'Trident',
+  Presto: 'Presto',
+  Gecko: 'Gecko',
+  WebKit: 'WebKit',
 };
 
 class Utils {
@@ -126,7 +126,7 @@ class Utils {
    */
   static getFirstMatch(regexp, ua) {
     const match = ua.match(regexp);
-    return (match && match.length > 0 && match[1]) || "";
+    return (match && match.length > 0 && match[1]) || '';
   }
 
   /**
@@ -137,7 +137,7 @@ class Utils {
    */
   static getSecondMatch(regexp, ua) {
     const match = ua.match(regexp);
-    return (match && match.length > 1 && match[2]) || "";
+    return (match && match.length > 1 && match[2]) || '';
   }
 
   /**
@@ -156,26 +156,26 @@ class Utils {
 
   static getWindowsVersionName(version) {
     switch (version) {
-      case "NT":
-        return "NT";
-      case "XP":
-        return "XP";
-      case "NT 5.0":
-        return "2000";
-      case "NT 5.1":
-        return "XP";
-      case "NT 5.2":
-        return "2003";
-      case "NT 6.0":
-        return "Vista";
-      case "NT 6.1":
-        return "7";
-      case "NT 6.2":
-        return "8";
-      case "NT 6.3":
-        return "8.1";
-      case "NT 10.0":
-        return "10";
+      case 'NT':
+        return 'NT';
+      case 'XP':
+        return 'XP';
+      case 'NT 5.0':
+        return '2000';
+      case 'NT 5.1':
+        return 'XP';
+      case 'NT 5.2':
+        return '2003';
+      case 'NT 6.0':
+        return 'Vista';
+      case 'NT 6.1':
+        return '7';
+      case 'NT 6.2':
+        return '8';
+      case 'NT 6.3':
+        return '8.1';
+      case 'NT 10.0':
+        return '10';
       default:
         return undefined;
     }
@@ -203,34 +203,34 @@ class Utils {
    */
   static getMacOSVersionName(version) {
     const v = version
-      .split(".")
+      .split('.')
       .splice(0, 2)
       .map((s) => parseInt(s, 10) || 0);
     v.push(0);
     if (v[0] !== 10) return undefined;
     switch (v[1]) {
       case 5:
-        return "Leopard";
+        return 'Leopard';
       case 6:
-        return "Snow Leopard";
+        return 'Snow Leopard';
       case 7:
-        return "Lion";
+        return 'Lion';
       case 8:
-        return "Mountain Lion";
+        return 'Mountain Lion';
       case 9:
-        return "Mavericks";
+        return 'Mavericks';
       case 10:
-        return "Yosemite";
+        return 'Yosemite';
       case 11:
-        return "El Capitan";
+        return 'El Capitan';
       case 12:
-        return "Sierra";
+        return 'Sierra';
       case 13:
-        return "High Sierra";
+        return 'High Sierra';
       case 14:
-        return "Mojave";
+        return 'Mojave';
       case 15:
-        return "Catalina";
+        return 'Catalina';
       default:
         return undefined;
     }
@@ -262,25 +262,25 @@ class Utils {
    */
   static getAndroidVersionName(version) {
     const v = version
-      .split(".")
+      .split('.')
       .splice(0, 2)
       .map((s) => parseInt(s, 10) || 0);
     v.push(0);
     if (v[0] === 1 && v[1] < 5) return undefined;
-    if (v[0] === 1 && v[1] < 6) return "Cupcake";
-    if (v[0] === 1 && v[1] >= 6) return "Donut";
-    if (v[0] === 2 && v[1] < 2) return "Eclair";
-    if (v[0] === 2 && v[1] === 2) return "Froyo";
-    if (v[0] === 2 && v[1] > 2) return "Gingerbread";
-    if (v[0] === 3) return "Honeycomb";
-    if (v[0] === 4 && v[1] < 1) return "Ice Cream Sandwich";
-    if (v[0] === 4 && v[1] < 4) return "Jelly Bean";
-    if (v[0] === 4 && v[1] >= 4) return "KitKat";
-    if (v[0] === 5) return "Lollipop";
-    if (v[0] === 6) return "Marshmallow";
-    if (v[0] === 7) return "Nougat";
-    if (v[0] === 8) return "Oreo";
-    if (v[0] === 9) return "Pie";
+    if (v[0] === 1 && v[1] < 6) return 'Cupcake';
+    if (v[0] === 1 && v[1] >= 6) return 'Donut';
+    if (v[0] === 2 && v[1] < 2) return 'Eclair';
+    if (v[0] === 2 && v[1] === 2) return 'Froyo';
+    if (v[0] === 2 && v[1] > 2) return 'Gingerbread';
+    if (v[0] === 3) return 'Honeycomb';
+    if (v[0] === 4 && v[1] < 1) return 'Ice Cream Sandwich';
+    if (v[0] === 4 && v[1] < 4) return 'Jelly Bean';
+    if (v[0] === 4 && v[1] >= 4) return 'KitKat';
+    if (v[0] === 5) return 'Lollipop';
+    if (v[0] === 6) return 'Marshmallow';
+    if (v[0] === 7) return 'Nougat';
+    if (v[0] === 8) return 'Oreo';
+    if (v[0] === 9) return 'Pie';
     return undefined;
   }
 
@@ -294,7 +294,7 @@ class Utils {
    * @return {number}
    */
   static getVersionPrecision(version) {
-    return version.split(".").length;
+    return version.split('.').length;
   }
 
   /**
@@ -326,19 +326,15 @@ class Utils {
       const delta = precision - Utils.getVersionPrecision(version);
 
       // 2) "9" -> "9.0" (for precision = 2)
-      const _version = version + new Array(delta + 1).join(".0");
+      const _version = version + new Array(delta + 1).join('.0');
 
       // 3) "9.0" -> ["000000000"", "000000009"]
-      return Utils.map(
-        _version.split("."),
-        (chunk) => new Array(20 - chunk.length).join("0") + chunk
-      ).reverse();
+      return Utils.map(_version.split('.'), (chunk) => new Array(20 - chunk.length).join('0') + chunk).reverse();
     });
 
     // adjust precision for loose comparison
     if (isLoose) {
-      lastPrecision =
-        precision - Math.min(versionAPrecision, versionBPrecision);
+      lastPrecision = precision - Math.min(versionAPrecision, versionBPrecision);
     }
 
     // iterate in reverse order by reversed chunks array
@@ -421,7 +417,7 @@ class Utils {
     }
     for (i = 0, l = assigners.length; i < l; i += 1) {
       const assigner = assigners[i];
-      if (typeof assigner === "object" && assigner !== null) {
+      if (typeof assigner === 'object' && assigner !== null) {
         const keys = Object.keys(assigner);
         keys.forEach((key) => {
           result[key] = assigner[key];
@@ -454,7 +450,7 @@ class Utils {
    * @return {string}
    */
   static getBrowserTypeByAlias(browserAlias) {
-    return BROWSER_MAP[browserAlias] || "";
+    return BROWSER_MAP[browserAlias] || '';
   }
 }
 
@@ -472,11 +468,10 @@ var browserParsersList = [
     test: [/googlebot/i],
     describe(ua) {
       const browser = {
-        name: "Googlebot",
+        name: 'Googlebot',
       };
       const version =
-        Utils.getFirstMatch(/googlebot\/(\d+(\.\d+))/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/googlebot\/(\d+(\.\d+))/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -491,11 +486,10 @@ var browserParsersList = [
     test: [/opera/i],
     describe(ua) {
       const browser = {
-        name: "Opera",
+        name: 'Opera',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:opera)[\s/](\d+(\.?_?\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:opera)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -510,11 +504,10 @@ var browserParsersList = [
     test: [/opr\/|opios/i],
     describe(ua) {
       const browser = {
-        name: "Opera",
+        name: 'Opera',
       };
       const version =
-        Utils.getFirstMatch(/(?:opr|opios)[\s/](\S+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:opr|opios)[\s/](\S+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -527,7 +520,7 @@ var browserParsersList = [
     test: [/SamsungBrowser/i],
     describe(ua) {
       const browser = {
-        name: "Samsung Internet for Android",
+        name: 'Samsung Internet for Android',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -544,11 +537,10 @@ var browserParsersList = [
     test: [/Whale/i],
     describe(ua) {
       const browser = {
-        name: "NAVER Whale Browser",
+        name: 'NAVER Whale Browser',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:whale)[\s/](\d+(?:\.\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:whale)[\s/](\d+(?:\.\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -561,7 +553,7 @@ var browserParsersList = [
     test: [/MZBrowser/i],
     describe(ua) {
       const browser = {
-        name: "MZ Browser",
+        name: 'MZ Browser',
       };
       const version =
         Utils.getFirstMatch(/(?:MZBrowser)[\s/](\d+(?:\.\d+)+)/i, ua) ||
@@ -578,11 +570,10 @@ var browserParsersList = [
     test: [/focus/i],
     describe(ua) {
       const browser = {
-        name: "Focus",
+        name: 'Focus',
       };
       const version =
-        Utils.getFirstMatch(/(?:focus)[\s/](\d+(?:\.\d+)+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:focus)[\s/](\d+(?:\.\d+)+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -595,11 +586,10 @@ var browserParsersList = [
     test: [/swing/i],
     describe(ua) {
       const browser = {
-        name: "Swing",
+        name: 'Swing',
       };
       const version =
-        Utils.getFirstMatch(/(?:swing)[\s/](\d+(?:\.\d+)+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:swing)[\s/](\d+(?:\.\d+)+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -612,11 +602,10 @@ var browserParsersList = [
     test: [/coast/i],
     describe(ua) {
       const browser = {
-        name: "Opera Coast",
+        name: 'Opera Coast',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:coast)[\s/](\d+(\.?_?\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:coast)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -629,11 +618,10 @@ var browserParsersList = [
     test: [/opt\/\d+(?:.?_?\d+)+/i],
     describe(ua) {
       const browser = {
-        name: "Opera Touch",
+        name: 'Opera Touch',
       };
       const version =
-        Utils.getFirstMatch(/(?:opt)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:opt)[\s/](\d+(\.?_?\d+)+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -646,7 +634,7 @@ var browserParsersList = [
     test: [/yabrowser/i],
     describe(ua) {
       const browser = {
-        name: "Yandex Browser",
+        name: 'Yandex Browser',
       };
       const version =
         Utils.getFirstMatch(/(?:yabrowser)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -663,7 +651,7 @@ var browserParsersList = [
     test: [/ucbrowser/i],
     describe(ua) {
       const browser = {
-        name: "UC Browser",
+        name: 'UC Browser',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -680,7 +668,7 @@ var browserParsersList = [
     test: [/Maxthon|mxios/i],
     describe(ua) {
       const browser = {
-        name: "Maxthon",
+        name: 'Maxthon',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -697,7 +685,7 @@ var browserParsersList = [
     test: [/epiphany/i],
     describe(ua) {
       const browser = {
-        name: "Epiphany",
+        name: 'Epiphany',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -714,11 +702,10 @@ var browserParsersList = [
     test: [/puffin/i],
     describe(ua) {
       const browser = {
-        name: "Puffin",
+        name: 'Puffin',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:puffin)[\s/](\d+(\.?_?\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:puffin)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -731,7 +718,7 @@ var browserParsersList = [
     test: [/sleipnir/i],
     describe(ua) {
       const browser = {
-        name: "Sleipnir",
+        name: 'Sleipnir',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -748,7 +735,7 @@ var browserParsersList = [
     test: [/k-meleon/i],
     describe(ua) {
       const browser = {
-        name: "K-Meleon",
+        name: 'K-Meleon',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -765,7 +752,7 @@ var browserParsersList = [
     test: [/micromessenger/i],
     describe(ua) {
       const browser = {
-        name: "WeChat",
+        name: 'WeChat',
       };
       const version =
         Utils.getFirstMatch(/(?:micromessenger)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -782,13 +769,11 @@ var browserParsersList = [
     test: [/qqbrowser/i],
     describe(ua) {
       const browser = {
-        name: /qqbrowserlite/i.test(ua) ? "QQ Browser Lite" : "QQ Browser",
+        name: /qqbrowserlite/i.test(ua) ? 'QQ Browser Lite' : 'QQ Browser',
       };
       const version =
-        Utils.getFirstMatch(
-          /(?:qqbrowserlite|qqbrowser)[/](\d+(\.?_?\d+)+)/i,
-          ua
-        ) || Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:qqbrowserlite|qqbrowser)[/](\d+(\.?_?\d+)+)/i, ua) ||
+        Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -801,7 +786,7 @@ var browserParsersList = [
     test: [/msie|trident/i],
     describe(ua) {
       const browser = {
-        name: "Internet Explorer",
+        name: 'Internet Explorer',
       };
       const version = Utils.getFirstMatch(/(?:msie |rv:)(\d+(\.?_?\d+)+)/i, ua);
 
@@ -816,7 +801,7 @@ var browserParsersList = [
     test: [/\sedg\//i],
     describe(ua) {
       const browser = {
-        name: "Microsoft Edge",
+        name: 'Microsoft Edge',
       };
 
       const version = Utils.getFirstMatch(/\sedg\/(\d+(\.?_?\d+)+)/i, ua);
@@ -832,13 +817,10 @@ var browserParsersList = [
     test: [/edg([ea]|ios)/i],
     describe(ua) {
       const browser = {
-        name: "Microsoft Edge",
+        name: 'Microsoft Edge',
       };
 
-      const version = Utils.getSecondMatch(
-        /edg([ea]|ios)\/(\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getSecondMatch(/edg([ea]|ios)\/(\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -851,7 +833,7 @@ var browserParsersList = [
     test: [/vivaldi/i],
     describe(ua) {
       const browser = {
-        name: "Vivaldi",
+        name: 'Vivaldi',
       };
       const version = Utils.getFirstMatch(/vivaldi\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -866,7 +848,7 @@ var browserParsersList = [
     test: [/seamonkey/i],
     describe(ua) {
       const browser = {
-        name: "SeaMonkey",
+        name: 'SeaMonkey',
       };
       const version = Utils.getFirstMatch(/seamonkey\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -881,13 +863,10 @@ var browserParsersList = [
     test: [/sailfish/i],
     describe(ua) {
       const browser = {
-        name: "Sailfish",
+        name: 'Sailfish',
       };
 
-      const version = Utils.getFirstMatch(
-        /sailfish\s?browser\/(\d+(\.\d+)?)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/sailfish\s?browser\/(\d+(\.\d+)?)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -900,7 +879,7 @@ var browserParsersList = [
     test: [/silk/i],
     describe(ua) {
       const browser = {
-        name: "Amazon Silk",
+        name: 'Amazon Silk',
       };
       const version = Utils.getFirstMatch(/silk\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -915,7 +894,7 @@ var browserParsersList = [
     test: [/phantom/i],
     describe(ua) {
       const browser = {
-        name: "PhantomJS",
+        name: 'PhantomJS',
       };
       const version = Utils.getFirstMatch(/phantomjs\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -930,7 +909,7 @@ var browserParsersList = [
     test: [/slimerjs/i],
     describe(ua) {
       const browser = {
-        name: "SlimerJS",
+        name: 'SlimerJS',
       };
       const version = Utils.getFirstMatch(/slimerjs\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -945,7 +924,7 @@ var browserParsersList = [
     test: [/blackberry|\bbb\d+/i, /rim\stablet/i],
     describe(ua) {
       const browser = {
-        name: "BlackBerry",
+        name: 'BlackBerry',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -962,7 +941,7 @@ var browserParsersList = [
     test: [/(web|hpw)[o0]s/i],
     describe(ua) {
       const browser = {
-        name: "WebOS Browser",
+        name: 'WebOS Browser',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -979,7 +958,7 @@ var browserParsersList = [
     test: [/bada/i],
     describe(ua) {
       const browser = {
-        name: "Bada",
+        name: 'Bada',
       };
       const version = Utils.getFirstMatch(/dolfin\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -994,7 +973,7 @@ var browserParsersList = [
     test: [/tizen/i],
     describe(ua) {
       const browser = {
-        name: "Tizen",
+        name: 'Tizen',
       };
       const version =
         Utils.getFirstMatch(/(?:tizen\s?)?browser\/(\d+(\.?_?\d+)+)/i, ua) ||
@@ -1011,7 +990,7 @@ var browserParsersList = [
     test: [/qupzilla/i],
     describe(ua) {
       const browser = {
-        name: "QupZilla",
+        name: 'QupZilla',
       };
       const version =
         Utils.getFirstMatch(/(?:qupzilla)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -1028,12 +1007,9 @@ var browserParsersList = [
     test: [/firefox|iceweasel|fxios/i],
     describe(ua) {
       const browser = {
-        name: "Firefox",
+        name: 'Firefox',
       };
-      const version = Utils.getFirstMatch(
-        /(?:firefox|iceweasel|fxios)[\s/](\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:firefox|iceweasel|fxios)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -1046,12 +1022,9 @@ var browserParsersList = [
     test: [/electron/i],
     describe(ua) {
       const browser = {
-        name: "Electron",
+        name: 'Electron',
       };
-      const version = Utils.getFirstMatch(
-        /(?:electron)\/(\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:electron)\/(\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -1064,12 +1037,9 @@ var browserParsersList = [
     test: [/MiuiBrowser/i],
     describe(ua) {
       const browser = {
-        name: "Miui",
+        name: 'Miui',
       };
-      const version = Utils.getFirstMatch(
-        /(?:MiuiBrowser)[\s/](\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:MiuiBrowser)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -1082,7 +1052,7 @@ var browserParsersList = [
     test: [/chromium/i],
     describe(ua) {
       const browser = {
-        name: "Chromium",
+        name: 'Chromium',
       };
       const version =
         Utils.getFirstMatch(/(?:chromium)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -1099,12 +1069,9 @@ var browserParsersList = [
     test: [/chrome|crios|crmo/i],
     describe(ua) {
       const browser = {
-        name: "Chrome",
+        name: 'Chrome',
       };
-      const version = Utils.getFirstMatch(
-        /(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -1117,7 +1084,7 @@ var browserParsersList = [
     test: [/GSA/i],
     describe(ua) {
       const browser = {
-        name: "Google Search",
+        name: 'Google Search',
       };
       const version = Utils.getFirstMatch(/(?:GSA)\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -1138,7 +1105,7 @@ var browserParsersList = [
     },
     describe(ua) {
       const browser = {
-        name: "Android Browser",
+        name: 'Android Browser',
       };
       const version = Utils.getFirstMatch(commonVersionIdentifier, ua);
 
@@ -1155,7 +1122,7 @@ var browserParsersList = [
     test: [/playstation 4/i],
     describe(ua) {
       const browser = {
-        name: "PlayStation 4",
+        name: 'PlayStation 4',
       };
       const version = Utils.getFirstMatch(commonVersionIdentifier, ua);
 
@@ -1172,7 +1139,7 @@ var browserParsersList = [
     test: [/safari|applewebkit/i],
     describe(ua) {
       const browser = {
-        name: "Safari",
+        name: 'Safari',
       };
       const version = Utils.getFirstMatch(commonVersionIdentifier, ua);
 
@@ -1194,10 +1161,8 @@ var browserParsersList = [
        */
       const regexpWithoutDeviceSpec = /^(.*)\/(.*) /;
       const regexpWithDeviceSpec = /^(.*)\/(.*)[ \t]\((.*)/;
-      const hasDeviceSpec = ua.search("\\(") !== -1;
-      const regexp = hasDeviceSpec
-        ? regexpWithDeviceSpec
-        : regexpWithoutDeviceSpec;
+      const hasDeviceSpec = ua.search('\\(') !== -1;
+      const regexp = hasDeviceSpec ? regexpWithDeviceSpec : regexpWithoutDeviceSpec;
       return {
         name: Utils.getFirstMatch(regexp, ua),
         version: Utils.getSecondMatch(regexp, ua),
@@ -1228,10 +1193,7 @@ var osParsersList = [
   {
     test: [/windows phone/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /windows phone (?:os)?\s?(\d+(\.\d+)*)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/windows phone (?:os)?\s?(\d+(\.\d+)*)/i, ua);
       return {
         name: OS_MAP.WindowsPhone,
         version,
@@ -1273,10 +1235,7 @@ var osParsersList = [
   {
     test: [/macintosh/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /mac os x (\d+(\.?_?\d+)+)/i,
-        ua
-      ).replace(/[_\s]/g, ".");
+      const version = Utils.getFirstMatch(/mac os x (\d+(\.?_?\d+)+)/i, ua).replace(/[_\s]/g, '.');
       const versionName = Utils.getMacOSVersionName(version);
 
       const os = {
@@ -1294,10 +1253,7 @@ var osParsersList = [
   {
     test: [/(ipod|iphone|ipad)/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /os (\d+([_\s]\d+)*) like mac os x/i,
-        ua
-      ).replace(/[_\s]/g, ".");
+      const version = Utils.getFirstMatch(/os (\d+([_\s]\d+)*) like mac os x/i, ua).replace(/[_\s]/g, '.');
 
       return {
         name: OS_MAP.iOS,
@@ -1331,10 +1287,7 @@ var osParsersList = [
   {
     test: [/(web|hpw)[o0]s/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i, ua);
       const os = {
         name: OS_MAP.WebOS,
       };
@@ -1412,10 +1365,7 @@ var osParsersList = [
   {
     test: [/PlayStation 4/],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /PlayStation 4[/\s](\d+(\.\d+)*)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/PlayStation 4[/\s](\d+(\.\d+)*)/i, ua);
       return {
         name: OS_MAP.PlayStation4,
         version,
@@ -1435,8 +1385,8 @@ var platformParsersList = [
     test: [/googlebot/i],
     describe() {
       return {
-        type: "bot",
-        vendor: "Google",
+        type: 'bot',
+        vendor: 'Google',
       };
     },
   },
@@ -1445,10 +1395,10 @@ var platformParsersList = [
   {
     test: [/huawei/i],
     describe(ua) {
-      const model = Utils.getFirstMatch(/(can-l01)/i, ua) && "Nova";
+      const model = Utils.getFirstMatch(/(can-l01)/i, ua) && 'Nova';
       const platform = {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Huawei",
+        vendor: 'Huawei',
       };
       if (model) {
         platform.model = model;
@@ -1463,7 +1413,7 @@ var platformParsersList = [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Nexus",
+        vendor: 'Nexus',
       };
     },
   },
@@ -1474,8 +1424,8 @@ var platformParsersList = [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Apple",
-        model: "iPad",
+        vendor: 'Apple',
+        model: 'iPad',
       };
     },
   },
@@ -1486,8 +1436,8 @@ var platformParsersList = [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Apple",
-        model: "iPad",
+        vendor: 'Apple',
+        model: 'iPad',
       };
     },
   },
@@ -1498,8 +1448,8 @@ var platformParsersList = [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Amazon",
-        model: "Kindle Fire HD 7",
+        vendor: 'Amazon',
+        model: 'Kindle Fire HD 7',
       };
     },
   },
@@ -1510,7 +1460,7 @@ var platformParsersList = [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Amazon",
+        vendor: 'Amazon',
       };
     },
   },
@@ -1536,7 +1486,7 @@ var platformParsersList = [
       const model = Utils.getFirstMatch(/(ipod|iphone)/i, ua);
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Apple",
+        vendor: 'Apple',
         model,
       };
     },
@@ -1548,7 +1498,7 @@ var platformParsersList = [
     describe() {
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Nexus",
+        vendor: 'Nexus',
       };
     },
   },
@@ -1566,12 +1516,12 @@ var platformParsersList = [
   /* BlackBerry */
   {
     test(parser) {
-      return parser.getBrowserName(true) === "blackberry";
+      return parser.getBrowserName(true) === 'blackberry';
     },
     describe() {
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "BlackBerry",
+        vendor: 'BlackBerry',
       };
     },
   },
@@ -1579,7 +1529,7 @@ var platformParsersList = [
   /* Bada */
   {
     test(parser) {
-      return parser.getBrowserName(true) === "bada";
+      return parser.getBrowserName(true) === 'bada';
     },
     describe() {
       return {
@@ -1591,12 +1541,12 @@ var platformParsersList = [
   /* Windows Phone */
   {
     test(parser) {
-      return parser.getBrowserName() === "windows phone";
+      return parser.getBrowserName() === 'windows phone';
     },
     describe() {
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Microsoft",
+        vendor: 'Microsoft',
       };
     },
   },
@@ -1604,10 +1554,8 @@ var platformParsersList = [
   /* Android Tablet */
   {
     test(parser) {
-      const osMajorVersion = Number(
-        String(parser.getOSVersion()).split(".")[0]
-      );
-      return parser.getOSName(true) === "android" && osMajorVersion >= 3;
+      const osMajorVersion = Number(String(parser.getOSVersion()).split('.')[0]);
+      return parser.getOSName(true) === 'android' && osMajorVersion >= 3;
     },
     describe() {
       return {
@@ -1619,7 +1567,7 @@ var platformParsersList = [
   /* Android Mobile */
   {
     test(parser) {
-      return parser.getOSName(true) === "android";
+      return parser.getOSName(true) === 'android';
     },
     describe() {
       return {
@@ -1631,12 +1579,12 @@ var platformParsersList = [
   /* desktop */
   {
     test(parser) {
-      return parser.getOSName(true) === "macos";
+      return parser.getOSName(true) === 'macos';
     },
     describe() {
       return {
         type: PLATFORMS_MAP.desktop,
-        vendor: "Apple",
+        vendor: 'Apple',
       };
     },
   },
@@ -1644,7 +1592,7 @@ var platformParsersList = [
   /* Windows */
   {
     test(parser) {
-      return parser.getOSName(true) === "windows";
+      return parser.getOSName(true) === 'windows';
     },
     describe() {
       return {
@@ -1656,7 +1604,7 @@ var platformParsersList = [
   /* Linux */
   {
     test(parser) {
-      return parser.getOSName(true) === "linux";
+      return parser.getOSName(true) === 'linux';
     },
     describe() {
       return {
@@ -1668,7 +1616,7 @@ var platformParsersList = [
   /* PlayStation 4 */
   {
     test(parser) {
-      return parser.getOSName(true) === "playstation 4";
+      return parser.getOSName(true) === 'playstation 4';
     },
     describe() {
       return {
@@ -1680,7 +1628,7 @@ var platformParsersList = [
   /* Roku */
   {
     test(parser) {
-      return parser.getOSName(true) === "roku";
+      return parser.getOSName(true) === 'roku';
     },
     describe() {
       return {
@@ -1699,7 +1647,7 @@ var enginesParsersList = [
   /* EdgeHTML */
   {
     test(parser) {
-      return parser.getBrowserName(true) === "microsoft edge";
+      return parser.getBrowserName(true) === 'microsoft edge';
     },
     describe(ua) {
       const isBlinkBased = /\sedg\//i.test(ua);
@@ -1827,8 +1775,8 @@ class Parser {
    * @constructor
    */
   constructor(UA, skipParsing = false) {
-    if (UA === void 0 || UA === null || UA === "") {
-      throw new Error("UserAgent parameter can't be empty");
+    if (UA === void 0 || UA === null || UA === '') {
+      throw new Error('UserAgent parameter can\'t be empty');
     }
 
     this._ua = UA;
@@ -1889,7 +1837,7 @@ class Parser {
     this.parsedResult.browser = {};
 
     const browserDescriptor = Utils.find(browserParsersList, (_browser) => {
-      if (typeof _browser.test === "function") {
+      if (typeof _browser.test === 'function') {
         return _browser.test(this);
       }
 
@@ -1897,7 +1845,7 @@ class Parser {
         return _browser.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (browserDescriptor) {
@@ -1929,9 +1877,9 @@ class Parser {
    */
   getBrowserName(toLowerCase) {
     if (toLowerCase) {
-      return String(this.getBrowser().name).toLowerCase() || "";
+      return String(this.getBrowser().name).toLowerCase() || '';
     }
-    return this.getBrowser().name || "";
+    return this.getBrowser().name || '';
   }
 
   /**
@@ -1971,7 +1919,7 @@ class Parser {
     this.parsedResult.os = {};
 
     const os = Utils.find(osParsersList, (_os) => {
-      if (typeof _os.test === "function") {
+      if (typeof _os.test === 'function') {
         return _os.test(this);
       }
 
@@ -1979,7 +1927,7 @@ class Parser {
         return _os.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (os) {
@@ -1998,10 +1946,10 @@ class Parser {
     const { name } = this.getOS();
 
     if (toLowerCase) {
-      return String(name).toLowerCase() || "";
+      return String(name).toLowerCase() || '';
     }
 
-    return name || "";
+    return name || '';
   }
 
   /**
@@ -2033,10 +1981,10 @@ class Parser {
     const { type } = this.getPlatform();
 
     if (toLowerCase) {
-      return String(type).toLowerCase() || "";
+      return String(type).toLowerCase() || '';
     }
 
-    return type || "";
+    return type || '';
   }
 
   /**
@@ -2047,7 +1995,7 @@ class Parser {
     this.parsedResult.platform = {};
 
     const platform = Utils.find(platformParsersList, (_platform) => {
-      if (typeof _platform.test === "function") {
+      if (typeof _platform.test === 'function') {
         return _platform.test(this);
       }
 
@@ -2055,7 +2003,7 @@ class Parser {
         return _platform.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (platform) {
@@ -2085,9 +2033,9 @@ class Parser {
    */
   getEngineName(toLowerCase) {
     if (toLowerCase) {
-      return String(this.getEngine().name).toLowerCase() || "";
+      return String(this.getEngine().name).toLowerCase() || '';
     }
-    return this.getEngine().name || "";
+    return this.getEngine().name || '';
   }
 
   /**
@@ -2098,7 +2046,7 @@ class Parser {
     this.parsedResult.engine = {};
 
     const engine = Utils.find(enginesParsersList, (_engine) => {
-      if (typeof _engine.test === "function") {
+      if (typeof _engine.test === 'function') {
         return _engine.test(this);
       }
 
@@ -2106,7 +2054,7 @@ class Parser {
         return _engine.test.some((condition) => this.test(condition));
       }
 
-      throw new Error("Browser's test function is not valid");
+      throw new Error('Browser\'s test function is not valid');
     });
 
     if (engine) {
@@ -2165,10 +2113,10 @@ class Parser {
 
     allDefinitions.forEach((key) => {
       const currentDefinition = checkTree[key];
-      if (typeof currentDefinition === "string") {
+      if (typeof currentDefinition === 'string') {
         browsers[key] = currentDefinition;
         browsersCounter += 1;
-      } else if (typeof currentDefinition === "object") {
+      } else if (typeof currentDefinition === 'object') {
         platformsAndOSes[key] = currentDefinition;
         platformsAndOSCounter += 1;
       }
@@ -2176,9 +2124,7 @@ class Parser {
 
     if (platformsAndOSCounter > 0) {
       const platformsAndOSNames = Object.keys(platformsAndOSes);
-      const OSMatchingDefinition = Utils.find(platformsAndOSNames, (name) =>
-        this.isOS(name)
-      );
+      const OSMatchingDefinition = Utils.find(platformsAndOSNames, (name) => this.isOS(name));
 
       if (OSMatchingDefinition) {
         const osResult = this.satisfies(platformsAndOSes[OSMatchingDefinition]);
@@ -2188,14 +2134,9 @@ class Parser {
         }
       }
 
-      const platformMatchingDefinition = Utils.find(
-        platformsAndOSNames,
-        (name) => this.isPlatform(name)
-      );
+      const platformMatchingDefinition = Utils.find(platformsAndOSNames, (name) => this.isPlatform(name));
       if (platformMatchingDefinition) {
-        const platformResult = this.satisfies(
-          platformsAndOSes[platformMatchingDefinition]
-        );
+        const platformResult = this.satisfies(platformsAndOSes[platformMatchingDefinition]);
 
         if (platformResult !== void 0) {
           return platformResult;
@@ -2205,9 +2146,7 @@ class Parser {
 
     if (browsersCounter > 0) {
       const browserNames = Object.keys(browsers);
-      const matchingDefinition = Utils.find(browserNames, (name) =>
-        this.isBrowser(name, true)
-      );
+      const matchingDefinition = Utils.find(browserNames, (name) => this.isBrowser(name, true));
 
       if (matchingDefinition !== void 0) {
         return this.compareVersion(browsers[matchingDefinition]);
@@ -2241,35 +2180,31 @@ class Parser {
 
     const currentBrowserVersion = this.getBrowserVersion();
 
-    if (typeof currentBrowserVersion !== "string") {
+    if (typeof currentBrowserVersion !== 'string') {
       return void 0;
     }
 
-    if (version[0] === ">" || version[0] === "<") {
+    if (version[0] === '>' || version[0] === '<') {
       comparableVersion = version.substr(1);
-      if (version[1] === "=") {
+      if (version[1] === '=') {
         isLoose = true;
         comparableVersion = version.substr(2);
       } else {
         expectedResults = [];
       }
-      if (version[0] === ">") {
+      if (version[0] === '>') {
         expectedResults.push(1);
       } else {
         expectedResults.push(-1);
       }
-    } else if (version[0] === "=") {
+    } else if (version[0] === '=') {
       comparableVersion = version.substr(1);
-    } else if (version[0] === "~") {
+    } else if (version[0] === '~') {
       isLoose = true;
       comparableVersion = version.substr(1);
     }
 
-    return (
-      expectedResults.indexOf(
-        Utils.compareVersions(currentBrowserVersion, comparableVersion, isLoose)
-      ) > -1
-    );
+    return expectedResults.indexOf(Utils.compareVersions(currentBrowserVersion, comparableVersion, isLoose)) > -1;
   }
 
   isOS(osName) {
@@ -2292,11 +2227,7 @@ class Parser {
    * @returns {Boolean}
    */
   is(anything, includingAlias = false) {
-    return (
-      this.isBrowser(anything, includingAlias) ||
-      this.isOS(anything) ||
-      this.isPlatform(anything)
-    );
+    return this.isBrowser(anything, includingAlias) || this.isOS(anything) || this.isPlatform(anything);
   }
 
   /**
@@ -2324,8 +2255,7 @@ function parseUserAgent(useragent) {
   const parserRes = new Parser(useragent).getResult();
 
   // res
-  parserRes.isMobile =
-    parserRes && parserRes.platform && parserRes.platform.type == "mobile";
+  parserRes.isMobile = parserRes && parserRes.platform && parserRes.platform.type == 'mobile';
   return parserRes;
 }
 

@@ -1,5 +1,5 @@
 // utils
-import Utils from "./utils.js";
+import Utils from './utils.js';
 
 // version
 const commonVersionIdentifier = /version\/(\d+(\.?_?\d+)+)/i;
@@ -13,11 +13,10 @@ export default [
     test: [/googlebot/i],
     describe(ua) {
       const browser = {
-        name: "Googlebot",
+        name: 'Googlebot',
       };
       const version =
-        Utils.getFirstMatch(/googlebot\/(\d+(\.\d+))/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/googlebot\/(\d+(\.\d+))/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -32,11 +31,10 @@ export default [
     test: [/opera/i],
     describe(ua) {
       const browser = {
-        name: "Opera",
+        name: 'Opera',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:opera)[\s/](\d+(\.?_?\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:opera)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -51,11 +49,10 @@ export default [
     test: [/opr\/|opios/i],
     describe(ua) {
       const browser = {
-        name: "Opera",
+        name: 'Opera',
       };
       const version =
-        Utils.getFirstMatch(/(?:opr|opios)[\s/](\S+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:opr|opios)[\s/](\S+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -68,7 +65,7 @@ export default [
     test: [/SamsungBrowser/i],
     describe(ua) {
       const browser = {
-        name: "Samsung Internet for Android",
+        name: 'Samsung Internet for Android',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -85,11 +82,10 @@ export default [
     test: [/Whale/i],
     describe(ua) {
       const browser = {
-        name: "NAVER Whale Browser",
+        name: 'NAVER Whale Browser',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:whale)[\s/](\d+(?:\.\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:whale)[\s/](\d+(?:\.\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -102,7 +98,7 @@ export default [
     test: [/MZBrowser/i],
     describe(ua) {
       const browser = {
-        name: "MZ Browser",
+        name: 'MZ Browser',
       };
       const version =
         Utils.getFirstMatch(/(?:MZBrowser)[\s/](\d+(?:\.\d+)+)/i, ua) ||
@@ -119,11 +115,10 @@ export default [
     test: [/focus/i],
     describe(ua) {
       const browser = {
-        name: "Focus",
+        name: 'Focus',
       };
       const version =
-        Utils.getFirstMatch(/(?:focus)[\s/](\d+(?:\.\d+)+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:focus)[\s/](\d+(?:\.\d+)+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -136,11 +131,10 @@ export default [
     test: [/swing/i],
     describe(ua) {
       const browser = {
-        name: "Swing",
+        name: 'Swing',
       };
       const version =
-        Utils.getFirstMatch(/(?:swing)[\s/](\d+(?:\.\d+)+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:swing)[\s/](\d+(?:\.\d+)+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -153,11 +147,10 @@ export default [
     test: [/coast/i],
     describe(ua) {
       const browser = {
-        name: "Opera Coast",
+        name: 'Opera Coast',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:coast)[\s/](\d+(\.?_?\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:coast)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -170,11 +163,10 @@ export default [
     test: [/opt\/\d+(?:.?_?\d+)+/i],
     describe(ua) {
       const browser = {
-        name: "Opera Touch",
+        name: 'Opera Touch',
       };
       const version =
-        Utils.getFirstMatch(/(?:opt)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
-        Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:opt)[\s/](\d+(\.?_?\d+)+)/i, ua) || Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -187,7 +179,7 @@ export default [
     test: [/yabrowser/i],
     describe(ua) {
       const browser = {
-        name: "Yandex Browser",
+        name: 'Yandex Browser',
       };
       const version =
         Utils.getFirstMatch(/(?:yabrowser)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -204,7 +196,7 @@ export default [
     test: [/ucbrowser/i],
     describe(ua) {
       const browser = {
-        name: "UC Browser",
+        name: 'UC Browser',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -221,7 +213,7 @@ export default [
     test: [/Maxthon|mxios/i],
     describe(ua) {
       const browser = {
-        name: "Maxthon",
+        name: 'Maxthon',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -238,7 +230,7 @@ export default [
     test: [/epiphany/i],
     describe(ua) {
       const browser = {
-        name: "Epiphany",
+        name: 'Epiphany',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -255,11 +247,10 @@ export default [
     test: [/puffin/i],
     describe(ua) {
       const browser = {
-        name: "Puffin",
+        name: 'Puffin',
       };
       const version =
-        Utils.getFirstMatch(commonVersionIdentifier, ua) ||
-        Utils.getFirstMatch(/(?:puffin)[\s/](\d+(\.?_?\d+)+)/i, ua);
+        Utils.getFirstMatch(commonVersionIdentifier, ua) || Utils.getFirstMatch(/(?:puffin)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -272,7 +263,7 @@ export default [
     test: [/sleipnir/i],
     describe(ua) {
       const browser = {
-        name: "Sleipnir",
+        name: 'Sleipnir',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -289,7 +280,7 @@ export default [
     test: [/k-meleon/i],
     describe(ua) {
       const browser = {
-        name: "K-Meleon",
+        name: 'K-Meleon',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -306,7 +297,7 @@ export default [
     test: [/micromessenger/i],
     describe(ua) {
       const browser = {
-        name: "WeChat",
+        name: 'WeChat',
       };
       const version =
         Utils.getFirstMatch(/(?:micromessenger)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -323,13 +314,11 @@ export default [
     test: [/qqbrowser/i],
     describe(ua) {
       const browser = {
-        name: /qqbrowserlite/i.test(ua) ? "QQ Browser Lite" : "QQ Browser",
+        name: /qqbrowserlite/i.test(ua) ? 'QQ Browser Lite' : 'QQ Browser',
       };
       const version =
-        Utils.getFirstMatch(
-          /(?:qqbrowserlite|qqbrowser)[/](\d+(\.?_?\d+)+)/i,
-          ua
-        ) || Utils.getFirstMatch(commonVersionIdentifier, ua);
+        Utils.getFirstMatch(/(?:qqbrowserlite|qqbrowser)[/](\d+(\.?_?\d+)+)/i, ua) ||
+        Utils.getFirstMatch(commonVersionIdentifier, ua);
 
       if (version) {
         browser.version = version;
@@ -342,7 +331,7 @@ export default [
     test: [/msie|trident/i],
     describe(ua) {
       const browser = {
-        name: "Internet Explorer",
+        name: 'Internet Explorer',
       };
       const version = Utils.getFirstMatch(/(?:msie |rv:)(\d+(\.?_?\d+)+)/i, ua);
 
@@ -357,7 +346,7 @@ export default [
     test: [/\sedg\//i],
     describe(ua) {
       const browser = {
-        name: "Microsoft Edge",
+        name: 'Microsoft Edge',
       };
 
       const version = Utils.getFirstMatch(/\sedg\/(\d+(\.?_?\d+)+)/i, ua);
@@ -373,13 +362,10 @@ export default [
     test: [/edg([ea]|ios)/i],
     describe(ua) {
       const browser = {
-        name: "Microsoft Edge",
+        name: 'Microsoft Edge',
       };
 
-      const version = Utils.getSecondMatch(
-        /edg([ea]|ios)\/(\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getSecondMatch(/edg([ea]|ios)\/(\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -392,7 +378,7 @@ export default [
     test: [/vivaldi/i],
     describe(ua) {
       const browser = {
-        name: "Vivaldi",
+        name: 'Vivaldi',
       };
       const version = Utils.getFirstMatch(/vivaldi\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -407,7 +393,7 @@ export default [
     test: [/seamonkey/i],
     describe(ua) {
       const browser = {
-        name: "SeaMonkey",
+        name: 'SeaMonkey',
       };
       const version = Utils.getFirstMatch(/seamonkey\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -422,13 +408,10 @@ export default [
     test: [/sailfish/i],
     describe(ua) {
       const browser = {
-        name: "Sailfish",
+        name: 'Sailfish',
       };
 
-      const version = Utils.getFirstMatch(
-        /sailfish\s?browser\/(\d+(\.\d+)?)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/sailfish\s?browser\/(\d+(\.\d+)?)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -441,7 +424,7 @@ export default [
     test: [/silk/i],
     describe(ua) {
       const browser = {
-        name: "Amazon Silk",
+        name: 'Amazon Silk',
       };
       const version = Utils.getFirstMatch(/silk\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -456,7 +439,7 @@ export default [
     test: [/phantom/i],
     describe(ua) {
       const browser = {
-        name: "PhantomJS",
+        name: 'PhantomJS',
       };
       const version = Utils.getFirstMatch(/phantomjs\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -471,7 +454,7 @@ export default [
     test: [/slimerjs/i],
     describe(ua) {
       const browser = {
-        name: "SlimerJS",
+        name: 'SlimerJS',
       };
       const version = Utils.getFirstMatch(/slimerjs\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -486,7 +469,7 @@ export default [
     test: [/blackberry|\bbb\d+/i, /rim\stablet/i],
     describe(ua) {
       const browser = {
-        name: "BlackBerry",
+        name: 'BlackBerry',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -503,7 +486,7 @@ export default [
     test: [/(web|hpw)[o0]s/i],
     describe(ua) {
       const browser = {
-        name: "WebOS Browser",
+        name: 'WebOS Browser',
       };
       const version =
         Utils.getFirstMatch(commonVersionIdentifier, ua) ||
@@ -520,7 +503,7 @@ export default [
     test: [/bada/i],
     describe(ua) {
       const browser = {
-        name: "Bada",
+        name: 'Bada',
       };
       const version = Utils.getFirstMatch(/dolfin\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -535,7 +518,7 @@ export default [
     test: [/tizen/i],
     describe(ua) {
       const browser = {
-        name: "Tizen",
+        name: 'Tizen',
       };
       const version =
         Utils.getFirstMatch(/(?:tizen\s?)?browser\/(\d+(\.?_?\d+)+)/i, ua) ||
@@ -552,7 +535,7 @@ export default [
     test: [/qupzilla/i],
     describe(ua) {
       const browser = {
-        name: "QupZilla",
+        name: 'QupZilla',
       };
       const version =
         Utils.getFirstMatch(/(?:qupzilla)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -569,12 +552,9 @@ export default [
     test: [/firefox|iceweasel|fxios/i],
     describe(ua) {
       const browser = {
-        name: "Firefox",
+        name: 'Firefox',
       };
-      const version = Utils.getFirstMatch(
-        /(?:firefox|iceweasel|fxios)[\s/](\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:firefox|iceweasel|fxios)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -587,12 +567,9 @@ export default [
     test: [/electron/i],
     describe(ua) {
       const browser = {
-        name: "Electron",
+        name: 'Electron',
       };
-      const version = Utils.getFirstMatch(
-        /(?:electron)\/(\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:electron)\/(\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -605,12 +582,9 @@ export default [
     test: [/MiuiBrowser/i],
     describe(ua) {
       const browser = {
-        name: "Miui",
+        name: 'Miui',
       };
-      const version = Utils.getFirstMatch(
-        /(?:MiuiBrowser)[\s/](\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:MiuiBrowser)[\s/](\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -623,7 +597,7 @@ export default [
     test: [/chromium/i],
     describe(ua) {
       const browser = {
-        name: "Chromium",
+        name: 'Chromium',
       };
       const version =
         Utils.getFirstMatch(/(?:chromium)[\s/](\d+(\.?_?\d+)+)/i, ua) ||
@@ -640,12 +614,9 @@ export default [
     test: [/chrome|crios|crmo/i],
     describe(ua) {
       const browser = {
-        name: "Chrome",
+        name: 'Chrome',
       };
-      const version = Utils.getFirstMatch(
-        /(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i, ua);
 
       if (version) {
         browser.version = version;
@@ -658,7 +629,7 @@ export default [
     test: [/GSA/i],
     describe(ua) {
       const browser = {
-        name: "Google Search",
+        name: 'Google Search',
       };
       const version = Utils.getFirstMatch(/(?:GSA)\/(\d+(\.?_?\d+)+)/i, ua);
 
@@ -679,7 +650,7 @@ export default [
     },
     describe(ua) {
       const browser = {
-        name: "Android Browser",
+        name: 'Android Browser',
       };
       const version = Utils.getFirstMatch(commonVersionIdentifier, ua);
 
@@ -696,7 +667,7 @@ export default [
     test: [/playstation 4/i],
     describe(ua) {
       const browser = {
-        name: "PlayStation 4",
+        name: 'PlayStation 4',
       };
       const version = Utils.getFirstMatch(commonVersionIdentifier, ua);
 
@@ -713,7 +684,7 @@ export default [
     test: [/safari|applewebkit/i],
     describe(ua) {
       const browser = {
-        name: "Safari",
+        name: 'Safari',
       };
       const version = Utils.getFirstMatch(commonVersionIdentifier, ua);
 
@@ -735,10 +706,8 @@ export default [
        */
       const regexpWithoutDeviceSpec = /^(.*)\/(.*) /;
       const regexpWithDeviceSpec = /^(.*)\/(.*)[ \t]\((.*)/;
-      const hasDeviceSpec = ua.search("\\(") !== -1;
-      const regexp = hasDeviceSpec
-        ? regexpWithDeviceSpec
-        : regexpWithoutDeviceSpec;
+      const hasDeviceSpec = ua.search('\\(') !== -1;
+      const regexp = hasDeviceSpec ? regexpWithDeviceSpec : regexpWithoutDeviceSpec;
       return {
         name: Utils.getFirstMatch(regexp, ua),
         version: Utils.getSecondMatch(regexp, ua),

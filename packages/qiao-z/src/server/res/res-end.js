@@ -9,7 +9,7 @@ const end = (res, msg) => {
 
   // clear cookies
   if (res.clearCookies && res.clearCookies.length) {
-    res.response.setHeader("Set-Cookie", res.clearCookies);
+    res.response.setHeader('Set-Cookie', res.clearCookies);
     delete res.clearCookies;
   }
 
@@ -17,10 +17,7 @@ const end = (res, msg) => {
   if (res.heads) {
     const status = res.heads.status;
     const options = res.heads.options;
-    const opt =
-      res.cros && status == 200
-        ? Object.assign({}, res.cros, options)
-        : options;
+    const opt = res.cros && status == 200 ? Object.assign({}, res.cros, options) : options;
 
     // head
     res.response.writeHead(status, opt);

@@ -1,5 +1,5 @@
 // qs
-import qs from "qs";
+import qs from 'qs';
 
 /**
  * handle query

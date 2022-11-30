@@ -1,5 +1,5 @@
 // sql
-const sql = require("../sql/ucenter-menu-sql.json");
+const sql = require('../sql/ucenter-menu-sql.json');
 
 /**
  * ucenter menu list
@@ -22,38 +22,38 @@ exports.ucenterMenuList = async (req, res) => {
 
   // query
   if (ucenterMenuParent) {
-    sqlcount.push(" and t.ucenter_menu_parent = ?");
+    sqlcount.push(' and t.ucenter_menu_parent = ?');
     paramscount.push(ucenterMenuParent);
 
-    sqlquery.push(" and t.ucenter_menu_parent = ?");
+    sqlquery.push(' and t.ucenter_menu_parent = ?');
     paramsquery.push(ucenterMenuParent);
   }
   if (ucenterMenuSn) {
-    sqlcount.push(" and t.ucenter_menu_sn = ?");
+    sqlcount.push(' and t.ucenter_menu_sn = ?');
     paramscount.push(ucenterMenuSn);
 
-    sqlquery.push(" and t.ucenter_menu_sn = ?");
+    sqlquery.push(' and t.ucenter_menu_sn = ?');
     paramsquery.push(ucenterMenuSn);
   }
   if (ucenterMenuTitle) {
-    sqlcount.push(" and t.ucenter_menu_title = ?");
+    sqlcount.push(' and t.ucenter_menu_title = ?');
     paramscount.push(ucenterMenuTitle);
 
-    sqlquery.push(" and t.ucenter_menu_title = ?");
+    sqlquery.push(' and t.ucenter_menu_title = ?');
     paramsquery.push(ucenterMenuTitle);
   }
   if (ucenterMenuUrl) {
-    sqlcount.push(" and t.ucenter_menu_url = ?");
+    sqlcount.push(' and t.ucenter_menu_url = ?');
     paramscount.push(ucenterMenuUrl);
 
-    sqlquery.push(" and t.ucenter_menu_url = ?");
+    sqlquery.push(' and t.ucenter_menu_url = ?');
     paramsquery.push(ucenterMenuUrl);
   }
 
   // order and page
-  sqlquery.push(" order by t.? ? limit ?,?");
-  const order = req.body.order || "desc";
-  const orderby = req.body.orderby || "id";
+  sqlquery.push(' order by t.? ? limit ?,?');
+  const order = req.body.order || 'desc';
+  const orderby = req.body.orderby || 'id';
   const pagesize = parseInt(req.body.rows || 10);
   const pagenumber = parseInt(req.body.page || 1);
   const start = (pagenumber - 1) * pagesize;
@@ -64,20 +64,20 @@ exports.ucenterMenuList = async (req, res) => {
 
   // db
   try {
-    const rs = await req.db.query(sqlcount.join(""), paramscount);
-    const rows = await req.db.query(sqlquery.join(""), paramsquery);
+    const rs = await req.db.query(sqlcount.join(''), paramscount);
+    const rows = await req.db.query(sqlquery.join(''), paramsquery);
 
     // result
     const result = {};
-    result.total = rs[0]["tcount"];
+    result.total = rs[0]['tcount'];
     result.rows = rows;
     result.sumpage = Math.ceil(result.total / pagesize);
     result.pagenumber = pagenumber;
     result.pagesize = pagesize;
 
-    res.jsonSuccess("query success", result);
+    res.jsonSuccess('query success', result);
   } catch (e) {
-    res.jsonFail("query failed", { errName: e.name, errMsg: e.message });
+    res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
   }
 };
 
@@ -89,11 +89,11 @@ exports.ucenterMenuList = async (req, res) => {
 exports.ucenterMenuGet = async (req, res) => {
   // check
   if (!req.body) {
-    res.jsonFail("缺少参数！");
+    res.jsonFail('缺少参数！');
     return;
   }
   if (!req.body.id) {
-    res.jsonFail("缺少参数id！");
+    res.jsonFail('缺少参数id！');
     return;
   }
 
@@ -101,9 +101,9 @@ exports.ucenterMenuGet = async (req, res) => {
   try {
     const rows = await req.db.query(sql.ucenterMenuGetById, [req.body.id]);
 
-    res.jsonSuccess("query success", { rows: rows });
+    res.jsonSuccess('query success', { rows: rows });
   } catch (e) {
-    res.jsonFail("query failed", { errName: e.name, errMsg: e.message });
+    res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
   }
 };
 
@@ -115,23 +115,23 @@ exports.ucenterMenuGet = async (req, res) => {
 exports.ucenterMenuSave = async (req, res) => {
   // check
   if (!req.body) {
-    res.jsonFail("缺少参数！");
+    res.jsonFail('缺少参数！');
     return;
   }
   if (!req.body.ucenterMenuParent) {
-    res.jsonFail("缺少参数ucenterMenuParent！");
+    res.jsonFail('缺少参数ucenterMenuParent！');
     return;
   }
   if (!req.body.ucenterMenuSn) {
-    res.jsonFail("缺少参数ucenterMenuSn！");
+    res.jsonFail('缺少参数ucenterMenuSn！');
     return;
   }
   if (!req.body.ucenterMenuTitle) {
-    res.jsonFail("缺少参数ucenterMenuTitle！");
+    res.jsonFail('缺少参数ucenterMenuTitle！');
     return;
   }
   if (!req.body.ucenterMenuUrl) {
-    res.jsonFail("缺少参数ucenterMenuUrl！");
+    res.jsonFail('缺少参数ucenterMenuUrl！');
     return;
   }
 
@@ -157,9 +157,9 @@ exports.ucenterMenuSave = async (req, res) => {
       params.push(ucenterMenuUrl);
 
       params.push(express_userid || 1);
-      params.push(express_username || "admin");
+      params.push(express_username || 'admin');
       params.push(express_userid || 1);
-      params.push(express_username || "admin");
+      params.push(express_username || 'admin');
 
       const rs = await req.db.query(sql.ucenterMenuAdd, params);
       id = rs && rs.insertId ? rs.insertId : id;
@@ -170,15 +170,15 @@ exports.ucenterMenuSave = async (req, res) => {
       params.push(ucenterMenuUrl);
 
       params.push(express_userid || 1);
-      params.push(express_username || "admin");
+      params.push(express_username || 'admin');
       params.push(id);
 
       await req.db.query(sql.ucenterMenuEdit, params);
     }
 
-    res.jsonSuccess("save success", { id: id });
+    res.jsonSuccess('save success', { id: id });
   } catch (e) {
-    res.jsonFail("save failed", { errName: e.name, errMsg: e.message });
+    res.jsonFail('save failed', { errName: e.name, errMsg: e.message });
   }
 };
 
@@ -190,19 +190,19 @@ exports.ucenterMenuSave = async (req, res) => {
 exports.ucenterMenuDel = async (req, res) => {
   // check
   if (!req.body) {
-    res.jsonFail("缺少参数！");
+    res.jsonFail('缺少参数！');
     return;
   }
   if (!req.body.ids) {
-    res.jsonFail("缺少参数ids！");
+    res.jsonFail('缺少参数ids！');
     return;
   }
 
   // db
   try {
-    await req.db.query(sql.ucenterMenuDel, req.body.ids.split(","));
-    res.jsonSuccess("del success");
+    await req.db.query(sql.ucenterMenuDel, req.body.ids.split(','));
+    res.jsonSuccess('del success');
   } catch (e) {
-    res.jsonFail("del failed", { errName: e.name, errMsg: e.message });
+    res.jsonFail('del failed', { errName: e.name, errMsg: e.message });
   }
 };

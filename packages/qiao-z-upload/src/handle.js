@@ -1,5 +1,5 @@
 // formidable
-import formidable from "formidable";
+import formidable from 'formidable';
 
 /**
  * handle
@@ -12,7 +12,7 @@ const handle = (req, opt) => {
 
   // default options
   const defaultOptions = {
-    encoding: "utf-8",
+    encoding: 'utf-8',
     allowEmptyFiles: false,
     keepExtensions: true,
     maxFileSize: 200 * 1024 * 1024,
@@ -31,26 +31,25 @@ const handle = (req, opt) => {
   });
 
   // events
-  form.on("progress", function (bytesReceived, bytesExpected) {
-    if (options && options.handleProgress)
-      options.handleProgress(bytesReceived, bytesExpected);
+  form.on('progress', function (bytesReceived, bytesExpected) {
+    if (options && options.handleProgress) options.handleProgress(bytesReceived, bytesExpected);
   });
-  form.on("field", function (name, value) {
+  form.on('field', function (name, value) {
     if (options && options.handleField) options.handleField(name, value);
   });
-  form.on("fileBegin", function (name, file) {
+  form.on('fileBegin', function (name, file) {
     if (options && options.handleFileBegin) options.handleFileBegin(name, file);
   });
-  form.on("file", function (name, file) {
+  form.on('file', function (name, file) {
     if (options && options.handleFile) options.handleFile(name, file);
   });
-  form.on("error", function (err) {
+  form.on('error', function (err) {
     if (options && options.handleError) options.handleError(err);
   });
-  form.on("aborted", function () {
+  form.on('aborted', function () {
     if (options && options.handleAborted) options.handleAborted();
   });
-  form.on("end", function () {
+  form.on('end', function () {
     if (options && options.handleEnd) options.handleEnd();
   });
 };

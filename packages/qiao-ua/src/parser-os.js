@@ -1,8 +1,8 @@
 // utils
-import Utils from "./utils.js";
+import Utils from './utils.js';
 
 // constants
-import { OS_MAP } from "./constants.js";
+import { OS_MAP } from './constants.js';
 
 /**
  * parse os
@@ -24,10 +24,7 @@ export default [
   {
     test: [/windows phone/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /windows phone (?:os)?\s?(\d+(\.\d+)*)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/windows phone (?:os)?\s?(\d+(\.\d+)*)/i, ua);
       return {
         name: OS_MAP.WindowsPhone,
         version,
@@ -69,10 +66,7 @@ export default [
   {
     test: [/macintosh/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /mac os x (\d+(\.?_?\d+)+)/i,
-        ua
-      ).replace(/[_\s]/g, ".");
+      const version = Utils.getFirstMatch(/mac os x (\d+(\.?_?\d+)+)/i, ua).replace(/[_\s]/g, '.');
       const versionName = Utils.getMacOSVersionName(version);
 
       const os = {
@@ -90,10 +84,7 @@ export default [
   {
     test: [/(ipod|iphone|ipad)/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /os (\d+([_\s]\d+)*) like mac os x/i,
-        ua
-      ).replace(/[_\s]/g, ".");
+      const version = Utils.getFirstMatch(/os (\d+([_\s]\d+)*) like mac os x/i, ua).replace(/[_\s]/g, '.');
 
       return {
         name: OS_MAP.iOS,
@@ -127,10 +118,7 @@ export default [
   {
     test: [/(web|hpw)[o0]s/i],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i, ua);
       const os = {
         name: OS_MAP.WebOS,
       };
@@ -208,10 +196,7 @@ export default [
   {
     test: [/PlayStation 4/],
     describe(ua) {
-      const version = Utils.getFirstMatch(
-        /PlayStation 4[/\s](\d+(\.\d+)*)/i,
-        ua
-      );
+      const version = Utils.getFirstMatch(/PlayStation 4[/\s](\d+(\.\d+)*)/i, ua);
       return {
         name: OS_MAP.PlayStation4,
         version,

@@ -1,20 +1,20 @@
 // parseurl
-import parseurl from "parseurl";
+import parseurl from 'parseurl';
 
 // headers
-import handleHeaders from "./req-headers.js";
+import handleHeaders from './req-headers.js';
 
 // cookies
-import handleCookies from "./req-cookies.js";
+import handleCookies from './req-cookies.js';
 
 // useragent
-import handleUseragent from "./req-useragent.js";
+import handleUseragent from './req-useragent.js';
 
 // query
-import handleQuery from "./req-query.js";
+import handleQuery from './req-query.js';
 
 // body
-import handleBody from "./req-body.js";
+import handleBody from './req-body.js';
 
 /**
  * req

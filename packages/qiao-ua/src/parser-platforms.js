@@ -1,8 +1,8 @@
 // utils
-import Utils from "./utils.js";
+import Utils from './utils.js';
 
 // constants
-import { PLATFORMS_MAP } from "./constants.js";
+import { PLATFORMS_MAP } from './constants.js';
 
 /**
  * parse platforms
@@ -13,8 +13,8 @@ export default [
     test: [/googlebot/i],
     describe() {
       return {
-        type: "bot",
-        vendor: "Google",
+        type: 'bot',
+        vendor: 'Google',
       };
     },
   },
@@ -23,10 +23,10 @@ export default [
   {
     test: [/huawei/i],
     describe(ua) {
-      const model = Utils.getFirstMatch(/(can-l01)/i, ua) && "Nova";
+      const model = Utils.getFirstMatch(/(can-l01)/i, ua) && 'Nova';
       const platform = {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Huawei",
+        vendor: 'Huawei',
       };
       if (model) {
         platform.model = model;
@@ -41,7 +41,7 @@ export default [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Nexus",
+        vendor: 'Nexus',
       };
     },
   },
@@ -52,8 +52,8 @@ export default [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Apple",
-        model: "iPad",
+        vendor: 'Apple',
+        model: 'iPad',
       };
     },
   },
@@ -64,8 +64,8 @@ export default [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Apple",
-        model: "iPad",
+        vendor: 'Apple',
+        model: 'iPad',
       };
     },
   },
@@ -76,8 +76,8 @@ export default [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Amazon",
-        model: "Kindle Fire HD 7",
+        vendor: 'Amazon',
+        model: 'Kindle Fire HD 7',
       };
     },
   },
@@ -88,7 +88,7 @@ export default [
     describe() {
       return {
         type: PLATFORMS_MAP.tablet,
-        vendor: "Amazon",
+        vendor: 'Amazon',
       };
     },
   },
@@ -114,7 +114,7 @@ export default [
       const model = Utils.getFirstMatch(/(ipod|iphone)/i, ua);
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Apple",
+        vendor: 'Apple',
         model,
       };
     },
@@ -126,7 +126,7 @@ export default [
     describe() {
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Nexus",
+        vendor: 'Nexus',
       };
     },
   },
@@ -144,12 +144,12 @@ export default [
   /* BlackBerry */
   {
     test(parser) {
-      return parser.getBrowserName(true) === "blackberry";
+      return parser.getBrowserName(true) === 'blackberry';
     },
     describe() {
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "BlackBerry",
+        vendor: 'BlackBerry',
       };
     },
   },
@@ -157,7 +157,7 @@ export default [
   /* Bada */
   {
     test(parser) {
-      return parser.getBrowserName(true) === "bada";
+      return parser.getBrowserName(true) === 'bada';
     },
     describe() {
       return {
@@ -169,12 +169,12 @@ export default [
   /* Windows Phone */
   {
     test(parser) {
-      return parser.getBrowserName() === "windows phone";
+      return parser.getBrowserName() === 'windows phone';
     },
     describe() {
       return {
         type: PLATFORMS_MAP.mobile,
-        vendor: "Microsoft",
+        vendor: 'Microsoft',
       };
     },
   },
@@ -182,10 +182,8 @@ export default [
   /* Android Tablet */
   {
     test(parser) {
-      const osMajorVersion = Number(
-        String(parser.getOSVersion()).split(".")[0]
-      );
-      return parser.getOSName(true) === "android" && osMajorVersion >= 3;
+      const osMajorVersion = Number(String(parser.getOSVersion()).split('.')[0]);
+      return parser.getOSName(true) === 'android' && osMajorVersion >= 3;
     },
     describe() {
       return {
@@ -197,7 +195,7 @@ export default [
   /* Android Mobile */
   {
     test(parser) {
-      return parser.getOSName(true) === "android";
+      return parser.getOSName(true) === 'android';
     },
     describe() {
       return {
@@ -209,12 +207,12 @@ export default [
   /* desktop */
   {
     test(parser) {
-      return parser.getOSName(true) === "macos";
+      return parser.getOSName(true) === 'macos';
     },
     describe() {
       return {
         type: PLATFORMS_MAP.desktop,
-        vendor: "Apple",
+        vendor: 'Apple',
       };
     },
   },
@@ -222,7 +220,7 @@ export default [
   /* Windows */
   {
     test(parser) {
-      return parser.getOSName(true) === "windows";
+      return parser.getOSName(true) === 'windows';
     },
     describe() {
       return {
@@ -234,7 +232,7 @@ export default [
   /* Linux */
   {
     test(parser) {
-      return parser.getOSName(true) === "linux";
+      return parser.getOSName(true) === 'linux';
     },
     describe() {
       return {
@@ -246,7 +244,7 @@ export default [
   /* PlayStation 4 */
   {
     test(parser) {
-      return parser.getOSName(true) === "playstation 4";
+      return parser.getOSName(true) === 'playstation 4';
     },
     describe() {
       return {
@@ -258,7 +256,7 @@ export default [
   /* Roku */
   {
     test(parser) {
-      return parser.getOSName(true) === "roku";
+      return parser.getOSName(true) === 'roku';
     },
     describe() {
       return {

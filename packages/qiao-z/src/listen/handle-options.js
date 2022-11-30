@@ -6,10 +6,10 @@
 const handleOptions = (req, res) => {
   // check
   const reqMethod = req.request.method.toLowerCase();
-  if (reqMethod != "options") return;
+  if (reqMethod != 'options') return;
 
   // return
-  res.end("");
+  res.end('');
   return true;
 };
 

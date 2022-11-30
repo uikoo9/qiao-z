@@ -1,8 +1,8 @@
 // utils
-import Utils from "./utils.js";
+import Utils from './utils.js';
 
 // constants
-import { ENGINE_MAP } from "./constants.js";
+import { ENGINE_MAP } from './constants.js';
 
 /**
  * parse engines
@@ -11,7 +11,7 @@ export default [
   /* EdgeHTML */
   {
     test(parser) {
-      return parser.getBrowserName(true) === "microsoft edge";
+      return parser.getBrowserName(true) === 'microsoft edge';
     },
     describe(ua) {
       const isBlinkBased = /\sedg\//i.test(ua);

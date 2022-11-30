@@ -7,10 +7,10 @@
  */
 const handleParamsRouter = (router, req, res) => {
   // check :
-  if (router.path.indexOf(":") == -1) return;
+  if (router.path.indexOf(':') == -1) return;
 
   // check start
-  const f = router.path.split(":")[0];
+  const f = router.path.split(':')[0];
   if (req.url.pathname.indexOf(f) !== 0) return;
 
   // params

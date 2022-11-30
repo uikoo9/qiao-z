@@ -1,5 +1,5 @@
 // path
-import { resolve } from "path";
+import { resolve } from 'path';
 
 /**
  * init static
@@ -30,7 +30,7 @@ const initStatic = (app, routers) => {
   };
 
   // acme
-  app.static("/.well-known", "./.well-known");
+  app.static('/.well-known', './.well-known');
 };
 
 export default initStatic;
