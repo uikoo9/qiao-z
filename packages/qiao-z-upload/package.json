@@ -30,6 +30,6 @@
     "build": "rollup --config _config.rollup.js"
   },
   "dependencies": {
-    "formidable": "^2.0.1"
+    "formidable": "^2.1.1"
   }
 }
