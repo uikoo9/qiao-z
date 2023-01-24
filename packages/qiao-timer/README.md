@@ -1,68 +1,57 @@
-# qiao-timer
+## qiao-timer
+
+[![npm version](https://img.shields.io/npm/v/qiao-timer.svg?style=flat-square)](https://www.npmjs.org/package/qiao-timer)
+[![npm downloads](https://img.shields.io/npm/dm/qiao-timer.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-timer)
+
+nodejs 下的 timer 能力
+
+## install
+
+安装
+
+```bash
+npm i qiao-timer
+```
 
 ## api
 
-### job
-
-```javascript
-'use strict';
-
-var q = require('qiao-timer');
-
-var test = function () {
-  var time = '*/1 * * * * *';
-  var tick = function () {
-    console.log(new Date());
-  };
-
-  var job = q.job(time, tick);
-  console.log(job);
-};
-
-test();
-```
-
 ### run
 
+按 time 执行 tick 函数
+
 ```javascript
-'use strict';
+const { run } = require('qiao-timer');
 
-var q = require('qiao-timer');
-
-var test = function () {
-  var time = '*/1 * * * * *';
-  var tick = function () {
-    console.log(new Date());
-  };
-
-  console.log('-' + new Date());
-  var job = q.run(time, tick);
+const time = '*/1 * * * * *';
+const tick = () => {
+  console.log(new Date());
 };
 
-test();
+console.log('-' + new Date());
+run(time, tick);
 ```
 
 ### runAndInit
 
+按 time 执行 tick 函数, 启动前会先执行一次 tick 函数
+
 ```javascript
-'use strict';
+const { runAndInit } = require('qiao-timer');
 
-var q = require('qiao-timer');
-
-var test = function () {
-  var time = '*/1 * * * * *';
-  var tick = function () {
-    console.log(new Date());
-  };
-
-  console.log('-' + new Date());
-  var job = q.runAndInit(time, tick);
+const time = '*/1 * * * * *';
+const tick = () => {
+  console.log(new Date());
 };
 
-test();
+console.log('-' + new Date());
+runAndInit(time, tick);
 ```
 
 ## version
+
+### 0.0.5.20230124
+
+1. 1.0.0
 
 ### 0.0.4.20220422
 
