@@ -158,6 +158,8 @@ const initTask = (app) => {
 
     if (/Task\.js$/.test(file)) {
       const task = require(file);
+      if (!task || !task.time || !task.tick) return;
+
       qiaoTimer.runAndInit(task.time, task.tick);
     }
   });
