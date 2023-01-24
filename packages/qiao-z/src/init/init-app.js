@@ -31,6 +31,11 @@ const initApp = (app, options) => {
     });
   }
 
+  // cron
+  if (options.cron) {
+    app._cron = options.cron;
+  }
+
   // upload
   if (options.upload) {
     app._upload = options.upload;

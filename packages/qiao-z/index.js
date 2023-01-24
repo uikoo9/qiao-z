@@ -2,7 +2,6 @@
 
 var path = require('path');
 var qiaoFile = require('qiao-file');
-var qiaoTimer = require('qiao-timer');
 var http = require('http');
 var parseurl = require('parseurl');
 var cookie = require('cookie');
@@ -42,6 +41,11 @@ const initApp = (app, options) => {
     options.modules.forEach((m) => {
       m(app, options.config);
     });
+  }
+
+  // cron
+  if (options.cron) {
+    app._cron = options.cron;
   }
 
   // upload
@@ -146,7 +150,7 @@ const initController = (app) => {
  */
 const initTask = (app) => {
   // check
-  if (!app) return;
+  if (!app || !app._cron || !app._cron.runAndInit) return;
 
   // files
   const serverFiles = qiaoFile.lsdir(process.cwd() + '/');
@@ -160,7 +164,7 @@ const initTask = (app) => {
       const task = require(file);
       if (!task || !task.time || !task.tick) return;
 
-      qiaoTimer.runAndInit(task.time, task.tick);
+      app._cron.runAndInit(task.time, task.tick);
     }
   });
 };
@@ -887,11 +891,11 @@ var app = (options) => {
   // init controller
   initController(app);
 
-  // init task
-  initTask(app);
-
   // init app
   initApp(app, options);
+
+  // init task
+  initTask(app);
 
   // listen
   app.listen = (port) => {

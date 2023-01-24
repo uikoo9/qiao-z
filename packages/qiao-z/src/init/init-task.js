@@ -1,9 +1,6 @@
 // file
 import { lsdir } from 'qiao-file';
 
-// timer
-import { runAndInit } from 'qiao-timer';
-
 /**
  * init task
  * @param {*} app
@@ -11,7 +8,7 @@ import { runAndInit } from 'qiao-timer';
  */
 const initTask = (app) => {
   // check
-  if (!app) return;
+  if (!app || !app._cron || !app._cron.runAndInit) return;
 
   // files
   const serverFiles = lsdir(process.cwd() + '/');
@@ -25,7 +22,7 @@ const initTask = (app) => {
       const task = require(file);
       if (!task || !task.time || !task.tick) return;
 
-      runAndInit(task.time, task.tick);
+      app._cron.runAndInit(task.time, task.tick);
     }
   });
 };

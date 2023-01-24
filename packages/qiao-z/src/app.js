@@ -26,11 +26,11 @@ export default (options) => {
   // init controller
   initController(app);
 
-  // init task
-  initTask(app);
-
   // init app
   initApp(app, options);
+
+  // init task
+  initTask(app);
 
   // listen
   app.listen = (port) => {
