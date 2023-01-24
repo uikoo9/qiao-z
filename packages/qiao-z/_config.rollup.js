@@ -7,5 +7,16 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['http', 'parseurl', 'cookie', 'qs', 'raw-body', 'path', 'art-template', 'qiao-file', 'qiao-ua'],
+  external: [
+    'http',
+    'parseurl',
+    'cookie',
+    'qs',
+    'raw-body',
+    'path',
+    'art-template',
+    'qiao-file',
+    'qiao-timer',
+    'qiao-ua',
+  ],
 };
