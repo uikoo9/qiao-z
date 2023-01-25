@@ -19,6 +19,6 @@
     "build": "rollup --config _config.rollup.js"
   },
   "dependencies": {
-    "cron": "^2.1.0"
+    "cron": "^2.2.0"
   }
 }
