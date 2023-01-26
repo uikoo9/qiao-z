@@ -3,7 +3,7 @@ const q = require('../index.js');
 
 const test = () => {
   // 普通单条短信-简化
-  q.send({
+  q.sendSMSMsg({
     appid: 'your appid',
     appkey: 'your appkey',
     sign: 'your sign',
@@ -12,7 +12,7 @@ const test = () => {
   });
 
   // 普通单条短信-定制&回调
-  q.send(
+  q.sendSMSMsg(
     {
       appid: 'your appid',
       appkey: 'your appkey',
@@ -22,8 +22,8 @@ const test = () => {
       mtype: '0：普通短信，1：营销短信，可选',
       cnum: '86：中国，可选',
     },
-    (err, res) => {
-      console.log(err, res);
+    (err, req, res, success, msg) => {
+      console.log(err, req, res, success, msg);
     },
   );
 };

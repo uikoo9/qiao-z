@@ -1,8 +1,5 @@
-'use strict';
-
-var txsms = require('qcloudsms_js');
-
 // txsms
+import txsms from 'qcloudsms_js';
 
 /**
  * send sms msg
@@ -18,7 +15,7 @@ var txsms = require('qcloudsms_js');
  * @param {*} callback
  * @returns
  */
-const sendSMSMsg = (options, callback) => {
+export const sendSMSMsg = (options, callback) => {
   // check
   if (!options) {
     console.log('sendSMSMsg need options');
@@ -76,38 +73,3 @@ function handleCallback(err, req, res, callback) {
   // callback
   callback(err, req, res, success, msg);
 }
-
-// send
-
-/**
- * send sms msg sync
- * 	options.appid	appid
- * 	options.appkey	appkey
- * 	options.mtype	0：普通短信，1：营销短信
- * 	options.cnum	86：中国
- * 	options.sign	签名
- * 	options.mobile	手机号
- * 	options.msg		消息
- * @param {*} options
- * @returns
- */
-const sendSMSMsgSync = (options) => {
-  return new Promise((resolve, reject) => {
-    sendSMSMsg(options, (err, req, res, success, msg) => {
-      // err
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      // resolve
-      resolve({
-        success,
-        msg,
-      });
-    });
-  });
-};
-
-exports.sendSMSMsg = sendSMSMsg;
-exports.sendSMSMsgSync = sendSMSMsgSync;
