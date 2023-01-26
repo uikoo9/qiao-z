@@ -148,9 +148,9 @@ const initController = (app) => {
  * @param {*} app
  * @returns
  */
-const initTask = (app) => {
+var initTask = (app) => {
   // check
-  if (!app || !app._cron || !app._cron.runAndInit) return;
+  if (!app || !app._cron) return;
 
   // files
   const serverFiles = qiaoFile.lsdir(process.cwd() + '/');
@@ -158,16 +158,25 @@ const initTask = (app) => {
 
   // init
   serverFiles.files.forEach((serverFile) => {
-    const file = serverFile.path + serverFile.name;
-
-    if (/Task\.js$/.test(file)) {
-      const task = require(file);
-      if (!task || !task.time || !task.tick) return;
-
-      app._cron.runAndInit(task.time, task.tick);
-    }
+    operateTaskFile(app, serverFile);
   });
 };
+
+// operate task file
+function operateTaskFile(app, serverFile) {
+  const file = serverFile.path + serverFile.name;
+
+  if (/Task\.js$/.test(file)) {
+    const task = require(file);
+    if (!task || !task.time || !task.tick) return;
+
+    if (task.runAndInit) {
+      app._cron.runAndInit(task.time, task.tick);
+    } else {
+      app._cron.run(task.time, task.tick);
+    }
+  }
+}
 
 /**
  * handle headers
