@@ -38,7 +38,7 @@ q.sendSMSMsg(options, (err, req, res, success, msg) => {
 发送短信，同步方式
 
 ```javascript
-await q.sendSMSMsgSync(options);
+const res = await q.sendSMSMsgSync(options);
 ```
 
 ## version

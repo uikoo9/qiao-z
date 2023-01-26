@@ -64,19 +64,19 @@ module.exports = async (req, res) => {
     const sign = req.body.sign;
 
     // send
-    const msg = await sms.sendSync({
+    const smsRes = await sms.sendSMSMsgSync({
       appid: appid,
       appkey: appkey,
       sign: sign,
       mobile: mobile,
-      msg: '您的验证码是：' + code + '，如非本人操作，请忽略此短信。',
+      msg: `您的验证码是：${code}，如非本人操作，请忽略此短信。`,
       // 验证码：{1}（切勿向任何人透露）。
       // 您的验证码是：{1}，如非本人操作，请忽略此短信。
     });
 
     // check send
-    if (msg != 'ok') {
-      res.jsonFail(msg);
+    if (!smsRes.success) {
+      res.jsonFail(smsRes.msg);
       return;
     }
 
