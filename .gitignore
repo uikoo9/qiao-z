@@ -3,8 +3,6 @@
 .settings
 .externalToolBuilders
 
-.log
-
 dist
 jsdoc
 files_out
@@ -13,3 +11,5 @@ node_modules
 config.json
 
 lerna-debug.log
+
+packages/qiao-log/__tests__/*.log

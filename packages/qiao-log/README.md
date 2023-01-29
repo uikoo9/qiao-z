@@ -14,21 +14,15 @@ const logger = Logger(options);
 
 ## options
 
-- log4jsConfig，[log4js](https://log4js-node.github.io/log4js-node/index.html)的配置
-- intervalTime，写本地日志的间隔时间，用来限制写日志频次，单位 ms
-- logContentLength，日志内容长度，用来限制日志内容长度
+[log4js](https://log4js-node.github.io/log4js-node/index.html)的配置
 
 ```javascript
 const options = {
-  intervalTime: 100,
-  logContentLength: 200,
-  log4jsConfig: {
-    appenders: {
-      out: { type: 'stdout' },
-    },
-    categories: {
-      default: { appenders: ['out'], level: 'debug' },
-    },
+  appenders: {
+    out: { type: 'stdout' },
+  },
+  categories: {
+    default: { appenders: ['out'], level: 'debug' },
   },
 };
 ```
@@ -43,6 +37,10 @@ logger.error;
 ```
 
 ## version
+
+## 0.0.4.20230129
+
+1. get logger
 
 ### 0.0.3.20221214
 
