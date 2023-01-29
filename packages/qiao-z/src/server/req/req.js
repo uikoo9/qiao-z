@@ -32,6 +32,7 @@ const handleRequest = async (request, app) => {
   req.query = handleQuery(req);
   req.body = await handleBody(req, app._upload);
   req.db = app._db;
+  req.logger = app._log;
 
   return req;
 };
