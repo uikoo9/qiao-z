@@ -1,8 +1,5 @@
-'use strict';
-
-var log4js = require('log4js');
-
 // log4js
+import log4js from 'log4js';
 
 // logger
 let logger;
@@ -12,7 +9,7 @@ let logger;
  * @param {*} options
  * @returns
  */
-const getLogger = (options) => {
+export const getLogger = (options) => {
   // check
   if (logger) return logger;
 
@@ -53,14 +50,3 @@ const getLogger = (options) => {
 function setLogger(log) {
   logger = log;
 }
-
-// logger
-
-/**
- * qiao-log
- */
-var index = (options) => {
-  return getLogger(options);
-};
-
-module.exports = index;

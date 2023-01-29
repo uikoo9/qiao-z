@@ -7,5 +7,5 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['date-format', 'debug', 'log4js'],
+  external: ['log4js'],
 };
