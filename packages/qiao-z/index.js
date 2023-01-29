@@ -48,14 +48,19 @@ const initApp = (app, options) => {
     app._cron = options.cron;
   }
 
-  // upload
-  if (options.upload) {
-    app._upload = options.upload;
+  // log
+  if (options.log && options.logOptions) {
+    app._log = options.log(options.logOptions);
   }
 
   // mysql
   if (options.mysql && options.config && options.config.db) {
     app._db = options.mysql(options.config.db);
+  }
+
+  // upload
+  if (options.upload) {
+    app._upload = options.upload;
   }
 };
 
@@ -322,6 +327,7 @@ const handleRequest = async (request, app) => {
   req.query = handleQuery(req);
   req.body = await handleBody(req, app._upload);
   req.db = app._db;
+  req.logger = app._log;
 
   return req;
 };
