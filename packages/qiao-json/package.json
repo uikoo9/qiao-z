@@ -1,9 +1,9 @@
 {
-  "name": "qiao-log",
-  "version": "1.0.7",
-  "description": "nodejs log tools",
+  "name": "qiao-json",
+  "version": "0.1.4",
+  "description": "nodejs json data",
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-log",
+  "homepage": "https://code.insistime.com/qiao-json",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -15,13 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/uikoo9/qiao-z.git"
   },
-  "bugs": {
-    "url": "https://github.com/uikoo9/qiao-z/issues"
-  },
   "scripts": {
     "build": "rollup -c"
-  },
-  "dependencies": {
-    "log4js": "^6.7.1"
   }
 }

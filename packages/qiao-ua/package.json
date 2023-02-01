@@ -23,6 +23,6 @@
     "url": "https://github.com/uikoo9/qiao-z/issues"
   },
   "scripts": {
-    "build": "rollup --config _config.rollup.js"
+    "build": "rollup -c"
   }
 }
