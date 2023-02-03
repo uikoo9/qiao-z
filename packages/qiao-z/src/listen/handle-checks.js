@@ -5,14 +5,14 @@
  * @param {*} res
  * @returns
  */
-const handleChecks = async (app, req, res) => {
+const handleChecks = async (options, req, res) => {
   // check
-  if (!app || !app._checks || !app._checks.length) return;
+  if (!options || !options.checks || !options.checks.length) return;
 
   // check
   let r;
-  for (let i = 0; i < app._checks.length; i++) {
-    const check = app._checks[i];
+  for (let i = 0; i < options.checks.length; i++) {
+    const check = options.checks[i];
     const checkRes = await check(req, res);
     if (checkRes) continue;
 

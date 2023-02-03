@@ -19,11 +19,6 @@ var template = require('art-template');
 const initApp = (app, options) => {
   if (!app || !options) return;
 
-  // checks
-  if (options.checks) {
-    app._checks = options.checks;
-  }
-
   // modules
   if (options.modules && options.config) {
     options.modules.forEach((m) => {
@@ -705,14 +700,14 @@ const handleAll = (routers, req, res) => {
  * @param {*} res
  * @returns
  */
-const handleChecks = async (app, req, res) => {
+const handleChecks = async (options, req, res) => {
   // check
-  if (!app || !app._checks || !app._checks.length) return;
+  if (!options || !options.checks || !options.checks.length) return;
 
   // check
   let r;
-  for (let i = 0; i < app._checks.length; i++) {
-    const check = app._checks[i];
+  for (let i = 0; i < options.checks.length; i++) {
+    const check = options.checks[i];
     const checkRes = await check(req, res);
     if (checkRes) continue;
 

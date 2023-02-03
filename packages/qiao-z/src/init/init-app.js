@@ -7,11 +7,6 @@
 const initApp = (app, options) => {
   if (!app || !options) return;
 
-  // checks
-  if (options.checks) {
-    app._checks = options.checks;
-  }
-
   // modules
   if (options.modules && options.config) {
     options.modules.forEach((m) => {
