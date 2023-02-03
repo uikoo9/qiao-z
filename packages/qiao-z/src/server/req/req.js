@@ -19,10 +19,10 @@ import handleBody from './req-body.js';
 /**
  * req
  * @param {*} request
- * @param {*} app
+ * @param {*} options
  * @returns
  */
-const handleRequest = async (request, app) => {
+const handleRequest = async (request, options) => {
   const req = {};
   req.request = request;
   req.url = parseurl(request);
@@ -30,9 +30,17 @@ const handleRequest = async (request, app) => {
   req.cookies = handleCookies(req);
   req.useragent = handleUseragent(req);
   req.query = handleQuery(req);
-  req.body = await handleBody(req, app._upload);
-  req.db = app._db;
-  req.logger = app._log;
+  req.body = await handleBody(req, options.upload);
+
+  // logger
+  if (options.log && options.logOptions) {
+    req.logger = options.log(options.logOptions);
+  }
+
+  // mysql
+  if (options.mysql && options.config && options.config.db) {
+    req.db = options.mysql(options.config.db);
+  }
 
   return req;
 };
