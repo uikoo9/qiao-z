@@ -17,6 +17,9 @@ const routers = {};
 export default (options) => {
   const app = {};
 
+  // options
+  options = options || {};
+
   // init methods
   initMethods(app, routers);
 

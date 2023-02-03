@@ -211,10 +211,10 @@ const defaultBody = {};
 /**
  * handle body
  * @param {*} req
- * @param {*} upload
+ * @param {*} options
  * @returns
  */
-const handleBody = async (req, upload) => {
+const handleBody = async (req, options) => {
   // check
   if (!req || !req.headers || !req.headers['content-type']) return defaultBody;
 
@@ -226,9 +226,9 @@ const handleBody = async (req, upload) => {
 
     // upload
     if (contentType.indexOf('multipart/form-data') > -1) {
-      if (!upload) return defaultBody;
+      if (!options || !options.upload) return defaultBody;
 
-      return await upload.uploadSync(req.request);
+      return await options.upload.uploadSync(req.request);
     } else {
       // body string
       const bodyString = await getBodyString(req);
@@ -286,19 +286,19 @@ const handleRequest = async (request, options) => {
   req.cookies = handleCookies(req);
   req.useragent = handleUseragent(req);
   req.query = handleQuery(req);
-  req.body = await handleBody(req, options.upload);
+  req.body = await handleBody(req, options);
 
   // ip
   const ip = req.headers['x-real-ip'];
   if (ip) req.ip = ip;
 
   // logger
-  if (options.log && options.logOptions) {
+  if (options && options.log && options.logOptions) {
     req.logger = options.log(options.logOptions);
   }
 
   // mysql
-  if (options.mysql && options.config && options.config.db) {
+  if (options && options.mysql && options.config && options.config.db) {
     req.db = options.mysql(options.config.db);
   }
 
@@ -894,6 +894,9 @@ const routers = {};
  */
 var app = (options) => {
   const app = {};
+
+  // options
+  options = options || {};
 
   // init methods
   initMethods(app, routers);
