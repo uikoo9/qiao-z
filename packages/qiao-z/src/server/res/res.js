@@ -23,19 +23,33 @@ const crosOptions = {
 const handleRes = (response, options) => {
   const res = {};
   res.response = response;
-  res.cros = options.cros === true ? crosOptions : options.cros || {};
-  res.head = (status, options) => {
-    head(res, status, options);
+
+  // cros
+  if (options && options.cros) {
+    res.cros = options.cros === true ? crosOptions : options.cros;
+  }
+
+  // head
+  res.head = (status, opt) => {
+    head(res, status, opt);
   };
+
+  // end
   res.end = (msg) => {
     end(res, msg);
   };
+
+  // redirect
   res.redirect = (url) => {
     redirect(res, url);
   };
+
+  // send
   res.send = (msg) => {
     send(res, msg);
   };
+
+  // json
   res.json = (obj) => {
     json(res, obj);
   };
@@ -45,9 +59,13 @@ const handleRes = (response, options) => {
   res.jsonFail = (msg, obj) => {
     jsonFail(res, msg, obj);
   };
+
+  // cookie
   res.clearCookie = (name) => {
     clearCookie(res, name);
   };
+
+  // render
   res.render = (filePath, data) => {
     render(res, filePath, data);
   };
