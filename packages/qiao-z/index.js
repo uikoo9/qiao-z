@@ -518,7 +518,7 @@ const render = (res, filePath, data) => {
 
   res.response.writeHeader(200, { 'Content-Type': contentType });
   res.response.write(file);
-  res.end();
+  res.response.end();
 };
 
 // res methods
