@@ -288,6 +288,10 @@ const handleRequest = async (request, options) => {
   req.query = handleQuery(req);
   req.body = await handleBody(req, options.upload);
 
+  // ip
+  const ip = req.headers['x-real-ip'];
+  if (ip) req.ip = ip;
+
   // logger
   if (options.log && options.logOptions) {
     req.logger = options.log(options.logOptions);
