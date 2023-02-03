@@ -25,11 +25,6 @@ const initApp = (app, options) => {
       m(app, options.config);
     });
   }
-
-  // upload
-  if (options.upload) {
-    app._upload = options.upload;
-  }
 };
 
 // methods
