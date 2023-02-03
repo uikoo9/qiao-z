@@ -30,7 +30,7 @@ export default (options) => {
   initApp(app, options);
 
   // init task
-  initTask(app);
+  initTask(options);
 
   // listen
   app.listen = (port) => {

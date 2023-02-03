@@ -35,5 +35,8 @@
     "qiao-ua": "^1.0.7",
     "qs": "^6.11.0",
     "raw-body": "^2.5.1"
+  },
+  "devDependencies": {
+    "qiao-timer": "^1.0.3"
   }
 }

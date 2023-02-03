@@ -150,12 +150,12 @@ const initController = (app) => {
 
 /**
  * init task
- * @param {*} app
+ * @param {*} options
  * @returns
  */
-var initTask = (app) => {
+var initTask = (options) => {
   // check
-  if (!app || !app._cron) return;
+  if (!options || !options.cron) return;
 
   // files
   const serverFiles = qiaoFile.lsdir(process.cwd() + '/');
@@ -163,12 +163,12 @@ var initTask = (app) => {
 
   // init
   serverFiles.files.forEach((serverFile) => {
-    operateTaskFile(app, serverFile);
+    operateTaskFile(options.cron, serverFile);
   });
 };
 
 // operate task file
-function operateTaskFile(app, serverFile) {
+function operateTaskFile(cron, serverFile) {
   const file = serverFile.path + serverFile.name;
 
   if (/Task\.js$/.test(file)) {
@@ -176,9 +176,9 @@ function operateTaskFile(app, serverFile) {
     if (!task || !task.time || !task.tick) return;
 
     if (task.runAndInit) {
-      app._cron.runAndInit(task.time, task.tick);
+      cron.runAndInit(task.time, task.tick);
     } else {
-      app._cron.run(task.time, task.tick);
+      cron.run(task.time, task.tick);
     }
   }
 }
@@ -910,7 +910,7 @@ var app = (options) => {
   initApp(app, options);
 
   // init task
-  initTask(app);
+  initTask(options);
 
   // listen
   app.listen = (port) => {

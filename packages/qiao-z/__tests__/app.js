@@ -2,7 +2,9 @@
 const qz = require('../index.js');
 
 // app
-const app = qz();
+const app = qz({
+  cron: require('qiao-timer'),
+});
 
 // listen
 app.listen();
