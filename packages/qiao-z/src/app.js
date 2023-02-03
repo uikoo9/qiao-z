@@ -34,7 +34,7 @@ export default (options) => {
 
   // listen
   app.listen = (port) => {
-    listen(port || '5277', routers, app);
+    listen(port || '5277', routers, options);
   };
 
   return app;

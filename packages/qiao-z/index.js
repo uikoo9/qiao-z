@@ -10,13 +10,6 @@ var qs = require('qs');
 var getRawBody = require('raw-body');
 var template = require('art-template');
 
-// cros options
-const crosOptions = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': '*',
-  'Access-Control-Allow-Headers': '*',
-};
-
 /**
  * init app
  * @param {*} app
@@ -25,11 +18,6 @@ const crosOptions = {
  */
 const initApp = (app, options) => {
   if (!app || !options) return;
-
-  // cros
-  if (options.cros) {
-    app._cros = options.cros === true ? crosOptions : options.cros || {};
-  }
 
   // checks
   if (options.checks) {
@@ -41,11 +29,6 @@ const initApp = (app, options) => {
     options.modules.forEach((m) => {
       m(app, options.config);
     });
-  }
-
-  // cron
-  if (options.cron) {
-    app._cron = options.cron;
   }
 
   // log
@@ -550,16 +533,23 @@ const render = (res, filePath, data) => {
 
 // res methods
 
+// cros options
+const crosOptions = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': '*',
+  'Access-Control-Allow-Headers': '*',
+};
+
 /**
  * res
  * @param {*} response
- * @param {*} cros
+ * @param {*} options
  * @returns
  */
-const handleRes = (response, cros) => {
+const handleRes = (response, options) => {
   const res = {};
   res.response = response;
-  res.cros = cros;
+  res.cros = options.cros === true ? crosOptions : options.cros || {};
   res.head = (status, options) => {
     head(res, status, options);
   };
@@ -794,13 +784,13 @@ const handleParams = (routers, req, res) => {
  * @param {*} request
  * @param {*} response
  * @param {*} routers
- * @param {*} app
+ * @param {*} options
  * @returns
  */
-const listenRequest = async (request, response, routers, app) => {
+const listenRequest = async (request, response, routers, options) => {
   // req res
-  const req = await handleRequest(request, app);
-  const res = handleRes(response, app._cros);
+  const req = await handleRequest(request, options);
+  const res = handleRes(response, options);
 
   // handle options
   const optionsRes = handleOptions(req, res);
@@ -823,7 +813,7 @@ const listenRequest = async (request, response, routers, app) => {
   if (allRes) return;
 
   // handle checks
-  const checkRes = await handleChecks(app, req, res);
+  const checkRes = await handleChecks(options, req, res);
   if (checkRes) return;
 
   // handle path
@@ -845,10 +835,10 @@ const listenRequest = async (request, response, routers, app) => {
  * listen
  * @param {*} port
  * @param {*} routers
- * @param {*} app
+ * @param {*} options
  * @returns
  */
-const listen = (port, routers, app) => {
+const listen = (port, routers, options) => {
   if (!routers) return;
 
   // server
@@ -879,7 +869,7 @@ const listen = (port, routers, app) => {
 
   // request
   server.on('request', (request, response) => {
-    listenRequest(request, response, routers, app);
+    listenRequest(request, response, routers, options);
   });
 
   // listen
@@ -914,7 +904,7 @@ var app = (options) => {
 
   // listen
   app.listen = (port) => {
-    listen(port || '5277', routers, app);
+    listen(port || '5277', routers, options);
   };
 
   return app;

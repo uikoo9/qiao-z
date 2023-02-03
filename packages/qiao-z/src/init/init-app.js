@@ -1,10 +1,3 @@
-// cros options
-const crosOptions = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': '*',
-  'Access-Control-Allow-Headers': '*',
-};
-
 /**
  * init app
  * @param {*} app
@@ -13,11 +6,6 @@ const crosOptions = {
  */
 const initApp = (app, options) => {
   if (!app || !options) return;
-
-  // cros
-  if (options.cros) {
-    app._cros = options.cros === true ? crosOptions : options.cros || {};
-  }
 
   // checks
   if (options.checks) {
@@ -29,11 +17,6 @@ const initApp = (app, options) => {
     options.modules.forEach((m) => {
       m(app, options.config);
     });
-  }
-
-  // cron
-  if (options.cron) {
-    app._cron = options.cron;
   }
 
   // log
