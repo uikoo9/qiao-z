@@ -1,10 +1,10 @@
-const { getIp } = require('../index.js');
+const { getIP } = require('../index.js');
 
 /**
  * @jest-environment jsdom
  */
 test('get ip on browser', async () => {
-  const ip = await getIp();
+  const ip = await getIP();
   expect(ip).toBeDefined();
 });
 
@@ -12,6 +12,6 @@ test('get ip on browser', async () => {
  * @jest-environment node
  */
 test('get ip on nodejs', async () => {
-  const ip = await getIp();
+  const ip = await getIP();
   expect(ip).toBeDefined();
 });
