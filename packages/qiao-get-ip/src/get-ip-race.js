@@ -12,6 +12,10 @@ const websites = [
     url: 'https://icanhazip.com/',
   },
   {
+    name: 'sohu.com',
+    url: 'http://txt.go.sohu.com/ip/soip',
+  },
+  {
     name: 'insistime.com',
     url: 'https://insistime.com/ip?type=api',
   },
@@ -49,7 +53,10 @@ export const getIPRace = (timeout, info) => {
     // errors
     if (!info) return;
     setTimeout(() => {
-      if (errors && errors.length) console.log(errors);
+      if (errors && errors.length) {
+        console.log('errros:');
+        console.log(errors);
+      }
     }, timeout + 50);
   });
 };

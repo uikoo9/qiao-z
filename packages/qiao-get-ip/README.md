@@ -3,7 +3,9 @@
 [![npm version](https://img.shields.io/npm/v/qiao-get-ip.svg?style=flat-square)](https://www.npmjs.org/package/qiao-get-ip)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-get-ip.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-get-ip)
 
-浏览器和 ndoejs 下获取公网 ip
+浏览器和 node.js 下获取公网 ip
+
+> Get public network ip under browser and node.js
 
 ## install
 
@@ -13,15 +15,81 @@ npm i qiao-get-ip
 
 ## api
 
-### getIp
+### getIP
+
+通过`getIP`方法可以获取公网 ip
+
+> The public IP can be obtained through the `getIP` method
 
 ```javascript
-const { getIp } = require('qiao-get-ip');
+const { getIP } = require('qiao-get-ip');
 
 const ip = await getIp();
 ```
 
+### options.timeout
+
+`timeout`属性用来设置超时时间，单位是毫秒，默认 200ms
+
+> The `timeout` attribute is used to set the timeout time,Unit: ms, default: 200ms
+
+```javascript
+const { getIP } = require('qiao-get-ip');
+
+const ip = await getIp({ timeout: 200 });
+```
+
+### options.info
+
+如果设置`info`属性，会打印获取公网 ip 的信息
+
+> If the `info` attribute is set, the information about obtaining the public IP will be printed
+
+```javascript
+const { getIP } = require('qiao-get-ip');
+
+const ip = await getIp({
+  timeout: 200,
+  info: true,
+});
+```
+
+如果设置了`timeout`为 300ms，且`info`属性为 true，效果如下
+
+> If the `timeout` is set to 300ms and the `info` attribute is true, the effect is as follows
+
+```bash
+get ip by insistime.com: 113.132ms
+get ip by insistime.com: xxx.xxx.xxx.xxx
+
+get ip by sohu.com: 178.481ms
+get ip by sohu.com: xxx.xxx.xxx.xxx
+
+get ip by ipify.org: 350.375ms
+get ip by ipify.org failed: timeout of 300ms exceeded
+
+get ip by icanhazip.com: 322.114ms
+get ip by icanhazip.com failed: timeout of 300ms exceeded
+```
+
+## 获取公网 ip 的方法
+
+> Method of obtaining public network ip
+
+通过请求以下几个网站来获取公网 ip，并设置默认超时时间为 200ms
+
+> Obtain the public IP address by requesting the following websites, and set the default timeout to 200ms
+
+- [https://api.ipify.org/](https://api.ipify.org/)
+- [https://icanhazip.com/](https://icanhazip.com/)
+- [http://txt.go.sohu.com/ip/soip](http://txt.go.sohu.com/ip/soip)
+- [https://insistime.com/ip?type=api](https://insistime.com/ip?type=api)
+
 ## version
+
+### 0.0.5.20230205
+
+1. get ip by race
 
 ### 0.0.4.20221025
 
