@@ -24,7 +24,7 @@ The public IP can be obtained through the `getIP` method
 ```javascript
 const { getIP } = require('qiao-get-ip');
 
-const ip = await getIp();
+const ip = await getIP();
 ```
 
 ### options.timeout
@@ -36,7 +36,7 @@ The `timeout` attribute is used to set the timeout time,Unit: ms, default: 200ms
 ```javascript
 const { getIP } = require('qiao-get-ip');
 
-const ip = await getIp({ timeout: 200 });
+const ip = await getIP({ timeout: 200 });
 ```
 
 ### options.info
@@ -48,7 +48,7 @@ If the `info` attribute is set, the information about obtaining the public IP wi
 ```javascript
 const { getIP } = require('qiao-get-ip');
 
-const ip = await getIp({
+const ip = await getIP({
   timeout: 200,
   info: true,
 });
