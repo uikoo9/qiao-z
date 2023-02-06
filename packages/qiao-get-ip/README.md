@@ -13,6 +13,16 @@ Get public network ip under browser and node.js
 npm i qiao-get-ip
 ```
 
+## usage
+
+```javascript
+// commonjs
+const { getIP } = require('qiao-get-ip');
+
+// es6
+import { getIP } from 'qiao-get-ip';
+```
+
 ## api
 
 ### getIP
@@ -22,8 +32,6 @@ The public IP can be obtained through the `getIP` method
 > 通过`getIP`方法可以获取公网 ip
 
 ```javascript
-const { getIP } = require('qiao-get-ip');
-
 const ip = await getIP();
 ```
 
@@ -34,8 +42,6 @@ The `timeout` attribute is used to set the timeout time,Unit: ms, default: 200ms
 > `timeout`属性用来设置超时时间，单位是毫秒，默认 200ms
 
 ```javascript
-const { getIP } = require('qiao-get-ip');
-
 const ip = await getIP({ timeout: 200 });
 ```
 
@@ -46,8 +52,6 @@ If the `info` attribute is set, the information about obtaining the public IP wi
 > 如果设置`info`属性，会打印获取公网 ip 的信息
 
 ```javascript
-const { getIP } = require('qiao-get-ip');
-
 const ip = await getIP({
   timeout: 200,
   info: true,
@@ -74,12 +78,15 @@ get ip by icanhazip.com failed: timeout of 300ms exceeded
 
 ## Method of obtaining public network ip
 
-Obtain the public IP address by requesting the following websites, and set the default timeout to 200ms
+Request the following websites and return the fastest response. The default timeout is 200ms
 
-> 通过请求以下几个网站来获取公网 ip，并设置默认超时时间为 200ms
+> 请求以下几个网站，返回最快的响应，默认超时时间为200ms
 
 - [https://api.ipify.org/](https://api.ipify.org/)
 - [https://icanhazip.com/](https://icanhazip.com/)
+- [https://ipinfo.io/ip](https://ipinfo.io/ip)
+- [https://ifconfig.me/ip](https://ifconfig.me/ip)
+- [https://checkip.amazonaws.com/](https://checkip.amazonaws.com/)
 - [http://txt.go.sohu.com/ip/soip](http://txt.go.sohu.com/ip/soip)
 - [https://insistime.com/ip?type=api](https://insistime.com/ip?type=api)
 

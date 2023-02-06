@@ -3,10 +3,14 @@
   "version": "2.0.0",
   "description": "get public ip on browser and nodejs",
   "keywords": [
-    "browser",
-    "nodejs",
+    "network",
+    "address",
     "public",
-    "ip"
+    "external",
+    "ip",
+    "fast",
+    "browser",
+    "nodejs"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
   "homepage": "https://code.insistime.com/qiao-get-ip",

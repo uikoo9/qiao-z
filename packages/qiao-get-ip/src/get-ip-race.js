@@ -4,6 +4,14 @@ import { getIPByWebsite } from './get-ip-by-website.js';
 // websites
 const websites = [
   {
+    name: 'sohu.com',
+    url: 'http://txt.go.sohu.com/ip/soip',
+  },
+  {
+    name: 'insistime.com',
+    url: 'https://insistime.com/ip?type=api',
+  },
+  {
     name: 'ipify.org',
     url: 'https://api.ipify.org/',
   },
@@ -12,12 +20,16 @@ const websites = [
     url: 'https://icanhazip.com/',
   },
   {
-    name: 'sohu.com',
-    url: 'http://txt.go.sohu.com/ip/soip',
+    name: 'ipinfo.io',
+    url: 'https://ipinfo.io/ip',
   },
   {
-    name: 'insistime.com',
-    url: 'https://insistime.com/ip?type=api',
+    name: 'ifconfig.me',
+    url: 'https://ifconfig.me/ip',
+  },
+  {
+    name: 'amazonaws.com',
+    url: 'https://checkip.amazonaws.com/',
   },
 ];
 
