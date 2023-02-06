@@ -63,17 +63,26 @@ If the `timeout` is set to 300ms and the `info` attribute is true, the effect is
 > 如果设置了`timeout`为 300ms，且`info`属性为 true，效果如下
 
 ```bash
-get ip by insistime.com: 113.132ms
-get ip by insistime.com: xxx.xxx.xxx.xxx
-
-get ip by sohu.com: 178.481ms
+get ip by sohu.com: 88.048ms
 get ip by sohu.com: xxx.xxx.xxx.xxx
 
-get ip by ipify.org: 350.375ms
+get ip by insistime.com: 122.362ms
+get ip by insistime.com: xxx.xxx.xxx.xxx
+
+get ip by icanhazip.com: 241.551ms
+get ip by icanhazip.com: xxx.xxx.xxx.xxx
+
+get ip by ipify.org: 305.327ms
 get ip by ipify.org failed: timeout of 300ms exceeded
 
-get ip by icanhazip.com: 322.114ms
-get ip by icanhazip.com failed: timeout of 300ms exceeded
+get ip by ipinfo.io: 304.342ms
+get ip by ipinfo.io failed: timeout of 300ms exceeded
+
+get ip by ifconfig.me: 303.981ms
+get ip by ifconfig.me failed: timeout of 300ms exceeded
+
+get ip by amazonaws.com: 303.691ms
+get ip by amazonaws.com failed: timeout of 300ms exceeded
 ```
 
 ## Method of obtaining public network ip
