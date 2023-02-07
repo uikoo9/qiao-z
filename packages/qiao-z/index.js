@@ -144,6 +144,49 @@ function operateTaskFile(cron, serverFile) {
   }
 }
 
+// cros options
+const crosOptions = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': '*',
+  'Access-Control-Allow-Headers': '*',
+};
+
+/**
+ * init plugins
+ * @param {*} options
+ * @returns
+ */
+var initPlugins = (options) => {
+  const plugins = {};
+
+  // checks
+  if (options && options.checks) {
+    plugins.checks = options.checks;
+  }
+
+  // cros
+  if (options && options.cros) {
+    plugins.cros = options.cros === true ? crosOptions : options.cros;
+  }
+
+  // logger
+  if (options && options.log && options.logOptions) {
+    plugins.logger = options.log(options.logOptions);
+  }
+
+  // mysql
+  if (options && options.mysql && options.config && options.config.db) {
+    plugins.db = options.mysql(options.config.db);
+  }
+
+  // upload
+  if (options && options.upload) {
+    plugins.upload = options.upload;
+  }
+
+  return plugins;
+};
+
 /**
  * handle headers
  * @param {*} request
@@ -211,10 +254,10 @@ const defaultBody = {};
 /**
  * handle body
  * @param {*} req
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const handleBody = async (req, options) => {
+const handleBody = async (req, plugins) => {
   // check
   if (!req || !req.headers || !req.headers['content-type']) return defaultBody;
 
@@ -226,9 +269,9 @@ const handleBody = async (req, options) => {
 
     // upload
     if (contentType.indexOf('multipart/form-data') > -1) {
-      if (!options || !options.upload) return defaultBody;
+      if (!plugins || !plugins.upload) return defaultBody;
 
-      return await options.upload.uploadSync(req.request);
+      return await plugins.upload.uploadSync(req.request);
     } else {
       // body string
       const bodyString = await getBodyString(req);
@@ -275,10 +318,10 @@ async function getBodyString(req) {
 /**
  * req
  * @param {*} request
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const handleRequest = async (request, options) => {
+const handleRequest = async (request, plugins) => {
   const req = {};
   req.request = request;
   req.url = parseurl(request);
@@ -286,20 +329,20 @@ const handleRequest = async (request, options) => {
   req.cookies = handleCookies(req);
   req.useragent = handleUseragent(req);
   req.query = handleQuery(req);
-  req.body = await handleBody(req, options);
+  req.body = await handleBody(req, plugins);
 
   // ip
   const ip = req.headers['x-real-ip'];
   if (ip) req.ip = ip;
 
   // logger
-  if (options && options.log && options.logOptions) {
-    req.logger = options.log(options.logOptions);
+  if (plugins && plugins.logger) {
+    req.logger = plugins.logger;
   }
 
   // mysql
-  if (options && options.mysql && options.config && options.config.db) {
-    req.db = options.mysql(options.config.db);
+  if (plugins && plugins.db) {
+    req.db = plugins.db;
   }
 
   return req;
@@ -523,26 +566,19 @@ const render = (res, filePath, data) => {
 
 // res methods
 
-// cros options
-const crosOptions = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': '*',
-  'Access-Control-Allow-Headers': '*',
-};
-
 /**
  * res
  * @param {*} response
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const handleRes = (response, options) => {
+const handleRes = (response, plugins) => {
   const res = {};
   res.response = response;
 
   // cros
-  if (options && options.cros) {
-    res.cros = options.cros === true ? crosOptions : options.cros;
+  if (plugins && plugins.cros) {
+    res.cros = plugins.cros;
   }
 
   // head
@@ -708,19 +744,19 @@ const handleAll = (routers, req, res) => {
 
 /**
  * handle checks
- * @param {*} routers
+ * @param {*} plugins
  * @param {*} req
  * @param {*} res
  * @returns
  */
-const handleChecks = async (options, req, res) => {
+const handleChecks = async (plugins, req, res) => {
   // check
-  if (!options || !options.checks || !options.checks.length) return;
+  if (!plugins || !plugins.checks || !plugins.checks.length) return;
 
   // check
   let r;
-  for (let i = 0; i < options.checks.length; i++) {
-    const check = options.checks[i];
+  for (let i = 0; i < plugins.checks.length; i++) {
+    const check = plugins.checks[i];
     const checkRes = await check(req, res);
     if (checkRes) continue;
 
@@ -792,13 +828,13 @@ const handleParams = (routers, req, res) => {
  * @param {*} request
  * @param {*} response
  * @param {*} routers
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const listenRequest = async (request, response, routers, options) => {
+const listenRequest = async (request, response, routers, plugins) => {
   // req res
-  const req = await handleRequest(request, options);
-  const res = handleRes(response, options);
+  const req = await handleRequest(request, plugins);
+  const res = handleRes(response, plugins);
 
   // handle options
   const optionsRes = handleOptions(req, res);
@@ -821,7 +857,7 @@ const listenRequest = async (request, response, routers, options) => {
   if (allRes) return;
 
   // handle checks
-  const checkRes = await handleChecks(options, req, res);
+  const checkRes = await handleChecks(plugins, req, res);
   if (checkRes) return;
 
   // handle path
@@ -843,10 +879,10 @@ const listenRequest = async (request, response, routers, options) => {
  * listen
  * @param {*} port
  * @param {*} routers
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const listen = (port, routers, options) => {
+const listen = (port, routers, plugins) => {
   if (!routers) return;
 
   // server
@@ -877,7 +913,7 @@ const listen = (port, routers, options) => {
 
   // request
   server.on('request', (request, response) => {
-    listenRequest(request, response, routers, options);
+    listenRequest(request, response, routers, plugins);
   });
 
   // listen
@@ -913,9 +949,12 @@ var app = (options) => {
   // init task
   initTask(options);
 
+  // init plugins
+  const plugins = initPlugins(options);
+
   // listen
   app.listen = (port) => {
-    listen(port || '5277', routers, options);
+    listen(port || '5277', routers, plugins);
   };
 
   return app;

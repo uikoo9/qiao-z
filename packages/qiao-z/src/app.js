@@ -4,6 +4,7 @@ import initStatic from './init/init-static.js';
 import initController from './init/init-controller.js';
 import initModules from './init/init-modules.js';
 import initTask from './init/init-task.js';
+import initPlugins from './init/init-plugins.js';
 
 // listen
 import listen from './listen/listen.js';
@@ -35,9 +36,12 @@ export default (options) => {
   // init task
   initTask(options);
 
+  // init plugins
+  const plugins = initPlugins(options);
+
   // listen
   app.listen = (port) => {
-    listen(port || '5277', routers, options);
+    listen(port || '5277', routers, plugins);
   };
 
   return app;

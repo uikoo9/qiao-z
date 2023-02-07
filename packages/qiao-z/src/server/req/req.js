@@ -19,10 +19,10 @@ import handleBody from './req-body.js';
 /**
  * req
  * @param {*} request
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const handleRequest = async (request, options) => {
+const handleRequest = async (request, plugins) => {
   const req = {};
   req.request = request;
   req.url = parseurl(request);
@@ -30,20 +30,20 @@ const handleRequest = async (request, options) => {
   req.cookies = handleCookies(req);
   req.useragent = handleUseragent(req);
   req.query = handleQuery(req);
-  req.body = await handleBody(req, options);
+  req.body = await handleBody(req, plugins);
 
   // ip
   const ip = req.headers['x-real-ip'];
   if (ip) req.ip = ip;
 
   // logger
-  if (options && options.log && options.logOptions) {
-    req.logger = options.log(options.logOptions);
+  if (plugins && plugins.logger) {
+    req.logger = plugins.logger;
   }
 
   // mysql
-  if (options && options.mysql && options.config && options.config.db) {
-    req.db = options.mysql(options.config.db);
+  if (plugins && plugins.db) {
+    req.db = plugins.db;
   }
 
   return req;

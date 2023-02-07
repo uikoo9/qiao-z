@@ -10,10 +10,10 @@ const defaultBody = {};
 /**
  * handle body
  * @param {*} req
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const handleBody = async (req, options) => {
+const handleBody = async (req, plugins) => {
   // check
   if (!req || !req.headers || !req.headers['content-type']) return defaultBody;
 
@@ -25,9 +25,9 @@ const handleBody = async (req, options) => {
 
     // upload
     if (contentType.indexOf('multipart/form-data') > -1) {
-      if (!options || !options.upload) return defaultBody;
+      if (!plugins || !plugins.upload) return defaultBody;
 
-      return await options.upload.uploadSync(req.request);
+      return await plugins.upload.uploadSync(req.request);
     } else {
       // body string
       const bodyString = await getBodyString(req);

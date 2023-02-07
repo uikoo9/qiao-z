@@ -18,13 +18,13 @@ import handleParams from './handle-params.js';
  * @param {*} request
  * @param {*} response
  * @param {*} routers
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const listenRequest = async (request, response, routers, options) => {
+const listenRequest = async (request, response, routers, plugins) => {
   // req res
-  const req = await reqFn(request, options);
-  const res = resFn(response, options);
+  const req = await reqFn(request, plugins);
+  const res = resFn(response, plugins);
 
   // handle options
   const optionsRes = handleOptions(req, res);
@@ -47,7 +47,7 @@ const listenRequest = async (request, response, routers, options) => {
   if (allRes) return;
 
   // handle checks
-  const checkRes = await handleChecks(options, req, res);
+  const checkRes = await handleChecks(plugins, req, res);
   if (checkRes) return;
 
   // handle path

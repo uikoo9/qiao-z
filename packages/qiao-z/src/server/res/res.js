@@ -7,26 +7,19 @@ import { json, jsonSuccess, jsonFail } from './res-json.js';
 import clearCookie from './res-clear-cookie.js';
 import render from './res-render.js';
 
-// cros options
-const crosOptions = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': '*',
-  'Access-Control-Allow-Headers': '*',
-};
-
 /**
  * res
  * @param {*} response
- * @param {*} options
+ * @param {*} plugins
  * @returns
  */
-const handleRes = (response, options) => {
+const handleRes = (response, plugins) => {
   const res = {};
   res.response = response;
 
   // cros
-  if (options && options.cros) {
-    res.cros = options.cros === true ? crosOptions : options.cros;
+  if (plugins && plugins.cros) {
+    res.cros = plugins.cros;
   }
 
   // head

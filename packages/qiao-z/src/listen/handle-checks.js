@@ -1,18 +1,18 @@
 /**
  * handle checks
- * @param {*} routers
+ * @param {*} plugins
  * @param {*} req
  * @param {*} res
  * @returns
  */
-const handleChecks = async (options, req, res) => {
+const handleChecks = async (plugins, req, res) => {
   // check
-  if (!options || !options.checks || !options.checks.length) return;
+  if (!plugins || !plugins.checks || !plugins.checks.length) return;
 
   // check
   let r;
-  for (let i = 0; i < options.checks.length; i++) {
-    const check = options.checks[i];
+  for (let i = 0; i < plugins.checks.length; i++) {
+    const check = plugins.checks[i];
     const checkRes = await check(req, res);
     if (checkRes) continue;
 
