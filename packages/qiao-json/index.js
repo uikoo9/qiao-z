@@ -7,7 +7,7 @@
  * 	obj
  */
 const json = (type, msg, obj) => {
-  var json = {
+  const json = {
     success: true,
     msg: '',
     type: '',

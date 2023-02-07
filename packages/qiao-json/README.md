@@ -1,63 +1,34 @@
-# qiao-json
+## qiao-json
+
+[![npm version](https://img.shields.io/npm/v/qiao-json.svg?style=flat-square)](https://www.npmjs.org/package/qiao-json)
+[![npm downloads](https://img.shields.io/npm/dm/qiao-json.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-json)
+
+nodejs 下 qiao-z 中的 json 数据结构
+
+## usage
+
+```javascript
+// commonjs
+const { success, info, warning, danger } = require('qiao-json');
+
+// es6
+import { success, info, warning, danger } from 'qiao-json';
+```
 
 ## api
 
-### json
-
 ```javascript
-'use strict';
+const { success, info, warning, danger } = require('qiao-json');
 
-var q = require('qiao-json');
-
-var json = q.json('success', 'test', {});
+const json = success('test', {});
 console.log(json);
 ```
 
-### success
-
-```javascript
-'use strict';
-
-var q = require('qiao-json');
-
-var success = q.success('test', {});
-console.log(success);
-```
-
-### info
-
-```javascript
-'use strict';
-
-var q = require('qiao-json');
-
-var info = q.info('test', {});
-console.log(info);
-```
-
-### warning
-
-```javascript
-'use strict';
-
-var q = require('qiao-json');
-
-var warning = q.warning('test', {});
-console.log(warning);
-```
-
-### danger
-
-```javascript
-'use strict';
-
-var q = require('qiao-json');
-
-var danger = q.danger('test', {});
-console.log(danger);
-```
-
 ## version
+
+### 0.0.7.202030207
+
+1. 1.0.0
 
 ### 0.0.6.20220417
 
