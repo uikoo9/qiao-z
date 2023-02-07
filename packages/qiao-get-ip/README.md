@@ -85,7 +85,7 @@ get ip by amazonaws.com: 303.691ms
 get ip by amazonaws.com failed: timeout of 300ms exceeded
 ```
 
-## Method of obtaining public network ip
+## fast
 
 Request the following websites and return the fastest response. The default timeout is 200ms
 
