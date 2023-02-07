@@ -1,17 +1,20 @@
-# qiao-string
+## qiao-string
+
+[![npm version](https://img.shields.io/npm/v/qiao-string.svg?style=flat-square)](https://www.npmjs.org/package/qiao-string)
+[![npm downloads](https://img.shields.io/npm/dm/qiao-string.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-string)
+
+nodejs 下[qiao-z](https://code.insistime.com/qiao-z#/)中的 string 相关工具类
 
 ## api
 
 ### firstLetterUpper
 
 ```javascript
-'use strict';
+const { firstLetterUpper } = require('qiao-string');
 
-var q = require('qiao-string');
-
-var test = function () {
-  var str = 'table';
-  var s = q.firstLetterUpper(str);
+const test = function () {
+  const str = 'table';
+  const s = firstLetterUpper(str);
 
   console.log(s);
 };
@@ -22,13 +25,11 @@ test();
 ### firstLetterLower
 
 ```javascript
-'use strict';
+const { firstLetterLower } = require('qiao-string');
 
-var q = require('qiao-string');
-
-var test = function () {
-  var str = 'Table';
-  var s = q.firstLetterLower(str);
+const test = function () {
+  const str = 'Table';
+  const s = firstLetterLower(str);
 
   console.log(s);
 };
@@ -39,13 +40,11 @@ test();
 ### underScoreCaseToCamelCase
 
 ```javascript
-'use strict';
+const { underScoreCaseToCamelCase } = require('qiao-string');
 
-var q = require('qiao-string');
-
-var test = function () {
-  var str = 'share_type';
-  var s = q.underScoreCaseToCamelCase(str);
+const test = function () {
+  const str = 'share_type';
+  const s = underScoreCaseToCamelCase(str);
 
   console.log(s);
 };
