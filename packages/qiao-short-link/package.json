@@ -1,13 +1,15 @@
 {
   "name": "qiao-short-link",
   "version": "2.0.4",
-  "description": "tiyee.cn URL Shortener Node.js and Browser module",
+  "description": "URL Shortener on Node.js and Browser",
   "keywords": [
+    "permanent",
+    "tiny",
     "short",
     "link",
+    "url",
     "nodejs",
-    "browser",
-    "tiyee.cn"
+    "browser"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
   "homepage": "https://code.insistime.com/qiao-short-link",
@@ -29,6 +31,5 @@
   "dependencies": {
     "qiao-ajax": "^2.8.5",
     "qs": "^6.11.0"
-  },
-  "gitHead": "03a956ab21cdab4a2f1fe3d281c7c7dd15f30525"
+  }
 }

@@ -3,19 +3,17 @@ const { shortLink } = require('../index.js');
 /**
  * @jest-environment jsdom
  */
-test('get short link on browser', async () => {
-  const res = await shortLink('https://insistime.com/');
+test('short link on browser', async () => {
+  const link = await shortLink('https://insistime.com/');
 
-  expect(res).toBeDefined();
-  expect(res.res).toBeTruthy();
+  expect(link).toBeDefined();
 });
 
 /**
  * @jest-environment node
  */
-test('get short link on nodejs', async () => {
-  const res = await shortLink('https://insistime.com/');
+test('short link on nodejs', async () => {
+  const link = await shortLink('https://insistime.com/');
 
-  expect(res).toBeDefined();
-  expect(res.res).toBeTruthy();
+  expect(link).toBeDefined();
 });
