@@ -118,10 +118,10 @@ const tiyeeCN = async (longLink, timeout, info) => {
     // return
     if (info) {
       console.timeEnd(timeStr);
-      console.log(`${timeStr} success: ${res.data.short_url}`);
+      console.log(`${timeStr} success: https://${res.data.short_url}`);
       console.log();
     }
-    return res.data.short_url;
+    return `https://${res.data.short_url}`;
   } catch (error) {
     if (info) {
       console.timeEnd(timeStr);
