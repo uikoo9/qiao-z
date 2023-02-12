@@ -49,7 +49,7 @@ const slink = await shortLink(longLink, { timeout: 200 });
 
 If the `info` attribute is set, the information about obtaining the short link will be printed
 
-> 如果设置了`info`属性，会打印获取短连接的信息
+> 如果设置了`info`属性，会打印获取短链接的信息
 
 ```javascript
 const slink = await shortLink(longLink, { timeout: 200, info: true });
