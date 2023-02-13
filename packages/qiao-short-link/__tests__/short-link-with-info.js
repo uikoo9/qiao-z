@@ -3,7 +3,7 @@ const { shortLink } = require('../index.js');
 async function test() {
   const url = 'https://insistime.com/';
   const options = {
-    timeout: 3000,
+    timeout: 300,
     info: true,
   };
 

@@ -60,11 +60,11 @@ If the `timeout` is set to 300ms and the `info` attribute is true, the effect is
 > 如果设置了`timeout`为 300ms，且`info`属性为 true，效果如下
 
 ```bash
-short link by tiyee.cn: 81.923ms
-short link by tiyee.cn success: tiyee.cn/iszc
+short link by tiyee.cn: 57.561ms
+short link by tiyee.cn success: https://tiyee.cn/iszc
 
-short link by gotiny.cc: 205.194ms
-short link by gotiny.cc failed: timeout of 200ms exceeded
+short link by gotiny.cc: 304.041ms
+short link by gotiny.cc failed: timeout of 300ms exceeded
 ```
 
 ## fast
