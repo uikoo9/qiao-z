@@ -11,7 +11,7 @@ nodejs 下极简的 web 框架，详见：[一篇文章开发 Node.js-Web-Server
 
 ## 安装
 
-```bash
+```shell
 npm i qiao-z
 ```
 
@@ -34,7 +34,7 @@ app.listen();
 
 ## examples
 
-```bash
+```shell
 git clone ...
 cd __tests__
 node app.js

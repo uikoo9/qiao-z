@@ -9,7 +9,7 @@ nodejs 下 mysql 能力
 
 安装
 
-```bash
+```shell
 npm i qiao-mysql
 ```
 

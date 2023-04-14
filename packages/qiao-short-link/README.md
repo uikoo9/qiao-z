@@ -9,7 +9,7 @@ Generate short links under browser and node.js
 
 ## install
 
-```bash
+```shell
 npm i qiao-short-link
 ```
 
@@ -59,7 +59,7 @@ If the `timeout` is set to 300ms and the `info` attribute is true, the effect is
 
 > 如果设置了`timeout`为 300ms，且`info`属性为 true，效果如下
 
-```bash
+```shell
 short link by tiyee.cn: 57.561ms
 short link by tiyee.cn success: https://tiyee.cn/iszc
 

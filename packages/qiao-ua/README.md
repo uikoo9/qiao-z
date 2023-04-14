@@ -7,7 +7,7 @@
 
 ## install
 
-```bash
+```shell
 npm i qiao-ua
 ```
 

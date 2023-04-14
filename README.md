@@ -8,7 +8,7 @@ nodejs 下极简的 web 框架
 
 ## 安装
 
-```bash
+```shell
 npm i qiao-z
 ```
 
@@ -27,7 +27,7 @@ app.listen();
 
 ## 示例
 
-```bash
+```shell
 git clone ...
 cd packages/qiao-z/__tests__
 node app.js

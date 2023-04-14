@@ -9,7 +9,7 @@ nodejs 下的 timer 能力
 
 安装
 
-```bash
+```shell
 npm i qiao-timer
 ```
 
