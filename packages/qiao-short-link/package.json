@@ -25,7 +25,8 @@
     "url": "git+https://github.com/uikoo9/qiao-z.git"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "ava __tests__/test.js"
   },
   "dependencies": {
     "qiao-ajax": "^2.8.6",
