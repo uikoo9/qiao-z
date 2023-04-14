@@ -7,31 +7,46 @@
 
 ## install
 
+安装
+
 ```shell
 npm i qiao-ua
 ```
 
 ## use
 
+使用
+
 ```javascript
-// ua
+// cjs
 const ua = require('qiao-ua');
 
-const useragent = 'xxx';
-const res = ua(useragent);
-console.log(res);
+// mjs
+import ua from 'qiao-ua';
 ```
 
-return
+## ua
+
+ua
+
+- useragent
+  - 类型: string
+  - 说明: useragent
+- return
+  - 类型: object
+  - 说明: 结果
+  - ```javascript
+    {
+      browser: { name: 'Chrome', version: '106.0.0.0' },
+      os: { name: 'macOS', version: '10.15.7', versionName: 'Catalina' },
+      platform: { type: 'desktop', vendor: 'Apple' },
+      engine: { name: 'Blink' },
+      isMobile: false
+    }
+    ```
 
 ```javascript
-{
-  browser: { name: 'Chrome', version: '106.0.0.0' },
-  os: { name: 'macOS', version: '10.15.7', versionName: 'Catalina' },
-  platform: { type: 'desktop', vendor: 'Apple' },
-  engine: { name: 'Blink' },
-  isMobile: false
-}
+const res = ua(useragent);
 ```
 
 ## version

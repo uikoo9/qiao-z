@@ -5,51 +5,37 @@
 
 nodejs 下[qiao-z](https://code.insistime.com/qiao-z#/)中的 string 相关工具类
 
-## api
+## install
 
-### firstLetterUpper
+安装
+
+```shell
+npm i qiao-string
+```
+
+## use
+
+使用
 
 ```javascript
+// cjs
 const { firstLetterUpper } = require('qiao-string');
 
-const test = function () {
-  const str = 'table';
-  const s = firstLetterUpper(str);
-
-  console.log(s);
-};
-
-test();
+// mjs
+import { firstLetterUpper } from 'qiao-string';
 ```
 
-### firstLetterLower
+## api
 
 ```javascript
-const { firstLetterLower } = require('qiao-string');
+// upper first letter
+firstLetterUpper(str);
 
-const test = function () {
-  const str = 'Table';
-  const s = firstLetterLower(str);
+// lower first letter
+firstLetterLower(str);
 
-  console.log(s);
-};
-
-test();
-```
-
-### underScoreCaseToCamelCase
-
-```javascript
-const { underScoreCaseToCamelCase } = require('qiao-string');
-
-const test = function () {
-  const str = 'share_type';
-  const s = underScoreCaseToCamelCase(str);
-
-  console.log(s);
-};
-
-test();
+// under score case 2 camel case
+underScoreCaseToCamelCase(str);
 ```
 
 ## version

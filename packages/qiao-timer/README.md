@@ -13,21 +13,32 @@ nodejs 下的 timer 能力
 npm i qiao-timer
 ```
 
+## use
+
+使用
+
+```javascript
+// cjs
+const { run } = require('qiao-timer');
+
+// mjs
+import { run } from 'qiao-timer';
+```
+
 ## api
 
 ### run
 
 按 time 执行 tick 函数
 
+- time
+  - 类型: string
+  - 说明: cron 表达式，例如'_/1 _ \* \* \* \*'
+- tick
+  - 类型: function
+  - 说明: 执行函数
+
 ```javascript
-const { run } = require('qiao-timer');
-
-const time = '*/1 * * * * *';
-const tick = () => {
-  console.log(new Date());
-};
-
-console.log('-' + new Date());
 run(time, tick);
 ```
 
@@ -35,15 +46,14 @@ run(time, tick);
 
 按 time 执行 tick 函数, 启动前会先执行一次 tick 函数
 
+- time
+  - 类型: string
+  - 说明: cron 表达式，例如'_/1 _ \* \* \* \*'
+- tick
+  - 类型: function
+  - 说明: 执行函数
+
 ```javascript
-const { runAndInit } = require('qiao-timer');
-
-const time = '*/1 * * * * *';
-const tick = () => {
-  console.log(new Date());
-};
-
-console.log('-' + new Date());
 runAndInit(time, tick);
 ```
 

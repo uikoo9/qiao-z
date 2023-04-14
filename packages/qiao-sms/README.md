@@ -5,6 +5,26 @@
 
 nodejs 下腾讯云 sms 常见 api 封装
 
+## install
+
+安装
+
+```shell
+npm i qiao-sms
+```
+
+## use
+
+使用
+
+```javascript
+// cjs
+const { sendSMSMsg } = require('qiao-sms');
+
+// mjs
+import { sendSMSMsg } from 'qiao-sms';
+```
+
 ## api
 
 ### options

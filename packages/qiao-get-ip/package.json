@@ -34,5 +34,22 @@
   "dependencies": {
     "ip-regex": "^5.0.0",
     "qiao-ajax": "^2.8.5"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
   }
 }
