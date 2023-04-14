@@ -24,7 +24,8 @@
     "url": "https://github.com/uikoo9/qiao-z/issues"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "ava"
   },
   "dependencies": {
     "node-cache": "^5.1.2"

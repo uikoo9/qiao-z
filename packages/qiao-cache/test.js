@@ -1,8 +1,11 @@
+// ava
+const test = require('ava');
+
 // cache
-const { cache } = require('../index.js');
+const { cache } = require('./index.js');
 
 // test
-test('cache on nodejs', async () => {
+test('cache on nodejs', async (t) => {
   // const
   const key = 'test';
   const value = 'hello';
@@ -12,10 +15,10 @@ test('cache on nodejs', async () => {
 
   // get
   const s = cache(key);
-  expect(s).toEqual(value);
+  t.is(s, value);
 
   // del
   cache(key, null);
   const ss = cache(key);
-  expect(ss).toBeUndefined();
+  t.falsy(ss);
 });
