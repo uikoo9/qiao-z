@@ -6,12 +6,12 @@ import { lsdir } from 'qiao-file';
  * @param {*} options
  * @returns
  */
-export default (options) => {
+export default async (options) => {
   // check
   if (!options || !options.cron) return;
 
   // files
-  const serverFiles = lsdir(process.cwd() + '/');
+  const serverFiles = await lsdir(process.cwd());
   if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
 
   // init
@@ -22,7 +22,7 @@ export default (options) => {
 
 // operate task file
 function operateTaskFile(cron, serverFile) {
-  const file = serverFile.path + serverFile.name;
+  const file = serverFile.path;
 
   if (/Task\.js$/.test(file)) {
     const task = require(file);

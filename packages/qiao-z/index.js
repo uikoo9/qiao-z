@@ -76,19 +76,17 @@ const initStatic = (app, routers) => {
  * @param {*} app
  * @returns
  */
-const initController = (app) => {
+const initController = async (app) => {
   // check
   if (!app) return;
 
   // files
-  const serverFiles = qiaoFile.lsdir(process.cwd() + '/');
+  const serverFiles = await qiaoFile.lsdir(process.cwd());
   if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
 
   // init
   serverFiles.files.forEach((serverFile) => {
-    const file = serverFile.path + serverFile.name;
-
-    if (/Controller\.js$/.test(file)) require(file)(app);
+    if (/Controller\.js$/.test(serverFile.path)) require(serverFile.path)(app);
   });
 };
 
@@ -114,12 +112,12 @@ const initModules = (app, options) => {
  * @param {*} options
  * @returns
  */
-var initTask = (options) => {
+var initTask = async (options) => {
   // check
   if (!options || !options.cron) return;
 
   // files
-  const serverFiles = qiaoFile.lsdir(process.cwd() + '/');
+  const serverFiles = await qiaoFile.lsdir(process.cwd());
   if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
 
   // init
@@ -130,7 +128,7 @@ var initTask = (options) => {
 
 // operate task file
 function operateTaskFile(cron, serverFile) {
-  const file = serverFile.path + serverFile.name;
+  const file = serverFile.path;
 
   if (/Task\.js$/.test(file)) {
     const task = require(file);
@@ -527,7 +525,7 @@ const clearCookie = (res, name) => {
  * @param {*} data
  * @returns
  */
-const render = (res, filePath, data) => {
+const render = async (res, filePath, data) => {
   // check res
   if (!res) return;
 
@@ -539,7 +537,7 @@ const render = (res, filePath, data) => {
 
   // final path
   const finalPath = path.resolve(process.cwd(), filePath);
-  if (!qiaoFile.isExists(filePath)) {
+  if (!(await qiaoFile.isExists(filePath))) {
     res.send('render: file path is not exists');
     return;
   }
@@ -551,7 +549,7 @@ const render = (res, filePath, data) => {
     file = template(finalPath, data || {});
     contentType = 'text/html';
   } else {
-    file = qiaoFile.readFile(finalPath);
+    file = await qiaoFile.readFile(finalPath);
     contentType = 'text/plain';
   }
   if (!file) {

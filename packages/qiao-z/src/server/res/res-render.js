@@ -14,7 +14,7 @@ import template from 'art-template';
  * @param {*} data
  * @returns
  */
-const render = (res, filePath, data) => {
+const render = async (res, filePath, data) => {
   // check res
   if (!res) return;
 
@@ -26,7 +26,7 @@ const render = (res, filePath, data) => {
 
   // final path
   const finalPath = resolve(process.cwd(), filePath);
-  if (!isExists(filePath)) {
+  if (!(await isExists(filePath))) {
     res.send('render: file path is not exists');
     return;
   }
@@ -38,7 +38,7 @@ const render = (res, filePath, data) => {
     file = template(finalPath, data || {});
     contentType = 'text/html';
   } else {
-    file = readFile(finalPath);
+    file = await readFile(finalPath);
     contentType = 'text/plain';
   }
   if (!file) {
