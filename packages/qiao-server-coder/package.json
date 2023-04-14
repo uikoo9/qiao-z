@@ -17,12 +17,12 @@
   },
   "dependencies": {
     "art-template": "^4.13.2",
-    "qiao-cli": "^1.1.1",
-    "qiao-encode": "^1.0.6",
-    "qiao-file": "^1.0.9",
+    "qiao-cli": "^3.1.5",
+    "qiao-encode": "^3.1.4",
+    "qiao-file": "^3.1.2",
     "qiao-mysql": "^1.0.7",
     "qiao-request": "^0.4.5",
     "qiao-string": "^1.0.0",
-    "qiao-zip": "^0.9.7"
+    "qiao-zip": "^3.1.2"
   }
 }

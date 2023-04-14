@@ -28,8 +28,8 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "qiao-ajax": "^2.8.5",
-    "qs": "^6.11.0"
+    "qiao-ajax": "^2.8.6",
+    "qs": "^6.11.1"
   },
   "nx": {
     "namedInputs": {
