@@ -19,10 +19,10 @@
     "art-template": "^4.13.2",
     "qiao-cli": "^3.1.5",
     "qiao-encode": "^3.1.4",
-    "qiao-file": "^3.1.2",
+    "qiao-file": "^3.1.5",
     "qiao-mysql": "^3.0.1",
     "qiao-request": "^3.0.1",
     "qiao-string": "^3.0.1",
-    "qiao-zip": "^3.1.2"
+    "qiao-zip": "^3.1.5"
   }
 }
