@@ -21,7 +21,7 @@
     "qiao-encode": "^3.1.4",
     "qiao-file": "^3.1.2",
     "qiao-mysql": "^3.0.1",
-    "qiao-request": "^0.4.5",
+    "qiao-request": "^3.0.1",
     "qiao-string": "^3.0.1",
     "qiao-zip": "^3.1.2"
   }
