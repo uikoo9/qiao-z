@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "art-template": "^4.13.2",
-    "qiao-cli": "^3.1.5",
+    "qiao-cli": "^3.2.7",
     "qiao-encode": "^3.1.4",
     "qiao-file": "^3.1.5",
     "qiao-mysql": "^3.0.1",
