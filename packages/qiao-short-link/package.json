@@ -29,8 +29,8 @@
     "test": "ava __tests__/test.js"
   },
   "dependencies": {
-    "qiao-ajax": "^3.0.2",
-    "qs": "^6.11.1"
+    "qiao-ajax": "^3.0.3",
+    "qs": "^6.11.2"
   },
   "nx": {
     "namedInputs": {

@@ -21,7 +21,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "qiao-ajax": "^3.0.2",
+    "qiao-ajax": "^3.0.3",
     "qiao-json": "^3.0.1"
   },
   "nx": {

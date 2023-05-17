@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "ip-regex": "^5.0.0",
-    "qiao-ajax": "^3.0.2"
+    "qiao-ajax": "^3.0.3"
   },
   "nx": {
     "namedInputs": {
