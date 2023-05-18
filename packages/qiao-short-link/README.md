@@ -75,19 +75,3 @@ Request the following websites and return the fastest response. The default time
 
 - [tiyee.cn](tiyee.cn)
 - [gotiny.cc](gotiny.cc)
-
-## version
-
-## 0.0.3.20230210
-
-1. short link race
-
-## 0.0.2.20230201
-
-1. 1.0.0
-
-### 0.0.1.20200911
-
-1. init project
-2. short url
-3. qiao-short-link

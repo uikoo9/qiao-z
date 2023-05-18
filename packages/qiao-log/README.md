@@ -35,23 +35,3 @@ logger.info;
 logger.warn;
 logger.error;
 ```
-
-## version
-
-## 0.0.4.20230129
-
-1. get logger
-
-### 0.0.3.20221214
-
-1. interval time
-2. content length
-
-### 0.0.2.20221202
-
-1. 1.0.0
-
-### 0.0.1.20220318
-
-1. init project
-2. add log

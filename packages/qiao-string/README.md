@@ -37,29 +37,3 @@ firstLetterLower(str);
 // under score case 2 camel case
 underScoreCaseToCamelCase(str);
 ```
-
-## version
-
-## 0.0.6.20230207
-
-1. 1.0.0
-
-### 0.0.5.20220422
-
-1. add lerna
-
-### 0.0.4.20191204
-
-1. add funding
-
-### 0.0.3.20190107
-
-1. npm audit
-
-### 0.0.2.20181122
-
-1. npm audit
-
-### 0.0.1.20181107
-
-1. init

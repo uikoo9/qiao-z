@@ -60,27 +60,3 @@ q.sendSMSMsg(options, (err, req, res, success, msg) => {
 ```javascript
 const res = await q.sendSMSMsgSync(options);
 ```
-
-## version
-
-### 0.0.5.20221109
-
-1. es6
-
-### 0.0.4.20220512
-
-1. lerna
-
-### 0.0.3.20191206
-
-1. add funding
-
-### 0.0.2.20190107
-
-1. nodejs tencent sms tool
-
-### 0.0.1.20181127
-
-1. init project
-2. send
-3. send sync

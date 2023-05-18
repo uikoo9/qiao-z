@@ -48,13 +48,3 @@ ua
 ```javascript
 const res = ua(useragent);
 ```
-
-## version
-
-### 0.0.2.20221107
-
-1. qiao-z --> qiao-ua
-
-### 0.0.1.20221028
-
-1. init project
