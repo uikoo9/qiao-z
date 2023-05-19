@@ -8,24 +8,11 @@ import { post } from 'qiao-ajax';
  * tiyee.cn
  * @param {*} longLink
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-export const tiyeeCN = async (longLink, timeout, info) => {
-  // time
-  const timeStr = 'short link by tiyee.cn';
-  if (info) console.time(timeStr);
-
+export const tiyeeCN = async (longLink, timeout) => {
   // check
-  if (!longLink) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: need long link`);
-      console.log();
-    }
-
-    return;
-  }
+  if (!longLink) return;
 
   // url
   const url = 'https://tiyee.cn/2/create_short_url';
@@ -40,28 +27,10 @@ export const tiyeeCN = async (longLink, timeout, info) => {
   // post
   try {
     const res = await post(url, config);
-    if (!res || res.status !== 200 || !res.data) {
-      if (info) {
-        console.timeEnd(timeStr);
-        console.log(`${timeStr} failed: request failed`);
-        console.log();
-      }
+    if (!res || res.status !== 200 || !res.data) return;
 
-      return;
-    }
-
-    // return
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} success: https://${res.data.short_url}`);
-      console.log();
-    }
     return `https://${res.data.short_url}`;
   } catch (error) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: ${error.message}`);
-      console.log();
-    }
+    console.log(error);
   }
 };

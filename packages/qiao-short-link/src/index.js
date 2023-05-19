@@ -4,10 +4,9 @@ import { shortLinkRace } from './short-link-race.js';
 /**
  * short link
  * @param {*} longLink
- * @param {*} options
+ * @param {*} timeout
  * @returns
  */
-export const shortLink = (longLink, options) => {
-  options = options || {};
-  return shortLinkRace(longLink, options.timeout, options.info);
+export const shortLink = (longLink, timeout) => {
+  return shortLinkRace(longLink, timeout);
 };

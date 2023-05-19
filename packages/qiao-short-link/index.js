@@ -9,24 +9,11 @@ var qs = require('qs');
  * gotiny.cc
  * @param {*} longLink
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-const goTinyCC = async (longLink, timeout, info) => {
-  // time
-  const timeStr = 'short link by gotiny.cc';
-  if (info) console.time(timeStr);
-
+const goTinyCC = async (longLink, timeout) => {
   // check
-  if (!longLink) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: need long link`);
-      console.log();
-    }
-
-    return;
-  }
+  if (!longLink) return;
 
   // url
   const url = 'https://gotiny.cc/api';
@@ -41,29 +28,11 @@ const goTinyCC = async (longLink, timeout, info) => {
   // post
   try {
     const res = await qiaoAjax.post(url, config);
-    if (!res || res.status !== 200 || !res.data || !res.data.length || res.data[0].long !== longLink) {
-      if (info) {
-        console.timeEnd(timeStr);
-        console.log(`${timeStr} failed: request failed`);
-        console.log();
-      }
+    if (!res || res.status !== 200 || !res.data || !res.data.length || res.data[0].long !== longLink) return;
 
-      return;
-    }
-
-    // return
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} success: https://gotiny.cc/${res.data[0].code}`);
-      console.log();
-    }
     return `https://gotiny.cc/${res.data[0].code}`;
   } catch (error) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: ${error.message}`);
-      console.log();
-    }
+    console.log(error);
   }
 };
 
@@ -73,24 +42,11 @@ const goTinyCC = async (longLink, timeout, info) => {
  * tiyee.cn
  * @param {*} longLink
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-const tiyeeCN = async (longLink, timeout, info) => {
-  // time
-  const timeStr = 'short link by tiyee.cn';
-  if (info) console.time(timeStr);
-
+const tiyeeCN = async (longLink, timeout) => {
   // check
-  if (!longLink) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: need long link`);
-      console.log();
-    }
-
-    return;
-  }
+  if (!longLink) return;
 
   // url
   const url = 'https://tiyee.cn/2/create_short_url';
@@ -105,82 +61,53 @@ const tiyeeCN = async (longLink, timeout, info) => {
   // post
   try {
     const res = await qiaoAjax.post(url, config);
-    if (!res || res.status !== 200 || !res.data) {
-      if (info) {
-        console.timeEnd(timeStr);
-        console.log(`${timeStr} failed: request failed`);
-        console.log();
-      }
+    if (!res || res.status !== 200 || !res.data) return;
 
-      return;
-    }
-
-    // return
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} success: https://${res.data.short_url}`);
-      console.log();
-    }
     return `https://${res.data.short_url}`;
   } catch (error) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: ${error.message}`);
-      console.log();
-    }
+    console.log(error);
   }
 };
 
 // short links
 
 // default timeout
-const defaultTimeout = 200;
+const defaultTimeout = 300;
 
 /**
  * short link race
  * @param {*} longLink
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-const shortLinkRace = async (longLink, timeout, info) => {
+const shortLinkRace = async (longLink, timeout) => {
   // timeout
   timeout = timeout || defaultTimeout;
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const errors = [];
 
     // tiyee.cn
-    tiyeeCN(longLink, timeout, info)
+    tiyeeCN(longLink, timeout)
       .then((res) => {
         resolve(res);
       })
       .catch((e) => {
-        errors.push({
-          name: 'tiyee.cn',
-          error: e.message,
-        });
+        errors.push(e);
       });
 
     // gotiny.cc
-    goTinyCC(longLink, timeout, info)
+    goTinyCC(longLink, timeout)
       .then((res) => {
         resolve(res);
       })
       .catch((e) => {
-        errors.push({
-          name: 'gotiny.cc',
-          error: e.message,
-        });
+        errors.push(e);
       });
 
     // errors
-    if (!info) return;
     setTimeout(() => {
-      if (errors && errors.length) {
-        console.log('errros:');
-        console.log(errors);
-      }
+      if (errors && errors.length) reject(errors);
     }, timeout + 50);
   });
 };
@@ -190,12 +117,11 @@ const shortLinkRace = async (longLink, timeout, info) => {
 /**
  * short link
  * @param {*} longLink
- * @param {*} options
+ * @param {*} timeout
  * @returns
  */
-const shortLink = (longLink, options) => {
-  options = options || {};
-  return shortLinkRace(longLink, options.timeout, options.info);
+const shortLink = (longLink, timeout) => {
+  return shortLinkRace(longLink, timeout);
 };
 
 exports.shortLink = shortLink;

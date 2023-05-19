@@ -3,53 +3,42 @@ import { goTinyCC } from './gotiny.cc.js';
 import { tiyeeCN } from './tiyee.cn.js';
 
 // default timeout
-const defaultTimeout = 200;
+const defaultTimeout = 300;
 
 /**
  * short link race
  * @param {*} longLink
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-export const shortLinkRace = async (longLink, timeout, info) => {
+export const shortLinkRace = async (longLink, timeout) => {
   // timeout
   timeout = timeout || defaultTimeout;
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const errors = [];
 
     // tiyee.cn
-    tiyeeCN(longLink, timeout, info)
+    tiyeeCN(longLink, timeout)
       .then((res) => {
         resolve(res);
       })
       .catch((e) => {
-        errors.push({
-          name: 'tiyee.cn',
-          error: e.message,
-        });
+        errors.push(e);
       });
 
     // gotiny.cc
-    goTinyCC(longLink, timeout, info)
+    goTinyCC(longLink, timeout)
       .then((res) => {
         resolve(res);
       })
       .catch((e) => {
-        errors.push({
-          name: 'gotiny.cc',
-          error: e.message,
-        });
+        errors.push(e);
       });
 
     // errors
-    if (!info) return;
     setTimeout(() => {
-      if (errors && errors.length) {
-        console.log('errros:');
-        console.log(errors);
-      }
+      if (errors && errors.length) reject(errors);
     }, timeout + 50);
   });
 };

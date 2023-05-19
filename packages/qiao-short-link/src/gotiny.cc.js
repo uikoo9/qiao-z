@@ -5,24 +5,11 @@ import { post } from 'qiao-ajax';
  * gotiny.cc
  * @param {*} longLink
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-export const goTinyCC = async (longLink, timeout, info) => {
-  // time
-  const timeStr = 'short link by gotiny.cc';
-  if (info) console.time(timeStr);
-
+export const goTinyCC = async (longLink, timeout) => {
   // check
-  if (!longLink) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: need long link`);
-      console.log();
-    }
-
-    return;
-  }
+  if (!longLink) return;
 
   // url
   const url = 'https://gotiny.cc/api';
@@ -37,28 +24,10 @@ export const goTinyCC = async (longLink, timeout, info) => {
   // post
   try {
     const res = await post(url, config);
-    if (!res || res.status !== 200 || !res.data || !res.data.length || res.data[0].long !== longLink) {
-      if (info) {
-        console.timeEnd(timeStr);
-        console.log(`${timeStr} failed: request failed`);
-        console.log();
-      }
+    if (!res || res.status !== 200 || !res.data || !res.data.length || res.data[0].long !== longLink) return;
 
-      return;
-    }
-
-    // return
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} success: https://gotiny.cc/${res.data[0].code}`);
-      console.log();
-    }
     return `https://gotiny.cc/${res.data[0].code}`;
   } catch (error) {
-    if (info) {
-      console.timeEnd(timeStr);
-      console.log(`${timeStr} failed: ${error.message}`);
-      console.log();
-    }
+    console.log(error);
   }
 };
