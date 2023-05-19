@@ -42,69 +42,32 @@ ipRegex.v6 = options => options && options.exact ? v6exact : new RegExp(`${bound
 /**
  * get ip by website
  * @param {*} url
- * @param {*} name
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-const getIPByWebsite = (url, name, timeout, info) => {
-  return new Promise((resolve) => {
-    if (info) console.time(`get ip by ${name}`);
-
+const getIPByWebsite = (url, timeout) => {
+  return new Promise((resolve, reject) => {
     qiaoAjax.get(url, {
       timeout: timeout,
     })
       .then((res) => {
         // check
-        if (!res || res.status !== 200 || !res.data) {
-          if (info) {
-            console.timeEnd(`get ip by ${name}`);
-            console.log(`get ip by ${name} failed: request failed`);
-            console.log();
-          }
-
-          return;
-        }
+        if (!res || res.status !== 200 || !res.data) return;
 
         // get ip
         const s = res.data.match(/\d+\.\d+\.\d+\.\d+/g);
         const ip = s && s.length ? s[0] : null;
-        if (!ip) {
-          if (info) {
-            console.timeEnd(`get ip by ${name}`);
-            console.log(`get ip by ${name} failed: ip match failed`);
-            console.log();
-          }
-
-          return;
-        }
+        if (!ip) return;
 
         // is ip
         const isIp = ipRegex.v4({ exact: true }).test(ip);
-        if (!isIp) {
-          if (info) {
-            console.timeEnd(`get ip by ${name}`);
-            console.log(`get ip by ${name} failed: not ipv4 ${ip}`);
-            console.log();
-          }
-
-          return;
-        }
+        if (!isIp) return;
 
         // return
-        if (info) {
-          console.timeEnd(`get ip by ${name}`);
-          console.log(`get ip by ${name}: ${ip}`);
-          console.log();
-        }
         return resolve(ip);
       })
       .catch((e) => {
-        if (info) {
-          console.timeEnd(`get ip by ${name}`);
-          console.log(`get ip by ${name} failed: ${e.message}`);
-          console.log();
-        }
+        reject(e);
       });
   });
 };
@@ -113,72 +76,43 @@ const getIPByWebsite = (url, name, timeout, info) => {
 
 // websites
 const websites = [
-  {
-    name: 'sohu.com',
-    url: 'http://txt.go.sohu.com/ip/soip',
-  },
-  {
-    name: 'insistime.com',
-    url: 'https://insistime.com/ip?type=api',
-  },
-  {
-    name: 'ipify.org',
-    url: 'https://api.ipify.org/',
-  },
-  {
-    name: 'icanhazip.com',
-    url: 'https://icanhazip.com/',
-  },
-  {
-    name: 'ipinfo.io',
-    url: 'https://ipinfo.io/ip',
-  },
-  {
-    name: 'ifconfig.me',
-    url: 'https://ifconfig.me/ip',
-  },
-  {
-    name: 'amazonaws.com',
-    url: 'https://checkip.amazonaws.com/',
-  },
+  'http://txt.go.sohu.com/ip/soip',
+  'https://insistime.com/ip?type=api',
+  'https://api.ipify.org/',
+  'https://icanhazip.com/',
+  'https://ipinfo.io/ip',
+  'https://ifconfig.me/ip',
+  'https://checkip.amazonaws.com/',
 ];
 
 // default timeout
-const defaultTimeout = 200;
+const defaultTimeout = 300;
 
 /**
  * get ip race
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-const getIPRace = (timeout, info) => {
+const getIPRace = (timeout) => {
   // timeout
   timeout = timeout || defaultTimeout;
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const errors = [];
 
-    websites.forEach((website) => {
-      getIPByWebsite(website.url, website.name, timeout, info)
+    websites.forEach((url) => {
+      getIPByWebsite(url, timeout)
         .then((res) => {
           resolve(res);
         })
         .catch((e) => {
-          errors.push({
-            name: website.name,
-            error: e.message,
-          });
+          errors.push(e);
         });
     });
 
     // errors
-    if (!info) return;
     setTimeout(() => {
-      if (errors && errors.length) {
-        console.log('errros:');
-        console.log(errors);
-      }
+      if (errors && errors.length) reject(errors);
     }, timeout + 50);
   });
 };
@@ -187,12 +121,11 @@ const getIPRace = (timeout, info) => {
 
 /**
  * get ip
- * @param {*} options
+ * @param {*} timeout
  * @returns
  */
-const getIP = (options) => {
-  options = options || {};
-  return getIPRace(options.timeout, options.info);
+const getIP = (timeout) => {
+  return getIPRace(timeout);
 };
 
 exports.getIP = getIP;

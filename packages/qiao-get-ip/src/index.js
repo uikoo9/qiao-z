@@ -3,10 +3,9 @@ import { getIPRace } from './get-ip-race.js';
 
 /**
  * get ip
- * @param {*} options
+ * @param {*} timeout
  * @returns
  */
-export const getIP = (options) => {
-  options = options || {};
-  return getIPRace(options.timeout, options.info);
+export const getIP = (timeout) => {
+  return getIPRace(timeout);
 };

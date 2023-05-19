@@ -3,72 +3,43 @@ import { getIPByWebsite } from './get-ip-by-website.js';
 
 // websites
 const websites = [
-  {
-    name: 'sohu.com',
-    url: 'http://txt.go.sohu.com/ip/soip',
-  },
-  {
-    name: 'insistime.com',
-    url: 'https://insistime.com/ip?type=api',
-  },
-  {
-    name: 'ipify.org',
-    url: 'https://api.ipify.org/',
-  },
-  {
-    name: 'icanhazip.com',
-    url: 'https://icanhazip.com/',
-  },
-  {
-    name: 'ipinfo.io',
-    url: 'https://ipinfo.io/ip',
-  },
-  {
-    name: 'ifconfig.me',
-    url: 'https://ifconfig.me/ip',
-  },
-  {
-    name: 'amazonaws.com',
-    url: 'https://checkip.amazonaws.com/',
-  },
+  'http://txt.go.sohu.com/ip/soip',
+  'https://insistime.com/ip?type=api',
+  'https://api.ipify.org/',
+  'https://icanhazip.com/',
+  'https://ipinfo.io/ip',
+  'https://ifconfig.me/ip',
+  'https://checkip.amazonaws.com/',
 ];
 
 // default timeout
-const defaultTimeout = 200;
+const defaultTimeout = 300;
 
 /**
  * get ip race
  * @param {*} timeout
- * @param {*} info
  * @returns
  */
-export const getIPRace = (timeout, info) => {
+export const getIPRace = (timeout) => {
   // timeout
   timeout = timeout || defaultTimeout;
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const errors = [];
 
-    websites.forEach((website) => {
-      getIPByWebsite(website.url, website.name, timeout, info)
+    websites.forEach((url) => {
+      getIPByWebsite(url, timeout)
         .then((res) => {
           resolve(res);
         })
         .catch((e) => {
-          errors.push({
-            name: website.name,
-            error: e.message,
-          });
+          errors.push(e);
         });
     });
 
     // errors
-    if (!info) return;
     setTimeout(() => {
-      if (errors && errors.length) {
-        console.log('errros:');
-        console.log(errors);
-      }
+      if (errors && errors.length) reject(errors);
     }, timeout + 50);
   });
 };
