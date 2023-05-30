@@ -27,7 +27,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "cron": "^2.3.0"
+    "cron": "^2.3.1"
   },
   "nx": {
     "namedInputs": {
