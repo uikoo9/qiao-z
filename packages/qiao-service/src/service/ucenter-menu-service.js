@@ -1,5 +1,3 @@
-'use strict';
-
 // config
 import config from '../util/_server.json';
 
@@ -67,11 +65,11 @@ export const ucenterMenuGet = async (id) => {
   const data = { id: id };
 
   const json = await postWithToken(url, data);
-  if (!json || !json.obj || !json.obj.rows || !json.obj.rows.length) {
+  if (!json || json.type !== 'success' || !json.obj || !json.obj.rows || !json.obj.rows.length) {
     return fail(`can not find item by ${id}`);
   }
 
-  var item = json.obj.rows[0];
+  const item = json.obj.rows[0];
   item.time = json.time;
   return item;
 };

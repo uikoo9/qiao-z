@@ -1,5 +1,3 @@
-'use strict';
-
 // config
 import config from '../util/_server.json';
 
