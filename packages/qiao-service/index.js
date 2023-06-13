@@ -79,11 +79,13 @@ async function ajax(url, data, headers) {
   if (!json) return qiaoJson.fail(`${time}ms | request fail: no data`);
 
   // danger
-  if (json.type == 'danger') return qiaoJson.fail(`${time}ms | ${json.msg}`);
+  if (json.type == 'success') return qiaoJson.fail(`${time}ms | ${json.msg}`);
 
   json.time = time;
   return json;
 }
+
+// config
 
 /**
  * register
@@ -162,6 +164,8 @@ const checkUser = async (userid, usertoken) => {
   return await post(url, data);
 };
 
+// config
+
 /**
  * ucenterMenuList
  * @param {*} pagenumber
@@ -220,11 +224,11 @@ const ucenterMenuGet = async (id) => {
   const data = { id: id };
 
   const json = await postWithToken(url, data);
-  if (!json || !json.obj || !json.obj.rows || !json.obj.rows.length) {
+  if (!json || json.type !== 'success' || !json.obj || !json.obj.rows || !json.obj.rows.length) {
     return qiaoJson.fail(`can not find item by ${id}`);
   }
 
-  var item = json.obj.rows[0];
+  const item = json.obj.rows[0];
   item.time = json.time;
   return item;
 };
