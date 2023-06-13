@@ -1,3 +1,6 @@
+// json
+import { success, danger } from 'qiao-json';
+
 /**
  * res.json
  * @param {*} res
@@ -30,14 +33,8 @@ export const jsonSuccess = (res, msg, obj) => {
   // check
   if (!res || !msg) return;
 
-  // json
-  const jsonObj = {
-    type: true,
-    msg: msg,
-  };
-
   // obj
-  if (obj) jsonObj.obj = obj;
+  const jsonObj = success(msg, obj);
 
   // send
   json(res, jsonObj);
@@ -54,14 +51,8 @@ export const jsonFail = (res, msg, obj) => {
   // check
   if (!res || !msg) return;
 
-  // json
-  const jsonObj = {
-    type: false,
-    msg: msg,
-  };
-
   // obj
-  if (obj) jsonObj.obj = obj;
+  const jsonObj = danger(msg, obj);
 
   // send
   json(res, jsonObj);

@@ -8,6 +8,7 @@ var cookie = require('cookie');
 var ua = require('qiao-ua');
 var qs = require('qs');
 var getRawBody = require('raw-body');
+var qiaoJson = require('qiao-json');
 var template = require('art-template');
 
 // methods
@@ -430,6 +431,8 @@ const send = (res, msg) => {
   res.end(msg);
 };
 
+// json
+
 /**
  * res.json
  * @param {*} res
@@ -462,14 +465,8 @@ const jsonSuccess = (res, msg, obj) => {
   // check
   if (!res || !msg) return;
 
-  // json
-  const jsonObj = {
-    type: true,
-    msg: msg,
-  };
-
   // obj
-  if (obj) jsonObj.obj = obj;
+  const jsonObj = qiaoJson.success(msg, obj);
 
   // send
   json(res, jsonObj);
@@ -486,14 +483,8 @@ const jsonFail = (res, msg, obj) => {
   // check
   if (!res || !msg) return;
 
-  // json
-  const jsonObj = {
-    type: false,
-    msg: msg,
-  };
-
   // obj
-  if (obj) jsonObj.obj = obj;
+  const jsonObj = qiaoJson.danger(msg, obj);
 
   // send
   json(res, jsonObj);
