@@ -1,6 +1,6 @@
 {
   "name": "qiao-service",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "author": "uikoo9 <uikoo9@qq.com>",
   "homepage": "https://code.insistime.com/qiao-service",
   "license": "MIT",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "qiao-ajax": "^3.1.1",
-    "qiao-json": "^3.1.1"
+    "qiao-json": "^3.1.2"
   },
   "nx": {
     "namedInputs": {
