@@ -1,6 +1,6 @@
 {
   "name": "qiao-get-ip",
-  "version": "3.0.8",
+  "version": "3.1.0",
   "description": "get public ip on browser and nodejs",
   "keywords": [
     "network",
