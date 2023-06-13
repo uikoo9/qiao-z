@@ -1,27 +1,6 @@
 'use strict';
 
 /**
- * json
- * 	type
- * 	msg
- * 	obj
- */
-const json = (type, msg, obj) => {
-  const json = {
-    success: true,
-    msg: '',
-    type: '',
-    obj: null,
-  };
-
-  if (type) json.type = type;
-  if (msg) json.msg = msg;
-  if (obj) json.obj = obj;
-
-  return json;
-};
-
-/**
  * success
  * 	msg
  * 	obj
@@ -31,34 +10,28 @@ const success = (msg, obj) => {
 };
 
 /**
- * info
+ * fail
  * 	msg
  * 	obj
  */
-const info = (msg, obj) => {
-  return json('info', msg, obj);
+const fail = (msg, obj) => {
+  return json('fail', msg, obj);
 };
 
-/**
- * warning
- * 	msg
- * 	obj
- */
-const warning = (msg, obj) => {
-  return json('warning', msg, obj);
-};
+// json
+function json(type, msg, obj) {
+  const jsonObj = {
+    type: '',
+    msg: '',
+    obj: null,
+  };
 
-/**
- * danger
- * 	msg
- * 	obj
- */
-const danger = (msg, obj) => {
-  return json('danger', msg, obj);
-};
+  if (type) jsonObj.type = type;
+  if (msg) jsonObj.msg = msg;
+  if (obj) jsonObj.obj = obj;
 
-exports.danger = danger;
-exports.info = info;
-exports.json = json;
+  return jsonObj;
+}
+
+exports.fail = fail;
 exports.success = success;
-exports.warning = warning;

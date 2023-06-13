@@ -9,29 +9,21 @@ nodejs 下 [qiao-z](https://code.insistime.com/qiao-z#/) 中的 json 数据结�
 
 ```javascript
 // commonjs
-const { success, info, warning, danger } = require('qiao-json');
+const { success, fail } = require('qiao-json');
 
 // es6
-import { success, info, warning, danger } from 'qiao-json';
+import { success, fail } from 'qiao-json';
 ```
 
 ## api
 
 ```javascript
-const { success, info, warning, danger } = require('qiao-json');
-
-const json = success('test', {});
+const json = success('msg', {});
 console.log(json);
 
 // success
-{ success: true, msg: 'test', type: 'success', obj: {} }
+{ type: 'success', msg: 'msg', obj: {} }
 
-// info
-{ success: true, msg: 'test', type: 'info', obj: {} }
-
-// warning
-{ success: true, msg: 'test', type: 'warning', obj: {} }
-
-// danger
-{ success: true, msg: 'test', type: 'danger', obj: {} }
+// fail
+{ type: 'fail', msg: 'msg', obj: {} }
 ```
