@@ -484,7 +484,7 @@ const jsonFail = (res, msg, obj) => {
   if (!res || !msg) return;
 
   // obj
-  const jsonObj = qiaoJson.danger(msg, obj);
+  const jsonObj = qiaoJson.fail(msg, obj);
 
   // send
   json(res, jsonObj);

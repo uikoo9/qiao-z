@@ -1,5 +1,5 @@
 // json
-import { success, danger } from 'qiao-json';
+import { success, fail } from 'qiao-json';
 
 /**
  * res.json
@@ -52,7 +52,7 @@ export const jsonFail = (res, msg, obj) => {
   if (!res || !msg) return;
 
   // obj
-  const jsonObj = danger(msg, obj);
+  const jsonObj = fail(msg, obj);
 
   // send
   json(res, jsonObj);

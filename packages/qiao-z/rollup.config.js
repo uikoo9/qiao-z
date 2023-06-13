@@ -18,5 +18,6 @@ module.exports = {
     'qiao-file',
     'qiao-timer',
     'qiao-ua',
+    'qiao-json',
   ],
 };
