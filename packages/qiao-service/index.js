@@ -42,10 +42,10 @@ const post = async (url, data) => {
  */
 const postWithToken = async (url, data) => {
   const root = global || window;
-  if (!root) return qiaoJson.danger('no window or global');
+  if (!root) return qiaoJson.fail('no window or global');
 
   const userinfo = root.insistime_userinfo;
-  if (!userinfo || !userinfo.userid || !userinfo.usertoken) return qiaoJson.danger('please login first');
+  if (!userinfo || !userinfo.userid || !userinfo.usertoken) return qiaoJson.fail('please login first');
 
   const headers = {
     userid: userinfo.userid,
@@ -69,17 +69,17 @@ async function ajax(url, data, headers) {
   const time = Date.now() - s;
 
   // res error
-  if (!res) return qiaoJson.danger(`${time}ms | request fail`);
+  if (!res) return qiaoJson.fail(`${time}ms | request fail`);
 
   // not 200
-  if (res.status != 200) return qiaoJson.danger(`${time}ms | request fail: ${res.status}`);
+  if (res.status != 200) return qiaoJson.fail(`${time}ms | request fail: ${res.status}`);
 
   // no data
   const json = res.data;
-  if (!json) return qiaoJson.danger(`${time}ms | request fail: no data`);
+  if (!json) return qiaoJson.fail(`${time}ms | request fail: no data`);
 
   // danger
-  if (json.type == 'danger') return qiaoJson.danger(`${time}ms | ${json.msg}`);
+  if (json.type == 'danger') return qiaoJson.fail(`${time}ms | ${json.msg}`);
 
   json.time = time;
   return json;
@@ -94,8 +94,8 @@ async function ajax(url, data, headers) {
  * @returns
  */
 const register = async (mobile, password, repassword, code) => {
-  if (!mobile || !password || !repassword || !code) return qiaoJson.danger('need mobile, code, password');
-  if (password != repassword) return qiaoJson.danger('the two password do not match');
+  if (!mobile || !password || !repassword || !code) return qiaoJson.fail('need mobile, code, password');
+  if (password != repassword) return qiaoJson.fail('the two password do not match');
 
   const url = config.host + config.register;
   const data = {
@@ -114,7 +114,7 @@ const register = async (mobile, password, repassword, code) => {
  * @returns
  */
 const login = async (mobile, password) => {
-  if (!mobile || !password) return qiaoJson.danger('need mobile and password');
+  if (!mobile || !password) return qiaoJson.fail('need mobile and password');
 
   const url = config.host + config.login;
   const data = {
@@ -131,7 +131,7 @@ const login = async (mobile, password) => {
  * @returns
  */
 const sendCode = async (mobile) => {
-  if (!mobile) return qiaoJson.danger('need mobile');
+  if (!mobile) return qiaoJson.fail('need mobile');
 
   const url = config.host + config.sendCode;
   const data = {
@@ -150,8 +150,8 @@ const sendCode = async (mobile) => {
  * @returns
  */
 const checkUser = async (userid, usertoken) => {
-  if (!userid) return qiaoJson.danger('need userid');
-  if (!usertoken) return qiaoJson.danger('need usertoken');
+  if (!userid) return qiaoJson.fail('need userid');
+  if (!usertoken) return qiaoJson.fail('need usertoken');
 
   const url = config.host + config.checkUser;
   const data = {
@@ -214,14 +214,14 @@ const ucenterMenuDel = async (ids) => {
  * @returns
  */
 const ucenterMenuGet = async (id) => {
-  if (!id) return qiaoJson.danger('need id');
+  if (!id) return qiaoJson.fail('need id');
 
   const url = config.host + config.ucenterMenuGet;
   const data = { id: id };
 
   const json = await postWithToken(url, data);
   if (!json || !json.obj || !json.obj.rows || !json.obj.rows.length) {
-    return qiaoJson.danger(`can not find item by ${id}`);
+    return qiaoJson.fail(`can not find item by ${id}`);
   }
 
   var item = json.obj.rows[0];

@@ -1,6 +1,6 @@
 // qiao
 import { post as ajaxPost } from 'qiao-ajax';
-import { danger } from 'qiao-json';
+import { fail } from 'qiao-json';
 
 /**
  * post
@@ -18,10 +18,10 @@ export const post = async (url, data) => {
  */
 export const postWithToken = async (url, data) => {
   const root = global || window;
-  if (!root) return danger('no window or global');
+  if (!root) return fail('no window or global');
 
   const userinfo = root.insistime_userinfo;
-  if (!userinfo || !userinfo.userid || !userinfo.usertoken) return danger('please login first');
+  if (!userinfo || !userinfo.userid || !userinfo.usertoken) return fail('please login first');
 
   const headers = {
     userid: userinfo.userid,
@@ -45,17 +45,17 @@ async function ajax(url, data, headers) {
   const time = Date.now() - s;
 
   // res error
-  if (!res) return danger(`${time}ms | request fail`);
+  if (!res) return fail(`${time}ms | request fail`);
 
   // not 200
-  if (res.status != 200) return danger(`${time}ms | request fail: ${res.status}`);
+  if (res.status != 200) return fail(`${time}ms | request fail: ${res.status}`);
 
   // no data
   const json = res.data;
-  if (!json) return danger(`${time}ms | request fail: no data`);
+  if (!json) return fail(`${time}ms | request fail: no data`);
 
   // danger
-  if (json.type == 'danger') return danger(`${time}ms | ${json.msg}`);
+  if (json.type == 'danger') return fail(`${time}ms | ${json.msg}`);
 
   json.time = time;
   return json;

@@ -7,7 +7,7 @@ import config from '../util/_server.json';
 import { postWithToken } from '../util/_fetch.js';
 
 // qjson
-import { danger } from 'qiao-json';
+import { fail } from 'qiao-json';
 
 /**
  * ucenterMenuList
@@ -61,14 +61,14 @@ export const ucenterMenuDel = async (ids) => {
  * @returns
  */
 export const ucenterMenuGet = async (id) => {
-  if (!id) return danger('need id');
+  if (!id) return fail('need id');
 
   const url = config.host + config.ucenterMenuGet;
   const data = { id: id };
 
   const json = await postWithToken(url, data);
   if (!json || !json.obj || !json.obj.rows || !json.obj.rows.length) {
-    return danger(`can not find item by ${id}`);
+    return fail(`can not find item by ${id}`);
   }
 
   var item = json.obj.rows[0];

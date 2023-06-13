@@ -7,7 +7,7 @@ import config from '../util/_server.json';
 import { post } from '../util/_fetch.js';
 
 // qjson
-import { danger } from 'qiao-json';
+import { fail } from 'qiao-json';
 
 /**
  * register
@@ -18,8 +18,8 @@ import { danger } from 'qiao-json';
  * @returns
  */
 export const register = async (mobile, password, repassword, code) => {
-  if (!mobile || !password || !repassword || !code) return danger('need mobile, code, password');
-  if (password != repassword) return danger('the two password do not match');
+  if (!mobile || !password || !repassword || !code) return fail('need mobile, code, password');
+  if (password != repassword) return fail('the two password do not match');
 
   const url = config.host + config.register;
   const data = {
@@ -38,7 +38,7 @@ export const register = async (mobile, password, repassword, code) => {
  * @returns
  */
 export const login = async (mobile, password) => {
-  if (!mobile || !password) return danger('need mobile and password');
+  if (!mobile || !password) return fail('need mobile and password');
 
   const url = config.host + config.login;
   const data = {
@@ -55,7 +55,7 @@ export const login = async (mobile, password) => {
  * @returns
  */
 export const sendCode = async (mobile) => {
-  if (!mobile) return danger('need mobile');
+  if (!mobile) return fail('need mobile');
 
   const url = config.host + config.sendCode;
   const data = {
@@ -74,8 +74,8 @@ export const sendCode = async (mobile) => {
  * @returns
  */
 export const checkUser = async (userid, usertoken) => {
-  if (!userid) return danger('need userid');
-  if (!usertoken) return danger('need usertoken');
+  if (!userid) return fail('need userid');
+  if (!usertoken) return fail('need usertoken');
 
   const url = config.host + config.checkUser;
   const data = {
