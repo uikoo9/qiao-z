@@ -1,6 +1,4 @@
-'use strict';
+const { info } = require('../index.js');
 
-var q = require('../index.js');
-
-var info = q.info('test', {});
-console.log(info);
+const json = info('test', {});
+console.log(json);

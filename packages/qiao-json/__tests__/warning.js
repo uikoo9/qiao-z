@@ -1,6 +1,4 @@
-'use strict';
+const { warning } = require('../index.js');
 
-var q = require('../index.js');
-
-var warning = q.warning('test', {});
-console.log(warning);
+const json = warning('test', {});
+console.log(json);

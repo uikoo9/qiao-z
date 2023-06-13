@@ -1,6 +1,4 @@
-'use strict';
+const { danger } = require('../index.js');
 
-var q = require('../index.js');
-
-var danger = q.danger('test', {});
-console.log(danger);
+const json = danger('test', {});
+console.log(json);

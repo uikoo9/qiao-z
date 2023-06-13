@@ -22,4 +22,16 @@ const { success, info, warning, danger } = require('qiao-json');
 
 const json = success('test', {});
 console.log(json);
+
+// success
+{ success: true, msg: 'test', type: 'success', obj: {} }
+
+// info
+{ success: true, msg: 'test', type: 'info', obj: {} }
+
+// warning
+{ success: true, msg: 'test', type: 'warning', obj: {} }
+
+// danger
+{ success: true, msg: 'test', type: 'danger', obj: {} }
 ```
