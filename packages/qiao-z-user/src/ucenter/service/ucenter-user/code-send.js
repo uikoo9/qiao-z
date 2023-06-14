@@ -37,6 +37,12 @@ module.exports = async (req, res) => {
     const type = req.body.type;
     const mobile = req.body.mobile;
 
+    // check type
+    if (type !== 'reg' && type !== 'forget') {
+      res.jsonFail('非法的类型！');
+      return;
+    }
+
     // type service
     const users = await req.db.query(sql.ucenterUserGetByMobile, [mobile]);
     if (type == 'reg' && users && users.length) {
