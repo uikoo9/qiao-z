@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   // db
   try {
-    const rows = await req.db.query(sql.ucenterUserGetById([req.body.id]));
+    const rows = await req.db.query(sql.ucenterUserGetById, [req.body.id]);
 
     res.jsonSuccess('query success', { rows: rows });
   } catch (e) {
