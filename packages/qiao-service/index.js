@@ -79,7 +79,7 @@ async function ajax(url, data, headers) {
   if (!json) return qiaoJson.fail(`${time}ms | request fail: no data`);
 
   // danger
-  if (json.type === 'fail') return qiaoJson.fail(`${time}ms | ${json.msg}`);
+  if (json.type !== 'success') return qiaoJson.fail(`${time}ms | ${json.msg}`);
 
   json.time = time;
   return json;
@@ -224,7 +224,7 @@ const ucenterMenuGet = async (id) => {
   const data = { id: id };
 
   const json = await postWithToken(url, data);
-  if (!json || json.type === 'fail' || !json.obj || !json.obj.rows || !json.obj.rows.length) {
+  if (!json || json.type !== 'success' || !json.obj || !json.obj.rows || !json.obj.rows.length) {
     return qiaoJson.fail(`can not find item by ${id}`);
   }
 

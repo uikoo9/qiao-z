@@ -55,7 +55,7 @@ async function ajax(url, data, headers) {
   if (!json) return fail(`${time}ms | request fail: no data`);
 
   // danger
-  if (json.type === 'fail') return fail(`${time}ms | ${json.msg}`);
+  if (json.type !== 'success') return fail(`${time}ms | ${json.msg}`);
 
   json.time = time;
   return json;
