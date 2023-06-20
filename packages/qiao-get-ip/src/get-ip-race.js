@@ -4,7 +4,6 @@ import { getIPByWebsite } from './get-ip-by-website.js';
 // websites
 const websites = [
   'http://txt.go.sohu.com/ip/soip',
-  'https://insistime.com/ip?type=api',
   'https://api.ipify.org/',
   'https://icanhazip.com/',
   'https://ipinfo.io/ip',

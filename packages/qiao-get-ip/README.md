@@ -48,4 +48,3 @@ const ip = await getIP(timeout);
 - [https://ifconfig.me/ip](https://ifconfig.me/ip)
 - [https://checkip.amazonaws.com/](https://checkip.amazonaws.com/)
 - [http://txt.go.sohu.com/ip/soip](http://txt.go.sohu.com/ip/soip)
-- [https://insistime.com/ip?type=api](https://insistime.com/ip?type=api)
