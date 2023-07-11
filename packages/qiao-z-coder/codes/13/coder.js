@@ -1,8 +1,8 @@
-'use strict';
+// path
+const path = require('path');
 
-var path = require('path');
-var qiao = require('../../lib/_qiao.js');
-qiao.coder = require('../../lib/qiao-z-coder.js');
+// coder
+const { genData, genFileByData } = require('../../lib/qiao-z-coder.js');
 
 /**
  * gen
@@ -10,34 +10,54 @@ qiao.coder = require('../../lib/qiao-z-coder.js');
  * 	destFolder	: dest folder
  */
 exports.gen = async function (tableName, destFolder) {
-  var data = await qiao.coder.genData(tableName);
+  const data = await genData(tableName);
+
+  console.log();
+  console.log('开始解析表结构：');
+  console.log('解析结果：');
   console.log(data);
 
   // gen code
-  genPage(destFolder, data);
-  genEdit(destFolder, data);
-  genSearch(destFolder, data);
-
-  return;
+  await genPage(destFolder, data);
+  await genEdit(destFolder, data);
+  await genSearch(destFolder, data);
 };
 
 // gen page
-function genPage(destFolder, data) {
-  var pageTemp = path.resolve(__dirname, './pages/page.art');
-  var pageDest = path.resolve(destFolder, `./src/${data.tableName1}-${data.tableName2}.jsx`);
-  qiao.coder.genFileByData(pageTemp, data, pageDest);
+async function genPage(destFolder, data) {
+  console.log();
+  console.log('开始生成page：');
+
+  const pageTemp = path.resolve(__dirname, './pages/page.art');
+  const pageDest = path.resolve(destFolder, `./${data.tableName1}-${data.tableName2}.jsx`);
+  await genFileByData(pageTemp, data, pageDest);
+
+  console.log('done');
+  console.log();
 }
 
 // gen edit
-function genEdit(destFolder, data) {
-  var pageTemp = path.resolve(__dirname, './pages/edit.art');
-  var pageDest = path.resolve(destFolder, `./src/${data.tableName1}-${data.tableName2}-edit.jsx`);
-  qiao.coder.genFileByData(pageTemp, data, pageDest);
+async function genEdit(destFolder, data) {
+  console.log();
+  console.log('开始生成edit：');
+
+  const pageTemp = path.resolve(__dirname, './pages/edit.art');
+  const pageDest = path.resolve(destFolder, `./${data.tableName1}-${data.tableName2}-edit.jsx`);
+  await genFileByData(pageTemp, data, pageDest);
+
+  console.log('done');
+  console.log();
 }
 
 // gen search
-function genSearch(destFolder, data) {
-  var pageTemp = path.resolve(__dirname, './pages/search.art');
-  var pageDest = path.resolve(destFolder, `./src/${data.tableName1}-${data.tableName2}-search.jsx`);
-  qiao.coder.genFileByData(pageTemp, data, pageDest);
+async function genSearch(destFolder, data) {
+  console.log();
+  console.log('开始生成search：');
+
+  const pageTemp = path.resolve(__dirname, './pages/search.art');
+  const pageDest = path.resolve(destFolder, `./${data.tableName1}-${data.tableName2}-search.jsx`);
+  await genFileByData(pageTemp, data, pageDest);
+
+  console.log('done');
+  console.log();
 }

@@ -2,29 +2,27 @@
 const template = require('art-template');
 
 // fs
-const { fs, mkdir } = require('qiao-file');
-
-// mysql
-const { getColumns, getTypes } = require('qiao-mysql');
+const { path, isExists, mkdir, writeFile } = require('qiao-file');
 
 // string
 const { underScoreCaseToCamelCase, firstLetterLower } = require('qiao-string');
 
-/**
- * config
- */
-exports.config = require('./config.json');
+// mysql
+const config = require('./config.json');
+const db = require('qiao-mysql')(config.db);
 
 /**
  * gen data
  * 	tableName
  */
 exports.genData = async function (tableName) {
+  console.log(`开始解析表格名：${tableName}`);
+  console.log('解析结果：');
+
   // class name
   const className = underScoreCaseToCamelCase(tableName);
-  const className1 = className.substr(1, className.length);
+  const className1 = className.substring(1, className.length);
   const className2 = firstLetterLower(className1);
-  console.log(className, className1, className2);
 
   // data
   let data = {
@@ -33,19 +31,21 @@ exports.genData = async function (tableName) {
     tableName: tableName,
   };
   data = getTableName(tableName, data);
+  console.log(data);
 
   // columns
   let columns = null;
   try {
-    columns = await getColumns(exports.config.db, tableName);
+    columns = await db.getColumns(tableName);
   } catch (e) {
+    console.log(e);
     console.log('table ' + tableName + ' doesn\'t exist!');
     return;
   }
 
   // params
   const params = [];
-  const defaultColumns = exports.config.defaultColumns;
+  const defaultColumns = config.defaultColumns;
   for (let i = 0; i < columns.length; i++) {
     const item = columns[i];
 
@@ -59,7 +59,7 @@ exports.genData = async function (tableName) {
 
     // obj
     const obj = {};
-    obj.type = getTypes(item.Type);
+    obj.type = await db.getTypes(item.Type);
     obj.name1 = name1;
     obj.name2 = name2;
     obj.name3 = name3;
@@ -124,10 +124,12 @@ exports.genFileByData = async function (templateFile, templateData, destFile) {
     const data = template(templateFile, templateData);
 
     // mkdir
-    await mkdir(destFile);
+    const dirname = path.dirname(destFile);
+    const pathIsExists = await isExists(dirname);
+    if (!pathIsExists) await mkdir(dirname);
 
     // write file
-    fs.writeFileSync(destFile, data);
+    await writeFile(destFile, data);
   } catch (e) {
     console.log(e);
   }
