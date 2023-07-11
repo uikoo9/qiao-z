@@ -1,10 +1,12 @@
 {
-  "name": "qiao-server-coder",
+  "name": "qiao-z-coder",
   "version": "3.1.7",
-  "description": "qiao-server-coder",
-  "keywords": [],
+  "description": "qiao-z-coder",
+  "keywords": [
+    "qiao-z"
+  ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-server-coder",
+  "homepage": "https://code.insistime.com/qiao-z-coder",
   "license": "MIT",
   "main": "index.js",
   "repository": {
@@ -13,7 +15,7 @@
   },
   "scripts": {},
   "bin": {
-    "qscoder": "./bin/qscoder.js"
+    "qscoder": "./bin/qzcoder.js"
   },
   "dependencies": {
     "art-template": "^4.13.2",

@@ -1,8 +1,14 @@
-'use strict';
+// template
+const template = require('art-template');
 
-var fs = require('fs');
-var template = require('art-template');
-var qiao = require('./_qiao.js');
+// fs
+const { fs, mkdir } = require('qiao-file');
+
+// mysql
+const { getColumns, getTypes } = require('qiao-mysql');
+
+// string
+const { underScoreCaseToCamelCase, firstLetterLower } = require('qiao-string');
 
 /**
  * config
@@ -15,12 +21,13 @@ exports.config = require('./config.json');
  */
 exports.genData = async function (tableName) {
   // class name
-  var className = qiao.string.underScoreCaseToCamelCase(tableName);
-  var className1 = className.substr(1, className.length);
-  var className2 = qiao.string.firstLetterLower(className1);
+  const className = underScoreCaseToCamelCase(tableName);
+  const className1 = className.substr(1, className.length);
+  const className2 = firstLetterLower(className1);
+  console.log(className, className1, className2);
 
   // data
-  var data = {
+  let data = {
     className1: className1,
     className2: className2,
     tableName: tableName,
@@ -28,31 +35,31 @@ exports.genData = async function (tableName) {
   data = getTableName(tableName, data);
 
   // columns
-  var columns = null;
+  let columns = null;
   try {
-    columns = await qiao.mysql.getColumns(exports.config.db, tableName);
+    columns = await getColumns(exports.config.db, tableName);
   } catch (e) {
     console.log('table ' + tableName + ' doesn\'t exist!');
     return;
   }
 
   // params
-  var params = [];
-  var defaultColumns = exports.config.defaultColumns;
-  for (var i = 0; i < columns.length; i++) {
-    var item = columns[i];
+  const params = [];
+  const defaultColumns = exports.config.defaultColumns;
+  for (let i = 0; i < columns.length; i++) {
+    const item = columns[i];
 
     // name1
-    var name1 = item.Field;
+    const name1 = item.Field;
     if (defaultColumns.indexOf(name1) > -1) continue;
 
     // name2
-    var name3 = qiao.string.underScoreCaseToCamelCase(name1);
-    var name2 = qiao.string.firstLetterLower(name3);
+    const name3 = underScoreCaseToCamelCase(name1);
+    const name2 = firstLetterLower(name3);
 
     // obj
-    var obj = {};
-    obj.type = qiao.mysql.getTypes(item.Type);
+    const obj = {};
+    obj.type = getTypes(item.Type);
     obj.name1 = name1;
     obj.name2 = name2;
     obj.name3 = name3;
@@ -68,12 +75,12 @@ exports.genData = async function (tableName) {
 
 // get table name
 function getTableName(tableName, data) {
-  var tableNames = tableName.split('_');
+  const tableNames = tableName.split('_');
 
-  var tableName1 = null;
-  var tableName2 = null;
-  var tableTemp = [];
-  for (var i = 0; i < tableNames.length; i++) {
+  let tableName1 = null;
+  let tableName2 = null;
+  const tableTemp = [];
+  for (let i = 0; i < tableNames.length; i++) {
     if (i == 1) tableName1 = tableNames[i];
 
     if (i > 1) tableTemp.push(tableNames[i]);
@@ -114,10 +121,10 @@ exports.genFileByData = async function (templateFile, templateData, destFile) {
   // gen file
   try {
     // data
-    var data = template(templateFile, templateData);
+    const data = template(templateFile, templateData);
 
     // mkdir
-    qiao.file.mkdir(destFile);
+    await mkdir(destFile);
 
     // write file
     fs.writeFileSync(destFile, data);
