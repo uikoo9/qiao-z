@@ -15,7 +15,7 @@
   },
   "scripts": {},
   "bin": {
-    "qscoder": "./bin/qzcoder.js"
+    "qzcoder": "./bin/qzcoder.js"
   },
   "dependencies": {
     "art-template": "^4.13.2",

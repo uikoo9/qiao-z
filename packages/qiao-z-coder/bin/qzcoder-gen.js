@@ -17,6 +17,5 @@ async function handleCode(code, table, path) {
 
   // gen code
   await require('../codes/' + code + '/coder.js').gen(table, path);
-  console.log('success');
-  return;
+  console.log('代码生成完成');
 }
