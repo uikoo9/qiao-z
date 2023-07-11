@@ -2,26 +2,20 @@
 import React from 'react';
 
 // qiao
-import { get } from 'qiao.cookie.js';
+import { cookie } from 'qiao.cookie.js';
 
 // ui
 import { Grid, gridInit, gridDel } from 'qiao-ui';
 
 // {{tableName1}} service
-import { {{className2}}List, {{className2}}Del } from '{{tableName1}}-service';
+import { {{className2}}List, {{className2}}Del } from '@services/{{tableName1}}';
 
 // components
 import { {{className1}}Edit } from './{{tableName1}}-{{tableName2}}-edit.jsx';
 import { {{className1}}Search } from './{{tableName1}}-{{tableName2}}-search.jsx';
 
 // cols
-const cols = [
-    'ck',
-    'id',
-    {{each params}}'{{$value.name1}}',
-    {{/each}}
-    'op'
-];
+const cols = ['ck', 'id', {{each params}}'{{$value.name1}}', {{/each}}'op'];
 
 /**
  * {{tableName1}} {{tableName2}}
@@ -33,13 +27,13 @@ export const {{className1}} = () => {
     const init = async (data, pagenumber) => {
         // userinfo
         window.insistime_userinfo = {
-            userid: get('insistime_userid'),
-            usertoken: get('insistime_usertoken')
+            userid: cookie('insistime_userid'),
+            usertoken: cookie('insistime_usertoken'),
         };
 
         // set
         const obj = await gridInit({{className2}}List, data, pagenumber, cols);
-        if(!obj) return;
+        if (!obj) return;
 
         // return
         return {
@@ -55,10 +49,5 @@ export const {{className1}} = () => {
         return await gridDel({{className2}}Del, ids);
     };
 
-    return <Grid
-        init={ init }
-        del={ del }
-        editModal={ {{className1}}Edit }
-        searchModal={ {{className1}}Search }
-    />;
-}
+    return <Grid init={init} del={del} editModal={ {{className1}}Edit } searchModal={ {{className1}}Search } />;
+};
