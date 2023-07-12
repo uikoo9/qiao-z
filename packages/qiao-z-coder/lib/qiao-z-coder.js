@@ -59,7 +59,7 @@ exports.genData = async function (tableName) {
 
     // obj
     const obj = {};
-    obj.type = await db.getTypes(item.Type);
+    obj.type = db.getTypes(item.Type);
     obj.name1 = name1;
     obj.name2 = name2;
     obj.name3 = name3;

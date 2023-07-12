@@ -76,9 +76,9 @@ function queryByConnection(connection, sql, params) {
   // query
   return new Promise((resolve, reject) => {
     connection.query(sql, params || [], (error, results) => {
-      connection.end();
-
-      return error ? reject(error) : resolve(results);
+      connection.end(() => {
+        return error ? reject(error) : resolve(results);
+      });
     });
   });
 }
