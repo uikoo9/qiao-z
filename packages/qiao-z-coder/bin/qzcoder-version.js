@@ -1,8 +1,8 @@
 // qiao
-const cli = require('qiao-cli');
+const { cmd } = require('qiao-cli');
 
 // cmd for common
-cli.cmd
+cmd
   .version(require('../package.json').version, '-v, --version')
   .description('qiao-z-coder, generate server and browser code.')
   .usage('<command>');

@@ -1,21 +1,14 @@
 // qiao
-const cli = require('qiao-cli');
+const { cmd } = require('qiao-cli');
 
-// config
-const config = require('../src/config.json');
+// coder
+const { gen } = require('../src/coder.js');
 
 // cmd for gen code
-cli.cmd.command('gen <code> <table> <path>').alias('g').description('gen code by table to path').action(handleCode);
-
-// handle code
-async function handleCode(code, table, path) {
-  // check code
-  if (config.codes.indexOf(code) == -1) {
-    console.log('error code, see: https://github.com/uikoo9/qiao-z/tree/master/packages/qiao-z-coder#code-list');
-    return;
-  }
-
-  // gen code
-  await require('../src/coder.js').gen(table, path);
-  console.log('代码生成完成');
-}
+cmd
+  .command('gen <table> <dest>')
+  .alias('g')
+  .description('gen code by table to path')
+  .action(async (tableName, destPath) => {
+    await gen(tableName, destPath);
+  });

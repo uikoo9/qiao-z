@@ -21,33 +21,33 @@ const cols = ['ck', 'id', {{each params}}'{{$value.name1}}', {{/each}}'op'];
  * {{tableName1}} {{tableName2}}
  */
 export const {{className1}} = () => {
-    console.log('{{tableName1}}-view/src/{{tableName1}}-{{tableName2}}: render');
+  console.log('{{tableName1}}-view/src/{{tableName1}}-{{tableName2}}: render');
 
-    // init
-    const init = async (data, pagenumber) => {
-        // userinfo
-        window.insistime_userinfo = {
-            userid: cookie('insistime_userid'),
-            usertoken: cookie('insistime_usertoken'),
-        };
-
-        // set
-        const obj = await gridInit({{className2}}List, data, pagenumber, cols);
-        if (!obj) return;
-
-        // return
-        return {
-            cols: cols,
-            rows: obj.rows,
-            sumpage: obj.sumpage,
-            pagenumber: obj.pagenumber,
-        };
+  // init
+  const init = async (data, pagenumber) => {
+    // userinfo
+    window.insistime_userinfo = {
+      userid: cookie('insistime_userid'),
+      usertoken: cookie('insistime_usertoken'),
     };
 
-    // del
-    const del = async (ids) => {
-        return await gridDel({{className2}}Del, ids);
-    };
+    // set
+    const obj = await gridInit({{className2}}List, data, pagenumber, cols);
+    if (!obj) return;
 
-    return <Grid init={init} del={del} editModal={ {{className1}}Edit } searchModal={ {{className1}}Search } />;
+    // return
+    return {
+      cols: cols,
+      rows: obj.rows,
+      sumpage: obj.sumpage,
+      pagenumber: obj.pagenumber,
+    };
+  };
+
+  // del
+  const del = async (ids) => {
+    return await gridDel({{className2}}Del, ids);
+  };
+
+  return <Grid init={init} del={del} editModal={ {{className1}}Edit } searchModal={ {{className1}}Search } />;
 };

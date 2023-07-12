@@ -4,7 +4,6 @@
 const cli = require('qiao-cli');
 
 // cmds
-require('./qzcoder-init.js');
 require('./qzcoder-gen.js');
 require('./qzcoder-version.js');
 

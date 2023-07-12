@@ -14,35 +14,52 @@ exports.gen = async function (tableName, destFolder) {
   const data = await parseTable(tableName);
 
   // page
-  const pageDest = path.resolve(destFolder, `./${data.tableName1}-${data.tableName2}.jsx`);
+  const pageDest = path.resolve(
+    destFolder,
+    `./packages/admin-web/src/components/${data.tableName1}/${data.tableName1}-${data.tableName2}.jsx`,
+  );
   await genFile('./pages/page.art', pageDest, data);
 
   // edit
-  const editDest = path.resolve(destFolder, `./${data.tableName1}-${data.tableName2}-edit.jsx`);
+  const editDest = path.resolve(
+    destFolder,
+    `./packages/admin-web/src/components/${data.tableName1}/${data.tableName1}-${data.tableName2}-edit.jsx`,
+  );
   await genFile('./pages/edit.art', editDest, data);
 
   // search
-  const searchDest = path.resolve(destFolder, `./${data.tableName1}-${data.tableName2}-search.jsx`);
+  const searchDest = path.resolve(
+    destFolder,
+    `./packages/admin-web/src/components/${data.tableName1}/${data.tableName1}-${data.tableName2}-search.jsx`,
+  );
   await genFile('./pages/search.art', searchDest, data);
 
   // service web
-  const serviceWebDest = path.resolve(destFolder, `./${data.tableName1}-${data.tableName2}-service.js`);
+  const serviceWebDest = path.resolve(
+    destFolder,
+    `./packages/admin-web/src/services/${data.tableName1}/${data.tableName1}-${data.tableName2}-service.js`,
+  );
   await genFile('./service/service.art', serviceWebDest, data);
 
   // controller
-  const controllerDest = path.resolve(destFolder, `./${data.tableName1}/controller/${data.className1}Controller.js`);
+  const controllerDest = path.resolve(
+    destFolder,
+    `./packages/api-server/server/${data.tableName1}/controller/${data.className1}Controller.js`,
+  );
   await genFile('./server/controller.art', controllerDest, data);
 
   // service
-  const serviceDest = path.resolve(destFolder, `./${data.tableName1}/service/${data.className1}Service.js`);
+  const serviceDest = path.resolve(
+    destFolder,
+    `./packages/api-server/server/${data.tableName1}/service/${data.className1}Service.js`,
+  );
   await genFile('./server/service.art', serviceDest, data);
 
-  // model
-  const modelDest = path.resolve(destFolder, `./${data.tableName1}/model/${data.className1}Model.js`);
-  await genFile('./server/model.art', modelDest, data);
-
-  //
-  const sqlDest = path.resolve(destFolder, `./${data.tableName1}/model/${data.tableName1}-${data.tableName2}-sql.json`);
+  // sql
+  const sqlDest = path.resolve(
+    destFolder,
+    `./packages/api-server/server/${data.tableName1}/sql/${data.tableName1}-${data.tableName2}-sql.json`,
+  );
   await genFile('./server/sql.art', sqlDest, data);
 };
 
