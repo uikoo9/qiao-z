@@ -31,7 +31,7 @@ export const {{className1}}Edit = forwardRef((props, ref) => {
             setId(row.id || '');
             {{each params}}set{{$value.name3}}(row.{{$value.name1}} || '');
             {{/each}}
-        }
+        },
     }));
 
     // save

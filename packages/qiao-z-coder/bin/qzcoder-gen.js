@@ -2,7 +2,7 @@
 const cli = require('qiao-cli');
 
 // config
-const config = require('../lib/config.json');
+const config = require('../src/config.json');
 
 // cmd for gen code
 cli.cmd.command('gen <code> <table> <path>').alias('g').description('gen code by table to path').action(handleCode);
@@ -16,6 +16,6 @@ async function handleCode(code, table, path) {
   }
 
   // gen code
-  await require('../codes/' + code + '/coder.js').gen(table, path);
+  await require('../src/coder.js').gen(table, path);
   console.log('代码生成完成');
 }

@@ -14,7 +14,7 @@ const encode = require('qiao-encode');
 const zip = require('qiao-zip');
 
 // config
-const config = require('../lib/config.json');
+const config = require('../src/config.json');
 
 // cmd for init code
 cli.cmd.command('init <code> <path>').alias('i').description('init code to path').action(initCode);
