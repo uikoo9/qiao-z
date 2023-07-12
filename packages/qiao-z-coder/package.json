@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-coder",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "qiao-z-coder",
   "keywords": [
     "qiao-z"
@@ -22,7 +22,7 @@
     "qiao-cli": "^3.3.3",
     "qiao-encode": "^3.1.9",
     "qiao-file": "^3.1.9",
-    "qiao-mysql": "^3.1.0",
+    "qiao-mysql": "^3.2.1",
     "qiao-request": "^3.1.1",
     "qiao-string": "^3.0.6",
     "qiao-zip": "^3.1.9"
