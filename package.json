@@ -17,7 +17,8 @@
     "check": "ncu && lerna exec ncu --concurrency=1",
     "update": "ncu -u && lerna exec 'ncu -u' --concurrency=1",
     "pkg": "qlerna pkg ./packages",
-    "dpkg": "qlerna pkg ./packages dev"
+    "dpkg": "qlerna pkg ./packages dev",
+    "gen": "npm run gen -w qiao-z-coder"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
