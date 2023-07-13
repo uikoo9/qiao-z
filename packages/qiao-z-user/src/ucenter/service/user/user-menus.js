@@ -12,14 +12,13 @@ module.exports = async (req, res) => {
     res.jsonFail('缺少参数！');
     return;
   }
-  if (!req.body.id) {
-    res.jsonFail('缺少参数id！');
-    return;
-  }
+
+  // user id
+  const express_userid = req.body.express_userid;
 
   // db
   try {
-    const rows = await req.db.query(sql.userMenus, [req.body.id]);
+    const rows = await req.db.query(sql.userMenus, [express_userid]);
 
     res.jsonSuccess('query success', { rows: rows });
   } catch (e) {
