@@ -9,6 +9,7 @@ const sql = require('../sql/ucenter-roleuser-sql.json');
 exports.ucenterRoleuserList = async (req, res) => {
   // vars
   const ucenterRoleId = req.body.ucenterRoleId;
+  const ucenterUserId = req.body.ucenterUserId;
 
   // sql and params
   const sqlcount = [sql.ucenterRoleuserListCount];
@@ -24,6 +25,13 @@ exports.ucenterRoleuserList = async (req, res) => {
 
     sqlquery.push(' and t.ucenter_role_id = ?');
     paramsquery.push(ucenterRoleId);
+  }
+  if (ucenterUserId) {
+    sqlcount.push(' and t.ucenter_user_id = ?');
+    paramscount.push(ucenterUserId);
+
+    sqlquery.push(' and t.ucenter_user_id = ?');
+    paramsquery.push(ucenterUserId);
   }
 
   // order and page
@@ -102,10 +110,15 @@ exports.ucenterRoleuserSave = async (req, res) => {
     res.jsonFail('缺少参数ucenterRoleId！');
     return;
   }
+  if (!req.body.ucenterUserId) {
+    res.jsonFail('缺少参数ucenterUserId！');
+    return;
+  }
 
   // vars
   let id = req.body.id;
   const ucenterRoleId = req.body.ucenterRoleId;
+  const ucenterUserId = req.body.ucenterUserId;
 
   // vars for userinfo
   const express_userid = req.body.express_userid;
@@ -117,6 +130,7 @@ exports.ucenterRoleuserSave = async (req, res) => {
 
     if (!id) {
       params.push(ucenterRoleId);
+      params.push(ucenterUserId);
 
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
@@ -127,6 +141,7 @@ exports.ucenterRoleuserSave = async (req, res) => {
       id = rs && rs.insertId ? rs.insertId : id;
     } else {
       params.push(ucenterRoleId);
+      params.push(ucenterUserId);
 
       params.push(express_userid || 1);
       params.push(express_username || 'admin');

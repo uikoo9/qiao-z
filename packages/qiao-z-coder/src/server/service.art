@@ -8,7 +8,7 @@ const sql = require('../sql/{{tableName1}}-{{tableName2}}-sql.json');
  */
 exports.{{className2}}List = async (req, res) => {
   // vars
-  {{each params}}{{if $value.name1 != 'ucenter_user_id'}}const {{$value.name2}} = req.body.{{$value.name2}};{{/if}}
+  {{each params}}const {{$value.name2}} = req.body.{{$value.name2}};
   {{/each}}
   // sql and params
   const sqlcount = [sql.{{className2}}ListCount];
@@ -18,13 +18,13 @@ exports.{{className2}}List = async (req, res) => {
   const paramsquery = [];
 
   // query
-  {{each params}}{{if $value.name1 != 'ucenter_user_id'}}if ({{$value.name2}}) {
+  {{each params}}if ({{$value.name2}}) {
     sqlcount.push(' and t.{{$value.name1}} = ?');
     paramscount.push({{$value.name2}});
 
     sqlquery.push(' and t.{{$value.name1}} = ?');
     paramsquery.push({{$value.name2}});
-  }{{/if}}
+  }
   {{/each}}
   // order and page
   sqlquery.push(' order by t.? ? limit ?,?');
@@ -98,14 +98,14 @@ exports.{{className2}}Save = async (req, res) => {
     res.jsonFail('缺少参数！');
     return;
   }
-  {{each params}}{{if $value.name1 != 'ucenter_user_id'}}if (!req.body.{{$value.name2}}) {
+  {{each params}}if (!req.body.{{$value.name2}}) {
     res.jsonFail('缺少参数{{$value.name2}}！');
     return;
-  }{{/if}}
+  }
   {{/each}}
   // vars
   let id = req.body.id;
-  {{each params}}{{if $value.name1 != 'ucenter_user_id'}}const {{$value.name2}} = req.body.{{$value.name2}};{{/if}}
+  {{each params}}const {{$value.name2}} = req.body.{{$value.name2}};
   {{/each}}
   // vars for userinfo
   const express_userid = req.body.express_userid;
@@ -116,7 +116,7 @@ exports.{{className2}}Save = async (req, res) => {
     const params = [];
     
     if (!id) {
-      {{each params}}{{if $value.name1 != 'ucenter_user_id'}}params.push({{$value.name2}});{{/if}}
+      {{each params}}params.push({{$value.name2}});
       {{/each}}
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
@@ -126,7 +126,7 @@ exports.{{className2}}Save = async (req, res) => {
       const rs = await req.db.query(sql.{{className2}}Add, params);
       id = rs && rs.insertId ? rs.insertId : id;
     } else {
-      {{each params}}{{if $value.name1 != 'ucenter_user_id'}}params.push({{$value.name2}});{{/if}}
+      {{each params}}params.push({{$value.name2}});
       {{/each}}
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
