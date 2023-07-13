@@ -1,21 +1,20 @@
 // sql
-const sql = require('../sql/ucenter-role-r-user-sql.json');
+const sql = require('../sql/ucenter-roleuser-sql.json');
 
 /**
- * ucenter role-r-user list
+ * ucenter roleuser list
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRUserList = async (req, res) => {
-  // consts
+exports.ucenterRoleuserList = async (req, res) => {
+  // vars
   const ucenterRoleId = req.body.ucenterRoleId;
-  const ucenterUserId = req.body.ucenterUserId;
 
   // sql and params
-  const sqlcount = [sql.ucenterRoleRUserListCount];
+  const sqlcount = [sql.ucenterRoleuserListCount];
   const paramscount = [];
 
-  const sqlquery = [sql.ucenterRoleRUserListQuery];
+  const sqlquery = [sql.ucenterRoleuserListQuery];
   const paramsquery = [];
 
   // query
@@ -25,13 +24,6 @@ exports.ucenterRoleRUserList = async (req, res) => {
 
     sqlquery.push(' and t.ucenter_role_id = ?');
     paramsquery.push(ucenterRoleId);
-  }
-  if (ucenterUserId) {
-    sqlcount.push(' and t.ucenter_user_id = ?');
-    paramscount.push(ucenterUserId);
-
-    sqlquery.push(' and t.ucenter_user_id = ?');
-    paramsquery.push(ucenterUserId);
   }
 
   // order and page
@@ -61,17 +53,17 @@ exports.ucenterRoleRUserList = async (req, res) => {
 
     res.jsonSuccess('query success', result);
   } catch (e) {
-    console.log(e);
+    req.logger.error(e);
     res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
   }
 };
 
 /**
- * ucenter role-r-user get
+ * ucenter roleuser get
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRUserGet = async (req, res) => {
+exports.ucenterRoleuserGet = async (req, res) => {
   // check
   if (!req.body) {
     res.jsonFail('缺少参数！');
@@ -84,20 +76,23 @@ exports.ucenterRoleRUserGet = async (req, res) => {
 
   // db
   try {
-    const rows = await req.db.query(sql.ucenterRoleRUserGetById, [req.body.id]);
+    const params = [];
+    params.push(req.body.id);
 
+    const rows = await req.db.query(sql.ucenterRoleuserGetById, params);
     res.jsonSuccess('query success', { rows: rows });
   } catch (e) {
+    req.logger.error(e);
     res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
   }
 };
 
 /**
- * ucenter role-r-user save
+ * ucenter roleuser save
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRUserSave = async (req, res) => {
+exports.ucenterRoleuserSave = async (req, res) => {
   // check
   if (!req.body) {
     res.jsonFail('缺少参数！');
@@ -107,17 +102,12 @@ exports.ucenterRoleRUserSave = async (req, res) => {
     res.jsonFail('缺少参数ucenterRoleId！');
     return;
   }
-  if (!req.body.ucenterUserId) {
-    res.jsonFail('缺少参数ucenterUserId！');
-    return;
-  }
 
-  // consts
+  // vars
   let id = req.body.id;
   const ucenterRoleId = req.body.ucenterRoleId;
-  const ucenterUserId = req.body.ucenterUserId;
 
-  // consts for userinfo
+  // vars for userinfo
   const express_userid = req.body.express_userid;
   const express_username = req.body.express_username;
 
@@ -127,38 +117,38 @@ exports.ucenterRoleRUserSave = async (req, res) => {
 
     if (!id) {
       params.push(ucenterRoleId);
-      params.push(ucenterUserId);
 
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
 
-      const rs = await req.db.query(sql.ucenterRoleRUserAdd, params);
+      const rs = await req.db.query(sql.ucenterRoleuserAdd, params);
       id = rs && rs.insertId ? rs.insertId : id;
     } else {
       params.push(ucenterRoleId);
-      params.push(ucenterUserId);
 
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
       params.push(id);
+      params.push(express_userid);
 
-      await req.db.query(sql.ucenterRoleRUserEdit, params);
+      await req.db.query(sql.ucenterRoleuserEdit, params);
     }
 
     res.jsonSuccess('save success', { id: id });
   } catch (e) {
+    req.logger.error(e);
     res.jsonFail('save failed', { errName: e.name, errMsg: e.message });
   }
 };
 
 /**
- * ucenter role-r-user del
+ * ucenter roleuser del
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRUserDel = async (req, res) => {
+exports.ucenterRoleuserDel = async (req, res) => {
   // check
   if (!req.body) {
     res.jsonFail('缺少参数！');
@@ -171,9 +161,13 @@ exports.ucenterRoleRUserDel = async (req, res) => {
 
   // db
   try {
-    await req.db.query(sql.ucenterRoleRUserDel, req.body.ids.split(','));
+    const params = [];
+    params.push(req.body.ids.split(','));
+
+    await req.db.query(sql.ucenterRoleuserDel, params);
     res.jsonSuccess('del success');
   } catch (e) {
+    req.logger.error(e);
     res.jsonFail('del failed', { errName: e.name, errMsg: e.message });
   }
 };

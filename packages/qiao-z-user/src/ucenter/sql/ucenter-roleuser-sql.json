@@ -1,0 +1,8 @@
+{
+  "ucenterRoleuserGetById": "select * from t_ucenter_roleuser t where t.id=? and t.del_tag='0'",
+  "ucenterRoleuserAdd": "insert into t_ucenter_roleuser(id, ucenter_role_id, ucenter_user_id, cdate, cuser_id, cuser_name, udate, uuser_id, uuser_name, del_tag) values(null, ?, ?, now(), ?, ?, now(), ?, ?, '0')",
+  "ucenterRoleuserEdit": "update t_ucenter_roleuser t set t.ucenter_role_id=?, t.ucenter_user_id=?, t.udate=now(), t.uuser_id=?, t.uuser_name=? where t.id=? and t.del_tag='0'",
+  "ucenterRoleuserDel": "update t_ucenter_roleuser t set t.del_tag='1' where t.id in (?)",
+  "ucenterRoleuserListCount": "SELECT count(*) tcount FROM t_ucenter_roleuser t WHERE t.del_tag='0'",
+  "ucenterRoleuserListQuery": "SELECT * FROM t_ucenter_roleuser t WHERE t.del_tag='0'"
+}

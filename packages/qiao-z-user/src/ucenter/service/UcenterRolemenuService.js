@@ -1,21 +1,21 @@
 // sql
-const sql = require('../sql/ucenter-role-r-menu-sql.json');
+const sql = require('../sql/ucenter-rolemenu-sql.json');
 
 /**
- * ucenter role-r-menu list
+ * ucenter rolemenu list
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRMenuList = async (req, res) => {
-  // consts
+exports.ucenterRolemenuList = async (req, res) => {
+  // vars
   const ucenterRoleId = req.body.ucenterRoleId;
   const ucenterMenuId = req.body.ucenterMenuId;
 
   // sql and params
-  const sqlcount = [sql.ucenterRoleRMenuListCount];
+  const sqlcount = [sql.ucenterRolemenuListCount];
   const paramscount = [];
 
-  const sqlquery = [sql.ucenterRoleRMenuListQuery];
+  const sqlquery = [sql.ucenterRolemenuListQuery];
   const paramsquery = [];
 
   // query
@@ -61,16 +61,17 @@ exports.ucenterRoleRMenuList = async (req, res) => {
 
     res.jsonSuccess('query success', result);
   } catch (e) {
+    req.logger.error(e);
     res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
   }
 };
 
 /**
- * ucenter role-r-menu get
+ * ucenter rolemenu get
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRMenuGet = async (req, res) => {
+exports.ucenterRolemenuGet = async (req, res) => {
   // check
   if (!req.body) {
     res.jsonFail('缺少参数！');
@@ -83,20 +84,23 @@ exports.ucenterRoleRMenuGet = async (req, res) => {
 
   // db
   try {
-    const rows = await req.db.query(sql.ucenterRoleRMenuGetById, [req.body.id]);
+    const params = [];
+    params.push(req.body.id);
 
+    const rows = await req.db.query(sql.ucenterRolemenuGetById, params);
     res.jsonSuccess('query success', { rows: rows });
   } catch (e) {
+    req.logger.error(e);
     res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
   }
 };
 
 /**
- * ucenter role-r-menu save
+ * ucenter rolemenu save
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRMenuSave = async (req, res) => {
+exports.ucenterRolemenuSave = async (req, res) => {
   // check
   if (!req.body) {
     res.jsonFail('缺少参数！');
@@ -111,12 +115,12 @@ exports.ucenterRoleRMenuSave = async (req, res) => {
     return;
   }
 
-  // consts
+  // vars
   let id = req.body.id;
   const ucenterRoleId = req.body.ucenterRoleId;
   const ucenterMenuId = req.body.ucenterMenuId;
 
-  // consts for userinfo
+  // vars for userinfo
   const express_userid = req.body.express_userid;
   const express_username = req.body.express_username;
 
@@ -133,7 +137,7 @@ exports.ucenterRoleRMenuSave = async (req, res) => {
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
 
-      const rs = await req.db.query(sql.ucenterRoleRMenuAdd, params);
+      const rs = await req.db.query(sql.ucenterRolemenuAdd, params);
       id = rs && rs.insertId ? rs.insertId : id;
     } else {
       params.push(ucenterRoleId);
@@ -142,22 +146,24 @@ exports.ucenterRoleRMenuSave = async (req, res) => {
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
       params.push(id);
+      params.push(express_userid);
 
-      await req.db.query(sql.ucenterRoleRMenuEdit, params);
+      await req.db.query(sql.ucenterRolemenuEdit, params);
     }
 
     res.jsonSuccess('save success', { id: id });
   } catch (e) {
+    req.logger.error(e);
     res.jsonFail('save failed', { errName: e.name, errMsg: e.message });
   }
 };
 
 /**
- * ucenter role-r-menu del
+ * ucenter rolemenu del
  * @param {*} req
  * @param {*} res
  */
-exports.ucenterRoleRMenuDel = async (req, res) => {
+exports.ucenterRolemenuDel = async (req, res) => {
   // check
   if (!req.body) {
     res.jsonFail('缺少参数！');
@@ -170,9 +176,13 @@ exports.ucenterRoleRMenuDel = async (req, res) => {
 
   // db
   try {
-    await req.db.query(sql.ucenterRoleRMenuDel, req.body.ids.split(','));
+    const params = [];
+    params.push(req.body.ids.split(','));
+
+    await req.db.query(sql.ucenterRolemenuDel, params);
     res.jsonSuccess('del success');
   } catch (e) {
+    req.logger.error(e);
     res.jsonFail('del failed', { errName: e.name, errMsg: e.message });
   }
 };

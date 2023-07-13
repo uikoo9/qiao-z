@@ -2,8 +2,8 @@ const userController = require('./src/ucenter/controller/UserController.js');
 const ucenterUserController = require('./src/ucenter/controller/UcenterUserController.js');
 const ucenterMenuController = require('./src/ucenter/controller/UcenterMenuController.js');
 const ucenterRoleController = require('./src/ucenter/controller/UcenterRoleController.js');
-const ucenterRoleRMenuController = require('./src/ucenter/controller/UcenterRoleRMenuController.js');
-const ucenterRoleRUserController = require('./src/ucenter/controller/UcenterRoleRUserController.js');
+const ucenterRolemenuController = require('./src/ucenter/controller/UcenterRolemenuController.js');
+const ucenterRoleuserController = require('./src/ucenter/controller/UcenterRoleuserController.js');
 
 /**
  * check user
@@ -29,6 +29,6 @@ exports.init = function (app, config) {
   ucenterUserController(app);
   ucenterMenuController(app);
   ucenterRoleController(app);
-  ucenterRoleRMenuController(app);
-  ucenterRoleRUserController(app);
+  ucenterRolemenuController(app);
+  ucenterRoleuserController(app);
 };
