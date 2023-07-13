@@ -1,7 +1,7 @@
 {
   "name": "qiao-z-coder",
   "private": true,
-  "version": "3.2.2",
+  "version": "3.3.2",
   "scripts": {
     "gen": "node bin/qzcoder.js gen "
   },
