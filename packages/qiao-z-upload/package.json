@@ -30,7 +30,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "formidable": "^2.1.1"
+    "formidable": "^3.5.0"
   },
   "nx": {
     "namedInputs": {
