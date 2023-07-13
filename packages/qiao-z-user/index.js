@@ -1,4 +1,5 @@
 const userController = require('./src/ucenter/controller/UserController.js');
+const ucenterUserController = require('./src/ucenter/controller/UcenterUserController.js');
 const ucenterMenuController = require('./src/ucenter/controller/UcenterMenuController.js');
 const ucenterRoleController = require('./src/ucenter/controller/UcenterRoleController.js');
 const ucenterRoleRMenuController = require('./src/ucenter/controller/UcenterRoleRMenuController.js');
@@ -25,6 +26,7 @@ exports.init = function (app, config) {
 
   // init controller
   userController(app);
+  ucenterUserController(app);
   ucenterMenuController(app);
   ucenterRoleController(app);
   ucenterRoleRMenuController(app);
