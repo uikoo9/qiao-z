@@ -38,7 +38,7 @@ export const userRegister = async (mobile, password, repassword, code) => {
 export const userLogin = async (mobile, password) => {
   if (!mobile || !password) return fail('need mobile and password');
 
-  const url = config.host + config.login;
+  const url = config.host + config.userLogin;
   const data = {
     username: mobile,
     password: password,
