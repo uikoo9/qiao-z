@@ -1,3 +1,6 @@
+// encode
+const { AESEncrypt } = require('qiao-encode');
+
 // sql
 const sql = require('../sql/ucenter-user-sql.json');
 
@@ -119,6 +122,7 @@ exports.ucenterUserSave = async (req, res) => {
   let id = req.body.id;
   const ucenterUserName = req.body.ucenterUserName;
   const ucenterUserPassword = req.body.ucenterUserPassword;
+  const encryptPassword = AESEncrypt(ucenterUserPassword, global.QIAO_USER_CONFIG.encryptKey);
 
   // vars for userinfo
   const express_userid = req.body.express_userid;
@@ -130,7 +134,7 @@ exports.ucenterUserSave = async (req, res) => {
 
     if (!id) {
       params.push(ucenterUserName);
-      params.push(ucenterUserPassword);
+      params.push(encryptPassword);
 
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
@@ -141,7 +145,7 @@ exports.ucenterUserSave = async (req, res) => {
       id = rs && rs.insertId ? rs.insertId : id;
     } else {
       params.push(ucenterUserName);
-      params.push(ucenterUserPassword);
+      params.push(encryptPassword);
 
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
