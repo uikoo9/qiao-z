@@ -1,8 +1,8 @@
 // sql
-const sql = require('../../sql/ucenter-user-sql.json');
+const sql = require('../../sql/user-sql.json');
 
 /**
- * ucenter user menus
+ * ucenter user get
  * @param {*} req
  * @param {*} res
  */
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   // db
   try {
-    const rows = await req.db.query(sql.ucenterUserMenus, [req.body.id]);
+    const rows = await req.db.query(sql.userGetById, [req.body.id]);
 
     res.jsonSuccess('query success', { rows: rows });
   } catch (e) {

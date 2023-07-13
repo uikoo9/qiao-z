@@ -2,7 +2,7 @@
 const encode = require('qiao-encode');
 
 // sql
-const sql = require('../../sql/ucenter-user-sql.json');
+const sql = require('../../sql/user-sql.json');
 
 /**
  * ucenter user forget
@@ -49,14 +49,14 @@ module.exports = async (req, res) => {
     // check user
     const password = req.body.password;
     const encryptPassword = encode.AESEncrypt(password, global.QIAO_USER_CONFIG.encryptKey);
-    const rows = await req.db.query(sql.ucenterUserGetByMobile, [username]);
+    const rows = await req.db.query(sql.userGetByMobile, [username]);
     if (rows && rows.length != 1) {
       res.jsonFail('手机号未注册！');
       return;
     }
 
     // forget
-    await req.db.query(sql.ucenterUserForget, [encryptPassword, rows[0].id]);
+    await req.db.query(sql.userForget, [encryptPassword, rows[0].id]);
 
     // del code params
     await req.db.query(sql.ucenterCodeDel, [type, username]);

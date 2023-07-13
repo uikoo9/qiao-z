@@ -2,7 +2,7 @@
 const encode = require('qiao-encode');
 
 // sql
-const sql = require('../../sql/ucenter-user-sql.json');
+const sql = require('../../sql/user-sql.json');
 
 /**
  * ucenter user reg
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     const usercode = req.body.usercode;
 
     // check code
-    const codes = await req.db.query(sql.ucenterCodeGet, [type, username]);
+    const codes = await req.db.query(sql.codeGet, [type, username]);
     if (codes.length != 1) {
       res.jsonFail('请先获取手机验证码！');
       return;
@@ -51,17 +51,17 @@ module.exports = async (req, res) => {
     const encryptPassword = encode.AESEncrypt(password, global.QIAO_USER_CONFIG.encryptKey);
 
     // check user
-    const usersForMobile = await req.db.query(sql.ucenterUserGetByMobile, [username]);
+    const usersForMobile = await req.db.query(sql.userGetByMobile, [username]);
     if (usersForMobile && usersForMobile.length) {
       res.jsonFail('手机号已注册！');
       return;
     }
 
     // reg
-    await req.db.query(sql.ucenterUserReg, [username, encryptPassword]);
+    await req.db.query(sql.userReg, [username, encryptPassword]);
 
     // del code
-    await req.db.query(sql.ucenterCodeDel, [type, username]);
+    await req.db.query(sql.codeDel, [type, username]);
 
     // send
     res.jsonSuccess('注册成功！');

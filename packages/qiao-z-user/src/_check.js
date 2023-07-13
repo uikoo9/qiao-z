@@ -2,7 +2,7 @@
 const encode = require('qiao-encode');
 
 // sql
-const sql = require('./ucenter/sql/ucenter-user-sql.json');
+const sql = require('./ucenter/sql/user-sql.json');
 
 /**
  * check user
@@ -32,7 +32,7 @@ module.exports = async function (req, res) {
   // auth - check token
   try {
     // get user
-    const rows = await req.db.query(sql.ucenterUserGetById, [userid]);
+    const rows = await req.db.query(sql.userGetById, [userid]);
     if (!rows || rows.length != 1) {
       res.jsonFail('缺少用户信息！');
       return;

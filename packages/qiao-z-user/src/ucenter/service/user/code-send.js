@@ -5,7 +5,7 @@ const encode = require('qiao-encode');
 const sms = require('qiao-sms');
 
 // sql
-const sql = require('../../sql/ucenter-user-sql.json');
+const sql = require('../../sql/user-sql.json');
 
 /**
  * ucenter code send
@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
     }
 
     // type service
-    const users = await req.db.query(sql.ucenterUserGetByMobile, [mobile]);
+    const users = await req.db.query(sql.userGetByMobile, [mobile]);
     if (type == 'reg' && users && users.length) {
       res.jsonFail('手机号已注册！');
       return;
@@ -56,12 +56,12 @@ module.exports = async (req, res) => {
 
     // db
     const code = encode.randomNumber(6);
-    const rows = await req.db.query(sql.ucenterCodeGet, [type, mobile]);
+    const rows = await req.db.query(sql.codeGet, [type, mobile]);
     if (rows.length == 1) {
-      await req.db.query(sql.ucenterCodeUpdate, [code, type, mobile]);
+      await req.db.query(sql.codeUpdate, [code, type, mobile]);
     } else {
-      await req.db.query(sql.ucenterCodeDel, [type, mobile]);
-      await req.db.query(sql.ucenterCodeAdd, [type, mobile, code]);
+      await req.db.query(sql.codeDel, [type, mobile]);
+      await req.db.query(sql.codeAdd, [type, mobile, code]);
     }
 
     // consts for send
