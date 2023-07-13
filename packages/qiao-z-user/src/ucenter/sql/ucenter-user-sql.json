@@ -1,0 +1,8 @@
+{
+  "ucenterUserGetById": "select * from t_ucenter_user t where t.id=? and t.del_tag='0'",
+  "ucenterUserAdd": "insert into t_ucenter_user(id, ucenter_user_name, ucenter_user_password, cdate, cuser_id, cuser_name, udate, uuser_id, uuser_name, del_tag) values(null, ?, ?, now(), ?, ?, now(), ?, ?, '0')",
+  "ucenterUserEdit": "update t_ucenter_user t set t.ucenter_user_name=?, t.ucenter_user_password=?, t.udate=now(), t.uuser_id=?, t.uuser_name=? where t.id=? and t.del_tag='0'",
+  "ucenterUserDel": "update t_ucenter_user t set t.del_tag='1' where t.id in (?)",
+  "ucenterUserListCount": "SELECT count(*) tcount FROM t_ucenter_user t WHERE t.del_tag='0'",
+  "ucenterUserListQuery": "SELECT * FROM t_ucenter_user t WHERE t.del_tag='0'"
+}
