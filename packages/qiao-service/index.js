@@ -4,10 +4,10 @@ var qiaoAjax = require('qiao-ajax');
 var qiaoJson = require('qiao-json');
 
 var host = 'https://api.insistime.com/';
-var login$1 = 'ucenter/user/login';
-var sendCode$1 = 'ucenter/code/send';
-var register$1 = 'ucenter/user/reg';
-var checkUser$1 = 'ucenter/user/check';
+var login$1 = 'user/login';
+var sendCode$1 = 'code/send';
+var register$1 = 'user/reg';
+var checkUser$1 = 'user/check';
 var ucenterMenuList$1 = 'ucenter/menu/list';
 var ucenterMenuSave$1 = 'ucenter/menu/save';
 var ucenterMenuDel$1 = 'ucenter/menu/del';
