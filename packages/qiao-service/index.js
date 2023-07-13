@@ -4,24 +4,18 @@ var qiaoAjax = require('qiao-ajax');
 var qiaoJson = require('qiao-json');
 
 var host = 'https://api.insistime.com/';
-var login$1 = 'user/login';
+var userRegister$1 = 'user/reg';
+var userLogin$1 = 'user/login';
+var userCheck$1 = 'user/check';
+var userMenus$1 = 'user/menus';
 var sendCode$1 = 'code/send';
-var register$1 = 'user/reg';
-var checkUser$1 = 'user/check';
-var ucenterMenuList$1 = 'ucenter/menu/list';
-var ucenterMenuSave$1 = 'ucenter/menu/save';
-var ucenterMenuDel$1 = 'ucenter/menu/del';
-var ucenterMenuGet$1 = 'ucenter/menu/get';
 var config = {
   host: host,
-  login: login$1,
+  userRegister: userRegister$1,
+  userLogin: userLogin$1,
+  userCheck: userCheck$1,
+  userMenus: userMenus$1,
   sendCode: sendCode$1,
-  register: register$1,
-  checkUser: checkUser$1,
-  ucenterMenuList: ucenterMenuList$1,
-  ucenterMenuSave: ucenterMenuSave$1,
-  ucenterMenuDel: ucenterMenuDel$1,
-  ucenterMenuGet: ucenterMenuGet$1,
 };
 
 // qiao
@@ -88,18 +82,18 @@ async function ajax(url, data, headers) {
 // config
 
 /**
- * register
+ * userRegister
  * @param {*} mobile
  * @param {*} password
  * @param {*} repassword
  * @param {*} code
  * @returns
  */
-const register = async (mobile, password, repassword, code) => {
+const userRegister = async (mobile, password, repassword, code) => {
   if (!mobile || !password || !repassword || !code) return qiaoJson.fail('need mobile, code, password');
   if (password != repassword) return qiaoJson.fail('the two password do not match');
 
-  const url = config.host + config.register;
+  const url = config.host + config.userRegister;
   const data = {
     username: mobile,
     password: password,
@@ -110,12 +104,12 @@ const register = async (mobile, password, repassword, code) => {
 };
 
 /**
- * login
+ * userLogin
  * @param {*} mobile
  * @param {*} password
  * @returns
  */
-const login = async (mobile, password) => {
+const userLogin = async (mobile, password) => {
   if (!mobile || !password) return qiaoJson.fail('need mobile and password');
 
   const url = config.host + config.login;
@@ -125,6 +119,47 @@ const login = async (mobile, password) => {
   };
 
   return await post(url, data);
+};
+
+/**
+ * userCheck
+ * @param {*} userid
+ * @param {*} usertoken
+ * @returns
+ */
+const userCheck = async (userid, usertoken) => {
+  if (!userid) return qiaoJson.fail('need userid');
+  if (!usertoken) return qiaoJson.fail('need usertoken');
+
+  const url = config.host + config.userCheck;
+  const data = {
+    userid: userid,
+    usertoken: usertoken,
+  };
+
+  return await post(url, data);
+};
+
+/**
+ * userMenus
+ * @param {*} userid
+ * @param {*} usertoken
+ * @returns
+ */
+const userMenus = async (userid, usertoken) => {
+  // check
+  if (!userid) return qiaoJson.fail('need userid');
+  if (!usertoken) return qiaoJson.fail('need usertoken');
+
+  // userinfo
+  global.insistime_userinfo = {
+    userid,
+    usertoken,
+  };
+
+  // req
+  const url = config.host + config.userMenus;
+  return await postWithToken(url, {});
 };
 
 /**
@@ -145,99 +180,8 @@ const sendCode = async (mobile) => {
   return await post(url, data);
 };
 
-/**
- * checkUser
- * @param {*} userid
- * @param {*} usertoken
- * @returns
- */
-const checkUser = async (userid, usertoken) => {
-  if (!userid) return qiaoJson.fail('need userid');
-  if (!usertoken) return qiaoJson.fail('need usertoken');
-
-  const url = config.host + config.checkUser;
-  const data = {
-    userid: userid,
-    usertoken: usertoken,
-  };
-
-  return await post(url, data);
-};
-
-// config
-
-/**
- * ucenterMenuList
- * @param {*} pagenumber
- * @param {*} pagesize
- * @returns
- */
-const ucenterMenuList = async (pagenumber, pagesize) => {
-  const url = config.host + config.ucenterMenuList;
-  const data = {
-    page: pagenumber || '1',
-    rows: pagesize || '10',
-  };
-
-  return await postWithToken(url, data);
-};
-
-/**
- * ucenterMenuSave
- * @param {*} data
- * @returns
- */
-const ucenterMenuSave = async (data) => {
-  const url = config.host + config.ucenterMenuSave;
-  let opt = {
-    ucenterMenuParent: data.ucenter_menu_parent,
-    ucenterMenuSn: data.ucenter_menu_sn,
-    ucenterMenuTitle: data.ucenter_menu_title,
-    ucenterMenuUrl: data.ucenter_menu_url,
-  };
-  if (data.id) opt.id = data.id;
-
-  return await postWithToken(url, opt);
-};
-
-/**
- * ucenterMenuDel
- * @param {*} ids
- * @returns
- */
-const ucenterMenuDel = async (ids) => {
-  const url = config.host + config.ucenterMenuDel;
-  const data = { ids: ids };
-
-  return await postWithToken(url, data);
-};
-
-/**
- * ucenterMenuGet
- * @param {*} id
- * @returns
- */
-const ucenterMenuGet = async (id) => {
-  if (!id) return qiaoJson.fail('need id');
-
-  const url = config.host + config.ucenterMenuGet;
-  const data = { id: id };
-
-  const json = await postWithToken(url, data);
-  if (!json || json.type !== 'success' || !json.obj || !json.obj.rows || !json.obj.rows.length) {
-    return qiaoJson.fail(`can not find item by ${id}`);
-  }
-
-  const item = json.obj.rows[0];
-  item.time = json.time;
-  return item;
-};
-
-exports.checkUser = checkUser;
-exports.login = login;
-exports.register = register;
 exports.sendCode = sendCode;
-exports.ucenterMenuDel = ucenterMenuDel;
-exports.ucenterMenuGet = ucenterMenuGet;
-exports.ucenterMenuList = ucenterMenuList;
-exports.ucenterMenuSave = ucenterMenuSave;
+exports.userCheck = userCheck;
+exports.userLogin = userLogin;
+exports.userMenus = userMenus;
+exports.userRegister = userRegister;

@@ -2,24 +2,24 @@
 import config from '../util/_server.json';
 
 // fetch
-import { post } from '../util/_fetch.js';
+import { post, postWithToken } from '../util/_fetch.js';
 
 // qjson
 import { fail } from 'qiao-json';
 
 /**
- * register
+ * userRegister
  * @param {*} mobile
  * @param {*} password
  * @param {*} repassword
  * @param {*} code
  * @returns
  */
-export const register = async (mobile, password, repassword, code) => {
+export const userRegister = async (mobile, password, repassword, code) => {
   if (!mobile || !password || !repassword || !code) return fail('need mobile, code, password');
   if (password != repassword) return fail('the two password do not match');
 
-  const url = config.host + config.register;
+  const url = config.host + config.userRegister;
   const data = {
     username: mobile,
     password: password,
@@ -30,12 +30,12 @@ export const register = async (mobile, password, repassword, code) => {
 };
 
 /**
- * login
+ * userLogin
  * @param {*} mobile
  * @param {*} password
  * @returns
  */
-export const login = async (mobile, password) => {
+export const userLogin = async (mobile, password) => {
   if (!mobile || !password) return fail('need mobile and password');
 
   const url = config.host + config.login;
@@ -45,6 +45,47 @@ export const login = async (mobile, password) => {
   };
 
   return await post(url, data);
+};
+
+/**
+ * userCheck
+ * @param {*} userid
+ * @param {*} usertoken
+ * @returns
+ */
+export const userCheck = async (userid, usertoken) => {
+  if (!userid) return fail('need userid');
+  if (!usertoken) return fail('need usertoken');
+
+  const url = config.host + config.userCheck;
+  const data = {
+    userid: userid,
+    usertoken: usertoken,
+  };
+
+  return await post(url, data);
+};
+
+/**
+ * userMenus
+ * @param {*} userid
+ * @param {*} usertoken
+ * @returns
+ */
+export const userMenus = async (userid, usertoken) => {
+  // check
+  if (!userid) return fail('need userid');
+  if (!usertoken) return fail('need usertoken');
+
+  // userinfo
+  global.insistime_userinfo = {
+    userid,
+    usertoken,
+  };
+
+  // req
+  const url = config.host + config.userMenus;
+  return await postWithToken(url, {});
 };
 
 /**
@@ -60,25 +101,6 @@ export const sendCode = async (mobile) => {
     type: 'reg',
     sign: '坚时科技',
     mobile: mobile,
-  };
-
-  return await post(url, data);
-};
-
-/**
- * checkUser
- * @param {*} userid
- * @param {*} usertoken
- * @returns
- */
-export const checkUser = async (userid, usertoken) => {
-  if (!userid) return fail('need userid');
-  if (!usertoken) return fail('need usertoken');
-
-  const url = config.host + config.checkUser;
-  const data = {
-    userid: userid,
-    usertoken: usertoken,
   };
 
   return await post(url, data);

@@ -1,13 +1,9 @@
 {
   "host": "https://api.insistime.com/",
 
-  "login": "user/login",
-  "sendCode": "code/send",
-  "register": "user/reg",
-  "checkUser": "user/check",
-
-  "ucenterMenuList": "ucenter/menu/list",
-  "ucenterMenuSave": "ucenter/menu/save",
-  "ucenterMenuDel": "ucenter/menu/del",
-  "ucenterMenuGet": "ucenter/menu/get"
+  "userRegister": "user/reg",
+  "userLogin": "user/login",
+  "userCheck": "user/check",
+  "userMenus": "user/menus",
+  "sendCode": "code/send"
 }
