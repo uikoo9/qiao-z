@@ -27,6 +27,7 @@ exports.checkUserMenu = async function (req, res, userid) {
     }
 
     // return
+    res.jsonFail('校验menu失败！');
     return;
   } catch (e) {
     res.jsonFail('校验url失败！', { errName: e.name, errMsg: e.message });
