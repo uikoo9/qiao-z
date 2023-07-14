@@ -29,15 +29,17 @@ module.exports = async function (req, res) {
     if (!user) return;
 
     // user menus
-    if (req.url.pathname === '/user/menus') return true;
+    if (req.url.pathname === '/user/menus') {
+      setUserinfo(user);
+      return true;
+    }
 
     // check menu
     const checkMenuRes = await checkUserMenu(req, res, userid);
     if (!checkMenuRes) return;
 
     // set userinfo
-    req.body['express_userid'] = userid;
-    req.body['express_username'] = user['ucenter_user_name'];
+    setUserinfo(user);
 
     // return
     return true;
@@ -46,3 +48,9 @@ module.exports = async function (req, res) {
     return;
   }
 };
+
+// set userinfo
+function setUserinfo(req, user) {
+  req.body['express_userid'] = user['id'];
+  req.body['express_username'] = user['ucenter_user_name'];
+}
