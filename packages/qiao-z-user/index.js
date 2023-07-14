@@ -6,9 +6,9 @@ const ucenterRolemenuController = require('./src/ucenter/controller/UcenterRolem
 const ucenterRoleuserController = require('./src/ucenter/controller/UcenterRoleuserController.js');
 
 /**
- * check user
+ * check auth
  */
-exports.checkUser = require('./src/_check.js');
+exports.checkAuth = require('./src/check/index.js');
 
 /**
  * init
