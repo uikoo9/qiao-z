@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
   const usertoken = req.body.usertoken;
 
   // check user
-  const user = await checkUserAuth(userid, usertoken);
+  const user = await checkUserAuth(req, res, userid, usertoken);
   if (!user) return;
 
   // return
