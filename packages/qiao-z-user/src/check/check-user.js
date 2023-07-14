@@ -29,7 +29,8 @@ exports.checkUserAuth = async function (req, res, userid, usertoken) {
     const rUsertoken = AESEncrypt(username + password, global.QIAO_USER_CONFIG.encryptKey);
 
     // send
-    if (usertoken != rUsertoken) {
+    const finalUsertoken = decodeURIComponent(usertoken);
+    if (finalUsertoken !== rUsertoken) {
       res.jsonFail('非法token！');
       return;
     }

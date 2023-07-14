@@ -1,8 +1,5 @@
-// encode
-const encode = require('qiao-encode');
-
-// sql
-const sql = require('../../sql/user-sql.json');
+// check
+const { checkUserAuth } = require('../../../check/check-user.js');
 
 /**
  * ucenter user check
@@ -28,28 +25,10 @@ module.exports = async (req, res) => {
   const userid = req.body.userid;
   const usertoken = req.body.usertoken;
 
-  // db
-  try {
-    // get user
-    const rows = await req.db.query(sql.userGetById, [userid]);
-    if (!rows || rows.length != 1) {
-      res.jsonFail('获取用户失败！');
-      return;
-    }
+  // check user
+  const user = await checkUserAuth(userid, usertoken);
+  if (!user) return;
 
-    // check token
-    const user = rows[0];
-    const username = user['ucenter_user_name'];
-    const password = user['ucenter_user_password'];
-    const rUsertoken = encode.AESEncrypt(username + password, global.QIAO_USER_CONFIG.encryptKey);
-
-    // send
-    if (usertoken == rUsertoken) {
-      res.jsonSuccess('合法token！', { user: user });
-    } else {
-      res.jsonFail('非法token！');
-    }
-  } catch (e) {
-    res.jsonFail('校验token失败！', { errName: e.name, errMsg: e.message });
-  }
+  // return
+  res.jsonSuccess('合法token！', { user: user });
 };
