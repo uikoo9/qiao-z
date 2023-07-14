@@ -30,7 +30,7 @@ module.exports = async function (req, res) {
 
     // user menus
     if (req.url.pathname === '/user/menus') {
-      setUserinfo(user);
+      setUserinfo(req, user);
       return true;
     }
 
@@ -39,7 +39,7 @@ module.exports = async function (req, res) {
     if (!checkMenuRes) return;
 
     // set userinfo
-    setUserinfo(user);
+    setUserinfo(req, user);
 
     // return
     return true;

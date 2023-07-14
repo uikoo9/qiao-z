@@ -13,7 +13,7 @@ exports.checkUserMenu = async function (req, res, userid) {
   try {
     // get menus
     const menus = await req.db.query(sql.userMenus, [userid]);
-    if (!menus || menus.length != 1) {
+    if (!menus || !menus.length) {
       res.jsonFail('非法的访问！');
       return;
     }
