@@ -1,5 +1,5 @@
 // file
-const { path, lsdir, cp } = require('qiao-file');
+const { path, mv } = require('qiao-file');
 
 /**
  * mvFiles
@@ -7,28 +7,13 @@ const { path, lsdir, cp } = require('qiao-file');
  * @param {*} destPath
  */
 exports.mvFiles = async (srcPath, destPath) => {
-  // check
+  // path
   const finalSrcPath = path.resolve(srcPath, 'monorepo');
-  const srcRes = await lsdir(finalSrcPath);
-  if (!srcRes || !srcRes.files) return;
+  const finalDestPath = path.resolve(destPath, 'monorepo');
 
-  // files
-  const finalFiles = srcRes.files.filter((item) => item.name && item.name !== '.DS_Store');
-
-  // cp
-  const success = [];
-  const fail = [];
-  for (let i = 0; i < finalFiles.length; i++) {
-    const item = finalFiles[i];
-    const dest = path.resolve(destPath, item.name);
-    const res = await cp(item.path, dest);
-    if (res) {
-      success.push(dest);
-    } else {
-      fail.push(dest);
-    }
-  }
-
-  console.log('cp files, success:', success);
-  console.log('cp files, fail:', fail);
+  console.log();
+  console.log(`src: ${finalSrcPath}`);
+  console.log(`dest: ${finalDestPath}`);
+  const res = await mv(finalSrcPath, finalDestPath);
+  console.log(`res:${res}`);
 };
