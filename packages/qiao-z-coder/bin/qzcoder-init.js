@@ -2,13 +2,12 @@
 const { cmd } = require('qiao-cli');
 
 // coder
-const { gen } = require('../src/coder.js');
+const { init } = require('../src/init/index.js');
 
 // cmd for gen code
 cmd
-  .command('gen <table> <dest>')
-  .alias('g')
-  .description('gen code by table to path')
-  .action(async (tableName, destPath) => {
-    await gen(tableName, destPath);
+  .command('gen-init <dest>')
+  .description('init monorepo to path')
+  .action(async (destPath) => {
+    await init(destPath);
   });

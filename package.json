@@ -18,6 +18,7 @@
     "update": "ncu -u && lerna exec 'ncu -u' --concurrency=1",
     "pkg": "qlerna pkg ./packages",
     "dpkg": "qlerna pkg ./packages dev",
+    "gen-init": "npm run gen-init -w qiao-z-coder",
     "gen": "npm run gen -w qiao-z-coder"
   },
   "devDependencies": {
