@@ -2,7 +2,7 @@
 const { cmd } = require('qiao-cli');
 
 // coder
-const { gen } = require('../src/gen/coder.js');
+const { gen } = require('../src/coder.js');
 
 // cmd for gen code
 cmd

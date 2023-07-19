@@ -3,7 +3,10 @@ const { underScoreCaseToCamelCase, firstLetterLower } = require('qiao-string');
 
 // mysql
 const config = require('./config.json');
-const db = require('qiao-mysql')(config.db);
+const db = require('qiao-mysql')(config);
+
+// default
+const defaultColumns = ['id', 'cdate', 'cuser_id', 'cuser_name', 'udate', 'uuser_id', 'uuser_name', 'del_tag'];
 
 /**
  * parseTable
@@ -65,13 +68,13 @@ async function parseColumns(data, tableName) {
     columns = await db.getColumns(tableName);
   } catch (e) {
     console.log(e);
-    console.log('table ' + tableName + ' doesn\'t exist!');
+    // eslint-disable-next-line quotes
+    console.log('table ' + tableName + " doesn't exist!");
     return;
   }
 
   // params
   const params = [];
-  const defaultColumns = config.defaultColumns;
   for (let i = 0; i < columns.length; i++) {
     const item = columns[i];
 
