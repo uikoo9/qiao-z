@@ -40,6 +40,5 @@ app.listen(port);
 - `/user/reg`: 用户注册
 - `/user/login`: 用户登录
 - `/user/forget`: 忘记密码
-- `/user/check`: 用户检测
 - `/user/menus`: 用户菜单
 - `/code/send`: 发送验证码
