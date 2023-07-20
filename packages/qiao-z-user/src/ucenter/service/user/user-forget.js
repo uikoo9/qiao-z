@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     const usercode = req.body.usercode;
 
     // check code
-    const codes = await req.db.query(sql.ucenterCodeGet, [type, username]);
+    const codes = await req.db.query(sql.codeGet, [type, username]);
     if (codes.length != 1) {
       res.jsonFail('请先获取手机验证码！');
       return;
@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
     await req.db.query(sql.userForget, [encryptPassword, rows[0].id]);
 
     // del code params
-    await req.db.query(sql.ucenterCodeDel, [type, username]);
+    await req.db.query(sql.codeDel, [type, username]);
 
     // send
     res.jsonSuccess('修改成功！');
