@@ -2,7 +2,6 @@
 const userReg = require('../service/user/user-reg.js');
 const userLogin = require('../service/user/user-login.js');
 const userForget = require('../service/user/user-forget.js');
-const userGet = require('../service/user/user-get.js');
 const userCheck = require('../service/user/user-check.js');
 const userMenus = require('../service/user/user-menus.js');
 const codeSend = require('../service/user/code-send.js');
@@ -24,11 +23,6 @@ module.exports = (app) => {
   // user forget
   app.post('/user/forget', (req, res) => {
     userForget(req, res);
-  });
-
-  // user get
-  app.post('/user/get', (req, res) => {
-    userGet(req, res);
   });
 
   // user check
