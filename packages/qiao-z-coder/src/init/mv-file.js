@@ -3,13 +3,14 @@ const { path, mv } = require('qiao-file');
 
 /**
  * mvFiles
+ * @param {*} type
  * @param {*} srcPath
  * @param {*} destPath
  */
-exports.mvFiles = async (srcPath, destPath) => {
+exports.mvFiles = async (type, srcPath, destPath) => {
   // path
-  const finalSrcPath = path.resolve(srcPath, 'monorepo');
-  const finalDestPath = path.resolve(destPath, 'monorepo');
+  const finalSrcPath = path.resolve(srcPath, type);
+  const finalDestPath = path.resolve(destPath, type);
 
   console.log();
   console.log(`src: ${finalSrcPath}`);

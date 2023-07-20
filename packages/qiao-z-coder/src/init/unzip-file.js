@@ -6,12 +6,13 @@ const { getTmpPath } = require('./tmp-path.js');
 
 /**
  * unzipFile
+ * @param {*} type
  * @param {*} zipPath
  * @returns
  */
-exports.unzipFile = async (zipPath) => {
+exports.unzipFile = async (type, zipPath) => {
   // p
-  const p = getTmpPath('monorepo-folder');
+  const p = getTmpPath(`${type}-folder`);
 
   // unzip
   const res = await unzip(zipPath, p);

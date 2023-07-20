@@ -6,13 +6,21 @@ const { getTmpPath } = require('./tmp-path.js');
 
 /**
  * downloadFile
+ * @param {*} type
+ * @returns
  */
-exports.downloadFile = async () => {
+exports.downloadFile = async (type) => {
   // url
-  const url = 'https://static.insistime.com/codes/monorepo.zip';
+  let url;
+  if (type === 'monorepo') url = 'https://static.insistime.com/codes/monorepo.zip';
+  if (type === 'manage') url = 'https://static.insistime.com/codes/manage.zip';
+  if (!url) {
+    console.log('不支持的type');
+    return;
+  }
 
   // p
-  const tmpPath = getTmpPath('monorepo.zip');
+  const tmpPath = getTmpPath(`${type}.zip`);
 
   // log
   console.log();

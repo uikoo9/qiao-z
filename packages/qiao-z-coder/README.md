@@ -2,10 +2,14 @@
 
 ## init
 
-初始化一个前端monorepo项目
+初始化代码项目
+
+- type
+  - monorepo: 初始化一个前端monorepo项目
+  - manage: 初始化一个带管理端的前端项目
 
 ```bash
-npm run gen-init /path/to/init/code
+npm run gen-init type /path/to/init/code
 ```
 
 ## gen

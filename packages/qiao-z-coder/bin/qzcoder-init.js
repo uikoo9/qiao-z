@@ -6,8 +6,8 @@ const { init } = require('../src/init/index.js');
 
 // cmd for gen code
 cmd
-  .command('gen-init <dest>')
+  .command('gen-init <type> <dest>')
   .description('init monorepo to path')
-  .action(async (destPath) => {
-    await init(destPath);
+  .action(async (type, destPath) => {
+    await init(type, destPath);
   });

@@ -8,17 +8,19 @@ const { unzipFile } = require('./unzip-file.js');
 const { mvFiles } = require('./mv-file.js');
 
 /**
- *
+ * init
+ * @param {*} type
  * @param {*} destPath
+ * @returns
  */
-exports.init = async (destPath) => {
+exports.init = async (type, destPath) => {
   // d
-  const zipPath = await downloadFile();
+  const zipPath = await downloadFile(type);
   if (!zipPath) return;
 
   // unzip
-  const unzipFolder = await unzipFile(zipPath);
+  const unzipFolder = await unzipFile(type, zipPath);
   if (!unzipFolder) return;
 
-  await mvFiles(unzipFolder, destPath);
+  await mvFiles(type, unzipFolder, destPath);
 };
