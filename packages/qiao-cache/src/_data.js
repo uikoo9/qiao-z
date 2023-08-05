@@ -7,6 +7,7 @@ import NodeCache from 'node-cache';
 export const cache = new NodeCache({
   stdTTL: 0,
   checkperiod: 600,
+  test: 1,
   maxKeys: -1,
   useClones: true,
   deleteOnExpire: true,
