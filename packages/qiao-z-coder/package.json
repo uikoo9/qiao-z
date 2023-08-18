@@ -13,6 +13,6 @@
     "qiao-file": "^3.1.9",
     "qiao-mysql": "^3.2.1",
     "qiao-string": "^3.0.6",
-    "qiao-zip": "^3.1.9"
+    "qiao-zip": "^3.2.2"
   }
 }
