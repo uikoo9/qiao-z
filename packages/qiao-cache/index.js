@@ -10,7 +10,6 @@ var NodeCache = require('node-cache');
 const cache$1 = new NodeCache({
   stdTTL: 0,
   checkperiod: 600,
-  test: 1,
   maxKeys: -1,
   useClones: true,
   deleteOnExpire: true,
