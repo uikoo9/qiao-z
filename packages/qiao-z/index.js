@@ -516,7 +516,7 @@ const clearCookie = (res, name) => {
  * @param {*} data
  * @returns
  */
-const render = async (res, filePath, data) => {
+const render$1 = async (res, filePath, data) => {
   // check res
   if (!res) return;
 
@@ -552,6 +552,66 @@ const render = async (res, filePath, data) => {
   res.response.write(file);
   res.response.end();
 };
+
+// path
+
+/**
+ * res.renderAndStatic
+ * @param {*} res
+ * @param {*} filePath
+ * @param {*} data
+ * @returns
+ */
+const renderAndStatic = async (res, filePath, data) => {
+  // check
+  if (!res) return;
+  if (!filePath) {
+    res.send('renderAndStatic: please check file path!');
+    return;
+  }
+  if (qiaoFile.extname(filePath) !== '.html') {
+    res.send('renderAndStatic: only support html');
+    return;
+  }
+
+  // final path
+  let finalPath = path.resolve(process.cwd(), filePath);
+  if (!(await qiaoFile.isExists(finalPath))) {
+    res.send('renderAndStatic: file path is not exists');
+    return;
+  }
+
+  // static path
+  const staticPath = `${finalPath}.html`;
+  if (await qiaoFile.isExists(staticPath)) {
+    console.log(`renderAndStatic from ${staticPath}`);
+
+    const file = await qiaoFile.readFile(staticPath);
+    render(res, file);
+    return;
+  }
+
+  // file
+  const file = template(finalPath, data || {});
+  if (!file) {
+    res.send('render: read file error');
+    return;
+  }
+
+  // local
+  await qiaoFile.writeFile(staticPath, file);
+
+  // render html
+  console.log(`renderAndStatic from ${finalPath}`);
+  render(res, file);
+};
+
+// render
+function render(res, file) {
+  res.response.writeHeader(200, { 'Content-Type': 'text/html' });
+  res.response.write(file);
+  res.response.end();
+}
 
 // res methods
 
@@ -608,7 +668,10 @@ const handleRes = (response, plugins) => {
 
   // render
   res.render = (filePath, data) => {
-    render(res, filePath, data);
+    render$1(res, filePath, data);
+  };
+  res.renderAndStatic = (filePath, data) => {
+    renderAndStatic(res, filePath, data);
   };
 
   return res;
