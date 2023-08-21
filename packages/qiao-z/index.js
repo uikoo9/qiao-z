@@ -186,6 +186,27 @@ var initPlugins = (options) => {
   return plugins;
 };
 
+// file
+
+/**
+ * clear html
+ */
+var clearHtml = async () => {
+  // files
+  const serverFiles = await qiaoFile.lsdir(process.cwd());
+  if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
+
+  // init
+  serverFiles.files.forEach(async (serverFile) => {
+    const file = serverFile.path;
+
+    if (/\.html\.html$/.test(file)) {
+      console.log(`clear html: ${file}`);
+      await qiaoFile.rm(file);
+    }
+  });
+};
+
 /**
  * handle headers
  * @param {*} request
@@ -1003,6 +1024,9 @@ var app = (options) => {
 
   // init plugins
   const plugins = initPlugins(options);
+
+  // clear html
+  clearHtml();
 
   // listen
   app.listen = (port) => {

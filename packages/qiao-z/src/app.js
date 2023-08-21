@@ -5,6 +5,7 @@ import initController from './init/init-controller.js';
 import initModules from './init/init-modules.js';
 import initTask from './init/init-task.js';
 import initPlugins from './init/init-plugins.js';
+import clearHtml from './init/clear-html.js';
 
 // listen
 import listen from './listen/listen.js';
@@ -38,6 +39,9 @@ export default (options) => {
 
   // init plugins
   const plugins = initPlugins(options);
+
+  // clear html
+  clearHtml();
 
   // listen
   app.listen = (port) => {
