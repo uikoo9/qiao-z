@@ -26,5 +26,5 @@ module.exports = function (app) {
   require('./res/res-clear-cookie.js')(app);
   require('./res/res-render-file.js')(app);
   require('./res/res-render-html.js')(app);
-  require('./res/res-render-static.js')(app);
+  require('./res/res-static-render.js')(app);
 };

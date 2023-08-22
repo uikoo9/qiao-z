@@ -2,7 +2,7 @@
 import { resolve } from 'path';
 
 // qiao
-import { isExists, extname, readFile } from 'qiao-file';
+import { isExists, extname, readFile, writeFile } from 'qiao-file';
 
 // template
 import template from 'art-template';
@@ -12,13 +12,12 @@ import template from 'art-template';
  * @param {*} res
  * @param {*} filePath
  * @param {*} data
+ * @param {*} toStatic
  * @returns
  */
-const render = async (res, filePath, data) => {
-  // check res
-  if (!res) return;
-
+const render = async (res, filePath, data, toStatic) => {
   // check
+  if (!res) return;
   if (!filePath) {
     res.send('render: please check file path!');
     return;
@@ -26,7 +25,7 @@ const render = async (res, filePath, data) => {
 
   // final path
   const finalPath = resolve(process.cwd(), filePath);
-  if (!(await isExists(filePath))) {
+  if (!(await isExists(finalPath))) {
     res.send('render: file path is not exists');
     return;
   }
@@ -46,6 +45,12 @@ const render = async (res, filePath, data) => {
     return;
   }
 
+  // static
+  const staticPath = `${finalPath}.html`;
+  if (toStatic) await writeFile(staticPath, file);
+
+  // res
+  console.log(`render from ${finalPath}`);
   res.response.writeHeader(200, { 'Content-Type': contentType });
   res.response.write(file);
   res.response.end();

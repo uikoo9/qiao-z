@@ -6,7 +6,7 @@ import send from './res-send.js';
 import { json, jsonSuccess, jsonFail } from './res-json.js';
 import clearCookie from './res-clear-cookie.js';
 import render from './res-render.js';
-import renderAndStatic from './res-render-static.js';
+import staticRender from './res-static-render.js';
 
 /**
  * res
@@ -60,11 +60,11 @@ const handleRes = (response, plugins) => {
   };
 
   // render
-  res.render = (filePath, data) => {
-    render(res, filePath, data);
+  res.render = (filePath, data, toStatic) => {
+    render(res, filePath, data, toStatic);
   };
-  res.renderAndStatic = (filePath, data) => {
-    renderAndStatic(res, filePath, data);
+  res.staticRender = async (filePath) => {
+    return await staticRender(res, filePath);
   };
 
   return res;
