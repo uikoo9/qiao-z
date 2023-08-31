@@ -17,11 +17,8 @@ const staticRender = async (res, filePath) => {
   if (!filePath) return;
   if (extname(filePath) !== '.html') return;
 
-  // final path
-  let finalPath = resolve(process.cwd(), filePath);
-  if (!(await isExists(finalPath))) return;
-
   // static path
+  let finalPath = resolve(process.cwd(), filePath);
   const staticPath = `${finalPath}.html`;
   if (!(await isExists(staticPath))) return;
 

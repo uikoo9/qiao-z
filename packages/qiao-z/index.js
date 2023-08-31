@@ -596,11 +596,8 @@ const staticRender = async (res, filePath) => {
   if (!filePath) return;
   if (qiaoFile.extname(filePath) !== '.html') return;
 
-  // final path
-  let finalPath = path.resolve(process.cwd(), filePath);
-  if (!(await qiaoFile.isExists(finalPath))) return;
-
   // static path
+  let finalPath = path.resolve(process.cwd(), filePath);
   const staticPath = `${finalPath}.html`;
   if (!(await qiaoFile.isExists(staticPath))) return;
 
