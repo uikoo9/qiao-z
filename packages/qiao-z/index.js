@@ -192,8 +192,6 @@ var initPlugins = (options) => {
  * clear html
  */
 var clearHtml = async () => {
-  //
-  console.log();
   // files
   const serverFiles = await qiaoFile.lsdir(process.cwd());
   if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
