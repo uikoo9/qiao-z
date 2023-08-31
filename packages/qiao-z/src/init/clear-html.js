@@ -5,6 +5,8 @@ import { lsdir, rm } from 'qiao-file';
  * clear html
  */
 export default async () => {
+  //
+  console.log();
   // files
   const serverFiles = await lsdir(process.cwd());
   if (!serverFiles || !serverFiles.files || !serverFiles.files.length) return;
