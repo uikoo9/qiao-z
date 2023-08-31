@@ -535,10 +535,10 @@ const clearCookie = (res, name) => {
  * @param {*} res
  * @param {*} filePath
  * @param {*} data
- * @param {*} toStatic
+ * @param {*} cacheFilePath
  * @returns
  */
-const render = async (res, filePath, data, toStatic) => {
+const render = async (res, filePath, data, cacheFilePath) => {
   // check
   if (!res) return;
   if (!filePath) {
@@ -569,8 +569,10 @@ const render = async (res, filePath, data, toStatic) => {
   }
 
   // static
-  const staticPath = `${finalPath}.html`;
-  if (toStatic) await qiaoFile.writeFile(staticPath, file);
+  if (cacheFilePath) {
+    const staticPath = typeof cacheFilePath === 'boolean' ? `${finalPath}.html` : `${cacheFilePath}.html`;
+    await qiaoFile.writeFile(staticPath, file);
+  }
 
   // res
   console.log(`render from ${finalPath}`);
