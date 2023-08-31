@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
 
   // db
   try {
-    const rows = await req.db.query(sql.userMenus, [express_userid]);
+    const rows = await req.db.query(sql.userMenusRoot, [express_userid]);
 
     res.jsonSuccess('query success', { rows: rows });
   } catch (e) {
