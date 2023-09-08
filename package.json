@@ -10,7 +10,7 @@
     "prettier": "qpro prettier",
     "eslint": "qpro eslint",
     "test": "lerna run test",
-    "lint": "npm run test && npm run prettier && npm run eslint",
+    "lint": "npm run build && npm run test && npm run prettier && npm run eslint",
     "postinstall": "npm run lint",
     "pb": "lerna publish",
     "graph": "nx graph",
@@ -34,7 +34,7 @@
     "lint-staged": "^14.0.1",
     "nx": "^16.8.1",
     "qiao-lerna": "^3.5.5",
-    "qiao-project": "^3.5.5",
+    "qiao-project": "^3.5.6",
     "rollup": "^3.29.0"
   }
 }

@@ -1,3 +1,3 @@
 module.exports = {
-  '**/*': () => ['npm run test', 'npm run prettier', 'npm run eslint'],
+  '**/*': () => ['npm run build', 'npm run test', 'npm run prettier', 'npm run eslint'],
 };
