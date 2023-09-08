@@ -22,7 +22,7 @@ export default class Parser {
    */
   constructor(UA, skipParsing = false) {
     if (UA === void 0 || UA === null || UA === '') {
-      throw new Error('UserAgent parameter can\'t be empty');
+      throw new Error("UserAgent parameter can't be empty");
     }
 
     this._ua = UA;
@@ -91,7 +91,7 @@ export default class Parser {
         return _browser.test.some((condition) => this.test(condition));
       }
 
-      throw new Error('Browser\'s test function is not valid');
+      throw new Error("Browser's test function is not valid");
     });
 
     if (browserDescriptor) {
@@ -173,7 +173,7 @@ export default class Parser {
         return _os.test.some((condition) => this.test(condition));
       }
 
-      throw new Error('Browser\'s test function is not valid');
+      throw new Error("Browser's test function is not valid");
     });
 
     if (os) {
@@ -249,7 +249,7 @@ export default class Parser {
         return _platform.test.some((condition) => this.test(condition));
       }
 
-      throw new Error('Browser\'s test function is not valid');
+      throw new Error("Browser's test function is not valid");
     });
 
     if (platform) {
@@ -300,7 +300,7 @@ export default class Parser {
         return _engine.test.some((condition) => this.test(condition));
       }
 
-      throw new Error('Browser\'s test function is not valid');
+      throw new Error("Browser's test function is not valid");
     });
 
     if (engine) {

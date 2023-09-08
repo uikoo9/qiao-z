@@ -36,9 +36,9 @@ const ipRegex = (options) =>
   options && options.exact
     ? v46Exact
     : new RegExp(
-      `(?:${boundry(options)}${v4}${boundry(options)})|(?:${boundry(options)}${v6}${boundry(options)})`,
-      'g',
-    );
+        `(?:${boundry(options)}${v4}${boundry(options)})|(?:${boundry(options)}${v6}${boundry(options)})`,
+        'g',
+      );
 
 ipRegex.v4 = (options) =>
   options && options.exact ? v4exact : new RegExp(`${boundry(options)}${v4}${boundry(options)}`, 'g');
