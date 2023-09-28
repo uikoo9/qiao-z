@@ -1,6 +1,6 @@
 {
   "name": "qiao-z",
-  "version": "3.5.3",
+  "version": "3.5.4",
   "description": "nodejs web app framework",
   "keywords": [
     "nodejs",
@@ -38,7 +38,7 @@
     "raw-body": "^2.5.2"
   },
   "devDependencies": {
-    "qiao-timer": "^3.5.3"
+    "qiao-timer": "^3.5.4"
   },
   "nx": {
     "namedInputs": {
