@@ -17,8 +17,8 @@
     "graph": "nx graph",
     "check": "ncu && lerna exec ncu --concurrency=1",
     "update": "ncu -u && lerna exec 'ncu -u' --concurrency=1",
-    "pkg": "qlerna pkg ./packages",
-    "dpkg": "qlerna pkg ./packages dev",
+    "pkg": "qpro pkg ./packages",
+    "dpkg": "qpro pkg ./packages dev",
     "gen-init": "npm run gen-init -w qiao-z-coder",
     "gen": "npm run gen -w qiao-z-coder"
   },
@@ -26,15 +26,14 @@
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "@rollup/plugin-json": "^6.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.2",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "ava": "^5.3.1",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "lerna": "^7.3.0",
     "lint-staged": "^14.0.1",
     "nx": "^16.10.0",
-    "qiao-lerna": "^4.0.8",
-    "qiao-project": "^4.0.7",
+    "qiao-project": "^4.0.9",
     "rollup": "^4.0.2"
   }
 }
