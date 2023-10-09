@@ -1,4 +1,4 @@
-const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const { rollupNodeResolve } = require('qiao-project');
 
 /**
  * rollup.config.js
@@ -11,7 +11,7 @@ module.exports = {
   },
   external: ['qiao-ajax'],
   plugins: [
-    nodeResolve({
+    rollupNodeResolve({
       resolveOnly: ['ip-regex'],
     }),
   ],

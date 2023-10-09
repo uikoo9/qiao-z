@@ -1,7 +1,5 @@
-'use strict';
-
 // json
-const json = require('@rollup/plugin-json');
+const { rollupPluginJson } = require('qiao-project');
 
 /**
  * rollup.config.js
@@ -13,5 +11,5 @@ module.exports = {
     format: 'cjs',
   },
   external: ['qiao-ajax', 'qiao-json'],
-  plugins: [json()],
+  plugins: [rollupPluginJson()],
 };
