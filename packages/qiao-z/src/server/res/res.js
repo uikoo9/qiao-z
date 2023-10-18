@@ -4,7 +4,7 @@ import end from './res-end.js';
 import redirect from './res-redirect.js';
 import send from './res-send.js';
 import { json, jsonSuccess, jsonFail } from './res-json.js';
-import clearCookie from './res-clear-cookie.js';
+import { clearCookie, setCookie } from './res-cookie.js';
 import render from './res-render.js';
 import staticRender from './res-static-render.js';
 
@@ -57,6 +57,9 @@ const handleRes = (response, plugins) => {
   // cookie
   res.clearCookie = (name) => {
     clearCookie(res, name);
+  };
+  res.setCookie = (name, value) => {
+    setCookie(res, name, value);
   };
 
   // render

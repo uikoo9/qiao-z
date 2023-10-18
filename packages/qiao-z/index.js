@@ -514,6 +514,26 @@ const jsonFail = (res, msg, obj) => {
 // cookie
 
 /**
+ * res.setCookie
+ * @param {*} res
+ * @param {*} key
+ * @param {*} value
+ * @returns
+ */
+const setCookie = (res, key, value) => {
+  // check
+  if (!res || !key || !value) return;
+
+  res.setHeader(
+    'Set-Cookie',
+    cookie.serialize(key, String(value), {
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+      path: '/',
+    }),
+  );
+};
+
+/**
  * res.clearCookie
  * @param {*} res
  * @param {*} name
@@ -660,6 +680,9 @@ const handleRes = (response, plugins) => {
   // cookie
   res.clearCookie = (name) => {
     clearCookie(res, name);
+  };
+  res.setCookie = (name, value) => {
+    setCookie(res, name, value);
   };
 
   // render
