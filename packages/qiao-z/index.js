@@ -514,21 +514,23 @@ const jsonFail = (res, msg, obj) => {
 // cookie
 
 /**
- * res.setCookie
+ * setCookie
  * @param {*} res
  * @param {*} key
  * @param {*} value
+ * @param {*} maxAge
+ * @param {*} path
  * @returns
  */
-const setCookie = (res, key, value) => {
+const setCookie = (res, key, value, maxAge, path) => {
   // check
   if (!res || !key || !value) return;
 
-  res.setHeader(
+  res.response.setHeader(
     'Set-Cookie',
     cookie.serialize(key, String(value), {
-      maxAge: 60 * 60 * 24 * 7, // 1 week
-      path: '/',
+      maxAge: maxAge || 60 * 60 * 24 * 7, // 1 week
+      path: path || '/',
     }),
   );
 };
