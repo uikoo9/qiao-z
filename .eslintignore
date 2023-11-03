@@ -1,6 +1,9 @@
 # project
+
+.nx
 node_modules
 package-lock.json
 
 # packages
-__tests__
+
+**tests**
