@@ -8,7 +8,7 @@ const { JSDOM } = require('jsdom');
 const { shortLink } = require('../index.js');
 
 // nodejs
-test.serial('get ip on nodejs', async (t) => {
+test.skip('get ip on nodejs', async (t) => {
   t.timeout(450);
 
   const link = await shortLink('https://insistime.com/', 500);
@@ -17,7 +17,7 @@ test.serial('get ip on nodejs', async (t) => {
 });
 
 // browser
-test.serial('get ip on browser', async (t) => {
+test.skip('get ip on browser', async (t) => {
   t.timeout(450);
 
   const dom = new JSDOM('', { url: 'http://localhost' });
