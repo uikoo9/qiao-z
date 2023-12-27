@@ -1,6 +1,11 @@
 // file
 import { lsdir, rm } from 'qiao-file';
 
+// logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z');
+const methodName = 'clearHtml';
+
 /**
  * clear html
  */
@@ -14,8 +19,9 @@ export default async () => {
     const file = serverFile.path;
 
     if (/\.html\.html$/.test(file)) {
-      console.log(`clear html: ${file}`);
+      logger.info(methodName, 'file', file);
       await rm(file);
+      logger.info(methodName, 'rm success');
     }
   });
 };

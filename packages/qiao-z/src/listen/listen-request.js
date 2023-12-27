@@ -13,6 +13,14 @@ import handleChecks from './handle-checks.js';
 import handlePath from './handle-path.js';
 import handleParams from './handle-params.js';
 
+// logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z');
+const methodName = 'listenRequest';
+
+// err tip
+const errTip = 'can not get router';
+
 /**
  * listen request
  * @param {*} request
@@ -25,12 +33,15 @@ const listenRequest = async (request, response, routers, plugins) => {
   // req res
   const req = await reqFn(request, plugins);
   const res = resFn(response, plugins);
+  logger.info(methodName, 'req and res ready');
 
   // handle options
+  logger.info(methodName, 'begin handleOptions');
   const optionsRes = handleOptions(req, res);
   if (optionsRes) return;
 
   // handle routers
+  logger.info(methodName, 'begin handleRouters');
   const routersRes = handleRouters(routers, req, res);
   if (routersRes) return;
 
@@ -39,27 +50,33 @@ const listenRequest = async (request, response, routers, plugins) => {
   const reqRouters = routers[reqMethod];
 
   // handle static
+  logger.info(methodName, 'begin handleStatic');
   const staticRes = handleStatic(reqRouters, req, res);
   if (staticRes) return;
 
   // handle all
+  logger.info(methodName, 'begin handleAll');
   const allRes = handleAll(reqRouters, req, res);
   if (allRes) return;
 
   // handle checks
+  logger.info(methodName, 'begin handleChecks');
   const checkRes = await handleChecks(plugins, req, res);
   if (checkRes) return;
 
   // handle path
+  logger.info(methodName, 'begin handlePath');
   const pathRes = handlePath(reqRouters, req, res);
   if (pathRes) return;
 
   // handle params
+  logger.info(methodName, 'begin handleParams');
   const paramsRes = handleParams(reqRouters, req, res);
   if (paramsRes) return;
 
   // other
-  res.send('can not get router');
+  logger.info(methodName, errTip);
+  res.send(errTip);
   return;
 };
 

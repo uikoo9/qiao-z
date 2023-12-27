@@ -4,6 +4,11 @@ import http from 'http';
 // listen request
 import listenRequest from './listen-request.js';
 
+// logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z');
+const methodName = 'listen';
+
 /**
  * listen
  * @param {*} port
@@ -19,34 +24,36 @@ const listen = (port, routers, plugins) => {
 
   // on
   server.on('checkContinue', () => {
-    console.log('checkContinue');
+    logger.info(methodName, 'checkContinue');
   });
   server.on('checkExpectation', () => {
-    console.log('checkExpectation');
+    logger.info(methodName, 'checkExpectation');
   });
   server.on('clientError', (err) => {
-    console.log('clientError', err);
+    logger.info(methodName, 'clientError', err);
   });
   server.on('close', () => {
-    console.log('close');
+    logger.info(methodName, 'close');
   });
   server.on('connect', () => {
-    console.log('connect');
+    logger.info(methodName, 'connect');
   });
   server.on('dropRequest', () => {
-    console.log('dropRequest');
+    logger.info(methodName, 'dropRequest');
   });
   server.on('upgrade', () => {
-    console.log('upgrade');
+    logger.info(methodName, 'upgrade');
   });
 
   // request
   server.on('request', (request, response) => {
+    logger.info(methodName, 'request');
     listenRequest(request, response, routers, plugins);
   });
 
   // listen
   server.listen(port);
+  logger.info(methodName, 'listen end');
 };
 
 export default listen;

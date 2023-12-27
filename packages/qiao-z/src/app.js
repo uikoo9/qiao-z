@@ -10,6 +10,11 @@ import clearHtml from './init/clear-html.js';
 // listen
 import listen from './listen/listen.js';
 
+// logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z');
+const methodName = 'qiao-z()';
+
 // routers
 const routers = {};
 
@@ -17,36 +22,47 @@ const routers = {};
  * app
  */
 export default (options) => {
+  // app
   const app = {};
 
   // options
   options = options || {};
 
   // init methods
+  logger.info(methodName, 'begin init methos');
   initMethods(app, routers);
 
   // init static
+  logger.info(methodName, 'begin init static');
   initStatic(app, routers);
 
   // init controller
+  logger.info(methodName, 'begin init controller');
   initController(app);
 
   // init modules
+  logger.info(methodName, 'begin init modules');
   initModules(app, options);
 
   // init task
+  logger.info(methodName, 'begin init task');
   initTask(options);
 
   // init plugins
+  logger.info(methodName, 'begin init plugins');
   const plugins = initPlugins(options);
 
   // clear html
+  logger.info(methodName, 'begin clear html');
   clearHtml();
 
   // listen
   app.listen = (port) => {
+    logger.info(methodName, 'listen port', port);
+    logger.info(methodName, 'listen routers', routers);
     listen(port || '5277', routers, plugins);
   };
 
+  //
   return app;
 };

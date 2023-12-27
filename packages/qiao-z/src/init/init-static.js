@@ -1,6 +1,11 @@
 // path
 import { resolve } from 'path';
 
+// logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z');
+const methodName = 'initStatic';
+
 /**
  * init static
  */
@@ -28,9 +33,11 @@ const initStatic = (app, routers) => {
       static: true,
     });
   };
+  logger.info(methodName, 'end');
 
   // acme
   app.static('/.well-known', './.well-known');
+  logger.info(methodName, 'routers', routers);
 };
 
 export default initStatic;
