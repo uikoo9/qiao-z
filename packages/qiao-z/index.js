@@ -1063,7 +1063,7 @@ const routers = {};
 /**
  * app
  */
-var app = (options) => {
+var app = async (options) => {
   // app
   const app = {};
 
@@ -1080,7 +1080,7 @@ var app = (options) => {
 
   // init controller
   logger.info(methodName, 'begin init controller');
-  initController(app);
+  await initController(app);
 
   // init modules
   logger.info(methodName, 'begin init modules');
@@ -1088,7 +1088,7 @@ var app = (options) => {
 
   // init task
   logger.info(methodName, 'begin init task');
-  initTask(options);
+  await initTask(options);
 
   // init plugins
   logger.info(methodName, 'begin init plugins');
@@ -1096,7 +1096,7 @@ var app = (options) => {
 
   // clear html
   logger.info(methodName, 'begin clear html');
-  clearHtml();
+  await clearHtml();
 
   // listen
   app.listen = (port) => {

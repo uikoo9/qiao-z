@@ -21,7 +21,7 @@ const routers = {};
 /**
  * app
  */
-export default (options) => {
+export default async (options) => {
   // app
   const app = {};
 
@@ -38,7 +38,7 @@ export default (options) => {
 
   // init controller
   logger.info(methodName, 'begin init controller');
-  initController(app);
+  await initController(app);
 
   // init modules
   logger.info(methodName, 'begin init modules');
@@ -46,7 +46,7 @@ export default (options) => {
 
   // init task
   logger.info(methodName, 'begin init task');
-  initTask(options);
+  await initTask(options);
 
   // init plugins
   logger.info(methodName, 'begin init plugins');
@@ -54,7 +54,7 @@ export default (options) => {
 
   // clear html
   logger.info(methodName, 'begin clear html');
-  clearHtml();
+  await clearHtml();
 
   // listen
   app.listen = (port) => {
