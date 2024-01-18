@@ -1103,6 +1103,7 @@ var app = async (options) => {
     logger.info(methodName, 'listen port', port);
     logger.info(methodName, 'listen routers', routers);
     listen(port || '5277', routers, plugins);
+    logger.info(methodName, 'start success');
   };
 
   //

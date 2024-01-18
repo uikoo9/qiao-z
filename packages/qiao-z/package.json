@@ -34,7 +34,7 @@
     "qiao-file": "^4.3.5",
     "qiao-json": "^3.5.7",
     "qiao-ua": "^3.5.7",
-    "qiao.log.js": "^3.6.8",
+    "qiao.log.js": "^3.6.9",
     "qs": "^6.11.2",
     "raw-body": "^2.5.2"
   },
