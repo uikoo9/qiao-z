@@ -13,7 +13,6 @@ const methodName = 'initTask';
  */
 export default async (options) => {
   // check
-  logger.info(methodName, 'options', options);
   if (!options || !options.cron) return;
 
   // files

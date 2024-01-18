@@ -1,8 +1,3 @@
-// logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z');
-const methodName = 'initMethods';
-
 // methods
 const methods = ['get', 'post'];
 
@@ -26,7 +21,6 @@ const initMethods = (app, routers) => {
       });
     };
   });
-  logger.info(methodName, 'end');
 };
 
 export default initMethods;

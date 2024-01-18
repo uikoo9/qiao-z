@@ -1,8 +1,3 @@
-// logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z');
-const methodName = 'initModules';
-
 /**
  * init modules
  * @param {*} app
@@ -16,7 +11,6 @@ const initModules = (app, options) => {
   options.modules.forEach((m) => {
     m(app, options.config);
   });
-  logger.info(methodName, 'end');
 };
 
 export default initModules;

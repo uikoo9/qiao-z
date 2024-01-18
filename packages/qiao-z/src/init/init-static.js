@@ -33,7 +33,6 @@ const initStatic = (app, routers) => {
       static: true,
     });
   };
-  logger.info(methodName, 'end');
 
   // acme
   app.static('/.well-known', './.well-known');
