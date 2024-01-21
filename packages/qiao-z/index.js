@@ -615,7 +615,7 @@ const render = async (res, filePath, data, cacheFilePath) => {
     file = await qiaoFile.readFile(finalPath);
     contentType = 'text/plain';
   }
-  if (!file) {
+  if (file === undefined) {
     res.send('render: read file error');
     return;
   }
