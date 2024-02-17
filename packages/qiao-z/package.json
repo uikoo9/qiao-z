@@ -9,7 +9,7 @@
     "framework"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-z",
+  "homepage": "https://code.insistime.com/#qiao-z",
   "license": "MIT",
   "main": "index.js",
   "module": "src/app.js",

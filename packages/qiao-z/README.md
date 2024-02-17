@@ -7,7 +7,7 @@ nodejs 下极简的 web 框架，详见：[一篇文章开发 Node.js-Web-Server
 
 ## 官网
 
-[https://code.insistime.com/qiao-z](https://code.insistime.com/qiao-z)
+[https://code.insistime.com/#qiao-z](https://code.insistime.com/#qiao-z)
 
 ## 安装
 

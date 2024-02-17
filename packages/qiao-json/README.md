@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-json.svg?style=flat-square)](https://www.npmjs.org/package/qiao-json)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-json.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-json)
 
-nodejs 下 [qiao-z](https://code.insistime.com/qiao-z#/) 中的 json 数据结构
+nodejs 下 [qiao-z](https://code.insistime.com/#qiao-z) 中的 json 数据结构
 
 ## usage
 

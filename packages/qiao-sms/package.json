@@ -10,7 +10,7 @@
     "qcloudsms_js"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-sms",
+  "homepage": "https://code.insistime.com/#qiao-sms",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
