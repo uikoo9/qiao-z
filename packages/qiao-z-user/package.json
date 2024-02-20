@@ -19,7 +19,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "qiao-encode": "^4.3.0",
+    "qiao-encode": "^4.4.2",
     "qiao-mysql": "^3.7.3",
     "qiao-sms": "^3.7.3"
   }
