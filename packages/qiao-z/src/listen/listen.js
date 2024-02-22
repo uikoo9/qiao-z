@@ -5,8 +5,8 @@ import http from 'http';
 import listenRequest from './listen-request.js';
 
 // logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z');
+import Debug from 'debug';
+const debug = Debug('qiao-z');
 const methodName = 'listen';
 
 /**
@@ -24,36 +24,36 @@ const listen = (port, routers, plugins) => {
 
   // on
   server.on('checkContinue', () => {
-    logger.info(methodName, 'checkContinue');
+    debug(methodName, 'checkContinue');
   });
   server.on('checkExpectation', () => {
-    logger.info(methodName, 'checkExpectation');
+    debug(methodName, 'checkExpectation');
   });
   server.on('clientError', (err) => {
-    logger.info(methodName, 'clientError', err);
+    debug(methodName, 'clientError', err);
   });
   server.on('close', () => {
-    logger.info(methodName, 'close');
+    debug(methodName, 'close');
   });
   server.on('connect', () => {
-    logger.info(methodName, 'connect');
+    debug(methodName, 'connect');
   });
   server.on('dropRequest', () => {
-    logger.info(methodName, 'dropRequest');
+    debug(methodName, 'dropRequest');
   });
   server.on('upgrade', () => {
-    logger.info(methodName, 'upgrade');
+    debug(methodName, 'upgrade');
   });
 
   // request
   server.on('request', (request, response) => {
-    logger.info(methodName, 'request');
+    debug(methodName, 'request');
     listenRequest(request, response, routers, plugins);
   });
 
   // listen
   server.listen(port);
-  logger.info(methodName, 'listen end');
+  debug(methodName, 'listen end');
 };
 
 export default listen;

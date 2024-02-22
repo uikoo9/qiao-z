@@ -2,8 +2,8 @@
 import { lsdir } from 'qiao-file';
 
 // logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z');
+import Debug from 'debug';
+const debug = Debug('qiao-z');
 const methodName = 'initController';
 
 /**
@@ -22,9 +22,9 @@ const initController = async (app) => {
   // init
   serverFiles.files.forEach((serverFile) => {
     if (/Controller\.js$/.test(serverFile.path)) {
-      logger.info(methodName, 'filename', serverFile.path);
+      debug(methodName, 'filename', serverFile.path);
       require(serverFile.path)(app);
-      logger.info(methodName, 'require success');
+      debug(methodName, 'require success');
     }
   });
 };

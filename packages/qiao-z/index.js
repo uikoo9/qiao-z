@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var qiao_log_js = require('qiao.log.js');
+var Debug = require('debug');
 var qiaoFile = require('qiao-file');
 var http = require('http');
 var parseurl = require('parseurl');
@@ -38,7 +38,7 @@ const initMethods = (app, routers) => {
 };
 
 // path
-const logger$7 = qiao_log_js.Logger('qiao-z');
+const debug$7 = Debug('qiao-z');
 const methodName$7 = 'initStatic';
 
 /**
@@ -71,11 +71,11 @@ const initStatic = (app, routers) => {
 
   // acme
   app.static('/.well-known', './.well-known');
-  logger$7.info(methodName$7, 'routers', routers);
+  debug$7(methodName$7, 'routers', routers);
 };
 
 // qiao
-const logger$6 = qiao_log_js.Logger('qiao-z');
+const debug$6 = Debug('qiao-z');
 const methodName$6 = 'initController';
 
 /**
@@ -94,9 +94,9 @@ const initController = async (app) => {
   // init
   serverFiles.files.forEach((serverFile) => {
     if (/Controller\.js$/.test(serverFile.path)) {
-      logger$6.info(methodName$6, 'filename', serverFile.path);
+      debug$6(methodName$6, 'filename', serverFile.path);
       require(serverFile.path)(app);
-      logger$6.info(methodName$6, 'require success');
+      debug$6(methodName$6, 'require success');
     }
   });
 };
@@ -117,7 +117,7 @@ const initModules = (app, options) => {
 };
 
 // file
-const logger$5 = qiao_log_js.Logger('qiao-z');
+const debug$5 = Debug('qiao-z');
 const methodName$5 = 'initTask';
 
 /**
@@ -144,24 +144,24 @@ function operateTaskFile(cron, serverFile) {
   const file = serverFile.path;
 
   if (/Task\.js$/.test(file)) {
-    logger$5.info(methodName$5, 'operateTaskFile', file);
+    debug$5(methodName$5, 'operateTaskFile', file);
 
     const task = require(file);
-    logger$5.info(methodName$5, 'operateTaskFile', 'require success');
+    debug$5(methodName$5, 'operateTaskFile', 'require success');
     if (!task || !task.time || !task.tick) return;
 
     if (task.runAndInit) {
-      logger$5.info(methodName$5, 'operateTaskFile', 'runAndInit');
+      debug$5(methodName$5, 'operateTaskFile', 'runAndInit');
       cron.runAndInit(task.time, task.tick);
     } else {
-      logger$5.info(methodName$5, 'operateTaskFile', 'run');
+      debug$5(methodName$5, 'operateTaskFile', 'run');
       cron.run(task.time, task.tick);
     }
   }
 }
 
 // logger
-const logger$4 = qiao_log_js.Logger('qiao-z');
+const debug$4 = Debug('qiao-z');
 const methodName$4 = 'initPlugins';
 
 // cros options
@@ -182,31 +182,31 @@ var initPlugins = (options) => {
 
   // checks
   if (options && options.checks) {
-    logger$4.info(methodName$4, 'options.checks');
+    debug$4(methodName$4, 'options.checks');
     plugins.checks = options.checks;
   }
 
   // cros
   if (options && options.cros) {
-    logger$4.info(methodName$4, 'options.cros');
+    debug$4(methodName$4, 'options.cros');
     plugins.cros = options.cros === true ? crosOptions : options.cros;
   }
 
   // logger
   if (options && options.log && options.logOptions) {
-    logger$4.info(methodName$4, 'options.log');
+    debug$4(methodName$4, 'options.log');
     plugins.logger = options.log(options.logOptions);
   }
 
   // mysql
   if (options && options.mysql && options.config && options.config.db) {
-    logger$4.info(methodName$4, 'options.db');
+    debug$4(methodName$4, 'options.db');
     plugins.db = options.mysql(options.config.db);
   }
 
   // upload
   if (options && options.upload) {
-    logger$4.info(methodName$4, 'options.upload');
+    debug$4(methodName$4, 'options.upload');
     plugins.upload = options.upload;
   }
 
@@ -214,7 +214,7 @@ var initPlugins = (options) => {
 };
 
 // file
-const logger$3 = qiao_log_js.Logger('qiao-z');
+const debug$3 = Debug('qiao-z');
 const methodName$3 = 'clearHtml';
 
 /**
@@ -230,9 +230,9 @@ var clearHtml = async () => {
     const file = serverFile.path;
 
     if (/\.html\.html$/.test(file)) {
-      logger$3.info(methodName$3, 'file', file);
+      debug$3(methodName$3, 'file', file);
       await qiaoFile.rm(file);
-      logger$3.info(methodName$3, 'rm success');
+      debug$3(methodName$3, 'rm success');
     }
   });
 };
@@ -925,7 +925,7 @@ const handleParams = (routers, req, res) => {
 };
 
 // req
-const logger$2 = qiao_log_js.Logger('qiao-z');
+const debug$2 = Debug('qiao-z');
 const methodName$2 = 'listenRequest';
 
 // err tip
@@ -943,15 +943,15 @@ const listenRequest = async (request, response, routers, plugins) => {
   // req res
   const req = await handleRequest(request, plugins);
   const res = handleRes(response, plugins);
-  logger$2.info(methodName$2, 'req and res ready');
+  debug$2(methodName$2, 'req and res ready');
 
   // handle options
-  logger$2.info(methodName$2, 'begin handleOptions');
+  debug$2(methodName$2, 'begin handleOptions');
   const optionsRes = handleOptions(req, res);
   if (optionsRes) return;
 
   // handle routers
-  logger$2.info(methodName$2, 'begin handleRouters');
+  debug$2(methodName$2, 'begin handleRouters');
   const routersRes = handleRouters(routers, req, res);
   if (routersRes) return;
 
@@ -960,38 +960,38 @@ const listenRequest = async (request, response, routers, plugins) => {
   const reqRouters = routers[reqMethod];
 
   // handle static
-  logger$2.info(methodName$2, 'begin handleStatic');
+  debug$2(methodName$2, 'begin handleStatic');
   const staticRes = handleStatic(reqRouters, req, res);
   if (staticRes) return;
 
   // handle all
-  logger$2.info(methodName$2, 'begin handleAll');
+  debug$2(methodName$2, 'begin handleAll');
   const allRes = handleAll(reqRouters, req, res);
   if (allRes) return;
 
   // handle checks
-  logger$2.info(methodName$2, 'begin handleChecks');
+  debug$2(methodName$2, 'begin handleChecks');
   const checkRes = await handleChecks(plugins, req, res);
   if (checkRes) return;
 
   // handle path
-  logger$2.info(methodName$2, 'begin handlePath');
+  debug$2(methodName$2, 'begin handlePath');
   const pathRes = handlePath(reqRouters, req, res);
   if (pathRes) return;
 
   // handle params
-  logger$2.info(methodName$2, 'begin handleParams');
+  debug$2(methodName$2, 'begin handleParams');
   const paramsRes = handleParams(reqRouters, req, res);
   if (paramsRes) return;
 
   // other
-  logger$2.info(methodName$2, errTip);
+  debug$2(methodName$2, errTip);
   res.send(errTip);
   return;
 };
 
 // http
-const logger$1 = qiao_log_js.Logger('qiao-z');
+const debug$1 = Debug('qiao-z');
 const methodName$1 = 'listen';
 
 /**
@@ -1009,40 +1009,40 @@ const listen = (port, routers, plugins) => {
 
   // on
   server.on('checkContinue', () => {
-    logger$1.info(methodName$1, 'checkContinue');
+    debug$1(methodName$1, 'checkContinue');
   });
   server.on('checkExpectation', () => {
-    logger$1.info(methodName$1, 'checkExpectation');
+    debug$1(methodName$1, 'checkExpectation');
   });
   server.on('clientError', (err) => {
-    logger$1.info(methodName$1, 'clientError', err);
+    debug$1(methodName$1, 'clientError', err);
   });
   server.on('close', () => {
-    logger$1.info(methodName$1, 'close');
+    debug$1(methodName$1, 'close');
   });
   server.on('connect', () => {
-    logger$1.info(methodName$1, 'connect');
+    debug$1(methodName$1, 'connect');
   });
   server.on('dropRequest', () => {
-    logger$1.info(methodName$1, 'dropRequest');
+    debug$1(methodName$1, 'dropRequest');
   });
   server.on('upgrade', () => {
-    logger$1.info(methodName$1, 'upgrade');
+    debug$1(methodName$1, 'upgrade');
   });
 
   // request
   server.on('request', (request, response) => {
-    logger$1.info(methodName$1, 'request');
+    debug$1(methodName$1, 'request');
     listenRequest(request, response, routers, plugins);
   });
 
   // listen
   server.listen(port);
-  logger$1.info(methodName$1, 'listen end');
+  debug$1(methodName$1, 'listen end');
 };
 
 // init
-const logger = qiao_log_js.Logger('qiao-z');
+const debug = Debug('qiao-z');
 const methodName = 'constructor';
 
 // routers
@@ -1059,46 +1059,46 @@ var app = async (options) => {
   options = options || {};
 
   // init methods
-  logger.info(methodName, 'start init methos');
+  debug(methodName, 'start init methos');
   initMethods(app, routers);
-  logger.info(methodName, 'end init methos');
+  debug(methodName, 'end init methos');
 
   // init static
-  logger.info(methodName, 'start init static');
+  debug(methodName, 'start init static');
   initStatic(app, routers);
-  logger.info(methodName, 'end init static');
+  debug(methodName, 'end init static');
 
   // init controller
-  logger.info(methodName, 'start init controller');
+  debug(methodName, 'start init controller');
   await initController(app);
-  logger.info(methodName, 'end init controller');
+  debug(methodName, 'end init controller');
 
   // init modules
-  logger.info(methodName, 'start init modules');
+  debug(methodName, 'start init modules');
   initModules(app, options);
-  logger.info(methodName, 'end init modules');
+  debug(methodName, 'end init modules');
 
   // init task
-  logger.info(methodName, 'start init task');
+  debug(methodName, 'start init task');
   await initTask(options);
-  logger.info(methodName, 'end init task');
+  debug(methodName, 'end init task');
 
   // init plugins
-  logger.info(methodName, 'start init plugins');
+  debug(methodName, 'start init plugins');
   const plugins = initPlugins(options);
-  logger.info(methodName, 'end init plugins');
+  debug(methodName, 'end init plugins');
 
   // clear html
-  logger.info(methodName, 'start clear html');
+  debug(methodName, 'start clear html');
   await clearHtml();
-  logger.info(methodName, 'end clear html');
+  debug(methodName, 'end clear html');
 
   // listen
   app.listen = (port) => {
-    logger.info(methodName, 'listen port', port);
-    logger.info(methodName, 'listen routers', routers);
+    debug(methodName, 'listen port', port);
+    debug(methodName, 'listen routers', routers);
     listen(port || '5277', routers, plugins);
-    logger.info(methodName, 'qiao-z start success');
+    debug(methodName, 'qiao-z start success');
   };
 
   //

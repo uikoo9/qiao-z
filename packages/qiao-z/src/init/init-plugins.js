@@ -1,6 +1,6 @@
 // logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z');
+import Debug from 'debug';
+const debug = Debug('qiao-z');
 const methodName = 'initPlugins';
 
 // cros options
@@ -21,31 +21,31 @@ export default (options) => {
 
   // checks
   if (options && options.checks) {
-    logger.info(methodName, 'options.checks');
+    debug(methodName, 'options.checks');
     plugins.checks = options.checks;
   }
 
   // cros
   if (options && options.cros) {
-    logger.info(methodName, 'options.cros');
+    debug(methodName, 'options.cros');
     plugins.cros = options.cros === true ? crosOptions : options.cros;
   }
 
   // logger
   if (options && options.log && options.logOptions) {
-    logger.info(methodName, 'options.log');
+    debug(methodName, 'options.log');
     plugins.logger = options.log(options.logOptions);
   }
 
   // mysql
   if (options && options.mysql && options.config && options.config.db) {
-    logger.info(methodName, 'options.db');
+    debug(methodName, 'options.db');
     plugins.db = options.mysql(options.config.db);
   }
 
   // upload
   if (options && options.upload) {
-    logger.info(methodName, 'options.upload');
+    debug(methodName, 'options.upload');
     plugins.upload = options.upload;
   }
 

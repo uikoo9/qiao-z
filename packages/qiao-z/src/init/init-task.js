@@ -2,8 +2,8 @@
 import { lsdir } from 'qiao-file';
 
 // logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z');
+import Debug from 'debug';
+const debug = Debug('qiao-z');
 const methodName = 'initTask';
 
 /**
@@ -30,17 +30,17 @@ function operateTaskFile(cron, serverFile) {
   const file = serverFile.path;
 
   if (/Task\.js$/.test(file)) {
-    logger.info(methodName, 'operateTaskFile', file);
+    debug(methodName, 'operateTaskFile', file);
 
     const task = require(file);
-    logger.info(methodName, 'operateTaskFile', 'require success');
+    debug(methodName, 'operateTaskFile', 'require success');
     if (!task || !task.time || !task.tick) return;
 
     if (task.runAndInit) {
-      logger.info(methodName, 'operateTaskFile', 'runAndInit');
+      debug(methodName, 'operateTaskFile', 'runAndInit');
       cron.runAndInit(task.time, task.tick);
     } else {
-      logger.info(methodName, 'operateTaskFile', 'run');
+      debug(methodName, 'operateTaskFile', 'run');
       cron.run(task.time, task.tick);
     }
   }

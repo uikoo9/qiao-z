@@ -2,8 +2,8 @@
 import { lsdir, rm } from 'qiao-file';
 
 // logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z');
+import Debug from 'debug';
+const debug = Debug('qiao-z');
 const methodName = 'clearHtml';
 
 /**
@@ -19,9 +19,9 @@ export default async () => {
     const file = serverFile.path;
 
     if (/\.html\.html$/.test(file)) {
-      logger.info(methodName, 'file', file);
+      debug(methodName, 'file', file);
       await rm(file);
-      logger.info(methodName, 'rm success');
+      debug(methodName, 'rm success');
     }
   });
 };
