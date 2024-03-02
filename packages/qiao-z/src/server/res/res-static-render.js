@@ -4,6 +4,10 @@ import { resolve } from 'path';
 // qiao
 import { isExists, extname, readFile } from 'qiao-file';
 
+// logger
+import Debug from 'debug';
+const debug = Debug('qiao-z');
+
 /**
  * res.staticRender
  * @param {*} res
@@ -22,7 +26,7 @@ const staticRender = async (res, filePath) => {
   const staticPath = `${finalPath}.html`;
   if (!(await isExists(staticPath))) return;
 
-  console.log(`staticRender from ${staticPath}`);
+  debug(`staticRender from ${staticPath}`);
   const file = await readFile(staticPath);
   res.response.writeHeader(200, { 'Content-Type': 'text/html' });
   res.response.write(file);

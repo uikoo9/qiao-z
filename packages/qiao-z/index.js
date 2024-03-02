@@ -38,7 +38,7 @@ const initMethods = (app, routers) => {
 };
 
 // path
-const debug$7 = Debug('qiao-z');
+const debug$9 = Debug('qiao-z');
 const methodName$7 = 'initStatic';
 
 /**
@@ -71,11 +71,11 @@ const initStatic = (app, routers) => {
 
   // acme
   app.static('/.well-known', './.well-known');
-  debug$7(methodName$7, 'routers', routers);
+  debug$9(methodName$7, 'routers', routers);
 };
 
 // qiao
-const debug$6 = Debug('qiao-z');
+const debug$8 = Debug('qiao-z');
 const methodName$6 = 'initController';
 
 /**
@@ -94,9 +94,9 @@ const initController = async (app) => {
   // init
   serverFiles.files.forEach((serverFile) => {
     if (/Controller\.js$/.test(serverFile.path)) {
-      debug$6(methodName$6, 'filename', serverFile.path);
+      debug$8(methodName$6, 'filename', serverFile.path);
       require(serverFile.path)(app);
-      debug$6(methodName$6, 'require success');
+      debug$8(methodName$6, 'require success');
     }
   });
 };
@@ -117,7 +117,7 @@ const initModules = (app, options) => {
 };
 
 // file
-const debug$5 = Debug('qiao-z');
+const debug$7 = Debug('qiao-z');
 const methodName$5 = 'initTask';
 
 /**
@@ -144,24 +144,24 @@ function operateTaskFile(cron, serverFile) {
   const file = serverFile.path;
 
   if (/Task\.js$/.test(file)) {
-    debug$5(methodName$5, 'operateTaskFile', file);
+    debug$7(methodName$5, 'operateTaskFile', file);
 
     const task = require(file);
-    debug$5(methodName$5, 'operateTaskFile', 'require success');
+    debug$7(methodName$5, 'operateTaskFile', 'require success');
     if (!task || !task.time || !task.tick) return;
 
     if (task.runAndInit) {
-      debug$5(methodName$5, 'operateTaskFile', 'runAndInit');
+      debug$7(methodName$5, 'operateTaskFile', 'runAndInit');
       cron.runAndInit(task.time, task.tick);
     } else {
-      debug$5(methodName$5, 'operateTaskFile', 'run');
+      debug$7(methodName$5, 'operateTaskFile', 'run');
       cron.run(task.time, task.tick);
     }
   }
 }
 
 // logger
-const debug$4 = Debug('qiao-z');
+const debug$6 = Debug('qiao-z');
 const methodName$4 = 'initPlugins';
 
 // cros options
@@ -182,31 +182,31 @@ var initPlugins = (options) => {
 
   // checks
   if (options && options.checks) {
-    debug$4(methodName$4, 'options.checks');
+    debug$6(methodName$4, 'options.checks');
     plugins.checks = options.checks;
   }
 
   // cros
   if (options && options.cros) {
-    debug$4(methodName$4, 'options.cros');
+    debug$6(methodName$4, 'options.cros');
     plugins.cros = options.cros === true ? crosOptions : options.cros;
   }
 
   // logger
   if (options && options.log && options.logOptions) {
-    debug$4(methodName$4, 'options.log');
+    debug$6(methodName$4, 'options.log');
     plugins.logger = options.log(options.logOptions);
   }
 
   // mysql
   if (options && options.mysql && options.config && options.config.db) {
-    debug$4(methodName$4, 'options.db');
+    debug$6(methodName$4, 'options.db');
     plugins.db = options.mysql(options.config.db);
   }
 
   // upload
   if (options && options.upload) {
-    debug$4(methodName$4, 'options.upload');
+    debug$6(methodName$4, 'options.upload');
     plugins.upload = options.upload;
   }
 
@@ -214,7 +214,7 @@ var initPlugins = (options) => {
 };
 
 // file
-const debug$3 = Debug('qiao-z');
+const debug$5 = Debug('qiao-z');
 const methodName$3 = 'clearHtml';
 
 /**
@@ -230,9 +230,9 @@ var clearHtml = async () => {
     const file = serverFile.path;
 
     if (/\.html\.html$/.test(file)) {
-      debug$3(methodName$3, 'file', file);
+      debug$5(methodName$3, 'file', file);
       await qiaoFile.rm(file);
-      debug$3(methodName$3, 'rm success');
+      debug$5(methodName$3, 'rm success');
     }
   });
 };
@@ -581,6 +581,7 @@ const clearCookie = (res, name) => {
 };
 
 // path
+const debug$4 = Debug('qiao-z');
 
 /**
  * res.render
@@ -627,13 +628,14 @@ const render = async (res, filePath, data, cacheFilePath) => {
   }
 
   // res
-  console.log(`render from ${finalPath}`);
+  debug$4(`render from ${finalPath}`);
   res.response.writeHeader(200, { 'Content-Type': contentType });
   res.response.write(file);
   res.response.end();
 };
 
 // path
+const debug$3 = Debug('qiao-z');
 
 /**
  * res.staticRender
@@ -653,7 +655,7 @@ const staticRender = async (res, filePath) => {
   const staticPath = `${finalPath}.html`;
   if (!(await qiaoFile.isExists(staticPath))) return;
 
-  console.log(`staticRender from ${staticPath}`);
+  debug$3(`staticRender from ${staticPath}`);
   const file = await qiaoFile.readFile(staticPath);
   res.response.writeHeader(200, { 'Content-Type': 'text/html' });
   res.response.write(file);

@@ -7,6 +7,10 @@ import { isExists, extname, readFile, writeFile } from 'qiao-file';
 // template
 import template from 'art-template';
 
+// logger
+import Debug from 'debug';
+const debug = Debug('qiao-z');
+
 /**
  * res.render
  * @param {*} res
@@ -52,7 +56,7 @@ const render = async (res, filePath, data, cacheFilePath) => {
   }
 
   // res
-  console.log(`render from ${finalPath}`);
+  debug(`render from ${finalPath}`);
   res.response.writeHeader(200, { 'Content-Type': contentType });
   res.response.write(file);
   res.response.end();
