@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "art-template": "^4.13.2",
-    "qiao-cli": "^4.4.2",
-    "qiao-downloader": "^4.4.2",
-    "qiao-file": "^4.4.2",
+    "qiao-cli": "^4.5.1",
+    "qiao-downloader": "^4.5.1",
+    "qiao-file": "^4.5.1",
     "qiao-mysql": "^3.7.3",
     "qiao-string": "^3.7.4",
-    "qiao-zip": "^4.4.2"
+    "qiao-zip": "^4.5.2"
   }
 }
