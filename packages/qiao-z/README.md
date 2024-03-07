@@ -3,41 +3,48 @@
 [![npm version](https://img.shields.io/npm/v/qiao-z.svg?style=flat-square)](https://www.npmjs.org/package/qiao-z)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-z.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-z)
 
-nodejs 下极简的 web 框架，详见：[一篇文章开发 Node.js-Web-Server](https://blog.insistime.com/nodejs-web-server)
+Node.js极简&高性能Web框架，详见：[一篇文章开发 Node.js-Web-Server](https://blog.insistime.com/nodejs-web-server)
 
 ## 官网
 
 [https://qiao-z.insistime.com/#/](https://qiao-z.insistime.com/#/)
 
-## 安装
+## 特性
 
-```shell
-npm i qiao-z
-```
+- 使用简单，快速上手
+- 强大的html模版渲染功能
+- 丰富的常用功能插件
+- express.js的3-4倍性能
 
-## 使用
+## 性能
 
-```javascript
-/**
- * |-- app.js
- */
+[性能测试](https://qiao-z.insistime.com/docs/guides/performance.md)
 
-// qz
-const qz = require('qiao-z');
+![express-vs-qz](https://qiao-z.insistime.com/docs/guides/imgs/express-vs-qz.png)
 
-// app
-const app = qz();
+## api
 
-// listen
-app.listen();
-```
-
-## examples
-
-```shell
-git clone ...
-cd __tests__
-node app.js
-
-# open http://localhost:5277
-```
+- app
+  - app.listen
+  - app.static
+  - app.get
+  - app.post
+- req
+  - req.url
+  - req.headers
+  - req.cookies
+  - req.useragent
+  - req.query
+  - req.params
+  - req.body
+  - req.ip
+- res
+  - res.redirect
+  - res.send
+  - res.json
+  - res.jsonSuccess
+  - res.jsonFail
+  - res.setCookie
+  - res.clearCookie
+  - res.render
+  - res.staticRender
