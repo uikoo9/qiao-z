@@ -38,8 +38,13 @@ const render = async (res, filePath, data, cacheFilePath) => {
   let file;
   let contentType;
   if (extname(finalPath) == '.html') {
-    file = template(finalPath, data || {});
-    contentType = 'text/html';
+    if (data) {
+      file = template(finalPath, data);
+      contentType = 'text/html';
+    } else {
+      file = await readFile(finalPath);
+      contentType = 'text/html';
+    }
   } else {
     file = await readFile(finalPath);
     contentType = 'text/plain';
