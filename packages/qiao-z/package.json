@@ -1,6 +1,6 @@
 {
   "name": "qiao-z",
-  "version": "3.8.0",
+  "version": "4.5.2",
   "description": "nodejs web app framework",
   "keywords": [
     "nodejs",
@@ -33,14 +33,14 @@
     "debug": "^4.3.4",
     "parseurl": "^1.3.3",
     "qiao-file": "^4.5.1",
-    "qiao-json": "^3.7.4",
-    "qiao-ua": "^3.7.3",
+    "qiao-json": "^4.5.2",
+    "qiao-ua": "^4.5.2",
     "qiao.log.js": "^3.7.1",
     "qs": "^6.12.0",
     "raw-body": "^2.5.2"
   },
   "devDependencies": {
-    "qiao-timer": "^3.7.3"
+    "qiao-timer": "^4.5.2"
   },
   "nx": {
     "namedInputs": {
