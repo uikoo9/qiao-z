@@ -1,5 +1,5 @@
 // Logger
-import { Logger } from 'qiao.log.js';
+const { Logger } = require('qiao.log.js');
 const logger = Logger('qiao-z-user');
 
 // controller
