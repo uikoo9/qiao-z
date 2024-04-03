@@ -2,6 +2,10 @@
 import { post as ajaxPost } from 'qiao-ajax';
 import { fail } from 'qiao-json';
 
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-service');
+
 /**
  * post
  *  url
@@ -40,7 +44,7 @@ async function ajax(url, data, headers) {
   try {
     res = await ajaxPost(url, options);
   } catch (e) {
-    console.log(e);
+    logger.info('ajax', e);
   }
   const time = Date.now() - s;
 

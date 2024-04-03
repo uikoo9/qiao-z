@@ -2,6 +2,7 @@
 
 var qiaoAjax = require('qiao-ajax');
 var qiaoJson = require('qiao-json');
+var qiao_log_js = require('qiao.log.js');
 
 var host = 'https://api.insistime.com/';
 var userRegister$1 = 'user/reg';
@@ -19,6 +20,7 @@ var config = {
 };
 
 // qiao
+const logger = qiao_log_js.Logger('qiao-service');
 
 /**
  * post
@@ -58,7 +60,7 @@ async function ajax(url, data, headers) {
   try {
     res = await qiaoAjax.post(url, options);
   } catch (e) {
-    console.log(e);
+    logger.info('ajax', e);
   }
   const time = Date.now() - s;
 
