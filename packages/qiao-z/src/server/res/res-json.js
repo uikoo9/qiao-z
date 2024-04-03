@@ -1,6 +1,10 @@
 // json
 import { success, fail } from 'qiao-json';
 
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z');
+
 /**
  * res.json
  * @param {*} res
@@ -17,7 +21,7 @@ export const json = (res, obj) => {
     res.head(200, { 'Content-Type': 'application/json' });
     res.end(msg);
   } catch (error) {
-    console.log(error);
+    logger.info('json', error);
     res.send('res.json obj error');
   }
 };

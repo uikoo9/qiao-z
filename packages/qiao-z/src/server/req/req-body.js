@@ -4,6 +4,10 @@ import getRawBody from 'raw-body';
 // qs
 import qs from 'qs';
 
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z');
+
 // default body
 const defaultBody = {};
 
@@ -44,7 +48,7 @@ const handleBody = async (req, plugins) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    logger.info('handleBody', error);
   }
 
   // return
@@ -64,7 +68,7 @@ async function getBodyString(req) {
     // body str
     return await getRawBody(req.request, options);
   } catch (e) {
-    console.log(e);
+    logger.info('getBodyString', e);
     return null;
   }
 }

@@ -1,3 +1,6 @@
+// debug
+const debug = require('debug')('qiao-z-user');
+
 // sql
 const sql = require('../ucenter/sql/user-sql.json');
 
@@ -22,7 +25,7 @@ exports.checkUserMenu = async function (req, res, userid) {
     const visitPath = `#${req.url.pathname}`;
     for (let i = 0; i < menus.length; i++) {
       const url = menus[i]['ucenter_menu_url'];
-      console.log(visitPath, url);
+      debug('checkUserMenu', visitPath, url);
       if (visitPath.indexOf(url) === 0) return true;
     }
 

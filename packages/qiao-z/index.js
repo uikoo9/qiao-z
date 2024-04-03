@@ -9,6 +9,7 @@ var cookie = require('cookie');
 var ua = require('qiao-ua');
 var qs = require('qs');
 var getRawBody = require('raw-body');
+var qiao_log_js = require('qiao.log.js');
 var qiaoJson = require('qiao-json');
 var template = require('art-template');
 
@@ -297,6 +298,7 @@ const handleQuery = (req) => {
 };
 
 // raw body
+const logger$1 = qiao_log_js.Logger('qiao-z');
 
 // default body
 const defaultBody = {};
@@ -338,7 +340,7 @@ const handleBody = async (req, plugins) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    logger$1.info('handleBody', error);
   }
 
   // return
@@ -358,7 +360,7 @@ async function getBodyString(req) {
     // body str
     return await getRawBody(req.request, options);
   } catch (e) {
-    console.log(e);
+    logger$1.info('getBodyString', e);
     return null;
   }
 }
@@ -483,6 +485,7 @@ const send = (res, msg) => {
 };
 
 // json
+const logger = qiao_log_js.Logger('qiao-z');
 
 /**
  * res.json
@@ -500,7 +503,7 @@ const json = (res, obj) => {
     res.head(200, { 'Content-Type': 'application/json' });
     res.end(msg);
   } catch (error) {
-    console.log(error);
+    logger.info('json', error);
     res.send('res.json obj error');
   }
 };

@@ -1,3 +1,8 @@
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z-user');
+
+// controller
 const userController = require('./src/ucenter/controller/UserController.js');
 const ucenterUserController = require('./src/ucenter/controller/UcenterUserController.js');
 const ucenterMenuController = require('./src/ucenter/controller/UcenterMenuController.js');
@@ -17,7 +22,7 @@ exports.checkAuth = require('./src/check/index.js');
 exports.init = function (app, config) {
   // check app and config
   if (!app || !config) {
-    console.log('need app and config');
+    logger.info('init', 'need app and config');
     return;
   }
 

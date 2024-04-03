@@ -19,8 +19,10 @@
   },
   "scripts": {},
   "dependencies": {
+    "debug": "^4.3.4",
     "qiao-encode": "^4.5.1",
     "qiao-mysql": "^3.7.3",
-    "qiao-sms": "^3.7.3"
+    "qiao-sms": "^3.7.3",
+    "qiao.log.js": "^3.7.1"
   }
 }
