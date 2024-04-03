@@ -23,3 +23,22 @@ export const cache = (key, value) => {
   // set
   set(key, value);
 };
+
+/**
+ * cacheIt
+ * @param {*} cacheKey
+ * @param {*} cacheFunction
+ * @returns
+ */
+export const cacheIt = async (cacheKey, cacheFunction) => {
+  let item;
+  const cacheItem = cache(cacheKey);
+  if (!cacheItem) {
+    item = await cacheFunction();
+    cache(cacheKey, item);
+  } else {
+    item = cacheItem;
+  }
+
+  return item;
+};

@@ -29,5 +29,5 @@ console.log(s); // hello
 
 // del
 cache('test', null);
-console.log(q.cache('test')); // undefined
+console.log(cache('test')); // undefined
 ```
