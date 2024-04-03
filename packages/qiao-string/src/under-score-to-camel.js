@@ -1,6 +1,10 @@
 // upper
 import { firstLetterUpper } from './first-letter-upper.js';
 
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-string');
+
 /**
  * underScoreCaseToCamelCase
  * @param {*} underScoreCaseName
@@ -8,7 +12,7 @@ import { firstLetterUpper } from './first-letter-upper.js';
  */
 export const underScoreCaseToCamelCase = (underScoreCaseName) => {
   if (!underScoreCaseName) {
-    console.log('need under score case name!');
+    logger.info('underScoreCaseToCamelCase', 'need under score case name!');
     return;
   }
 

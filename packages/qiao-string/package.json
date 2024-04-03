@@ -39,5 +39,8 @@
         ]
       }
     }
+  },
+  "dependencies": {
+    "qiao.log.js": "^3.7.1"
   }
 }

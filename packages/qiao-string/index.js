@@ -1,5 +1,10 @@
 'use strict';
 
+var qiao_log_js = require('qiao.log.js');
+
+// Logger
+const logger$2 = qiao_log_js.Logger('qiao-string');
+
 /**
  * firstLetterLower
  * @param {*} str
@@ -8,13 +13,13 @@
 const firstLetterLower = (str) => {
   // check empty
   if (!str) {
-    console.log('need str');
+    logger$2.info('firstLetterLower', 'need str');
     return null;
   }
 
   // check string
   if (typeof str != 'string') {
-    console.log('need string');
+    logger$2.info('firstLetterLower', 'need string');
     return null;
   }
 
@@ -24,6 +29,9 @@ const firstLetterLower = (str) => {
   return strLength == 1 ? firstLetter : firstLetter + str.substring(1, strLength);
 };
 
+// Logger
+const logger$1 = qiao_log_js.Logger('qiao-string');
+
 /**
  * firstLetterUpper
  * @param {*} str
@@ -32,13 +40,13 @@ const firstLetterLower = (str) => {
 const firstLetterUpper = (str) => {
   // check empty
   if (!str) {
-    console.log('need str');
+    logger$1.info('firstLetterUpper', 'need str');
     return null;
   }
 
   // check string
   if (typeof str != 'string') {
-    console.log('need string');
+    logger$1.info('firstLetterUpper', 'need string');
     return null;
   }
 
@@ -49,6 +57,7 @@ const firstLetterUpper = (str) => {
 };
 
 // upper
+const logger = qiao_log_js.Logger('qiao-string');
 
 /**
  * underScoreCaseToCamelCase
@@ -57,7 +66,7 @@ const firstLetterUpper = (str) => {
  */
 const underScoreCaseToCamelCase = (underScoreCaseName) => {
   if (!underScoreCaseName) {
-    console.log('need under score case name!');
+    logger.info('underScoreCaseToCamelCase', 'need under score case name!');
     return;
   }
 

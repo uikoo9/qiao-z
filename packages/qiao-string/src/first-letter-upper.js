@@ -1,3 +1,7 @@
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-string');
+
 /**
  * firstLetterUpper
  * @param {*} str
@@ -6,13 +10,13 @@
 export const firstLetterUpper = (str) => {
   // check empty
   if (!str) {
-    console.log('need str');
+    logger.info('firstLetterUpper', 'need str');
     return null;
   }
 
   // check string
   if (typeof str != 'string') {
-    console.log('need string');
+    logger.info('firstLetterUpper', 'need string');
     return null;
   }
 
