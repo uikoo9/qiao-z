@@ -1,6 +1,10 @@
 // txsms
 import txsms from 'qcloudsms_js';
 
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-sms');
+
 /**
  * send sms msg
  * 	options.appid appid
@@ -16,25 +20,27 @@ import txsms from 'qcloudsms_js';
  * @returns
  */
 export const sendSMSMsg = (options, callback) => {
+  const methodName = 'sendSMSMsg';
+
   // check
   if (!options) {
-    console.log('sendSMSMsg need options');
+    logger.info(methodName, 'sendSMSMsg need options');
     return;
   }
   if (!options.appid) {
-    console.log('sendSMSMsg need options.appid');
+    logger.info(methodName, 'sendSMSMsg need options.appid');
     return;
   }
   if (!options.appkey) {
-    console.log('sendSMSMsg need options.appkey');
+    logger.info(methodName, 'sendSMSMsg need options.appkey');
     return;
   }
   if (!options.mobile) {
-    console.log('sendSMSMsg need options.mobile');
+    logger.info(methodName, 'sendSMSMsg need options.mobile');
     return;
   }
   if (!options.msg) {
-    console.log('sendSMSMsg need options.msg');
+    logger.info(methodName, 'sendSMSMsg need options.msg');
     return;
   }
 

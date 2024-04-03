@@ -1,8 +1,10 @@
 'use strict';
 
 var txsms = require('qcloudsms_js');
+var qiao_log_js = require('qiao.log.js');
 
 // txsms
+const logger = qiao_log_js.Logger('qiao-sms');
 
 /**
  * send sms msg
@@ -19,25 +21,27 @@ var txsms = require('qcloudsms_js');
  * @returns
  */
 const sendSMSMsg = (options, callback) => {
+  const methodName = 'sendSMSMsg';
+
   // check
   if (!options) {
-    console.log('sendSMSMsg need options');
+    logger.info(methodName, 'sendSMSMsg need options');
     return;
   }
   if (!options.appid) {
-    console.log('sendSMSMsg need options.appid');
+    logger.info(methodName, 'sendSMSMsg need options.appid');
     return;
   }
   if (!options.appkey) {
-    console.log('sendSMSMsg need options.appkey');
+    logger.info(methodName, 'sendSMSMsg need options.appkey');
     return;
   }
   if (!options.mobile) {
-    console.log('sendSMSMsg need options.mobile');
+    logger.info(methodName, 'sendSMSMsg need options.mobile');
     return;
   }
   if (!options.msg) {
-    console.log('sendSMSMsg need options.msg');
+    logger.info(methodName, 'sendSMSMsg need options.msg');
     return;
   }
 
