@@ -27,7 +27,8 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "cron": "^3.1.6"
+    "cron": "^3.1.6",
+    "qiao.log.js": "^3.7.1"
   },
   "nx": {
     "namedInputs": {

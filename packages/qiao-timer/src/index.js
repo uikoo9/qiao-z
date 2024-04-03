@@ -1,6 +1,10 @@
 // cron
 import cron from 'cron';
 
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-timer');
+
 /**
  * job
  * 	time
@@ -9,11 +13,11 @@ import cron from 'cron';
 export const job = (time, tick) => {
   // check
   if (!time) {
-    console.log('need time params!');
+    logger.info('job', 'need time params!');
     return;
   }
   if (!tick) {
-    console.log('need tick params!');
+    logger.info('job', 'need tick params!');
     return;
   }
 
@@ -29,11 +33,11 @@ export const job = (time, tick) => {
 export const run = (time, tick) => {
   // check
   if (!time) {
-    console.log('need time params!');
+    logger.info('run', 'need time params!');
     return;
   }
   if (!tick) {
-    console.log('need tick params!');
+    logger.info('run', 'need tick params!');
     return;
   }
 
@@ -53,11 +57,11 @@ export const run = (time, tick) => {
 export const runAndInit = (time, tick) => {
   // check
   if (!time) {
-    console.log('need time params!');
+    logger.info('runAndInit', 'need time params!');
     return;
   }
   if (!tick) {
-    console.log('need tick params!');
+    logger.info('runAndInit', 'need tick params!');
     return;
   }
 
