@@ -91,11 +91,11 @@ async function ajax(url, data, headers) {
  * @param {*} code
  * @returns
  */
-const userRegister = async (mobile, password, repassword, code) => {
+const userRegister = async (mobile, password, repassword, code, host) => {
   if (!mobile || !password || !repassword || !code) return qiaoJson.fail('need mobile, code, password');
   if (password != repassword) return qiaoJson.fail('the two password do not match');
 
-  const url = config.host + config.userRegister;
+  const url = (host || config.host) + config.userRegister;
   const data = {
     username: mobile,
     password: password,
@@ -111,10 +111,10 @@ const userRegister = async (mobile, password, repassword, code) => {
  * @param {*} password
  * @returns
  */
-const userLogin = async (mobile, password) => {
+const userLogin = async (mobile, password, host) => {
   if (!mobile || !password) return qiaoJson.fail('need mobile and password');
 
-  const url = config.host + config.userLogin;
+  const url = (host || config.host) + config.userLogin;
   const data = {
     username: mobile,
     password: password,
@@ -129,11 +129,11 @@ const userLogin = async (mobile, password) => {
  * @param {*} usertoken
  * @returns
  */
-const userCheck = async (userid, usertoken) => {
+const userCheck = async (userid, usertoken, host) => {
   if (!userid) return qiaoJson.fail('need userid');
   if (!usertoken) return qiaoJson.fail('need usertoken');
 
-  const url = config.host + config.userCheck;
+  const url = (host || config.host) + config.userCheck;
   const data = {
     userid: userid,
     usertoken: usertoken,
@@ -148,7 +148,7 @@ const userCheck = async (userid, usertoken) => {
  * @param {*} usertoken
  * @returns
  */
-const userMenus = async (userid, usertoken) => {
+const userMenus = async (userid, usertoken, host) => {
   // check
   if (!userid) return qiaoJson.fail('need userid');
   if (!usertoken) return qiaoJson.fail('need usertoken');
@@ -160,7 +160,7 @@ const userMenus = async (userid, usertoken) => {
   };
 
   // req
-  const url = config.host + config.userMenus;
+  const url = (host || config.host) + config.userMenus;
   return await postWithToken(url, {});
 };
 
@@ -169,10 +169,10 @@ const userMenus = async (userid, usertoken) => {
  * @param {*} mobile
  * @returns
  */
-const sendCode = async (mobile) => {
+const sendCode = async (mobile, host) => {
   if (!mobile) return qiaoJson.fail('need mobile');
 
-  const url = config.host + config.sendCode;
+  const url = (host || config.host) + config.sendCode;
   const data = {
     type: 'reg',
     sign: '坚时科技',

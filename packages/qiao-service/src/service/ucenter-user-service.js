@@ -15,11 +15,11 @@ import { fail } from 'qiao-json';
  * @param {*} code
  * @returns
  */
-export const userRegister = async (mobile, password, repassword, code) => {
+export const userRegister = async (mobile, password, repassword, code, host) => {
   if (!mobile || !password || !repassword || !code) return fail('need mobile, code, password');
   if (password != repassword) return fail('the two password do not match');
 
-  const url = config.host + config.userRegister;
+  const url = (host || config.host) + config.userRegister;
   const data = {
     username: mobile,
     password: password,
@@ -35,10 +35,10 @@ export const userRegister = async (mobile, password, repassword, code) => {
  * @param {*} password
  * @returns
  */
-export const userLogin = async (mobile, password) => {
+export const userLogin = async (mobile, password, host) => {
   if (!mobile || !password) return fail('need mobile and password');
 
-  const url = config.host + config.userLogin;
+  const url = (host || config.host) + config.userLogin;
   const data = {
     username: mobile,
     password: password,
@@ -53,11 +53,11 @@ export const userLogin = async (mobile, password) => {
  * @param {*} usertoken
  * @returns
  */
-export const userCheck = async (userid, usertoken) => {
+export const userCheck = async (userid, usertoken, host) => {
   if (!userid) return fail('need userid');
   if (!usertoken) return fail('need usertoken');
 
-  const url = config.host + config.userCheck;
+  const url = (host || config.host) + config.userCheck;
   const data = {
     userid: userid,
     usertoken: usertoken,
@@ -72,7 +72,7 @@ export const userCheck = async (userid, usertoken) => {
  * @param {*} usertoken
  * @returns
  */
-export const userMenus = async (userid, usertoken) => {
+export const userMenus = async (userid, usertoken, host) => {
   // check
   if (!userid) return fail('need userid');
   if (!usertoken) return fail('need usertoken');
@@ -84,7 +84,7 @@ export const userMenus = async (userid, usertoken) => {
   };
 
   // req
-  const url = config.host + config.userMenus;
+  const url = (host || config.host) + config.userMenus;
   return await postWithToken(url, {});
 };
 
@@ -93,10 +93,10 @@ export const userMenus = async (userid, usertoken) => {
  * @param {*} mobile
  * @returns
  */
-export const sendCode = async (mobile) => {
+export const sendCode = async (mobile, host) => {
   if (!mobile) return fail('need mobile');
 
-  const url = config.host + config.sendCode;
+  const url = (host || config.host) + config.sendCode;
   const data = {
     type: 'reg',
     sign: '坚时科技',
