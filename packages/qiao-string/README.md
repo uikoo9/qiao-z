@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-string.svg?style=flat-square)](https://www.npmjs.org/package/qiao-string)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-string.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-string)
 
-nodejs 下[qiao-z](https://qiao-z.insistime.com/#/)中的 string 相关工具类
+nodejs 下[qiao-z](https://qiao-z.vincentqiao.com/#/)中的 string 相关工具类
 
 ## install
 

@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-z-upload.svg?style=flat-square)](https://www.npmjs.org/package/qiao-z-upload)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-z-upload.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-z-upload)
 
-[qiao-z](https://qiao-z.insistime.com/#/) upload module
+[qiao-z](https://qiao-z.vincentqiao.com/#/) upload module
 
 ## api
 

@@ -7,7 +7,7 @@ Node.js极简&高性能Web框架，详见：[一篇文章开发 Node.js-Web-Serv
 
 ## 官网
 
-[https://qiao-z.insistime.com/#/](https://qiao-z.insistime.com/#/)
+[https://qiao-z.vincentqiao.com/#/](https://qiao-z.vincentqiao.com/#/)
 
 ## 特性
 
@@ -18,9 +18,9 @@ Node.js极简&高性能Web框架，详见：[一篇文章开发 Node.js-Web-Serv
 
 ## 性能
 
-[性能测试](https://qiao-z.insistime.com/docs/guides/performance.md)
+[性能测试](https://qiao-z.vincentqiao.com/docs/guides/performance.md)
 
-![express-vs-qz](https://qiao-z.insistime.com/docs/guides/imgs/express-vs-qz.png)
+![express-vs-qz](https://qiao-z.vincentqiao.com/docs/guides/imgs/express-vs-qz.png)
 
 ## api
 
