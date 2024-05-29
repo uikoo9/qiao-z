@@ -131,7 +131,6 @@ exports.{{className2}}Save = async (req, res) => {
       params.push(express_userid || 1);
       params.push(express_username || 'admin');
       params.push(id);
-      params.push(express_userid);
       
       await req.db.query(sql.{{className2}}Edit, params);
     }
