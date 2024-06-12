@@ -109,11 +109,11 @@ const initController = async (app) => {
  * @returns
  */
 const initModules = (app, options) => {
-  if (!app || !options || !options.modules || !options.config) return;
+  if (!app || !options || !options.modules) return;
 
   // modules
   options.modules.forEach((m) => {
-    m(app, options.config);
+    m(app);
   });
 };
 
@@ -1067,6 +1067,9 @@ var app = async (options) => {
 
   // options
   options = options || {};
+
+  // init config
+  if (options.config) global.QZ_CONFIG = options.config;
 
   // init methods
   debug(methodName, 'start init methos');
