@@ -5,11 +5,11 @@
  * @returns
  */
 const initModules = (app, options) => {
-  if (!app || !options || !options.modules || !options.config) return;
+  if (!app || !options || !options.modules) return;
 
   // modules
   options.modules.forEach((m) => {
-    m(app, options.config);
+    m(app);
   });
 };
 

@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
   // consts
   const username = req.body.username;
   const password = req.body.password;
-  const encryptPassword = encode.AESEncrypt(password, global.QIAO_USER_CONFIG.encryptKey);
+  const encryptPassword = encode.AESEncrypt(password, global.QZ_CONFIG.encryptKey);
 
   // db
   try {
@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
     }
 
     // send
-    const usertoken = encode.AESEncrypt(username + encryptPassword, global.QIAO_USER_CONFIG.encryptKey);
+    const usertoken = encode.AESEncrypt(username + encryptPassword, global.QZ_CONFIG.encryptKey);
     res.jsonSuccess('登录成功！', {
       userid: rows[0].id,
       usertoken: usertoken,

@@ -65,8 +65,8 @@ module.exports = async (req, res) => {
     }
 
     // consts for send
-    const appid = global.QIAO_USER_CONFIG.sms.appid;
-    const appkey = global.QIAO_USER_CONFIG.sms.appkey;
+    const appid = global.QZ_CONFIG.sms.appid;
+    const appkey = global.QZ_CONFIG.sms.appkey;
     const sign = req.body.sign;
 
     // send

@@ -26,7 +26,7 @@ exports.checkUserAuth = async function (req, res, userid, usertoken) {
     const user = rows[0];
     const username = user['ucenter_user_name'];
     const password = user['ucenter_user_password'];
-    const rUsertoken = AESEncrypt(username + password, global.QIAO_USER_CONFIG.encryptKey);
+    const rUsertoken = AESEncrypt(username + password, global.QZ_CONFIG.encryptKey);
 
     // send
     const finalUsertoken = decodeURIComponent(usertoken);

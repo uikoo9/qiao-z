@@ -28,6 +28,9 @@ export default async (options) => {
   // options
   options = options || {};
 
+  // init config
+  if (options.config) global.QZ_CONFIG = options.config;
+
   // init methods
   debug(methodName, 'start init methos');
   initMethods(app, routers);

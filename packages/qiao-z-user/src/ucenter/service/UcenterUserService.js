@@ -122,7 +122,7 @@ exports.ucenterUserSave = async (req, res) => {
   let id = req.body.id;
   const ucenterUserName = req.body.ucenterUserName;
   const ucenterUserPassword = req.body.ucenterUserPassword;
-  const encryptPassword = AESEncrypt(ucenterUserPassword, global.QIAO_USER_CONFIG.encryptKey);
+  const encryptPassword = AESEncrypt(ucenterUserPassword, global.QZ_CONFIG.encryptKey);
 
   // vars for userinfo
   const express_userid = req.body.express_userid;

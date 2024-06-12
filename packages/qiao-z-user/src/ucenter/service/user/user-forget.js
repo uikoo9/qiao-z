@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
 
     // check user
     const password = req.body.password;
-    const encryptPassword = encode.AESEncrypt(password, global.QIAO_USER_CONFIG.encryptKey);
+    const encryptPassword = encode.AESEncrypt(password, global.QZ_CONFIG.encryptKey);
     const rows = await req.db.query(sql.userGetByMobile, [username]);
     if (rows && rows.length != 1) {
       res.jsonFail('手机号未注册！');

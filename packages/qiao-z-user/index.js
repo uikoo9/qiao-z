@@ -17,17 +17,14 @@ exports.checkAuth = require('./src/check/index.js');
 
 /**
  * init
- * @param {*} app express app
+ * @param {*} app qz app
  */
-exports.init = function (app, config) {
-  // check app and config
-  if (!app || !config) {
-    logger.info('init', 'need app and config');
+exports.init = function (app) {
+  // check app
+  if (!app) {
+    logger.info('init', 'need app');
     return;
   }
-
-  // config
-  global.QIAO_USER_CONFIG = config;
 
   // init controller
   userController(app);
