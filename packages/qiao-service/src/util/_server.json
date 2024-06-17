@@ -1,5 +1,5 @@
 {
-  "host": "https://api.insistime.com/",
+  "host": "https://api.vincentqiao.com/",
 
   "userRegister": "user/reg",
   "userLogin": "user/login",

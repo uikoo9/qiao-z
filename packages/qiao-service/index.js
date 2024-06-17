@@ -4,7 +4,7 @@ var qiaoAjax = require('qiao-ajax');
 var qiaoJson = require('qiao-json');
 var qiao_log_js = require('qiao.log.js');
 
-var host = 'https://api.insistime.com/';
+var host = 'https://api.vincentqiao.com/';
 var userRegister$1 = 'user/reg';
 var userLogin$1 = 'user/login';
 var userCheck$1 = 'user/check';
