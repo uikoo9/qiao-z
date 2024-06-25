@@ -94,7 +94,7 @@ const initController = async (app) => {
 
   // init
   serverFiles.files.forEach((serverFile) => {
-    if (/Controller\.js$/.test(serverFile.path)) {
+    if (/Controller\.js$/.test(serverFile.path) && serverFile.path.indexOf('node_modules') === -1) {
       debug$8(methodName$6, 'filename', serverFile.path);
       require(serverFile.path)(app);
       debug$8(methodName$6, 'require success');
