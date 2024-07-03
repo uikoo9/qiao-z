@@ -12,7 +12,6 @@ var getRawBody = require('raw-body');
 var qiao_log_js = require('qiao.log.js');
 var qiaoJson = require('qiao-json');
 var template = require('art-template');
-var httpProxy = require('http-proxy');
 
 // methods
 const methods = ['get', 'post'];
@@ -672,11 +671,8 @@ const staticRender = async (res, filePath) => {
   return true;
 };
 
-// proxy
+// http
 const logger = qiao_log_js.Logger('qiao-z');
-
-// const
-const proxyServer = httpProxy.createProxyServer({});
 
 /**
  * res.proxy
@@ -685,9 +681,28 @@ const proxyServer = httpProxy.createProxyServer({});
  * @param {*} proxyOptions
  */
 const proxy = (request, response, proxyOptions) => {
-  proxyServer.web(request, response, { target: proxyOptions.proxyUrl }, (e) => {
-    logger.error('res.proxy', e);
+  // options
+  const options = {
+    hostname: proxyOptions.host,
+    port: proxyOptions.port,
+    path: request.url,
+    method: request.method,
+    headers: request.headers,
+  };
+
+  // proxy
+  const proxy = http.request(options, (proxyRes) => {
+    response.writeHead(proxyRes.statusCode, proxyRes.headers);
+    proxyRes.pipe(response, { end: true });
   });
+  proxy.on('error', (err) => {
+    logger.error('Proxy request error:', err);
+    response.writeHead(500, { 'Content-Type': 'text/plain' });
+    response.end('Something went wrong.');
+  });
+
+  // request
+  request.pipe(proxy, { end: true });
 };
 
 // res methods
