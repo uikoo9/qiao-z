@@ -27,7 +27,7 @@ const proxy = (options) => {
   // proxy server
   const proxyServer = httpProxy.createProxyServer({});
   const server = http.createServer(function (req, res) {
-    proxyServer.web(req, res, { target: options.targetUrl });
+    proxyServer.web(req, res, { target: options.proxyUrl });
   });
 
   // on
