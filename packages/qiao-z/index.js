@@ -1,9 +1,10 @@
 'use strict';
 
-var path = require('path');
-var Debug = require('debug');
-var qiaoFile = require('qiao-file');
 var http = require('http');
+var httpProxy = require('http-proxy');
+var Debug = require('debug');
+var path = require('path');
+var qiaoFile = require('qiao-file');
 var parseurl = require('parseurl');
 var cookie = require('cookie');
 var ua = require('qiao-ua');
@@ -12,6 +13,50 @@ var getRawBody = require('raw-body');
 var qiao_log_js = require('qiao.log.js');
 var qiaoJson = require('qiao-json');
 var template = require('art-template');
+
+// http
+const debug$a = Debug('qiao-z');
+const methodName$8 = 'proxy';
+
+/**
+ * proxy
+ * @param {*} options
+ * @returns
+ */
+const proxy = (options) => {
+  // proxy server
+  const proxyServer = httpProxy.createProxyServer({});
+  const server = http.createServer(function (req, res) {
+    proxyServer.web(req, res, { target: options.targetUrl });
+  });
+
+  // on
+  server.on('checkContinue', () => {
+    debug$a(methodName$8, 'checkContinue');
+  });
+  server.on('checkExpectation', () => {
+    debug$a(methodName$8, 'checkExpectation');
+  });
+  server.on('clientError', (err) => {
+    debug$a(methodName$8, 'clientError', err);
+  });
+  server.on('close', () => {
+    debug$a(methodName$8, 'close');
+  });
+  server.on('connect', () => {
+    debug$a(methodName$8, 'connect');
+  });
+  server.on('dropRequest', () => {
+    debug$a(methodName$8, 'dropRequest');
+  });
+  server.on('upgrade', () => {
+    debug$a(methodName$8, 'upgrade');
+  });
+
+  // listen
+  server.listen(options.port);
+  debug$a(methodName$8, 'listen end');
+};
 
 // methods
 const methods = ['get', 'post'];
@@ -1051,7 +1096,7 @@ const listen = (port, routers, plugins) => {
   debug$1(methodName$1, 'listen end');
 };
 
-// init
+// proxy
 const debug = Debug('qiao-z');
 const methodName = 'constructor';
 
@@ -1062,14 +1107,20 @@ const routers = {};
  * app
  */
 var app = async (options) => {
+  // options
+  options = options || {};
+  if (options.config) global.QZ_CONFIG = options.config;
+
   // app
   const app = {};
 
-  // options
-  options = options || {};
-
-  // init config
-  if (options.config) global.QZ_CONFIG = options.config;
+  // proxy
+  if (options.proxy) {
+    app.proxy = () => {
+      proxy(options);
+    };
+    return app;
+  }
 
   // init methods
   debug(methodName, 'start init methos');

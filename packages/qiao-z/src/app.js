@@ -1,3 +1,6 @@
+// proxy
+import proxy from './proxy/proxy.js';
+
 // init
 import initMethods from './init/init-methods.js';
 import initStatic from './init/init-static.js';
@@ -22,14 +25,20 @@ const routers = {};
  * app
  */
 export default async (options) => {
+  // options
+  options = options || {};
+  if (options.config) global.QZ_CONFIG = options.config;
+
   // app
   const app = {};
 
-  // options
-  options = options || {};
-
-  // init config
-  if (options.config) global.QZ_CONFIG = options.config;
+  // proxy
+  if (options.proxy) {
+    app.proxy = () => {
+      proxy(options);
+    };
+    return app;
+  }
 
   // init methods
   debug(methodName, 'start init methos');
