@@ -7,14 +7,16 @@ import { json, jsonSuccess, jsonFail } from './res-json.js';
 import { clearCookie, setCookie } from './res-cookie.js';
 import render from './res-render.js';
 import staticRender from './res-static-render.js';
+import proxy from './res-proxy.js';
 
 /**
  * res
+ * @param {*} request
  * @param {*} response
  * @param {*} plugins
  * @returns
  */
-const handleRes = (response, plugins) => {
+const handleRes = (request, response, plugins) => {
   const res = {};
   res.response = response;
 
@@ -68,6 +70,11 @@ const handleRes = (response, plugins) => {
   };
   res.staticRender = async (filePath) => {
     return await staticRender(res, filePath);
+  };
+
+  // proxy
+  res.proxy = (proxyOptions) => {
+    proxy(request, response, proxyOptions);
   };
 
   return res;

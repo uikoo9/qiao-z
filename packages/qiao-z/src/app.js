@@ -1,6 +1,3 @@
-// proxy
-import proxy from './proxy/proxy.js';
-
 // init
 import initMethods from './init/init-methods.js';
 import initStatic from './init/init-static.js';
@@ -31,14 +28,6 @@ export default async (options) => {
 
   // app
   const app = {};
-
-  // proxy
-  if (options.proxy) {
-    app.proxy = () => {
-      proxy(options);
-    };
-    return app;
-  }
 
   // init methods
   debug(methodName, 'start init methos');

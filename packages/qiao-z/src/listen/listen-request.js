@@ -32,7 +32,7 @@ const errTip = 'can not get router';
 const listenRequest = async (request, response, routers, plugins) => {
   // req res
   const req = await reqFn(request, plugins);
-  const res = resFn(response, plugins);
+  const res = resFn(request, response, plugins);
   debug(methodName, 'req and res ready');
 
   // handle options

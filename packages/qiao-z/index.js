@@ -1,10 +1,9 @@
 'use strict';
 
-var http = require('http');
-var httpProxy = require('http-proxy');
-var Debug = require('debug');
 var path = require('path');
+var Debug = require('debug');
 var qiaoFile = require('qiao-file');
+var http = require('http');
 var parseurl = require('parseurl');
 var cookie = require('cookie');
 var ua = require('qiao-ua');
@@ -13,50 +12,7 @@ var getRawBody = require('raw-body');
 var qiao_log_js = require('qiao.log.js');
 var qiaoJson = require('qiao-json');
 var template = require('art-template');
-
-// http
-const debug$a = Debug('qiao-z');
-const methodName$8 = 'proxy';
-
-/**
- * proxy
- * @param {*} options
- * @returns
- */
-const proxy = (options) => {
-  // proxy server
-  const proxyServer = httpProxy.createProxyServer({});
-  const server = http.createServer(function (req, res) {
-    proxyServer.web(req, res, { target: options.proxyUrl });
-  });
-
-  // on
-  server.on('checkContinue', () => {
-    debug$a(methodName$8, 'checkContinue');
-  });
-  server.on('checkExpectation', () => {
-    debug$a(methodName$8, 'checkExpectation');
-  });
-  server.on('clientError', (err) => {
-    debug$a(methodName$8, 'clientError', err);
-  });
-  server.on('close', () => {
-    debug$a(methodName$8, 'close');
-  });
-  server.on('connect', () => {
-    debug$a(methodName$8, 'connect');
-  });
-  server.on('dropRequest', () => {
-    debug$a(methodName$8, 'dropRequest');
-  });
-  server.on('upgrade', () => {
-    debug$a(methodName$8, 'upgrade');
-  });
-
-  // listen
-  server.listen(options.port);
-  debug$a(methodName$8, 'listen end');
-};
+var httpProxy = require('http-proxy');
 
 // methods
 const methods = ['get', 'post'];
@@ -343,7 +299,7 @@ const handleQuery = (req) => {
 };
 
 // raw body
-const logger$1 = qiao_log_js.Logger('qiao-z');
+const logger$2 = qiao_log_js.Logger('qiao-z');
 
 // default body
 const defaultBody = {};
@@ -385,7 +341,7 @@ const handleBody = async (req, plugins) => {
       }
     }
   } catch (error) {
-    logger$1.info('handleBody', error);
+    logger$2.info('handleBody', error);
   }
 
   // return
@@ -405,7 +361,7 @@ async function getBodyString(req) {
     // body str
     return await getRawBody(req.request, options);
   } catch (e) {
-    logger$1.info('getBodyString', e);
+    logger$2.info('getBodyString', e);
     return null;
   }
 }
@@ -530,7 +486,7 @@ const send = (res, msg) => {
 };
 
 // json
-const logger = qiao_log_js.Logger('qiao-z');
+const logger$1 = qiao_log_js.Logger('qiao-z');
 
 /**
  * res.json
@@ -548,7 +504,7 @@ const json = (res, obj) => {
     res.head(200, { 'Content-Type': 'application/json' });
     res.end(msg);
   } catch (error) {
-    logger.info('json', error);
+    logger$1.info('json', error);
     res.send('res.json obj error');
   }
 };
@@ -716,15 +672,34 @@ const staticRender = async (res, filePath) => {
   return true;
 };
 
+// proxy
+const logger = qiao_log_js.Logger('qiao-z');
+
+// const
+const proxyServer = httpProxy.createProxyServer({});
+
+/**
+ * res.proxy
+ * @param {*} request
+ * @param {*} response
+ * @param {*} proxyOptions
+ */
+const proxy = (request, response, proxyOptions) => {
+  proxyServer.web(request, response, { target: proxyOptions.proxyUrl }, (e) => {
+    logger.error('res.proxy', e);
+  });
+};
+
 // res methods
 
 /**
  * res
+ * @param {*} request
  * @param {*} response
  * @param {*} plugins
  * @returns
  */
-const handleRes = (response, plugins) => {
+const handleRes = (request, response, plugins) => {
   const res = {};
   res.response = response;
 
@@ -778,6 +753,11 @@ const handleRes = (response, plugins) => {
   };
   res.staticRender = async (filePath) => {
     return await staticRender(res, filePath);
+  };
+
+  // proxy
+  res.proxy = (proxyOptions) => {
+    proxy(request, response, proxyOptions);
   };
 
   return res;
@@ -997,7 +977,7 @@ const errTip = 'can not get router';
 const listenRequest = async (request, response, routers, plugins) => {
   // req res
   const req = await handleRequest(request, plugins);
-  const res = handleRes(response, plugins);
+  const res = handleRes(request, response, plugins);
   debug$2(methodName$2, 'req and res ready');
 
   // handle options
@@ -1096,7 +1076,7 @@ const listen = (port, routers, plugins) => {
   debug$1(methodName$1, 'listen end');
 };
 
-// proxy
+// init
 const debug = Debug('qiao-z');
 const methodName = 'constructor';
 
@@ -1113,14 +1093,6 @@ var app = async (options) => {
 
   // app
   const app = {};
-
-  // proxy
-  if (options.proxy) {
-    app.proxy = () => {
-      proxy(options);
-    };
-    return app;
-  }
 
   // init methods
   debug(methodName, 'start init methos');
