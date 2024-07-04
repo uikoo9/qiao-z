@@ -683,32 +683,6 @@ const logger = qiao_log_js.Logger('qiao-z');
 const proxy = (request, response, proxyOptions) => {
   const methodName = 'res.proxy';
 
-  // proxy req
-  const proxyRequest = proxyRequestFn(request, response, proxyOptions);
-  if (request.method === 'POST') {
-    logger.info(methodName, 'post');
-
-    const chunks = [];
-    request.on('data', (chunk) => {
-      chunks.push(chunk);
-    });
-    request.on('end', () => {
-      logger.info(methodName, 'post end');
-
-      const postData = Buffer.concat(chunks).toString();
-      proxyRequest.write(postData);
-      proxyRequest.end();
-    });
-  } else {
-    logger.info(methodName, 'other end');
-    request.pipe(proxyRequest, { end: true });
-  }
-};
-
-// proxy request
-function proxyRequestFn(request, response, proxyOptions) {
-  const methodName = 'proxyRequest';
-
   // check
   if (!proxyOptions) {
     logger.error(methodName, 'need proxyOptions');
@@ -742,7 +716,7 @@ function proxyRequestFn(request, response, proxyOptions) {
   logger.info(methodName, 'options', options);
 
   // proxy
-  const proxy = http.request(options, (proxyRes) => {
+  const proxyRequest = http.request(options, (proxyRes) => {
     logger.info(methodName, 'proxyRes.statusCode', proxyRes.statusCode);
     logger.info(methodName, 'proxyRes.headers', proxyRes.headers);
 
@@ -754,12 +728,21 @@ function proxyRequestFn(request, response, proxyOptions) {
     response.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(response, { end: true });
   });
-  proxy.on('error', (err) => {
+  proxyRequest.on('error', (err) => {
     logger.error(methodName, 'proxy request error', err);
     responseError(response);
   });
-  return proxy;
-}
+
+  // proxy req
+  if (request.method === 'POST') {
+    const postData = JSON.stringify(proxyOptions.body);
+    logger.info(methodName, 'postData', postData);
+    proxyRequest.write(postData);
+    proxyRequest.end();
+  } else {
+    request.pipe(proxyRequest, { end: true });
+  }
+};
 
 // response error
 function responseError(response) {
