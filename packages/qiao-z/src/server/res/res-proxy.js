@@ -83,16 +83,17 @@ function responseSetCookie(response, proxyOptions) {
   if (!proxyOptions || !proxyOptions.cookies) return;
 
   // set
+  let setCookieHeaders = [];
   for (let i = 0; i < proxyOptions.cookies.length; i++) {
     const item = proxyOptions.cookies[i];
-    response.setHeader(
-      'Set-Cookie',
+    setCookieHeaders.push(
       cookie.serialize(item.key, String(item.value), {
         maxAge: item.maxAge || 60 * 60 * 24 * 7, // 1 week
         path: item.path || '/',
       }),
     );
   }
+  response.setHeader('Set-Cookie', setCookieHeaders);
 }
 
 // response clear cookie
@@ -101,10 +102,12 @@ function responseClearCookie(response, proxyOptions) {
   if (!proxyOptions || !proxyOptions.clearCookies) return;
 
   // clear
+  let setCookieHeaders = [];
   for (let i = 0; i < proxyOptions.clearCookies.length; i++) {
     const item = proxyOptions.clearCookies[i];
-    response.setHeader('Set-Cookie', cookie.serialize(item.key, '', { expires: new Date(1), path: '/' }));
+    setCookieHeaders.push(cookie.serialize(item.key, '', { expires: new Date(1), path: '/' }));
   }
+  response.setHeader('Set-Cookie', setCookieHeaders);
 }
 
 export default proxy;
