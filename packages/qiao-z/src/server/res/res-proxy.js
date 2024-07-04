@@ -17,6 +17,32 @@ const logger = Logger('qiao-z');
 const proxy = (request, response, proxyOptions) => {
   const methodName = 'res.proxy';
 
+  // proxy req
+  const proxyRequest = proxyRequestFn(request, response, proxyOptions);
+  if (request.method === 'POST') {
+    logger.info(methodName, 'post');
+
+    const chunks = [];
+    request.on('data', (chunk) => {
+      chunks.push(chunk);
+    });
+    request.on('end', () => {
+      logger.info(methodName, 'post end');
+
+      const postData = Buffer.concat(chunks).toString();
+      proxyRequest.write(postData);
+      proxyRequest.end();
+    });
+  } else {
+    logger.info(methodName, 'other end');
+    request.pipe(proxyRequest, { end: true });
+  }
+};
+
+// proxy request
+function proxyRequestFn(request, response, proxyOptions) {
+  const methodName = 'proxyRequest';
+
   // check
   if (!proxyOptions) {
     logger.error(methodName, 'need proxyOptions');
@@ -66,10 +92,8 @@ const proxy = (request, response, proxyOptions) => {
     logger.error(methodName, 'proxy request error', err);
     responseError(response);
   });
-
-  // request
-  request.pipe(proxy, { end: true });
-};
+  return proxy;
+}
 
 // response error
 function responseError(response) {
