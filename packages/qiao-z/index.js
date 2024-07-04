@@ -761,6 +761,8 @@ function responseSetCookie(response, proxyOptions) {
     const item = proxyOptions.cookies[i];
     setCookieHeaders.push(
       cookie.serialize(item.key, String(item.value), {
+        secure: true,
+        sameSite: 'none',
         maxAge: item.maxAge || 60 * 60 * 24 * 7, // 1 week
         path: item.path || '/',
       }),
@@ -778,7 +780,9 @@ function responseClearCookie(response, proxyOptions) {
   let setCookieHeaders = [];
   for (let i = 0; i < proxyOptions.clearCookies.length; i++) {
     const item = proxyOptions.clearCookies[i];
-    setCookieHeaders.push(cookie.serialize(item.key, '', { expires: new Date(1), path: '/' }));
+    setCookieHeaders.push(
+      cookie.serialize(item.key, '', { secure: true, sameSite: 'none', expires: new Date(1), path: '/' }),
+    );
   }
   response.setHeader('Set-Cookie', setCookieHeaders);
 }
