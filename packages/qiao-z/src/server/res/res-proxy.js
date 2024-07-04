@@ -1,6 +1,9 @@
 // http
 import http from 'http';
 
+// cookie
+import cookie from 'cookie';
+
 // Logger
 import { Logger } from 'qiao.log.js';
 const logger = Logger('qiao-z');
@@ -51,6 +54,11 @@ const proxy = (request, response, proxyOptions) => {
     logger.info(methodName, 'proxyRes.statusCode', proxyRes.statusCode);
     logger.info(methodName, 'proxyRes.headers', proxyRes.headers);
 
+    // cookies
+    responseSetCookie(response, proxyOptions);
+    responseClearCookie(response, proxyOptions);
+
+    // res
     response.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(response, { end: true });
   });
@@ -67,6 +75,36 @@ const proxy = (request, response, proxyOptions) => {
 function responseError(response) {
   response.writeHead(500, { 'Content-Type': 'text/plain' });
   response.end('Something went wrong.');
+}
+
+// response set cookie
+function responseSetCookie(response, proxyOptions) {
+  // check
+  if (!proxyOptions || !proxyOptions.cookies) return;
+
+  // set
+  for (let i = 0; i < proxyOptions.cookies.length; i++) {
+    const item = proxyOptions.cookies[i];
+    response.setHeader(
+      'Set-Cookie',
+      cookie.serialize(item.key, String(item.value), {
+        maxAge: item.maxAge || 60 * 60 * 24 * 7, // 1 week
+        path: item.path || '/',
+      }),
+    );
+  }
+}
+
+// response clear cookie
+function responseClearCookie(response, proxyOptions) {
+  // check
+  if (!proxyOptions || !proxyOptions.clearCookies) return;
+
+  // clear
+  for (let i = 0; i < proxyOptions.clearCookies.length; i++) {
+    const item = proxyOptions.clearCookies[i];
+    response.setHeader('Set-Cookie', cookie.serialize(item.key, '', { expires: new Date(1), path: '/' }));
+  }
 }
 
 export default proxy;
