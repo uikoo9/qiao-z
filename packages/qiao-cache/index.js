@@ -20,9 +20,10 @@ const cache$1 = new NodeCache({
  * set
  * @param {*} key
  * @param {*} value
+ * @param {*} ttl
  */
-const set = (key, value) => {
-  cache$1.set(key, value);
+const set = (key, value, ttl) => {
+  cache$1.set(key, value, ttl || 0);
 };
 
 /**

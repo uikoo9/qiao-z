@@ -17,9 +17,10 @@ export const cache = new NodeCache({
  * set
  * @param {*} key
  * @param {*} value
+ * @param {*} ttl
  */
-export const set = (key, value) => {
-  cache.set(key, value);
+export const set = (key, value, ttl) => {
+  cache.set(key, value, ttl || 0);
 };
 
 /**

@@ -23,6 +23,9 @@ import { cache } from 'qiao-cache';
 // set
 cache('test', 'hello');
 
+// set ttl
+cache('test', 'hello', 10);
+
 // get
 const s = cache('test');
 console.log(s); // hello
