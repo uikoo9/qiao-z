@@ -4,7 +4,7 @@ var alipaySdk = require('alipay-sdk');
 var qiao_log_js = require('qiao.log.js');
 
 // ali pay
-const logger$2 = qiao_log_js.Logger('qiao-alipay');
+const logger$3 = qiao_log_js.Logger('qiao-alipay');
 
 /**
  * getAliPay
@@ -16,25 +16,28 @@ const getAliPay = (config) => {
 
   // check
   if (!config.appId) {
-    logger$2.error(methodName, 'need config.appId');
+    logger$3.error(methodName, 'need config.appId');
     return;
   }
   if (!config.privateKey) {
-    logger$2.error(methodName, 'need config.privateKey');
+    logger$3.error(methodName, 'need config.privateKey');
     return;
   }
   if (!config.alipayPublicKey) {
-    logger$2.error(methodName, 'need config.alipayPublicKey');
+    logger$3.error(methodName, 'need config.alipayPublicKey');
     return;
   }
 
-  // sdk
-  const alipaySdk$1 = new alipaySdk.AlipaySdk({
+  // options
+  const options = {
     appId: config.appId,
     privateKey: config.privateKey,
     alipayPublicKey: config.alipayPublicKey,
-  });
-  return alipaySdk$1;
+  };
+  if (config.encryptKey) options.encryptKey = config.encryptKey;
+  logger$3.info(methodName, 'options', options);
+
+  return new alipaySdk.AlipaySdk(options);
 };
 
 /**
@@ -51,13 +54,11 @@ const check = async (app) => {
       limit: 1,
     },
   });
-
-  // r
   return result && result.responseHttpStatus === 200;
 };
 
 // Logger
-const logger$1 = qiao_log_js.Logger('qiao-alipay');
+const logger$2 = qiao_log_js.Logger('qiao-alipay');
 
 /**
  * pay
@@ -65,6 +66,7 @@ const logger$1 = qiao_log_js.Logger('qiao-alipay');
  * @param {*} tradeTitle
  * @param {*} tradeOrder
  * @param {*} tradeAmount
+ * @param {*} payMode
  * @param {*} returnUrl
  * @returns
  */
@@ -73,23 +75,23 @@ const pay = async (app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl)
 
   // check
   if (!tradeTitle) {
-    logger$1.error(methodName, 'need tradeTitle');
+    logger$2.error(methodName, 'need tradeTitle');
     return;
   }
   if (!tradeOrder) {
-    logger$1.error(methodName, 'need tradeOrder');
+    logger$2.error(methodName, 'need tradeOrder');
     return;
   }
   if (!tradeAmount) {
-    logger$1.error(methodName, 'need tradeAmount');
+    logger$2.error(methodName, 'need tradeAmount');
     return;
   }
   if (!payMode) {
-    logger$1.error(methodName, 'need payMode');
+    logger$2.error(methodName, 'need payMode');
     return;
   }
   if (!returnUrl) {
-    logger$1.error(methodName, 'need returnUrl');
+    logger$2.error(methodName, 'need returnUrl');
     return;
   }
 
@@ -101,14 +103,43 @@ const pay = async (app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl)
     total_amount: tradeAmount,
     qr_pay_mode: payMode,
   };
+  logger$2.info(methodName, 'bizContent', bizContent);
 
   // html
-  const html = app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
+  return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
     bizContent,
     returnUrl: returnUrl,
   });
+};
 
-  console.log(html);
+// Logger
+const logger$1 = qiao_log_js.Logger('qiao-alipay');
+
+/**
+ * query
+ * @param {*} app
+ * @param {*} tradeOrder
+ * @param {*} needEncrypt
+ * @returns
+ */
+const query = async (app, tradeOrder, needEncrypt) => {
+  const methodName = 'query';
+  if (!tradeOrder) {
+    logger$1.error(methodName, 'need tradeOrder');
+    return;
+  }
+
+  // options
+  const queryOptions = {
+    needEncrypt: needEncrypt || false,
+    body: {
+      out_trade_no: tradeOrder,
+    },
+  };
+  logger$1.info(methodName, 'queryOptions', queryOptions);
+
+  // query
+  return await app.alipay.curl('POST', '/v3/alipay/trade/query', queryOptions);
 };
 
 // util
@@ -137,6 +168,9 @@ const init = (config) => {
   };
   app.pay = async (tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl) => {
     return await pay(app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl);
+  };
+  app.query = async (tradeOrder, needEncrypt) => {
+    return await query(app, tradeOrder, needEncrypt);
   };
 
   // return

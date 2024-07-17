@@ -2,6 +2,7 @@
 import { getAliPay } from './get-alipay.js';
 import { check } from './check.js';
 import { pay } from './pay.js';
+import { query } from './query.js';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -30,6 +31,9 @@ const init = (config) => {
   };
   app.pay = async (tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl) => {
     return await pay(app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl);
+  };
+  app.query = async (tradeOrder, needEncrypt) => {
+    return await query(app, tradeOrder, needEncrypt);
   };
 
   // return

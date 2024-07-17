@@ -27,11 +27,14 @@ export const getAliPay = (config) => {
     return;
   }
 
-  // sdk
-  const alipaySdk = new AlipaySdk({
+  // options
+  const options = {
     appId: config.appId,
     privateKey: config.privateKey,
     alipayPublicKey: config.alipayPublicKey,
-  });
-  return alipaySdk;
+  };
+  if (config.encryptKey) options.encryptKey = config.encryptKey;
+  logger.info(methodName, 'options', options);
+
+  return new AlipaySdk(options);
 };

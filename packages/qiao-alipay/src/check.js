@@ -12,7 +12,5 @@ export const check = async (app) => {
       limit: 1,
     },
   });
-
-  // r
   return result && result.responseHttpStatus === 200;
 };

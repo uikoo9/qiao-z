@@ -8,6 +8,7 @@ const logger = Logger('qiao-alipay');
  * @param {*} tradeTitle
  * @param {*} tradeOrder
  * @param {*} tradeAmount
+ * @param {*} payMode
  * @param {*} returnUrl
  * @returns
  */
@@ -44,12 +45,11 @@ export const pay = async (app, tradeTitle, tradeOrder, tradeAmount, payMode, ret
     total_amount: tradeAmount,
     qr_pay_mode: payMode,
   };
+  logger.info(methodName, 'bizContent', bizContent);
 
   // html
-  const html = app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
+  return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
     bizContent,
     returnUrl: returnUrl,
   });
-
-  console.log(html);
 };
