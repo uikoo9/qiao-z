@@ -11,6 +11,8 @@ const logger = Logger('qiao-alipay');
  */
 export const query = async (app, tradeOrder, needEncrypt) => {
   const methodName = 'query';
+
+  // check
   if (!tradeOrder) {
     logger.error(methodName, 'need tradeOrder');
     return;
@@ -26,5 +28,10 @@ export const query = async (app, tradeOrder, needEncrypt) => {
   logger.info(methodName, 'queryOptions', queryOptions);
 
   // query
-  return await app.alipay.curl('POST', '/v3/alipay/trade/query', queryOptions);
+  // html
+  try {
+    return await app.alipay.curl('POST', '/v3/alipay/trade/query', queryOptions);
+  } catch (error) {
+    logger.error(methodName, 'error', error);
+  }
 };

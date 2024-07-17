@@ -48,8 +48,12 @@ export const pay = async (app, tradeTitle, tradeOrder, tradeAmount, payMode, ret
   logger.info(methodName, 'bizContent', bizContent);
 
   // html
-  return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
-    bizContent,
-    returnUrl: returnUrl,
-  });
+  try {
+    return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
+      bizContent,
+      returnUrl: returnUrl,
+    });
+  } catch (error) {
+    logger.error(methodName, 'error', error);
+  }
 };

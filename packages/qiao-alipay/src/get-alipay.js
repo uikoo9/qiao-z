@@ -34,7 +34,7 @@ export const getAliPay = (config) => {
     alipayPublicKey: config.alipayPublicKey,
   };
   if (config.encryptKey) options.encryptKey = config.encryptKey;
-  logger.info(methodName, 'options', options);
 
+  // r
   return new AlipaySdk(options);
 };

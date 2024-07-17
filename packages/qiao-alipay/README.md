@@ -5,20 +5,78 @@
 
 nodejs 下支付宝支付能力
 
-## usage
+## install
+
+安装
+
+```shell
+npm i qiao-alipay
+```
+
+## config
+
+配置文件
+
+```json
+{
+  "appId": "",
+  "privateKey": "",
+  "alipayPublicKey": ""
+}
+```
+
+## client
 
 ```javascript
-// commonjs
-const { pay } = require('qiao-alipay');
+// config
+const config = require('./config.json');
 
-// es6
-import { pay } from 'qiao-alipay';
+// alipay
+const alipay = require('qiao-alipay')(config);
 ```
 
 ## api
 
-### pay
+### check
+
+检查配置是否正确
 
 ```javascript
+await alipay.check();
+```
 
+### pay
+
+支付
+
+- tradeTitle
+  - 类型: string
+  - 说明: 支付标题
+- tradeOrder
+  - 类型: string
+  - 说明: 支付订单号
+- tradeAmount
+  - 类型: string
+  - 说明: 支付金额
+- payMode
+  - 类型: string
+  - 说明: 支付方式，主要是二维码显示方式
+- returnUrl
+  - 类型: string
+  - 说明: 回调url
+
+```javascript
+await alipay.pay(tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl);
+```
+
+### query
+
+查询支付结果
+
+- tradeOrder
+  - 类型: string
+  - 说明: 支付订单号
+
+```javascript
+await alipay.query(tradeOrder);
 ```

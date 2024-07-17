@@ -24,7 +24,6 @@ const init = (config) => {
 
   // app
   const app = {};
-  app.config = config;
   app.alipay = getAliPay(config);
   app.check = async () => {
     return await check(app);
