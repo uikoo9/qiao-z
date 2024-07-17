@@ -4,7 +4,7 @@ var alipaySdk = require('alipay-sdk');
 var qiao_log_js = require('qiao.log.js');
 
 // ali pay
-const logger$1 = qiao_log_js.Logger('qiao-alipay');
+const logger$2 = qiao_log_js.Logger('qiao-alipay');
 
 /**
  * getAliPay
@@ -16,15 +16,15 @@ const getAliPay = (config) => {
 
   // check
   if (!config.appId) {
-    logger$1.error(methodName, 'need config.appId');
+    logger$2.error(methodName, 'need config.appId');
     return;
   }
   if (!config.privateKey) {
-    logger$1.error(methodName, 'need config.privateKey');
+    logger$2.error(methodName, 'need config.privateKey');
     return;
   }
   if (!config.alipayPublicKey) {
-    logger$1.error(methodName, 'need config.alipayPublicKey');
+    logger$2.error(methodName, 'need config.alipayPublicKey');
     return;
   }
 
@@ -56,6 +56,61 @@ const check = async (app) => {
   return result && result.responseHttpStatus === 200;
 };
 
+// Logger
+const logger$1 = qiao_log_js.Logger('qiao-alipay');
+
+/**
+ * pay
+ * @param {*} app
+ * @param {*} tradeTitle
+ * @param {*} tradeOrder
+ * @param {*} tradeAmount
+ * @param {*} returnUrl
+ * @returns
+ */
+const pay = async (app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl) => {
+  const methodName = 'pay';
+
+  // check
+  if (!tradeTitle) {
+    logger$1.error(methodName, 'need tradeTitle');
+    return;
+  }
+  if (!tradeOrder) {
+    logger$1.error(methodName, 'need tradeOrder');
+    return;
+  }
+  if (!tradeAmount) {
+    logger$1.error(methodName, 'need tradeAmount');
+    return;
+  }
+  if (!payMode) {
+    logger$1.error(methodName, 'need payMode');
+    return;
+  }
+  if (!returnUrl) {
+    logger$1.error(methodName, 'need returnUrl');
+    return;
+  }
+
+  // content
+  const bizContent = {
+    product_code: 'FAST_INSTANT_TRADE_PAY',
+    subject: tradeTitle,
+    out_trade_no: tradeOrder,
+    total_amount: tradeAmount,
+    qr_pay_mode: payMode,
+  };
+
+  // html
+  const html = app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
+    bizContent,
+    returnUrl: returnUrl,
+  });
+
+  console.log(html);
+};
+
 // util
 const logger = qiao_log_js.Logger('qiao-alipay');
 
@@ -79,6 +134,9 @@ const init = (config) => {
   app.alipay = getAliPay(config);
   app.check = async () => {
     return await check(app);
+  };
+  app.pay = async (tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl) => {
+    return await pay(app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl);
   };
 
   // return
