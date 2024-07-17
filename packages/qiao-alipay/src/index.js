@@ -1,5 +1,6 @@
 // util
-import { getAliPay } from './util.js';
+import { getAliPay } from './get-alipay.js';
+import { check } from './check.js';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -23,6 +24,9 @@ const init = (config) => {
   const app = {};
   app.config = config;
   app.alipay = getAliPay(config);
+  app.check = async () => {
+    return await check(app);
+  };
 
   // return
   return app;
