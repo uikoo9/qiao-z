@@ -3,6 +3,7 @@ import { getAliPay } from './get-alipay.js';
 import { check } from './check.js';
 import { pay } from './pay.js';
 import { query } from './query.js';
+import { checkSign } from './check-sign.js';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -33,6 +34,9 @@ const init = (config) => {
   };
   app.query = async (tradeOrder, needEncrypt) => {
     return await query(app, tradeOrder, needEncrypt);
+  };
+  app.checkSign = (queryObj) => {
+    return checkSign(app, queryObj);
   };
 
   // return

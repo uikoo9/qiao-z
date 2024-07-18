@@ -41,6 +41,10 @@ const alipay = require('qiao-alipay')(config);
 
 检查配置是否正确
 
+- return
+  - 类型: boolean
+  - 说明: 返回是否成功
+
 ```javascript
 await alipay.check();
 ```
@@ -67,6 +71,9 @@ await alipay.check();
 - options.returnUrl
   - 类型: string
   - 说明: 回调url
+- return
+  - 类型: string
+  - 说明: 返回支付页面
 
 ```javascript
 await alipay.pay(options);
@@ -79,7 +86,25 @@ await alipay.pay(options);
 - tradeOrder
   - 类型: string
   - 说明: 支付订单号
+- return
+  - 类型: object
+  - 说明: 返回查询结果
 
 ```javascript
 await alipay.query(tradeOrder);
+```
+
+### checkSign
+
+校验返回的签名是否正确
+
+- queryObj
+  - 类型: object
+  - 说明: 支付宝返回的queryObj
+- return
+  - 类型: boolean
+  - 说明: 返回是否成功
+
+```javascript
+alipay.checkSign(queryObj);
 ```
