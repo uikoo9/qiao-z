@@ -25,7 +25,7 @@ npm i qiao-alipay
 }
 ```
 
-## client
+## alipay
 
 ```javascript
 // config
@@ -49,24 +49,27 @@ await alipay.check();
 
 支付
 
-- tradeTitle
+- options.tradeTitle
   - 类型: string
   - 说明: 支付标题
-- tradeOrder
+- options.tradeOrder
   - 类型: string
   - 说明: 支付订单号
-- tradeAmount
+- options.tradeAmount
   - 类型: string
   - 说明: 支付金额
-- payMode
+- options.payMode
   - 类型: string
-  - 说明: 支付方式，主要是二维码显示方式
-- returnUrl
+  - 说明: 支付方式，主要是二维码显示方式，https://opendocs.alipay.com/open-v3/2423fad5_alipay.trade.page.pay
+- options.notifyUrl
+  - 类型: string
+  - 说明: 支付回调url
+- options.returnUrl
   - 类型: string
   - 说明: 回调url
 
 ```javascript
-await alipay.pay(tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl);
+await alipay.pay(options);
 ```
 
 ### query

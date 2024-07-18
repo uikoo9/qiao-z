@@ -72,53 +72,54 @@ const logger$2 = qiao_log_js.Logger('qiao-alipay');
 /**
  * pay
  * @param {*} app
- * @param {*} tradeTitle
- * @param {*} tradeOrder
- * @param {*} tradeAmount
- * @param {*} payMode
- * @param {*} returnUrl
+ * @param {*} options
  * @returns
  */
-const pay = async (app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl) => {
+const pay = async (app, options) => {
   const methodName = 'pay';
 
   // check
-  if (!tradeTitle) {
-    logger$2.error(methodName, 'need tradeTitle');
+  if (!options) {
+    logger$2.error(methodName, 'need options');
     return;
   }
-  if (!tradeOrder) {
-    logger$2.error(methodName, 'need tradeOrder');
+  if (!options.tradeTitle) {
+    logger$2.error(methodName, 'need options.tradeTitle');
     return;
   }
-  if (!tradeAmount) {
-    logger$2.error(methodName, 'need tradeAmount');
+  if (!options.tradeOrder) {
+    logger$2.error(methodName, 'need options.tradeOrder');
     return;
   }
-  if (!payMode) {
-    logger$2.error(methodName, 'need payMode');
+  if (!options.tradeAmount) {
+    logger$2.error(methodName, 'need options.tradeAmount');
     return;
   }
-  if (!returnUrl) {
-    logger$2.error(methodName, 'need returnUrl');
+  if (!options.payMode) {
+    logger$2.error(methodName, 'need options.payMode');
+    return;
+  }
+  if (!options.returnUrl) {
+    logger$2.error(methodName, 'need options.returnUrl');
     return;
   }
 
   // content
   const bizContent = {
     product_code: 'FAST_INSTANT_TRADE_PAY',
-    subject: tradeTitle,
-    out_trade_no: tradeOrder,
-    total_amount: tradeAmount,
-    qr_pay_mode: payMode,
+    subject: options.tradeTitle,
+    out_trade_no: options.tradeOrder,
+    total_amount: options.tradeAmount,
+    qr_pay_mode: options.payMode,
   };
+  if (options.notifyUrl) bizContent.notify_url = options.notifyUrl;
   logger$2.info(methodName, 'bizContent', bizContent);
 
   // html
   try {
     return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
       bizContent,
-      returnUrl: returnUrl,
+      returnUrl: options.returnUrl,
     });
   } catch (error) {
     logger$2.error(methodName, 'error', error);
@@ -185,8 +186,8 @@ const init = (config) => {
   app.check = async () => {
     return await check(app);
   };
-  app.pay = async (tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl) => {
-    return await pay(app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl);
+  app.pay = async (options) => {
+    return await pay(app, options);
   };
   app.query = async (tradeOrder, needEncrypt) => {
     return await query(app, tradeOrder, needEncrypt);

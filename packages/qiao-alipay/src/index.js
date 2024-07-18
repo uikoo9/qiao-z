@@ -28,8 +28,8 @@ const init = (config) => {
   app.check = async () => {
     return await check(app);
   };
-  app.pay = async (tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl) => {
-    return await pay(app, tradeTitle, tradeOrder, tradeAmount, payMode, returnUrl);
+  app.pay = async (options) => {
+    return await pay(app, options);
   };
   app.query = async (tradeOrder, needEncrypt) => {
     return await query(app, tradeOrder, needEncrypt);
