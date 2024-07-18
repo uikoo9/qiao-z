@@ -112,15 +112,20 @@ const pay = async (app, options) => {
     total_amount: options.tradeAmount,
     qr_pay_mode: options.payMode,
   };
-  if (options.notifyUrl) bizContent.notify_url = options.notifyUrl;
   logger$2.info(methodName, 'bizContent', bizContent);
 
   // html
   try {
-    return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', {
+    // query options
+    const queryOptions = {
       bizContent,
       returnUrl: options.returnUrl,
-    });
+    };
+    if (options.notifyUrl) queryOptions.notify_url = options.notifyUrl;
+    logger$2.info(methodName, 'queryOptions', queryOptions);
+
+    // r
+    return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', queryOptions);
   } catch (error) {
     logger$2.error(methodName, 'error', error);
   }
