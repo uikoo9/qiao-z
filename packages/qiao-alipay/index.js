@@ -4,7 +4,7 @@ var alipaySdk = require('alipay-sdk');
 var qiao_log_js = require('qiao.log.js');
 
 // ali pay
-const logger$4 = qiao_log_js.Logger('qiao-alipay');
+const logger$5 = qiao_log_js.Logger('qiao-alipay');
 
 /**
  * getAliPay
@@ -16,15 +16,15 @@ const getAliPay = (config) => {
 
   // check
   if (!config.appId) {
-    logger$4.error(methodName, 'need config.appId');
+    logger$5.error(methodName, 'need config.appId');
     return;
   }
   if (!config.privateKey) {
-    logger$4.error(methodName, 'need config.privateKey');
+    logger$5.error(methodName, 'need config.privateKey');
     return;
   }
   if (!config.alipayPublicKey) {
-    logger$4.error(methodName, 'need config.alipayPublicKey');
+    logger$5.error(methodName, 'need config.alipayPublicKey');
     return;
   }
 
@@ -41,7 +41,7 @@ const getAliPay = (config) => {
 };
 
 // Logger
-const logger$3 = qiao_log_js.Logger('qiao-alipay');
+const logger$4 = qiao_log_js.Logger('qiao-alipay');
 
 /**
  * check
@@ -62,12 +62,12 @@ const check = async (app) => {
     });
     return result && result.responseHttpStatus === 200;
   } catch (error) {
-    logger$3.error(methodName, 'error', error);
+    logger$4.error(methodName, 'error', error);
   }
 };
 
 // Logger
-const logger$2 = qiao_log_js.Logger('qiao-alipay');
+const logger$3 = qiao_log_js.Logger('qiao-alipay');
 
 /**
  * pay
@@ -80,27 +80,27 @@ const pay = async (app, options) => {
 
   // check
   if (!options) {
-    logger$2.error(methodName, 'need options');
+    logger$3.error(methodName, 'need options');
     return;
   }
   if (!options.tradeTitle) {
-    logger$2.error(methodName, 'need options.tradeTitle');
+    logger$3.error(methodName, 'need options.tradeTitle');
     return;
   }
   if (!options.tradeOrder) {
-    logger$2.error(methodName, 'need options.tradeOrder');
+    logger$3.error(methodName, 'need options.tradeOrder');
     return;
   }
   if (!options.tradeAmount) {
-    logger$2.error(methodName, 'need options.tradeAmount');
+    logger$3.error(methodName, 'need options.tradeAmount');
     return;
   }
   if (!options.payMode) {
-    logger$2.error(methodName, 'need options.payMode');
+    logger$3.error(methodName, 'need options.payMode');
     return;
   }
   if (!options.returnUrl) {
-    logger$2.error(methodName, 'need options.returnUrl');
+    logger$3.error(methodName, 'need options.returnUrl');
     return;
   }
 
@@ -112,7 +112,7 @@ const pay = async (app, options) => {
     total_amount: options.tradeAmount,
     qr_pay_mode: options.payMode,
   };
-  logger$2.info(methodName, 'bizContent', bizContent);
+  logger$3.info(methodName, 'bizContent', bizContent);
 
   // html
   try {
@@ -122,17 +122,17 @@ const pay = async (app, options) => {
       returnUrl: options.returnUrl,
     };
     if (options.notifyUrl) queryOptions.notify_url = options.notifyUrl;
-    logger$2.info(methodName, 'queryOptions', queryOptions);
+    logger$3.info(methodName, 'queryOptions', queryOptions);
 
     // r
     return app.alipay.pageExecute('alipay.trade.page.pay', 'POST', queryOptions);
   } catch (error) {
-    logger$2.error(methodName, 'error', error);
+    logger$3.error(methodName, 'error', error);
   }
 };
 
 // Logger
-const logger$1 = qiao_log_js.Logger('qiao-alipay');
+const logger$2 = qiao_log_js.Logger('qiao-alipay');
 
 /**
  * query
@@ -146,7 +146,7 @@ const query = async (app, tradeOrder, needEncrypt) => {
 
   // check
   if (!tradeOrder) {
-    logger$1.error(methodName, 'need tradeOrder');
+    logger$2.error(methodName, 'need tradeOrder');
     return;
   }
 
@@ -157,12 +157,32 @@ const query = async (app, tradeOrder, needEncrypt) => {
       out_trade_no: tradeOrder,
     },
   };
-  logger$1.info(methodName, 'queryOptions', queryOptions);
+  logger$2.info(methodName, 'queryOptions', queryOptions);
 
   // query
   // html
   try {
     return await app.alipay.curl('POST', '/v3/alipay/trade/query', queryOptions);
+  } catch (error) {
+    logger$2.error(methodName, 'error', error);
+  }
+};
+
+// Logger
+const logger$1 = qiao_log_js.Logger('qiao-alipay');
+
+/**
+ * checkSign
+ * @param {*} app
+ * @returns
+ */
+const checkSign = async (app, queryObj) => {
+  const methodName = 'checkSign';
+
+  // go
+  try {
+    logger$1.info(methodName, 'queryObj', queryObj);
+    return app.alipay.checkNotifySign(queryObj);
   } catch (error) {
     logger$1.error(methodName, 'error', error);
   }
@@ -196,6 +216,9 @@ const init = (config) => {
   };
   app.query = async (tradeOrder, needEncrypt) => {
     return await query(app, tradeOrder, needEncrypt);
+  };
+  app.checkSign = (queryObj) => {
+    return checkSign(app, queryObj);
   };
 
   // return
