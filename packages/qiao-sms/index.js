@@ -2,9 +2,10 @@
 
 var txsms = require('qcloudsms_js');
 var qiao_log_js = require('qiao.log.js');
+var qiaoAjax = require('qiao-ajax');
 
 // txsms
-const logger = qiao_log_js.Logger('qiao-sms');
+const logger$1 = qiao_log_js.Logger('qiao-sms');
 
 /**
  * send sms msg
@@ -25,23 +26,23 @@ const sendSMSMsg = (options, callback) => {
 
   // check
   if (!options) {
-    logger.info(methodName, 'sendSMSMsg need options');
+    logger$1.info(methodName, 'sendSMSMsg need options');
     return;
   }
   if (!options.appid) {
-    logger.info(methodName, 'sendSMSMsg need options.appid');
+    logger$1.info(methodName, 'sendSMSMsg need options.appid');
     return;
   }
   if (!options.appkey) {
-    logger.info(methodName, 'sendSMSMsg need options.appkey');
+    logger$1.info(methodName, 'sendSMSMsg need options.appkey');
     return;
   }
   if (!options.mobile) {
-    logger.info(methodName, 'sendSMSMsg need options.mobile');
+    logger$1.info(methodName, 'sendSMSMsg need options.mobile');
     return;
   }
   if (!options.msg) {
-    logger.info(methodName, 'sendSMSMsg need options.msg');
+    logger$1.info(methodName, 'sendSMSMsg need options.msg');
     return;
   }
 
@@ -113,5 +114,64 @@ const sendSMSMsgSync = (options) => {
   });
 };
 
+// qiao
+const logger = qiao_log_js.Logger('qiao-sms');
+
+/**
+ * submailSMS
+ * @param {*} options
+ * @returns
+ */
+const submailSMS = async (options) => {
+  const methodName = 'sms';
+
+  // check
+  if (!options) {
+    logger.error(methodName, 'need options');
+    return;
+  }
+  if (!options.appid) {
+    logger.error(methodName, 'need options.appid');
+    return;
+  }
+  if (!options.appkey) {
+    logger.error(methodName, 'need options.appkey');
+    return;
+  }
+  if (!options.mobile) {
+    logger.error(methodName, 'need options.mobile');
+    return;
+  }
+  if (!options.content) {
+    logger.error(methodName, 'need options.content');
+    return;
+  }
+
+  // go
+  const url = 'https://api-v4.mysubmail.com/sms/send';
+  const res = await qiaoAjax.post(url, {
+    data: {
+      appid: options.appid,
+      signature: options.appkey,
+      to: options.mobile,
+      content: options.content,
+    },
+  });
+  if (!res || res.status !== 200) {
+    logger.error(methodName, 'ajax fail', res);
+    return;
+  }
+
+  // check res
+  if (!res.data || res.data.status !== 'success') {
+    logger.error(methodName, 'sms fail', res.data);
+    return;
+  }
+
+  // return
+  return res.data;
+};
+
 exports.sendSMSMsg = sendSMSMsg;
 exports.sendSMSMsgSync = sendSMSMsgSync;
+exports.submailSMS = submailSMS;
