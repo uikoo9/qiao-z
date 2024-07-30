@@ -13,26 +13,41 @@ const logger = Logger('qiao-sms');
 export const submailSMS = async (options) => {
   const methodName = 'sms';
 
+  // const
+  const resMsg = {
+    status: 'error',
+  };
+
   // check
   if (!options) {
-    logger.error(methodName, 'need options');
-    return;
+    const msg = 'need options';
+    logger.error(methodName, msg);
+    resMsg.msg = msg;
+    return resMsg;
   }
   if (!options.appid) {
-    logger.error(methodName, 'need options.appid');
-    return;
+    const msg = 'need options.appid';
+    logger.error(methodName, msg);
+    resMsg.msg = msg;
+    return resMsg;
   }
   if (!options.appkey) {
-    logger.error(methodName, 'need options.appkey');
-    return;
+    const msg = 'need options.appkey';
+    logger.error(methodName, msg);
+    resMsg.msg = msg;
+    return resMsg;
   }
   if (!options.mobile) {
-    logger.error(methodName, 'need options.mobile');
-    return;
+    const msg = 'need options.mobile';
+    logger.error(methodName, msg);
+    resMsg.msg = msg;
+    return resMsg;
   }
   if (!options.content) {
-    logger.error(methodName, 'need options.content');
-    return;
+    const msg = 'need options.content';
+    logger.error(methodName, msg);
+    resMsg.msg = msg;
+    return resMsg;
   }
 
   // go
@@ -46,14 +61,10 @@ export const submailSMS = async (options) => {
     },
   });
   if (!res || res.status !== 200) {
-    logger.error(methodName, 'ajax fail', res);
-    return;
-  }
-
-  // check res
-  if (!res.data || res.data.status !== 'success') {
-    logger.error(methodName, 'sms fail', res.data);
-    return;
+    const msg = `ajax fail: ${res}`;
+    logger.error(methodName, msg);
+    resMsg.msg = msg;
+    return resMsg;
   }
 
   // return
