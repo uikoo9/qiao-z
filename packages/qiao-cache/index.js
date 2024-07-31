@@ -50,9 +50,10 @@ const del = (key) => {
  * 	https://www.npmjs.com/package/node-cache
  * @param {*} key
  * @param {*} value
+ * @param {*} ttl
  * @returns
  */
-const cache = (key, value) => {
+const cache = (key, value, ttl) => {
   // remove
   if (value === null) {
     del(key);
@@ -65,7 +66,7 @@ const cache = (key, value) => {
   }
 
   // set
-  set(key, value);
+  set(key, value, ttl);
 };
 
 /**

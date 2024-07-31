@@ -6,9 +6,10 @@ import { set, get, del } from './_data.js';
  * 	https://www.npmjs.com/package/node-cache
  * @param {*} key
  * @param {*} value
+ * @param {*} ttl
  * @returns
  */
-export const cache = (key, value) => {
+export const cache = (key, value, ttl) => {
   // remove
   if (value === null) {
     del(key);
@@ -21,7 +22,7 @@ export const cache = (key, value) => {
   }
 
   // set
-  set(key, value);
+  set(key, value, ttl);
 };
 
 /**
