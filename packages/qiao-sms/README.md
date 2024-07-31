@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-sms.svg?style=flat-square)](https://www.npmjs.org/package/qiao-sms)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-sms.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-sms)
 
-nodejs 下腾讯云 sms 常见 api 封装
+nodejs下[submail](https://www.mysubmail.com/)发送短信封装
 
 ## install
 
@@ -19,44 +19,42 @@ npm i qiao-sms
 
 ```javascript
 // cjs
-const { sendSMSMsg } = require('qiao-sms');
+const { submailSMS } = require('qiao-sms');
 
 // mjs
-import { sendSMSMsg } from 'qiao-sms';
+import { submailSMS } from 'qiao-sms';
 ```
 
 ## api
 
-### options
+### submailSMS
 
-发送短信的配置项
+发送短信
+
+- options
+  - 类型: object
+  - 说明: 发送短信参数
+- options.appid
+  - 类型: string
+  - 说明: appid
+- options.appkey
+  - 类型: string
+  - 说明: appkey
+- options.mobile
+  - 类型: string
+  - 说明: 手机号
+- options.content
+  - 类型: string
+  - 说明: 短信内容
+- return
+  - 类型: object
+  - 说明: 返回信息
 
 ```javascript
-{
-  appid: 'your appid',
-  appkey: 'your appkey',
-  sign: 'your sign',
-  mobile: 'mobile',
-  msg: '您的验证码是：1234，如非本人操作，请忽略此短信。',
-  mtype: '0：普通短信，1：营销短信，可选',
-  cnum: '86：中国，可选',
-}
-```
-
-### sendSMSMsg
-
-发送短信，回调方式
-
-```javascript
-q.sendSMSMsg(options, (err, req, res, success, msg) => {
-  console.log(err, req, res, success, msg);
+await submailSMS({
+  appid: appId,
+  appkey: appKey,
+  mobile: mobile,
+  content: content,
 });
-```
-
-### sendSMSMsgSync
-
-发送短信，同步方式
-
-```javascript
-const res = await q.sendSMSMsgSync(options);
 ```

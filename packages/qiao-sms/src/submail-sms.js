@@ -51,22 +51,28 @@ export const submailSMS = async (options) => {
   }
 
   // go
-  const url = 'https://api-v4.mysubmail.com/sms/send';
-  const res = await post(url, {
-    data: {
-      appid: options.appid,
-      signature: options.appkey,
-      to: options.mobile,
-      content: options.content,
-    },
-  });
-  if (!res || res.status !== 200) {
-    const msg = `ajax fail: ${res}`;
-    logger.error(methodName, msg);
-    resMsg.msg = msg;
+  try {
+    const url = 'https://api-v4.mysubmail.com/sms/send';
+    const res = await post(url, {
+      data: {
+        appid: options.appid,
+        signature: options.appkey,
+        to: options.mobile,
+        content: options.content,
+      },
+    });
+    if (!res || res.status !== 200) {
+      const msg = `ajax fail: ${res}`;
+      logger.error(methodName, msg);
+      resMsg.msg = msg;
+      return resMsg;
+    }
+
+    // return
+    return res.data;
+  } catch (error) {
+    logger.error(methodName, error);
+    resMsg.msg = error;
     return resMsg;
   }
-
-  // return
-  return res.data;
 };
