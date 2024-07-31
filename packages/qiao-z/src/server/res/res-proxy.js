@@ -80,8 +80,14 @@ const proxy = (request, response, proxyOptions) => {
 
 // response error
 function responseError(response) {
-  response.writeHead(500, { 'Content-Type': 'text/plain' });
-  response.end('Something went wrong.');
+  response.writeHead(500, { 'Content-Type': 'application/json' });
+  response.end(
+    JSON.stringify({
+      loc: [],
+      msg: 'server error',
+      type: 'error',
+    }),
+  );
 }
 
 // response set cookie
