@@ -353,7 +353,7 @@ async function getBodyString(req) {
     // options
     const options = {
       length: req.headers['content-length'],
-      limit: '1mb',
+      limit: '10mb',
       encoding: true,
     };
 
