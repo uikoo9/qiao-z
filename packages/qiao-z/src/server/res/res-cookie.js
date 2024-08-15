@@ -17,6 +17,8 @@ export const setCookie = (res, key, value, maxAge, path) => {
   res.response.setHeader(
     'Set-Cookie',
     cookie.serialize(key, String(value), {
+      secure: true,
+      sameSite: 'none',
       maxAge: maxAge || 60 * 60 * 24 * 7, // 1 week
       path: path || '/',
     }),
@@ -33,7 +35,12 @@ export const clearCookie = (res, name) => {
   if (!res || !name) return;
 
   // clear cookies
-  const str = cookie.serialize(name, '', { expires: new Date(1), path: '/' });
+  const str = cookie.serialize(name, '', {
+    secure: true,
+    sameSite: 'none',
+    expires: new Date(1),
+    path: '/',
+  });
   res.clearCookies = res.clearCookies || [];
   res.clearCookies.push(str);
 };
