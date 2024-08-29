@@ -736,7 +736,7 @@ const proxy = (request, response, proxyOptions, proxyCallback) => {
         data += chunk;
       });
       proxyRes.on('end', () => {
-        proxyCallback(null, data);
+        proxyCallback(null, proxyRes.statusCode, data);
       });
     }
 
