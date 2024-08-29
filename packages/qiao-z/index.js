@@ -728,7 +728,17 @@ const proxy = (request, response, proxyOptions, proxyCallback) => {
   const proxyRequest = http.request(options, (proxyRes) => {
     logger.info(methodName, 'proxyRes.statusCode', proxyRes.statusCode);
     logger.info(methodName, 'proxyRes.headers', proxyRes.headers);
-    if (proxyCallback) proxyCallback(null, proxyRes);
+
+    // callback
+    if (proxyCallback) {
+      let data = '';
+      proxyRes.on('data', (chunk) => {
+        data += chunk;
+      });
+      proxyRes.on('end', () => {
+        proxyCallback(null, data);
+      });
+    }
 
     // cookies
     responseSetCookie(response, proxyOptions);
