@@ -763,7 +763,7 @@ function responseError(response, proxyCallback) {
   if (proxyCallback) proxyCallback(error);
 
   response.writeHead(500, { 'Content-Type': 'application/json' });
-  response.end({ error });
+  response.end(JSON.stringify({ error }));
 }
 
 // response set cookie
