@@ -1,6 +1,9 @@
 // http
 import http from 'http';
 
+// zlib
+import zlib from 'zlib';
+
 // cookie
 import cookie from 'cookie';
 
@@ -57,15 +60,7 @@ const proxy = (request, response, proxyOptions, proxyCallback) => {
     logger.info(methodName, 'proxyRes.headers', proxyRes.headers);
 
     // callback
-    if (proxyCallback) {
-      let data = '';
-      proxyRes.on('data', (chunk) => {
-        data += chunk;
-      });
-      proxyRes.on('end', () => {
-        proxyCallback(null, proxyRes.statusCode, data);
-      });
-    }
+    if (proxyCallback) responseData(proxyRes, proxyCallback);
 
     // cookies
     responseSetCookie(response, proxyOptions);
@@ -135,6 +130,31 @@ function responseClearCookie(response, proxyOptions) {
     );
   }
   response.setHeader('Set-Cookie', setCookieHeaders);
+}
+
+// response data
+function responseData(proxyRes, proxyCallback) {
+  let data = '';
+
+  // gzip
+  if (proxyRes.headers['content-encoding'] === 'gzip') {
+    const gzip = zlib.createGunzip();
+    proxyRes.pipe(gzip);
+
+    gzip.on('data', (chunk) => {
+      data += chunk;
+    });
+    gzip.on('end', () => {
+      proxyCallback(null, data, proxyRes);
+    });
+  } else {
+    proxyRes.on('data', (chunk) => {
+      data += chunk;
+    });
+    proxyRes.on('end', () => {
+      proxyCallback(null, data, proxyRes);
+    });
+  }
 }
 
 export default proxy;
