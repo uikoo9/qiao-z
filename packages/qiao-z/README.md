@@ -48,3 +48,4 @@ Node.js极简&高性能Web框架，详见：[一篇文章开发 Node.js-Web-Serv
   - res.clearCookie
   - res.render
   - res.staticRender
+  - res.proxy

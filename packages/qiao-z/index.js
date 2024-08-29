@@ -686,29 +686,31 @@ const logger = qiao_log_js.Logger('qiao-z');
  * @param {*} request
  * @param {*} response
  * @param {*} proxyOptions
+ * @param {*} proxyCallback
+ * @returns
  */
-const proxy = (request, response, proxyOptions) => {
+const proxy = (request, response, proxyOptions, proxyCallback) => {
   const methodName = 'res.proxy';
 
   // check
   if (!proxyOptions) {
     logger.error(methodName, 'need proxyOptions');
-    responseError(response);
+    responseError(response, proxyCallback);
     return;
   }
   if (!proxyOptions.host) {
     logger.error(methodName, 'need proxyOptions.host');
-    responseError(response);
+    responseError(response, proxyCallback);
     return;
   }
   if (!proxyOptions.port) {
     logger.error(methodName, 'need proxyOptions.port');
-    responseError(response);
+    responseError(response, proxyCallback);
     return;
   }
   if (!proxyOptions.path) {
     logger.error(methodName, 'need proxyOptions.path');
-    responseError(response);
+    responseError(response, proxyCallback);
     return;
   }
 
@@ -726,6 +728,7 @@ const proxy = (request, response, proxyOptions) => {
   const proxyRequest = http.request(options, (proxyRes) => {
     logger.info(methodName, 'proxyRes.statusCode', proxyRes.statusCode);
     logger.info(methodName, 'proxyRes.headers', proxyRes.headers);
+    if (proxyCallback) proxyCallback(null, proxyRes);
 
     // cookies
     responseSetCookie(response, proxyOptions);
@@ -737,7 +740,7 @@ const proxy = (request, response, proxyOptions) => {
   });
   proxyRequest.on('error', (err) => {
     logger.error(methodName, 'proxy request error', err);
-    responseError(response);
+    responseError(response, proxyCallback);
   });
 
   // proxy req
@@ -752,9 +755,12 @@ const proxy = (request, response, proxyOptions) => {
 };
 
 // response error
-function responseError(response) {
-  response.writeHead(500, { 'Content-Type': 'text/plain' });
-  response.end('server error');
+function responseError(response, proxyCallback) {
+  const error = 'proxy server error';
+  if (proxyCallback) proxyCallback(error);
+
+  response.writeHead(500, { 'Content-Type': 'application/json' });
+  response.end({ error });
 }
 
 // response set cookie
@@ -860,8 +866,8 @@ const handleRes = (request, response, plugins) => {
   };
 
   // proxy
-  res.proxy = (proxyOptions) => {
-    proxy(request, response, proxyOptions);
+  res.proxy = (proxyOptions, proxyCallback) => {
+    proxy(request, response, proxyOptions, proxyCallback);
   };
 
   return res;

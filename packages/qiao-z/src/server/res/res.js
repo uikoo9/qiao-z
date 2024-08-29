@@ -73,8 +73,8 @@ const handleRes = (request, response, plugins) => {
   };
 
   // proxy
-  res.proxy = (proxyOptions) => {
-    proxy(request, response, proxyOptions);
+  res.proxy = (proxyOptions, proxyCallback) => {
+    proxy(request, response, proxyOptions, proxyCallback);
   };
 
   return res;
