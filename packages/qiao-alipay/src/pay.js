@@ -45,6 +45,7 @@ export const pay = async (app, options) => {
     total_amount: options.tradeAmount,
     qr_pay_mode: options.payMode,
   };
+  if (options.payMode === '4') bizContent.qrcode_width = options.qrcodeWidth || 100;
   logger.info(methodName, 'bizContent', bizContent);
 
   // html

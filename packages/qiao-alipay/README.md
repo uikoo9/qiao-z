@@ -65,6 +65,9 @@ await alipay.check();
 - options.payMode
   - 类型: string
   - 说明: 支付方式，主要是二维码显示方式，https://opendocs.alipay.com/open-v3/2423fad5_alipay.trade.page.pay
+- options.qrcodeWidth
+  - 类型: number
+  - 说明: 二维码宽度
 - options.notifyUrl
   - 类型: string
   - 说明: 支付回调url
