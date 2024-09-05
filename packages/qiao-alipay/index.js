@@ -116,9 +116,9 @@ const pay = async (app, options) => {
     // query options
     const queryOptions = {
       bizContent,
-      returnUrl: options.returnUrl,
     };
     if (options.notifyUrl) queryOptions.notify_url = options.notifyUrl;
+    if (options.returnUrl) queryOptions.returnUrl = options.returnUrl;
     logger$3.info(methodName, 'queryOptions', queryOptions);
 
     // r
