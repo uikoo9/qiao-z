@@ -32,10 +32,6 @@ export const pay = async (app, options) => {
     logger.error(methodName, 'need options.payMode');
     return;
   }
-  if (!options.returnUrl) {
-    logger.error(methodName, 'need options.returnUrl');
-    return;
-  }
 
   // content
   const bizContent = {

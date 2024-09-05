@@ -99,10 +99,6 @@ const pay = async (app, options) => {
     logger$3.error(methodName, 'need options.payMode');
     return;
   }
-  if (!options.returnUrl) {
-    logger$3.error(methodName, 'need options.returnUrl');
-    return;
-  }
 
   // content
   const bizContent = {
