@@ -485,6 +485,30 @@ const send = (res, msg) => {
   res.end(msg);
 };
 
+/**
+ * html
+ * @param {*} res
+ * @param {*} htmlData
+ * @param {*} encoding
+ * @returns
+ */
+const html = (res, htmlData, encoding) => {
+  // check
+  if (!res) return;
+  if (!htmlData) {
+    res.send('html: please check html data!');
+    return;
+  }
+
+  // content type
+  const contentType = `text/html; charset=${encoding || 'utf-8'}`;
+
+  // res
+  res.response.writeHeader(200, { 'Content-Type': contentType });
+  res.response.write(htmlData);
+  res.response.end();
+};
+
 // json
 const logger$1 = qiao_log_js.Logger('qiao-z');
 
@@ -864,6 +888,11 @@ const handleRes = (request, response, plugins) => {
   // send
   res.send = (msg) => {
     send(res, msg);
+  };
+
+  // html
+  res.html = (htmlData, encoding) => {
+    html(res, htmlData, encoding);
   };
 
   // json

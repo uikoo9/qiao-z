@@ -3,6 +3,7 @@ import head from './res-head.js';
 import end from './res-end.js';
 import redirect from './res-redirect.js';
 import send from './res-send.js';
+import html from './res-html.js';
 import { json, jsonSuccess, jsonFail } from './res-json.js';
 import { clearCookie, setCookie } from './res-cookie.js';
 import render from './res-render.js';
@@ -43,6 +44,11 @@ const handleRes = (request, response, plugins) => {
   // send
   res.send = (msg) => {
     send(res, msg);
+  };
+
+  // html
+  res.html = (htmlData, encoding) => {
+    html(res, htmlData, encoding);
   };
 
   // json
