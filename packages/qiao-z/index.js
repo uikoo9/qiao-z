@@ -773,7 +773,6 @@ const proxy = (request, response, proxyOptions, proxyCallback) => {
   // proxy req
   if (request.method === 'POST') {
     const postData = JSON.stringify(proxyOptions.body);
-    logger.info(methodName, 'postData', postData);
     proxyRequest.write(postData);
     proxyRequest.end();
   } else {
