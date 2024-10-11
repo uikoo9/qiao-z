@@ -1,0 +1,51 @@
+{
+  "name": "qiao-ws",
+  "version": "4.9.8",
+  "description": "nodejs websocket",
+  "keywords": [
+    "nodejs",
+    "websocket"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.insistime.com/#qiao-ws",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "src/app.js",
+  "sideEffets": false,
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-z.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-z/issues"
+  },
+  "scripts": {
+    "build": "qpro rollup ./rollup.config.js"
+  },
+  "dependencies": {
+    "bufferutil": "^4.0.8",
+    "qiao.log.js": "^3.7.1",
+    "utf-8-validate": "^6.0.4",
+    "ws": "^8.18.0"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
+  }
+}
