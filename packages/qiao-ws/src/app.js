@@ -1,6 +1,9 @@
 // server
 import { initWSServer } from './server.js';
 
+// client
+import { initWSClient } from './client.js';
+
 // Logger
 import { Logger } from 'qiao.log.js';
 const logger = Logger('qiao-ws');
@@ -8,7 +11,7 @@ const logger = Logger('qiao-ws');
 /**
  * app
  */
-export default async () => {
+export default () => {
   const methodName = 'constructor';
 
   // app
@@ -18,6 +21,12 @@ export default async () => {
   app.server = (options) => {
     logger.info(methodName, 'server options', options);
     return initWSServer(options);
+  };
+
+  // client
+  app.client = (options) => {
+    logger.info(methodName, 'client options', options);
+    return initWSClient(options);
   };
 
   //
