@@ -1,6 +1,6 @@
 {
   "name": "qiao-cache",
-  "version": "4.8.3",
+  "version": "5.0.0",
   "description": "nodejs memory cache",
   "keywords": [
     "nodejs",

@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-user",
-  "version": "4.8.2",
+  "version": "5.0.0",
   "description": "qiao-z user module",
   "keywords": [
     "qiao-z",
@@ -21,8 +21,8 @@
   "dependencies": {
     "debug": "^4.3.4",
     "qiao-encode": "^4.5.1",
-    "qiao-mysql": "^4.5.2",
-    "qiao-sms": "^4.8.2",
+    "qiao-mysql": "^5.0.0",
+    "qiao-sms": "^5.0.0",
     "qiao.log.js": "^3.7.1"
   }
 }

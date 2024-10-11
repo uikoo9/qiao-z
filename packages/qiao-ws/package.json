@@ -1,6 +1,6 @@
 {
   "name": "qiao-ws",
-  "version": "4.9.9",
+  "version": "5.0.0",
   "description": "nodejs websocket",
   "keywords": [
     "nodejs",
