@@ -29,7 +29,6 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "qcloudsms_js": "^0.1.1",
     "qiao-ajax": "^5.0.3",
     "qiao.log.js": "^3.7.1"
   },
