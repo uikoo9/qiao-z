@@ -1,2 +1,2 @@
-// ucenter user service
-export * from './service/ucenter-user-service.js';
+// sms
+export * from './service/sms.js';

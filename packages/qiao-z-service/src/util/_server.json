@@ -1,9 +1,0 @@
-{
-  "host": "https://api.vincentqiao.com/",
-
-  "userRegister": "user/reg",
-  "userLogin": "user/login",
-  "userCheck": "user/check",
-  "userMenus": "user/menus",
-  "sendCode": "code/send"
-}

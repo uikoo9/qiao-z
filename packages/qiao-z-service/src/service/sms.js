@@ -1,11 +1,12 @@
-'use strict';
-
-var qiaoAjax = require('qiao-ajax');
-var json = require('qiao-json');
-var qiao_log_js = require('qiao.log.js');
-
 // ajax
-const logger = qiao_log_js.Logger('qiao-z-service');
+import { post } from 'qiao-ajax';
+
+// json
+import json from 'qiao-json';
+
+// Logger
+import { Logger } from 'qiao.log.js';
+const logger = Logger('qiao-z-service');
 
 /**
  * sendSms
@@ -14,7 +15,7 @@ const logger = qiao_log_js.Logger('qiao-z-service');
  * @param {*} mobile
  * @returns
  */
-const sendSms = async (options) => {
+export const sendSms = async (options) => {
   const methodName = 'sendSms';
 
   // const
@@ -27,7 +28,7 @@ const sendSms = async (options) => {
 
   // send
   try {
-    const smsRes = await qiaoAjax.post(url, {
+    const smsRes = await post(url, {
       data: {
         appId: appId,
         appKey: appKey,
@@ -53,5 +54,3 @@ const sendSms = async (options) => {
     return json.fail('send sms network error');
   }
 };
-
-exports.sendSms = sendSms;
