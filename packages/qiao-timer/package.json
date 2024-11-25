@@ -8,7 +8,7 @@
     "cron"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/#qiao-timer",
+  "homepage": "https://code.vincentqiao.com/#qiao-timer",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",

@@ -2,7 +2,7 @@
   "name": "qiao-service",
   "version": "5.0.0",
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/#qiao-service",
+  "homepage": "https://code.vincentqiao.com/#qiao-service",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",

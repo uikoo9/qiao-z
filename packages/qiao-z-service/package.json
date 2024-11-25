@@ -1,13 +1,8 @@
 {
-  "name": "qiao-ua",
+  "name": "qiao-z-service",
   "version": "5.0.0",
-  "description": "parse useragent",
-  "keywords": [
-    "parse",
-    "useragent"
-  ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.vincentqiao.com/#qiao-ua",
+  "homepage": "https://code.vincentqiao.com/#qiao-z-service",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -24,6 +19,11 @@
   },
   "scripts": {
     "build": "qpro rollup ./rollup.config.js"
+  },
+  "dependencies": {
+    "qiao-ajax": "^5.0.1",
+    "qiao-json": "^5.0.0",
+    "qiao.log.js": "^3.7.1"
   },
   "nx": {
     "namedInputs": {

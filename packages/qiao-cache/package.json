@@ -8,7 +8,7 @@
     "cache"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/#qiao-cache",
+  "homepage": "https://code.vincentqiao.com/#qiao-cache",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
