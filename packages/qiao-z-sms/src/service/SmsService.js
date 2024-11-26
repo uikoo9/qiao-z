@@ -4,11 +4,11 @@ const { randomNumber } = require('qiao-encode');
 const { sendSms } = require('qiao-z-service');
 
 /**
- * userSendCode
+ * sms
  * @param {*} req
  * @param {*} res
  */
-exports.userSendCode = async (req, res) => {
+exports.sms = async (req, res) => {
   // const
   const mobile = req.body.mobile;
   const code = randomNumber(6);

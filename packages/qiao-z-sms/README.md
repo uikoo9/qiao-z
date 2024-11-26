@@ -22,6 +22,7 @@ const sms = require('qiao-z-sms');
 // options
 const options = {
   // sms
+  config: config,
   modules: [sms.init],
 };
 
@@ -34,10 +35,4 @@ app.listen(port);
 
 ## 内置路由
 
-### user相关路由
-
-- `/sms/reg`: 用户注册
-- `/sms/login`: 用户登录
-- `/sms/forget`: 忘记密码
-- `/sms/menus`: 用户菜单
-- `/code/send`: 发送验证码
+- `/sms`: 发送短信
