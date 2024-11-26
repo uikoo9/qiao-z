@@ -28,7 +28,7 @@
   "dependencies": {
     "bufferutil": "^4.0.8",
     "qiao.log.js": "^3.7.1",
-    "utf-8-validate": "^6.0.4",
+    "utf-8-validate": "^6.0.5",
     "ws": "^8.18.0"
   },
   "nx": {

@@ -1,13 +1,13 @@
 {
-  "name": "qiao-z-user",
+  "name": "qiao-z-sms",
   "version": "5.0.1",
-  "description": "qiao-z user module",
+  "description": "qiao-z sms module",
   "keywords": [
     "qiao-z",
-    "user module"
+    "sms module"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.vincentqiao.com/#qiao-z-user",
+  "homepage": "https://code.vincentqiao.com/#qiao-z-sms",
   "license": "MIT",
   "main": "index.js",
   "repository": {
@@ -19,10 +19,9 @@
   },
   "scripts": {},
   "dependencies": {
-    "debug": "^4.3.7",
+    "qiao-cache": "^5.0.1",
     "qiao-encode": "^4.5.1",
-    "qiao-mysql": "^5.0.1",
-    "qiao-sms": "^5.0.1",
+    "qiao-z-service": "^5.0.1",
     "qiao.log.js": "^3.7.1"
   }
 }

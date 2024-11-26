@@ -18,7 +18,9 @@ module.exports = {
     'qiao-timer',
     'qiao-ua',
     'qiao-json',
+    'qiao.log.js',
     'qs',
     'raw-body',
+    'zlib',
   ],
 };
