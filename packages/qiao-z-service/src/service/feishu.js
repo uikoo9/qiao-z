@@ -51,11 +51,11 @@ export const sendMsgToFeishu = async (options) => {
 
     // check
     if (feishuRes.status !== 200) {
-      logger.fail(methodName, 'feishuRes', feishuRes);
+      logger.error(methodName, 'feishuRes', feishuRes);
       return json.fail(`feishuRes.status is ${feishuRes.status}`);
     }
     if (feishuRes.data.type !== 'success') {
-      logger.fail(methodName, 'smsRes', feishuRes);
+      logger.error(methodName, 'smsRes', feishuRes);
       return json.fail(feishuRes.data.msg);
     }
 

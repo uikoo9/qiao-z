@@ -50,11 +50,11 @@ const sendMsgToFeishu = async (options) => {
 
     // check
     if (feishuRes.status !== 200) {
-      logger$1.fail(methodName, 'feishuRes', feishuRes);
+      logger$1.error(methodName, 'feishuRes', feishuRes);
       return json.fail(`feishuRes.status is ${feishuRes.status}`);
     }
     if (feishuRes.data.type !== 'success') {
-      logger$1.fail(methodName, 'smsRes', feishuRes);
+      logger$1.error(methodName, 'smsRes', feishuRes);
       return json.fail(feishuRes.data.msg);
     }
 
@@ -100,11 +100,11 @@ const sendSms = async (options) => {
 
     // check
     if (smsRes.status !== 200) {
-      logger.fail(methodName, 'smsRes', smsRes);
+      logger.error(methodName, 'smsRes', smsRes);
       return json.fail(`smsRes.status is ${smsRes.status}`);
     }
     if (smsRes.data.type !== 'success') {
-      logger.fail(methodName, 'smsRes', smsRes);
+      logger.error(methodName, 'smsRes', smsRes);
       return json.fail(smsRes.data.msg);
     }
 

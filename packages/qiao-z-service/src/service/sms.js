@@ -39,11 +39,11 @@ export const sendSms = async (options) => {
 
     // check
     if (smsRes.status !== 200) {
-      logger.fail(methodName, 'smsRes', smsRes);
+      logger.error(methodName, 'smsRes', smsRes);
       return json.fail(`smsRes.status is ${smsRes.status}`);
     }
     if (smsRes.data.type !== 'success') {
-      logger.fail(methodName, 'smsRes', smsRes);
+      logger.error(methodName, 'smsRes', smsRes);
       return json.fail(smsRes.data.msg);
     }
 
