@@ -89,7 +89,7 @@ export const listRecommend = async (options) => {
     }
 
     // r
-    return json.success(recommendRes.data.msg);
+    return json.success(recommendRes.data.msg, recommendRes.data.obj);
   } catch (error) {
     logger.error(methodName, error);
     return json.fail('list recommend network error');
