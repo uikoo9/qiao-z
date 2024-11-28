@@ -10,9 +10,7 @@ const logger = Logger('qiao-z-service');
 
 /**
  * sendSms
- * @param {*} req
- * @param {*} res
- * @param {*} mobile
+ * @param {*} options
  * @returns
  */
 export const sendSms = async (options) => {

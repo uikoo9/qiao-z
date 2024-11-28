@@ -10,6 +10,8 @@ const logger = Logger('qiao-z-service');
 
 /**
  * sendMsgToFeishu
+ * @param {*} options
+ * @returns
  */
 export const sendMsgToFeishu = async (options) => {
   const methodName = 'sendMsgToFeishu';

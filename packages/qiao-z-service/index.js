@@ -9,6 +9,8 @@ const logger$1 = qiao_log_js.Logger('qiao-z-service');
 
 /**
  * sendMsgToFeishu
+ * @param {*} options
+ * @returns
  */
 const sendMsgToFeishu = async (options) => {
   const methodName = 'sendMsgToFeishu';
@@ -71,9 +73,7 @@ const logger = qiao_log_js.Logger('qiao-z-service');
 
 /**
  * sendSms
- * @param {*} req
- * @param {*} res
- * @param {*} mobile
+ * @param {*} options
  * @returns
  */
 const sendSms = async (options) => {
