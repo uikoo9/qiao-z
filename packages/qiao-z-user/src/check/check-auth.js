@@ -46,3 +46,43 @@ exports.checkUserAuth = async function (req, userid, usertoken) {
     logger.error(methodName, 'check user auth error', e);
   }
 };
+
+/**
+ * checkUserAuth
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
+exports.checkUserAuthByReq = async (req, res) => {
+  const methodName = 'checkUserAuthByReq';
+
+  // const
+  const cookies = [];
+  const userid = req.query.userid || req.cookies.userid || req.headers.userid;
+  const usertoken = req.query.usertoken || req.cookies.usertoken || req.headers.usertoken;
+  const decodeUsertoken = decodeURIComponent(usertoken);
+  if (userid && usertoken) {
+    cookies.push({ key: 'userid', value: userid });
+    cookies.push({ key: 'usertoken', value: usertoken });
+  }
+
+  // check
+  try {
+    const checkUserRes = await exports.checkUserAuth(req, userid, decodeUsertoken);
+    if (!checkUserRes) {
+      res.clearCookie('userid');
+      res.clearCookie('usertoken');
+
+      const msg = 'need login';
+      logger.error(methodName, msg);
+      res.jsonFail(msg);
+      return;
+    }
+
+    return cookies;
+  } catch (error) {
+    const msg = 'check user auth error';
+    logger.error(methodName, msg, error);
+    res.jsonFail(msg);
+  }
+};

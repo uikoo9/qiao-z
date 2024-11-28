@@ -1,5 +1,5 @@
 {
-  "name": "qiao-z-sms",
+  "name": "qiao-z-recommend",
   "version": "5.0.7",
   "description": "qiao-z sms module",
   "keywords": [
@@ -7,7 +7,7 @@
     "sms module"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.vincentqiao.com/#qiao-z-sms",
+  "homepage": "https://code.vincentqiao.com/#qiao-z-recommend",
   "license": "MIT",
   "main": "index.js",
   "repository": {
@@ -19,8 +19,11 @@
   },
   "scripts": {},
   "dependencies": {
+    "dayjs": "^1.11.13",
     "qiao-cache": "^5.0.1",
     "qiao-encode": "^4.5.1",
-    "qiao-z-service": "^5.0.7"
+    "qiao-z-service": "^5.0.7",
+    "qiao-z-user": "^5.0.2",
+    "qiao.log.js": "^3.7.1"
   }
 }

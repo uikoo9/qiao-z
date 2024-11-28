@@ -15,6 +15,7 @@ const ucenterRoleuserController = require('./src/ucenter/controller/UcenterRoleu
  */
 exports.checkAuth = require('./src/check/index.js');
 exports.checkUserAuth = require('./src/check/check-auth.js').checkUserAuth;
+exports.checkUserAuthByReq = require('./src/check/check-auth.js').checkUserAuthByReq;
 
 /**
  * init
