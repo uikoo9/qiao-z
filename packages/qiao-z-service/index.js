@@ -5,7 +5,7 @@ var json = require('qiao-json');
 var qiao_log_js = require('qiao.log.js');
 
 // ajax
-const logger$1 = qiao_log_js.Logger('qiao-z-service');
+const logger$2 = qiao_log_js.Logger('qiao-z-service');
 
 /**
  * sendMsgToFeishu
@@ -21,7 +21,7 @@ const sendMsgToFeishu = async (options) => {
   const appKey = options.appKey;
   const feishuUrl = options.feishuUrl;
   const feishuMsg = options.feishuMsg;
-  logger$1.info(methodName, 'options', options);
+  logger$2.info(methodName, 'options', options);
 
   // content
   const content = JSON.stringify({
@@ -52,19 +52,155 @@ const sendMsgToFeishu = async (options) => {
 
     // check
     if (feishuRes.status !== 200) {
-      logger$1.error(methodName, 'feishuRes', feishuRes);
+      logger$2.error(methodName, 'feishuRes', feishuRes);
       return json.fail(`feishuRes.status is ${feishuRes.status}`);
     }
     if (feishuRes.data.type !== 'success') {
-      logger$1.error(methodName, 'smsRes', feishuRes);
+      logger$2.error(methodName, 'smsRes', feishuRes);
       return json.fail(feishuRes.data.msg);
     }
 
     // r
     return json.success(feishuRes.data.msg);
   } catch (error) {
-    logger$1.error(methodName, error);
+    logger$2.error(methodName, error);
     return json.fail('send msg to feishu network error');
+  }
+};
+
+// ajax
+const logger$1 = qiao_log_js.Logger('qiao-z-service');
+
+/**
+ * addRecommend
+ * @param {*} options
+ * @returns
+ */
+const addRecommend = async (options) => {
+  const methodName = 'addRecommend';
+
+  // const
+  const url = options.url + 'recommend/add';
+  const appId = options.appId;
+  const appKey = options.appKey;
+  const userId = options.userId;
+  const newUserId = options.newUserId;
+  logger$1.info(methodName, 'options', options);
+
+  // send
+  try {
+    const recommendRes = await qiaoAjax.post(url, {
+      data: {
+        appId: appId,
+        appKey: appKey,
+        userId: userId,
+        newUserId: newUserId,
+      },
+    });
+
+    // check
+    if (recommendRes.status !== 200) {
+      logger$1.error(methodName, 'recommendRes', recommendRes);
+      return json.fail(`recommendRes.status is ${recommendRes.status}`);
+    }
+    if (recommendRes.data.type !== 'success') {
+      logger$1.error(methodName, 'recommendRes', recommendRes);
+      return json.fail(recommendRes.data.msg);
+    }
+
+    // r
+    return json.success(recommendRes.data.msg);
+  } catch (error) {
+    logger$1.error(methodName, error);
+    return json.fail('add recommend network error');
+  }
+};
+
+/**
+ * listRecommend
+ * @param {*} options
+ * @returns
+ */
+const listRecommend = async (options) => {
+  const methodName = 'listRecommend';
+
+  // const
+  const url = options.url + 'recommend/list';
+  const appId = options.appId;
+  const appKey = options.appKey;
+  const userId = options.userId;
+  logger$1.info(methodName, 'options', options);
+
+  // send
+  try {
+    const recommendRes = await qiaoAjax.post(url, {
+      data: {
+        appId: appId,
+        appKey: appKey,
+        userId: userId,
+      },
+    });
+
+    // check
+    if (recommendRes.status !== 200) {
+      logger$1.error(methodName, 'recommendRes', recommendRes);
+      return json.fail(`recommendRes.status is ${recommendRes.status}`);
+    }
+    if (recommendRes.data.type !== 'success') {
+      logger$1.error(methodName, 'recommendRes', recommendRes);
+      return json.fail(recommendRes.data.msg);
+    }
+
+    // r
+    return json.success(recommendRes.data.msg);
+  } catch (error) {
+    logger$1.error(methodName, error);
+    return json.fail('list recommend network error');
+  }
+};
+
+/**
+ * changeRecommend
+ * @param {*} options
+ * @returns
+ */
+const changeRecommend = async (options) => {
+  const methodName = 'changeRecommend';
+
+  // const
+  const url = options.url + 'recommend/change';
+  const appId = options.appId;
+  const appKey = options.appKey;
+  const userId = options.userId;
+  const newUserId = options.newUserId;
+  logger$1.info(methodName, 'options', options);
+
+  // send
+  try {
+    const recommendRes = await qiaoAjax.post(url, {
+      data: {
+        appId: appId,
+        appKey: appKey,
+        userId: userId,
+        newUserId: newUserId,
+      },
+    });
+
+    // check
+    if (recommendRes.status !== 200) {
+      logger$1.error(methodName, 'recommendRes', recommendRes);
+      return json.fail(`recommendRes.status is ${recommendRes.status}`);
+    }
+    if (recommendRes.data.type !== 'success') {
+      logger$1.error(methodName, 'recommendRes', recommendRes);
+      return json.fail(recommendRes.data.msg);
+    }
+
+    // r
+    return json.success(recommendRes.data.msg);
+  } catch (error) {
+    logger$1.error(methodName, error);
+    return json.fail('change recommend network error');
   }
 };
 
@@ -116,5 +252,8 @@ const sendSms = async (options) => {
   }
 };
 
+exports.addRecommend = addRecommend;
+exports.changeRecommend = changeRecommend;
+exports.listRecommend = listRecommend;
 exports.sendMsgToFeishu = sendMsgToFeishu;
 exports.sendSms = sendSms;
