@@ -5,6 +5,68 @@ var json = require('qiao-json');
 var qiao_log_js = require('qiao.log.js');
 
 // ajax
+const logger$1 = qiao_log_js.Logger('qiao-z-service');
+
+/**
+ * sendMsgToFeishu
+ */
+const sendMsgToFeishu = async (options) => {
+  const methodName = 'sendMsgToFeishu';
+
+  // const
+  const url = options.url;
+  const appId = options.appId;
+  const appKey = options.appKey;
+  const feishuUrl = options.feishuUrl;
+  const feishuMsg = options.feishuMsg;
+  logger$1.info(methodName, 'options', options);
+
+  // content
+  const content = JSON.stringify({
+    post: {
+      zh_cn: {
+        content: [
+          [
+            {
+              tag: 'text',
+              text: feishuMsg,
+            },
+          ],
+        ],
+      },
+    },
+  });
+
+  // go
+  try {
+    const feishuRes = await qiaoAjax.post(url, {
+      data: {
+        appId: appId,
+        appKey: appKey,
+        url: feishuUrl,
+        content: content,
+      },
+    });
+
+    // check
+    if (feishuRes.status !== 200) {
+      logger$1.fail(methodName, 'feishuRes', feishuRes);
+      return json.fail(`feishuRes.status is ${feishuRes.status}`);
+    }
+    if (feishuRes.data.type !== 'success') {
+      logger$1.fail(methodName, 'smsRes', feishuRes);
+      return json.fail(feishuRes.data.msg);
+    }
+
+    // r
+    return json.success(feishuRes.data.msg);
+  } catch (error) {
+    logger$1.error(methodName, error);
+    return json.fail('send msg to feishu network error');
+  }
+};
+
+// ajax
 const logger = qiao_log_js.Logger('qiao-z-service');
 
 /**
@@ -54,4 +116,5 @@ const sendSms = async (options) => {
   }
 };
 
+exports.sendMsgToFeishu = sendMsgToFeishu;
 exports.sendSms = sendSms;
