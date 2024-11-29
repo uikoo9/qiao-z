@@ -1,3 +1,6 @@
+// cos
+export * from './service/cos.js';
+
 // feishu
 export * from './service/feishu.js';
 

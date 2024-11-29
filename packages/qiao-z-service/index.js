@@ -43,6 +43,17 @@ const fetch = async (url, data) => {
 // util
 
 /**
+ * cosToken
+ * @param {*} options
+ * @returns
+ */
+const cosToken = async (options) => {
+  return await fetch(options.url + 'cos/token', options);
+};
+
+// util
+
+/**
  * sendMsgToFeishu
  * @param {*} options
  * @returns
@@ -114,6 +125,7 @@ const sendSms = async (options) => {
 
 exports.addRecommend = addRecommend;
 exports.changeRecommend = changeRecommend;
+exports.cosToken = cosToken;
 exports.listRecommend = listRecommend;
 exports.sendMsgToFeishu = sendMsgToFeishu;
 exports.sendSms = sendSms;
