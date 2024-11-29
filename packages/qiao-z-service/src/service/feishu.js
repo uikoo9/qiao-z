@@ -1,12 +1,5 @@
-// ajax
-import { post } from 'qiao-ajax';
-
-// json
-import json from 'qiao-json';
-
-// Logger
-import { Logger } from 'qiao.log.js';
-const logger = Logger('qiao-z-service');
+// util
+import { fetch } from '../util/fetch.js';
 
 /**
  * sendMsgToFeishu
@@ -14,16 +7,6 @@ const logger = Logger('qiao-z-service');
  * @returns
  */
 export const sendMsgToFeishu = async (options) => {
-  const methodName = 'sendMsgToFeishu';
-
-  // const
-  const url = options.url;
-  const appId = options.appId;
-  const appKey = options.appKey;
-  const feishuUrl = options.feishuUrl;
-  const feishuMsg = options.feishuMsg;
-  logger.info(methodName, 'options', options);
-
   // content
   const content = JSON.stringify({
     post: {
@@ -32,7 +15,7 @@ export const sendMsgToFeishu = async (options) => {
           [
             {
               tag: 'text',
-              text: feishuMsg,
+              text: options.feishuMsg,
             },
           ],
         ],
@@ -40,31 +23,10 @@ export const sendMsgToFeishu = async (options) => {
     },
   });
 
-  // go
-  try {
-    const feishuRes = await post(url, {
-      data: {
-        appId: appId,
-        appKey: appKey,
-        url: feishuUrl,
-        content: content,
-      },
-    });
-
-    // check
-    if (feishuRes.status !== 200) {
-      logger.error(methodName, 'feishuRes', feishuRes);
-      return json.fail(`feishuRes.status is ${feishuRes.status}`);
-    }
-    if (feishuRes.data.type !== 'success') {
-      logger.error(methodName, 'smsRes', feishuRes);
-      return json.fail(feishuRes.data.msg);
-    }
-
-    // r
-    return json.success(feishuRes.data.msg);
-  } catch (error) {
-    logger.error(methodName, error);
-    return json.fail('send msg to feishu network error');
-  }
+  return await fetch(options.url, {
+    appId: options.appId,
+    appKey: options.appKey,
+    url: options.feishuUrl,
+    content: content,
+  });
 };
