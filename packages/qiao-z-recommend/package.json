@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-recommend",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "description": "qiao-z sms module",
   "keywords": [
     "qiao-z",
@@ -22,8 +22,8 @@
     "dayjs": "^1.11.13",
     "qiao-cache": "^5.0.1",
     "qiao-encode": "^4.5.1",
-    "qiao-z-service": "^5.0.7",
-    "qiao-z-user": "^5.0.2",
+    "qiao-z-service": "^5.0.8",
+    "qiao-z-user": "^5.0.8",
     "qiao.log.js": "^3.7.1"
   }
 }
