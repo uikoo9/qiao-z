@@ -51,6 +51,15 @@ const cosToken = async (options) => {
   return await fetch(options.url + 'cos/token', options);
 };
 
+/**
+ * cosSign
+ * @param {*} options
+ * @returns
+ */
+const cosSign = async (options) => {
+  return await fetch(options.url + 'cos/sign', options);
+};
+
 // util
 
 /**
@@ -125,6 +134,7 @@ const sendSms = async (options) => {
 
 exports.addRecommend = addRecommend;
 exports.changeRecommend = changeRecommend;
+exports.cosSign = cosSign;
 exports.cosToken = cosToken;
 exports.listRecommend = listRecommend;
 exports.sendMsgToFeishu = sendMsgToFeishu;
