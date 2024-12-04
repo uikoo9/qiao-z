@@ -20,7 +20,7 @@
   "scripts": {},
   "dependencies": {
     "debug": "^4.3.7",
-    "qiao-encode": "^4.7.1",
+    "qiao-encode": "^4.7.2",
     "qiao-mysql": "^5.0.1",
     "qiao-sms": "^5.1.2",
     "qiao.log.js": "^3.7.3"

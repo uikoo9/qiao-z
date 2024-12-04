@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "build": "lerna run build",
     "prettier": "qpro prettier",
     "eslint": "qpro eslint",
