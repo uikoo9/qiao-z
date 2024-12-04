@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "cron": "^3.2.1",
-    "qiao.log.js": "^3.7.1"
+    "qiao.log.js": "^3.7.3"
   },
   "nx": {
     "namedInputs": {

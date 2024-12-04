@@ -32,10 +32,10 @@
     "cookie": "^1.0.2",
     "debug": "^4.3.7",
     "parseurl": "^1.3.3",
-    "qiao-file": "^4.5.5",
+    "qiao-file": "^4.7.1",
     "qiao-json": "^5.0.1",
     "qiao-ua": "^5.0.1",
-    "qiao.log.js": "^3.7.1",
+    "qiao.log.js": "^3.7.3",
     "qs": "^6.13.1",
     "raw-body": "^3.0.0"
   },

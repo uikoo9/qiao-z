@@ -21,9 +21,9 @@
   "dependencies": {
     "dayjs": "^1.11.13",
     "qiao-cache": "^5.0.1",
-    "qiao-encode": "^4.5.1",
+    "qiao-encode": "^4.7.1",
     "qiao-z-service": "^5.1.0",
     "qiao-z-user": "^5.0.8",
-    "qiao.log.js": "^3.7.1"
+    "qiao.log.js": "^3.7.3"
   }
 }
