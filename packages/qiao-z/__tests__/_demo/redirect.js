@@ -8,7 +8,7 @@ const server = http.createServer();
 server.on('request', (request, response) => {
   console.log('request');
 
-  const url = 'https://insistime.com/';
+  const url = 'https://vincentqiao.com/';
 
   response.writeHead(302, { Location: url });
   response.end();

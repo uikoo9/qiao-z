@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-z.svg?style=flat-square)](https://www.npmjs.org/package/qiao-z)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-z.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-z)
 
-Node.js极简&高性能Web框架，详见：[一篇文章开发 Node.js-Web-Server](https://blog.insistime.com/nodejs-web-server)
+Node.js极简&高性能Web框架，详见：[一篇文章开发 Node.js-Web-Server](https://blog.vincentqiao.com/nodejs-web-server)
 
 ## 官网
 

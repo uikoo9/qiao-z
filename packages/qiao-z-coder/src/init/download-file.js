@@ -12,8 +12,8 @@ const { getTmpPath } = require('./tmp-path.js');
 exports.downloadFile = async (type) => {
   // url
   let url;
-  if (type === 'monorepo') url = 'https://static.insistime.com/codes/monorepo.zip';
-  if (type === 'manage') url = 'https://static.insistime.com/codes/manage.zip';
+  if (type === 'monorepo') url = 'https://static.vincentqiao.com/codes/monorepo.zip';
+  if (type === 'manage') url = 'https://static.vincentqiao.com/codes/manage.zip';
   if (!url) {
     console.log('不支持的type');
     return;
