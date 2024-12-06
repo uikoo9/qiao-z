@@ -43,6 +43,17 @@ const fetch = async (url, data) => {
 // util
 
 /**
+ * appUpdate
+ * @param {*} options
+ * @returns
+ */
+const appUpdate = async (options) => {
+  return await fetch(options.url + 'app/update', options);
+};
+
+// util
+
+/**
  * cosToken
  * @param {*} options
  * @returns
@@ -133,6 +144,7 @@ const sendSms = async (options) => {
 };
 
 exports.addRecommend = addRecommend;
+exports.appUpdate = appUpdate;
 exports.changeRecommend = changeRecommend;
 exports.cosSign = cosSign;
 exports.cosToken = cosToken;

@@ -1,3 +1,6 @@
+// app
+export * from './service/app.js';
+
 // cos
 export * from './service/cos.js';
 
