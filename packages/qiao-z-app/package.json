@@ -1,0 +1,24 @@
+{
+  "name": "qiao-z-app",
+  "version": "5.1.5",
+  "description": "qiao-z app module",
+  "keywords": [
+    "qiao-z",
+    "app module"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.vincentqiao.com/#qiao-z-app",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-z.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-z/issues"
+  },
+  "scripts": {},
+  "dependencies": {
+    "qiao-z-service": "^5.1.3"
+  }
+}
