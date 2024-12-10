@@ -31,7 +31,20 @@ exports.cosToken = async (req, res) => {
  */
 exports.cosSign = async (req, res) => {
   // send
-  const json = await cosSign({
+  const json = await exports.cosSignByReq(req.body.filePath, req.body.formatWebp, req.body.formatWidth);
+
+  // send
+  res.json(json);
+};
+
+/**
+ * cosSignByReq
+ * @param {*} filePath
+ * @param {*} formatWebp
+ * @param {*} formatWidth
+ */
+exports.cosSignByReq = async (filePath, formatWebp, formatWidth) => {
+  return await cosSign({
     url: global.QZ_CONFIG.cosServer.url,
     appId: global.QZ_CONFIG.cosServer.appId,
     appKey: global.QZ_CONFIG.cosServer.appKey,
@@ -42,11 +55,8 @@ exports.cosSign = async (req, res) => {
     signKey: global.QZ_CONFIG.cos.signKey,
     signTimeout: global.QZ_CONFIG.cos.signTimeout,
     cdnHost: global.QZ_CONFIG.cos.cdnHost,
-    filePath: req.body.filePath,
-    formatWebp: req.body.formatWebp,
-    formatWidth: req.body.formatWidth,
+    filePath: filePath,
+    formatWebp: formatWebp,
+    formatWidth: formatWidth,
   });
-
-  // send
-  res.json(json);
 };
