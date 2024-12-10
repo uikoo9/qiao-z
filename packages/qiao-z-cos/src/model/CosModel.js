@@ -42,9 +42,9 @@ exports.cosSign = async (req, res) => {
     signKey: global.QZ_CONFIG.cos.signKey,
     signTimeout: global.QZ_CONFIG.cos.signTimeout,
     cdnHost: global.QZ_CONFIG.cos.cdnHost,
-    filePath: req.body.path,
-    formatWebp: 'no',
-    formatWidth: 'null',
+    filePath: req.body.filePath,
+    formatWebp: req.body.formatWebp,
+    formatWidth: req.body.formatWidth,
   });
 
   // send
