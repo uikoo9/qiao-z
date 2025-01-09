@@ -1,5 +1,5 @@
-// qiao
-import { get } from 'qiao-ajax';
+// util
+import { weixinGet } from './util.js';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -23,25 +23,51 @@ export const accessToken = async (appId, appSecret) => {
     return;
   }
 
-  try {
-    const url = 'https://api.weixin.qq.com/cgi-bin/token';
-    const res = await get(url, {
-      params: {
-        grant_type: 'client_credential',
-        appid: appId,
-        secret: appSecret,
-      },
-    });
+  // get
+  const url = 'https://api.weixin.qq.com/cgi-bin/token';
+  const res = await weixinGet(url, {
+    grant_type: 'client_credential',
+    appid: appId,
+    secret: appSecret,
+  });
 
-    // check
-    if (res.status !== 200) {
-      logger.info(methodName, 'status is not 200', res);
-      return;
-    }
+  // r
+  return res;
+};
 
-    // r
-    return res.data;
-  } catch (error) {
-    logger.error(methodName, 'request error', error);
+/**
+ * code2Session
+ * @param {*} appId
+ * @param {*} appSecret
+ * @param {*} jsCode
+ * @returns
+ */
+export const code2Session = async (appId, appSecret, jsCode) => {
+  const methodName = 'code2Session';
+
+  // check
+  if (!appId) {
+    logger.info(methodName, 'need appId');
+    return;
   }
+  if (!appSecret) {
+    logger.info(methodName, 'need appSecret');
+    return;
+  }
+  if (!jsCode) {
+    logger.info(methodName, 'need jsCode');
+    return;
+  }
+
+  // get
+  const url = 'https://api.weixin.qq.com/sns/jscode2session';
+  const res = await weixinGet(url, {
+    grant_type: 'authorization_code',
+    appid: appId,
+    secret: appSecret,
+    js_code: jsCode,
+  });
+
+  // r
+  return res;
 };
