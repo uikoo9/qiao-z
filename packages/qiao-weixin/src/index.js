@@ -26,7 +26,7 @@ export const accessToken = async (appId, appSecret) => {
   try {
     const url = 'https://api.weixin.qq.com/cgi-bin/token';
     const res = await get(url, {
-      data: {
+      params: {
         grant_type: 'client_credential',
         appid: appId,
         secret: appSecret,
