@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-sms",
-  "version": "5.1.6",
+  "version": "5.1.9",
   "description": "qiao-z sms module",
   "keywords": [
     "qiao-z",
@@ -19,8 +19,8 @@
   },
   "scripts": {},
   "dependencies": {
-    "qiao-cache": "^5.0.1",
+    "qiao-cache": "^5.1.9",
     "qiao-encode": "^4.7.4",
-    "qiao-z-service": "^5.1.6"
+    "qiao-z-service": "^5.1.9"
   }
 }

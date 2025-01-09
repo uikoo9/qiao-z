@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-service",
-  "version": "5.1.6",
+  "version": "5.1.9",
   "author": "uikoo9 <uikoo9@qq.com>",
   "homepage": "https://code.vincentqiao.com/#qiao-z-service",
   "license": "MIT",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "qiao-ajax": "^5.1.0",
-    "qiao-json": "^5.0.1",
+    "qiao-json": "^5.1.9",
     "qiao.log.js": "^3.7.3"
   },
   "nx": {

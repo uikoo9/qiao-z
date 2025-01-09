@@ -1,6 +1,6 @@
 {
   "name": "qiao-mysql",
-  "version": "5.0.1",
+  "version": "5.1.9",
   "description": "nodejs mysql plugin",
   "keywords": [
     "nodejs",
