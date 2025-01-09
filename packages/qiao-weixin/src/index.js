@@ -24,8 +24,14 @@ export const accessToken = async (appId, appSecret) => {
   }
 
   try {
-    const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`;
-    const res = await get(url);
+    const url = 'https://api.weixin.qq.com/cgi-bin/token';
+    const res = await get(url, {
+      data: {
+        grant_type: 'client_credential',
+        appid: appId,
+        secret: appSecret,
+      },
+    });
 
     // check
     if (res.status !== 200) {
