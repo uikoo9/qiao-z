@@ -176,6 +176,23 @@ const signWithBody = (method, path, timestamp, nonceStr, privateKeyPath, body) =
   return sign(privateKeyPath, signStr);
 };
 
+/**
+ * unsign
+ * @param {*} key
+ * @param {*} nonce
+ * @param {*} associatedData
+ * @param {*} ciphertext
+ * @returns
+ */
+const unsign = (key, nonce, associatedData, ciphertext) => {
+  const decipher = crypto.createDecipheriv('aes-256-gcm', key, nonce);
+  decipher.setAAD(Buffer.from(associatedData));
+  decipher.setAuthTag(Buffer.from(ciphertext.slice(-16), 'base64'));
+  const decrypted = decipher.update(Buffer.from(ciphertext.slice(0, -16), 'base64'), null, 'utf8');
+  decipher.final();
+  return decrypted;
+};
+
 // qiao
 const logger = qiao_log_js.Logger('qiao-weixin');
 
@@ -311,3 +328,6 @@ exports.accessToken = accessToken;
 exports.code2Session = code2Session;
 exports.pay = pay;
 exports.prepay = prepay;
+exports.sign = sign;
+exports.signWithBody = signWithBody;
+exports.unsign = unsign;
