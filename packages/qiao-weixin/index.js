@@ -51,7 +51,7 @@ const weixinPayPost = async (url, headers, body) => {
   const methodName = 'weixinPayPost';
 
   try {
-    const res = await qiaoAjax.get(url, {
+    const res = await qiaoAjax.post(url, {
       headers,
       body,
     });

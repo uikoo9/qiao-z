@@ -5,7 +5,7 @@ import fs from 'fs';
 import crypto from 'crypto';
 
 // qiao
-import { get } from 'qiao-ajax';
+import { get, post } from 'qiao-ajax';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -53,7 +53,7 @@ export const weixinPayPost = async (url, headers, body) => {
   const methodName = 'weixinPayPost';
 
   try {
-    const res = await get(url, {
+    const res = await post(url, {
       headers,
       body,
     });
