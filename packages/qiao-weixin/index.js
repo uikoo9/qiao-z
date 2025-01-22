@@ -1,10 +1,13 @@
 'use strict';
 
+var fs = require('fs');
+var crypto = require('crypto');
 var qiaoAjax = require('qiao-ajax');
 var qiao_log_js = require('qiao.log.js');
+var qiaoEncode = require('qiao-encode');
 
-// qiao
-const logger$1 = qiao_log_js.Logger('qiao-weixin');
+// fs
+const logger$2 = qiao_log_js.Logger('qiao-weixin');
 
 /**
  *
@@ -13,7 +16,7 @@ const logger$1 = qiao_log_js.Logger('qiao-weixin');
  * @returns
  */
 const weixinGet = async (url, params) => {
-  const methodName = 'get';
+  const methodName = 'weixinGet';
 
   try {
     const res = await qiaoAjax.get(url, {
@@ -22,23 +25,76 @@ const weixinGet = async (url, params) => {
 
     // check
     if (res.status !== 200) {
-      logger$1.error(methodName, 'status is not 200', res);
+      logger$2.error(methodName, 'status is not 200', res);
       return;
     }
     if (res.data.errcode) {
-      logger$1.error(methodName, 'request api error', res.data);
+      logger$2.error(methodName, 'request api error', res.data);
       return;
     }
 
     // r
     return res.data;
   } catch (error) {
-    logger$1.error(methodName, 'request error', error);
+    logger$2.error(methodName, 'request error', error);
   }
 };
 
+/**
+ * weixinPayPost
+ * @param {*} url
+ * @param {*} headers
+ * @param {*} body
+ * @returns
+ */
+const weixinPayPost = async (url, headers, body) => {
+  const methodName = 'weixinPayPost';
+
+  try {
+    const res = await qiaoAjax.get(url, {
+      headers,
+      body,
+    });
+
+    // check
+    if (res.status !== 200) {
+      logger$2.error(methodName, 'status is not 200', res);
+      return;
+    }
+
+    // r
+    return res.data;
+  } catch (error) {
+    logger$2.error(methodName, 'request error', error);
+  }
+};
+
+/**
+ * signWithBody
+ * @param {*} method
+ * @param {*} path
+ * @param {*} timestamp
+ * @param {*} nonceStr
+ * @param {*} privateKeyPath
+ * @param {*} body
+ * @returns
+ */
+const signWithBody = (method, path, timestamp, nonceStr, privateKeyPath, body) => {
+  // sign str
+  const requestBody = JSON.stringify(body);
+  const signStr = `${method}\n${path}\n${timestamp}\n${nonceStr}\n${requestBody}\n`;
+
+  // sign
+  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+  const signer = crypto.createSign('sha256');
+  signer.update(signStr);
+
+  // r
+  return signer.sign(privateKey, 'base64');
+};
+
 // util
-const logger = qiao_log_js.Logger('qiao-weixin');
+const logger$1 = qiao_log_js.Logger('qiao-weixin');
 
 /**
  * accessToken
@@ -50,11 +106,11 @@ const accessToken = async (appId, appSecret) => {
 
   // check
   if (!appId) {
-    logger.info(methodName, 'need appId');
+    logger$1.info(methodName, 'need appId');
     return;
   }
   if (!appSecret) {
-    logger.info(methodName, 'need appSecret');
+    logger$1.info(methodName, 'need appSecret');
     return;
   }
 
@@ -82,15 +138,15 @@ const code2Session = async (appId, appSecret, jsCode) => {
 
   // check
   if (!appId) {
-    logger.info(methodName, 'need appId');
+    logger$1.info(methodName, 'need appId');
     return;
   }
   if (!appSecret) {
-    logger.info(methodName, 'need appSecret');
+    logger$1.info(methodName, 'need appSecret');
     return;
   }
   if (!jsCode) {
-    logger.info(methodName, 'need jsCode');
+    logger$1.info(methodName, 'need jsCode');
     return;
   }
 
@@ -107,5 +163,95 @@ const code2Session = async (appId, appSecret, jsCode) => {
   return res;
 };
 
+// qiao
+const logger = qiao_log_js.Logger('qiao-weixin');
+
+/**
+ * prepay
+ * @param {*} options
+ * @returns
+ */
+const prepay = async (options) => {
+  const methodName = 'prepay';
+
+  // check
+  if (!options) {
+    logger.error(methodName, 'need options');
+    return;
+  }
+  if (!options.keyPath) {
+    logger.error(methodName, 'need options.keyPath');
+    return;
+  }
+  if (!options.appid) {
+    logger.error(methodName, 'need options.appid');
+    return;
+  }
+  if (!options.mchid) {
+    logger.error(methodName, 'need options.mchid');
+    return;
+  }
+  if (!options.description) {
+    logger.error(methodName, 'need options.description');
+    return;
+  }
+  if (!options.out_trade_no) {
+    logger.error(methodName, 'need options.out_trade_no');
+    return;
+  }
+  if (!options.notify_url) {
+    logger.error(methodName, 'need options.notify_url');
+    return;
+  }
+  if (!options.amount) {
+    logger.error(methodName, 'need options.amount');
+    return;
+  }
+  if (!options.openid) {
+    logger.error(methodName, 'need options.openid');
+    return;
+  }
+  if (!options.serial_no) {
+    logger.error(methodName, 'need options.serial_no');
+    return;
+  }
+
+  // sign
+  const method = 'POST';
+  const path = '/v3/pay/transactions/jsapi';
+  const timestamp = Math.floor(Date.now() / 1000);
+  const nonceStr = qiaoEncode.uuid().replace(/-/g, '').substring(0, 32);
+  const keyPath = options.keyPath;
+  const body = {
+    appid: options.appid,
+    mchid: options.mchid,
+    description: options.description,
+    out_trade_no: options.out_trade_no,
+    notify_url: options.notify_url,
+    amount: {
+      total: options.amount,
+    },
+    payer: {
+      openid: options.openid,
+    },
+  };
+  const signature = signWithBody(method, path, timestamp, nonceStr, keyPath, body);
+
+  // post
+  const host = 'https://api.mch.weixin.qq.com';
+  const url = `${host}${path}`;
+  const signType = 'WECHATPAY2-SHA256-RSA2048';
+  const serial_no = '338AC0C281381C30AE5860EEE4E97AD50F0C2053';
+  const headers = {
+    Authorization: `${signType} mchid="${options.mchid}",nonce_str="${nonceStr}",signature="${signature}",timestamp="${timestamp}",serial_no="${serial_no}"`,
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+
+  // r
+  return await weixinPayPost(url, headers, body);
+};
+
 exports.accessToken = accessToken;
 exports.code2Session = code2Session;
+exports.prepay = prepay;

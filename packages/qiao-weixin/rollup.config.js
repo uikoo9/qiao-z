@@ -7,5 +7,5 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: [],
+  external: ['qiao-ajax', 'qiao-encode', 'qiao.log.js'],
 };

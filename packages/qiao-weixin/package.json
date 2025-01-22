@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "qiao-ajax": "^5.1.9",
+    "qiao-encode": "^4.7.4",
     "qiao.log.js": "^3.7.3"
   },
   "nx": {
