@@ -83,9 +83,8 @@ export const prepay = async (options) => {
   const host = 'https://api.mch.weixin.qq.com';
   const url = `${host}${path}`;
   const signType = 'WECHATPAY2-SHA256-RSA2048';
-  const serial_no = '338AC0C281381C30AE5860EEE4E97AD50F0C2053';
   const headers = {
-    Authorization: `${signType} mchid="${options.mchid}",nonce_str="${nonceStr}",signature="${signature}",timestamp="${timestamp}",serial_no="${serial_no}"`,
+    Authorization: `${signType} mchid="${options.mchid}",nonce_str="${nonceStr}",signature="${signature}",timestamp="${timestamp}",serial_no="${options.serial_no}"`,
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
