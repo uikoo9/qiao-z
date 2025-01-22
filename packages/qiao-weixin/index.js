@@ -52,8 +52,8 @@ const weixinPayPost = async (url, headers, body) => {
 
   try {
     const res = await qiaoAjax.post(url, {
-      headers,
-      body,
+      headers: headers,
+      data: body,
     });
 
     // check
