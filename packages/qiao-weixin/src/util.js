@@ -1,9 +1,3 @@
-// fs
-import fs from 'fs';
-
-// crypto
-import crypto from 'crypto';
-
 // qiao
 import { get, post } from 'qiao-ajax';
 
@@ -12,7 +6,7 @@ import { Logger } from 'qiao.log.js';
 const logger = Logger('qiao-weixin');
 
 /**
- *
+ * weixinGet
  * @param {*} url
  * @param {*} params
  * @returns
@@ -69,44 +63,4 @@ export const weixinPayPost = async (url, headers, body) => {
   } catch (error) {
     logger.error(methodName, 'request error', error);
   }
-};
-
-/**
- * signWithBody
- * @param {*} method
- * @param {*} path
- * @param {*} timestamp
- * @param {*} nonceStr
- * @param {*} privateKeyPath
- * @param {*} body
- * @returns
- */
-export const signWithBody = (method, path, timestamp, nonceStr, privateKeyPath, body) => {
-  // sign str
-  const requestBody = JSON.stringify(body);
-  const signStr = `${method}\n${path}\n${timestamp}\n${nonceStr}\n${requestBody}\n`;
-
-  // sign
-  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
-  const signer = crypto.createSign('sha256');
-  signer.update(signStr);
-
-  // r
-  return signer.sign(privateKey, 'base64');
-};
-
-/**
- * signForPay
- * @param {*} privateKeyPath
- * @param {*} signStr
- * @returns
- */
-export const signForPay = (privateKeyPath, signStr) => {
-  // sign
-  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
-  const signer = crypto.createSign('sha256');
-  signer.update(signStr);
-
-  // r
-  return signer.sign(privateKey, 'base64');
 };

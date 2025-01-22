@@ -1,16 +1,16 @@
 'use strict';
 
-var fs = require('fs');
-var crypto = require('crypto');
 var qiaoAjax = require('qiao-ajax');
 var qiao_log_js = require('qiao.log.js');
 var qiaoEncode = require('qiao-encode');
+var fs = require('fs');
+var crypto = require('crypto');
 
-// fs
+// qiao
 const logger$2 = qiao_log_js.Logger('qiao-weixin');
 
 /**
- *
+ * weixinGet
  * @param {*} url
  * @param {*} params
  * @returns
@@ -67,46 +67,6 @@ const weixinPayPost = async (url, headers, body) => {
   } catch (error) {
     logger$2.error(methodName, 'request error', error);
   }
-};
-
-/**
- * signWithBody
- * @param {*} method
- * @param {*} path
- * @param {*} timestamp
- * @param {*} nonceStr
- * @param {*} privateKeyPath
- * @param {*} body
- * @returns
- */
-const signWithBody = (method, path, timestamp, nonceStr, privateKeyPath, body) => {
-  // sign str
-  const requestBody = JSON.stringify(body);
-  const signStr = `${method}\n${path}\n${timestamp}\n${nonceStr}\n${requestBody}\n`;
-
-  // sign
-  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
-  const signer = crypto.createSign('sha256');
-  signer.update(signStr);
-
-  // r
-  return signer.sign(privateKey, 'base64');
-};
-
-/**
- * signForPay
- * @param {*} privateKeyPath
- * @param {*} signStr
- * @returns
- */
-const signForPay = (privateKeyPath, signStr) => {
-  // sign
-  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
-  const signer = crypto.createSign('sha256');
-  signer.update(signStr);
-
-  // r
-  return signer.sign(privateKey, 'base64');
 };
 
 // util
@@ -177,6 +137,43 @@ const code2Session = async (appId, appSecret, jsCode) => {
 
   // r
   return res;
+};
+
+// fs
+
+/**
+ * sign
+ * @param {*} privateKeyPath
+ * @param {*} signStr
+ * @returns
+ */
+const sign = (privateKeyPath, signStr) => {
+  // sign
+  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+  const signer = crypto.createSign('sha256');
+  signer.update(signStr);
+
+  // r
+  return signer.sign(privateKey, 'base64');
+};
+
+/**
+ * signWithBody
+ * @param {*} method
+ * @param {*} path
+ * @param {*} timestamp
+ * @param {*} nonceStr
+ * @param {*} privateKeyPath
+ * @param {*} body
+ * @returns
+ */
+const signWithBody = (method, path, timestamp, nonceStr, privateKeyPath, body) => {
+  // sign str
+  const requestBody = JSON.stringify(body);
+  const signStr = `${method}\n${path}\n${timestamp}\n${nonceStr}\n${requestBody}\n`;
+
+  // r
+  return sign(privateKeyPath, signStr);
 };
 
 // qiao
@@ -298,7 +295,7 @@ const pay = (options) => {
   const nonceStr = qiaoEncode.uuid().replace(/-/g, '').substring(0, 32);
   const prepayStr = `prepay_id=${options.prepay_id}`;
   const pay = `${options.appid}\n${timestamp}\n${nonceStr}\n${prepayStr}\n`;
-  const sign = signForPay(options.keyPath, pay);
+  const paySign = sign(options.keyPath, pay);
 
   // r
   return {
@@ -306,7 +303,7 @@ const pay = (options) => {
     nonceStr: nonceStr,
     package: prepayStr,
     signType: 'RSA',
-    paySign: sign,
+    paySign: paySign,
   };
 };
 

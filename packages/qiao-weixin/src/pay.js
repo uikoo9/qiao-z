@@ -1,8 +1,11 @@
 // qiao
 import { uuid } from 'qiao-encode';
 
+// sign
+import { sign, signWithBody } from './sign.js';
+
 // util
-import { signWithBody, signForPay, weixinPayPost } from './util.js';
+import { weixinPayPost } from './util.js';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -124,7 +127,7 @@ export const pay = (options) => {
   const nonceStr = uuid().replace(/-/g, '').substring(0, 32);
   const prepayStr = `prepay_id=${options.prepay_id}`;
   const pay = `${options.appid}\n${timestamp}\n${nonceStr}\n${prepayStr}\n`;
-  const sign = signForPay(options.keyPath, pay);
+  const paySign = sign(options.keyPath, pay);
 
   // r
   return {
@@ -132,6 +135,6 @@ export const pay = (options) => {
     nonceStr: nonceStr,
     package: prepayStr,
     signType: 'RSA',
-    paySign: sign,
+    paySign: paySign,
   };
 };
