@@ -94,3 +94,19 @@ export const signWithBody = (method, path, timestamp, nonceStr, privateKeyPath, 
   // r
   return signer.sign(privateKey, 'base64');
 };
+
+/**
+ * signForPay
+ * @param {*} privateKeyPath
+ * @param {*} signStr
+ * @returns
+ */
+export const signForPay = (privateKeyPath, signStr) => {
+  // sign
+  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+  const signer = crypto.createSign('sha256');
+  signer.update(signStr);
+
+  // r
+  return signer.sign(privateKey, 'base64');
+};

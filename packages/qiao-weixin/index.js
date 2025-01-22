@@ -93,6 +93,22 @@ const signWithBody = (method, path, timestamp, nonceStr, privateKeyPath, body) =
   return signer.sign(privateKey, 'base64');
 };
 
+/**
+ * signForPay
+ * @param {*} privateKeyPath
+ * @param {*} signStr
+ * @returns
+ */
+const signForPay = (privateKeyPath, signStr) => {
+  // sign
+  const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+  const signer = crypto.createSign('sha256');
+  signer.update(signStr);
+
+  // r
+  return signer.sign(privateKey, 'base64');
+};
+
 // util
 const logger$1 = qiao_log_js.Logger('qiao-weixin');
 
@@ -251,6 +267,50 @@ const prepay = async (options) => {
   return await weixinPayPost(url, headers, body);
 };
 
+/**
+ * pay
+ * @param {*} options
+ * @returns
+ */
+const pay = (options) => {
+  const methodName = 'prepay';
+
+  // check
+  if (!options) {
+    logger.error(methodName, 'need options');
+    return;
+  }
+  if (!options.appid) {
+    logger.error(methodName, 'need options.appid');
+    return;
+  }
+  if (!options.prepay_id) {
+    logger.error(methodName, 'need options.prepay_id');
+    return;
+  }
+  if (!options.keyPath) {
+    logger.error(methodName, 'need options.keyPath');
+    return;
+  }
+
+  // sign
+  const timestamp = `${Math.floor(Date.now() / 1000)}`;
+  const nonceStr = qiaoEncode.uuid().replace(/-/g, '').substring(0, 32);
+  const prepayStr = `prepay_id=${options.prepay_id}`;
+  const pay = `${options.appid}\n${timestamp}\n${nonceStr}\n${prepayStr}\n`;
+  const sign = signForPay(options.keyPath, pay);
+
+  // r
+  return {
+    timeStamp: timestamp,
+    nonceStr: nonceStr,
+    package: prepayStr,
+    signType: 'RSA',
+    paySign: sign,
+  };
+};
+
 exports.accessToken = accessToken;
 exports.code2Session = code2Session;
+exports.pay = pay;
 exports.prepay = prepay;

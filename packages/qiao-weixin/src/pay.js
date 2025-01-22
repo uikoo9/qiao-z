@@ -2,7 +2,7 @@
 import { uuid } from 'qiao-encode';
 
 // util
-import { signWithBody, weixinPayPost } from './util.js';
+import { signWithBody, signForPay, weixinPayPost } from './util.js';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -91,4 +91,47 @@ export const prepay = async (options) => {
 
   // r
   return await weixinPayPost(url, headers, body);
+};
+
+/**
+ * pay
+ * @param {*} options
+ * @returns
+ */
+export const pay = (options) => {
+  const methodName = 'prepay';
+
+  // check
+  if (!options) {
+    logger.error(methodName, 'need options');
+    return;
+  }
+  if (!options.appid) {
+    logger.error(methodName, 'need options.appid');
+    return;
+  }
+  if (!options.prepay_id) {
+    logger.error(methodName, 'need options.prepay_id');
+    return;
+  }
+  if (!options.keyPath) {
+    logger.error(methodName, 'need options.keyPath');
+    return;
+  }
+
+  // sign
+  const timestamp = `${Math.floor(Date.now() / 1000)}`;
+  const nonceStr = uuid().replace(/-/g, '').substring(0, 32);
+  const prepayStr = `prepay_id=${options.prepay_id}`;
+  const pay = `${options.appid}\n${timestamp}\n${nonceStr}\n${prepayStr}\n`;
+  const sign = signForPay(options.keyPath, pay);
+
+  // r
+  return {
+    timeStamp: timestamp,
+    nonceStr: nonceStr,
+    package: prepayStr,
+    signType: 'RSA',
+    paySign: sign,
+  };
 };
