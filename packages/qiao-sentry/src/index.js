@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/node';
 /**
  * sentry
  */
-export default async () => {
+export default () => {
   // sentry
   const sentry = {};
 

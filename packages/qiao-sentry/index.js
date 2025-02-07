@@ -34,7 +34,7 @@ var Sentry__namespace = /*#__PURE__*/ _interopNamespaceDefault(Sentry);
 /**
  * sentry
  */
-var index = async () => {
+var index = () => {
   // sentry
   const sentry = {};
 
