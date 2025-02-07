@@ -41,6 +41,11 @@ const handleRequest = async (request, plugins) => {
     req.logger = plugins.logger;
   }
 
+  // sentry
+  if (plugins && plugins.sentry) {
+    req.sentry = plugins.sentry;
+  }
+
   // mysql
   if (plugins && plugins.db) {
     req.db = plugins.db;

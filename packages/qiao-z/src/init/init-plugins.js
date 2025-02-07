@@ -37,6 +37,12 @@ export default (options) => {
     plugins.logger = options.log(options.logOptions);
   }
 
+  // sentry
+  if (options && options.sentry) {
+    debug(methodName, 'options.sentry');
+    plugins.sentry = options.sentry();
+  }
+
   // mysql
   if (options && options.mysql && options.config && options.config.db) {
     debug(methodName, 'options.db');

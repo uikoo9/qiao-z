@@ -200,6 +200,12 @@ var initPlugins = (options) => {
     plugins.logger = options.log(options.logOptions);
   }
 
+  // sentry
+  if (options && options.sentry) {
+    debug$6(methodName$4, 'options.sentry');
+    plugins.sentry = options.sentry();
+  }
+
   // mysql
   if (options && options.mysql && options.config && options.config.db) {
     debug$6(methodName$4, 'options.db');
@@ -391,6 +397,11 @@ const handleRequest = async (request, plugins) => {
   // logger
   if (plugins && plugins.logger) {
     req.logger = plugins.logger;
+  }
+
+  // sentry
+  if (plugins && plugins.sentry) {
+    req.sentry = plugins.sentry;
   }
 
   // mysql
