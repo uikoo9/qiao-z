@@ -40,13 +40,14 @@ var index = () => {
   const sentry = {};
 
   // init
-  sentry.init = (dsn) => {
+  sentry.init = (dsn, startProfiler) => {
     Sentry__namespace.init({
       dsn: dsn,
       integrations: [profilingNode.nodeProfilingIntegration()],
       tracesSampleRate: 1.0,
     });
-    Sentry__namespace.profiler.startProfiler();
+
+    if (startProfiler) Sentry__namespace.profiler.startProfiler();
   };
 
   // user

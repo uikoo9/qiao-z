@@ -10,13 +10,14 @@ export default () => {
   const sentry = {};
 
   // init
-  sentry.init = (dsn) => {
+  sentry.init = (dsn, startProfiler) => {
     Sentry.init({
       dsn: dsn,
       integrations: [nodeProfilingIntegration()],
       tracesSampleRate: 1.0,
     });
-    Sentry.profiler.startProfiler();
+
+    if (startProfiler) Sentry.profiler.startProfiler();
   };
 
   // user
