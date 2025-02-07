@@ -39,19 +39,6 @@ var index = () => {
   // sentry
   const sentry = {};
 
-  // error
-  sentry.error = (error) => {
-    Sentry__namespace.captureException(error);
-  };
-  // warn
-  sentry.warn = (msg) => {
-    Sentry__namespace.captureMessage(msg, 'warning');
-  };
-  // info
-  sentry.info = (msg) => {
-    Sentry__namespace.captureMessage(msg, 'info');
-  };
-
   // init
   sentry.init = (dsn) => {
     Sentry__namespace.init({
@@ -60,6 +47,22 @@ var index = () => {
       tracesSampleRate: 1.0,
     });
     Sentry__namespace.profiler.startProfiler();
+  };
+
+  // user
+  sentry.user = (options) => {
+    Sentry__namespace.setUser(options);
+  };
+
+  // log
+  sentry.error = (error) => {
+    Sentry__namespace.captureException(error);
+  };
+  sentry.warn = (msg) => {
+    Sentry__namespace.captureMessage(msg, 'warning');
+  };
+  sentry.info = (msg) => {
+    Sentry__namespace.captureMessage(msg, 'info');
   };
 
   //

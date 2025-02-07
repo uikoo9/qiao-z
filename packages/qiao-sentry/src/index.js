@@ -9,19 +9,6 @@ export default () => {
   // sentry
   const sentry = {};
 
-  // error
-  sentry.error = (error) => {
-    Sentry.captureException(error);
-  };
-  // warn
-  sentry.warn = (msg) => {
-    Sentry.captureMessage(msg, 'warning');
-  };
-  // info
-  sentry.info = (msg) => {
-    Sentry.captureMessage(msg, 'info');
-  };
-
   // init
   sentry.init = (dsn) => {
     Sentry.init({
@@ -30,6 +17,22 @@ export default () => {
       tracesSampleRate: 1.0,
     });
     Sentry.profiler.startProfiler();
+  };
+
+  // user
+  sentry.user = (options) => {
+    Sentry.setUser(options);
+  };
+
+  // log
+  sentry.error = (error) => {
+    Sentry.captureException(error);
+  };
+  sentry.warn = (msg) => {
+    Sentry.captureMessage(msg, 'warning');
+  };
+  sentry.info = (msg) => {
+    Sentry.captureMessage(msg, 'info');
   };
 
   //
