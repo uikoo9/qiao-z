@@ -22,7 +22,8 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "@sentry/node": "^8.54.0"
+    "@sentry/node": "^8.54.0",
+    "@sentry/profiling-node": "^8.54.0"
   },
   "nx": {
     "namedInputs": {

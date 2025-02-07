@@ -1,6 +1,7 @@
 'use strict';
 
 var Sentry = require('@sentry/node');
+var profilingNode = require('@sentry/profiling-node');
 
 function _interopNamespaceDefault(e) {
   var n = Object.create(null);
@@ -49,6 +50,16 @@ var index = () => {
   // info
   sentry.info = (msg) => {
     Sentry__namespace.captureMessage(msg, 'info');
+  };
+
+  // init
+  sentry.init = (dsn) => {
+    Sentry__namespace.init({
+      dsn: dsn,
+      integrations: [profilingNode.nodeProfilingIntegration()],
+      tracesSampleRate: 1.0,
+    });
+    Sentry__namespace.profiler.startProfiler();
   };
 
   //
