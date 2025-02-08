@@ -40,14 +40,21 @@ var index = () => {
   const sentry = {};
 
   // init
-  sentry.init = (dsn, startProfiler) => {
-    Sentry__namespace.init({
-      dsn: dsn,
-      integrations: [profilingNode.nodeProfilingIntegration()],
-      tracesSampleRate: 1.0,
-    });
+  sentry.init = (options) => {
+    // opt
+    const opt = {
+      dsn: options.dsn,
+    };
 
-    if (startProfiler) Sentry__namespace.profiler.startProfiler();
+    // trace
+    if (options.tracesSampleRate) opt.tracesSampleRate = options.tracesSampleRate;
+
+    // profiler
+    if (options.startProfiler) opt.integrations = [profilingNode.nodeProfilingIntegration()];
+
+    // init
+    Sentry__namespace.init(opt);
+    if (options.startProfiler) Sentry__namespace.profiler.startProfiler();
   };
 
   // user
