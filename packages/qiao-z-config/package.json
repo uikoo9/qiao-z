@@ -1,0 +1,24 @@
+{
+  "name": "qiao-z-config",
+  "version": "5.3.9",
+  "description": "qiao-z config module",
+  "keywords": [
+    "qiao-z",
+    "config module"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.vincentqiao.com/#qiao-z-config",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-z.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-z/issues"
+  },
+  "scripts": {},
+  "dependencies": {
+    "qiao-z-service": "^5.3.9"
+  }
+}
