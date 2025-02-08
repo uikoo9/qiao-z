@@ -1,6 +1,9 @@
 // app
 export * from './service/app.js';
 
+// config
+export * from './service/config.js';
+
 // cos
 export * from './service/cos.js';
 

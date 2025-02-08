@@ -54,6 +54,17 @@ const appUpdate = async (options) => {
 // util
 
 /**
+ * config
+ * @param {*} options
+ * @returns
+ */
+const config = async (options) => {
+  return await fetch(options.url + 'config', options);
+};
+
+// util
+
+/**
  * cosToken
  * @param {*} options
  * @returns
@@ -146,6 +157,7 @@ const sendSms = async (options) => {
 exports.addRecommend = addRecommend;
 exports.appUpdate = appUpdate;
 exports.changeRecommend = changeRecommend;
+exports.config = config;
 exports.cosSign = cosSign;
 exports.cosToken = cosToken;
 exports.listRecommend = listRecommend;
