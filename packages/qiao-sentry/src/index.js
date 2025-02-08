@@ -14,17 +14,21 @@ export default () => {
     // opt
     const opt = {
       dsn: options.dsn,
+      integrations: [],
     };
 
     // trace
     if (options.tracesSampleRate) opt.tracesSampleRate = options.tracesSampleRate;
 
     // profiler
-    if (options.startProfiler) opt.integrations = [nodeProfilingIntegration()];
+    if (options.profilesSampleRate) {
+      opt.profilesSampleRate = options.profilesSampleRate;
+      opt.integrations.push(nodeProfilingIntegration());
+    }
 
     // init
     Sentry.init(opt);
-    if (options.startProfiler) Sentry.profiler.startProfiler();
+    if (options.profilesSampleRate) Sentry.profiler.startProfiler();
   };
 
   // user
