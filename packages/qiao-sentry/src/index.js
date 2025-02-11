@@ -11,23 +11,14 @@ export default () => {
 
   // init
   sentry.init = (options) => {
-    // opt
-    const opt = {
-      dsn: options.dsn,
-      integrations: [],
-    };
-
-    // trace
-    if (options.tracesSampleRate) opt.tracesSampleRate = options.tracesSampleRate;
+    // options
+    options.integrations = [];
 
     // profiler
-    if (options.profilesSampleRate) {
-      opt.profilesSampleRate = options.profilesSampleRate;
-      opt.integrations.push(nodeProfilingIntegration());
-    }
+    if (options.profilesSampleRate) options.integrations.push(nodeProfilingIntegration());
 
     // init
-    Sentry.init(opt);
+    Sentry.init(options);
     if (options.profilesSampleRate) Sentry.profiler.startProfiler();
   };
 

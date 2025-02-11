@@ -41,23 +41,14 @@ var index = () => {
 
   // init
   sentry.init = (options) => {
-    // opt
-    const opt = {
-      dsn: options.dsn,
-      integrations: [],
-    };
-
-    // trace
-    if (options.tracesSampleRate) opt.tracesSampleRate = options.tracesSampleRate;
+    // options
+    options.integrations = [];
 
     // profiler
-    if (options.profilesSampleRate) {
-      opt.profilesSampleRate = options.profilesSampleRate;
-      opt.integrations.push(profilingNode.nodeProfilingIntegration());
-    }
+    if (options.profilesSampleRate) options.integrations.push(profilingNode.nodeProfilingIntegration());
 
     // init
-    Sentry__namespace.init(opt);
+    Sentry__namespace.init(options);
     if (options.profilesSampleRate) Sentry__namespace.profiler.startProfiler();
   };
 
