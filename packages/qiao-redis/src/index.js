@@ -57,7 +57,7 @@ export default (options) => {
       if (cacheValue) return cacheValue;
 
       // value
-      const value = cacheFunction();
+      const value = await cacheFunction();
       const setRes = await client.set(key, value, expire);
       if (setRes) return value;
 
