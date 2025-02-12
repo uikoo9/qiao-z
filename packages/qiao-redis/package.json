@@ -1,0 +1,49 @@
+{
+  "name": "qiao-redis",
+  "version": "5.1.9",
+  "description": "nodejs redis cache",
+  "keywords": [
+    "nodejs",
+    "redis"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.vincentqiao.com/#qiao-redis",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "src/index.js",
+  "sideEffets": false,
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-z.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-z/issues"
+  },
+  "scripts": {
+    "build": "qpro rollup ./rollup.config.js"
+  },
+  "dependencies": {
+    "ioredis": "^5.5.0",
+    "qiao.log.js": "^3.7.3"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
+  }
+}
