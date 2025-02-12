@@ -13,7 +13,13 @@ export default (options) => {
   const redis = {};
 
   // client
-  redis.client = new Redis(options);
+  redis.client = () => {
+    if (options.cluster) {
+      return new Redis.Cluster(options.clusterHosts, options.clusterOptions);
+    } else {
+      return new Redis(options);
+    }
+  };
 
   // set
   redis.set = async (key, value, expire) => {
