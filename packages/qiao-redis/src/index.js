@@ -31,6 +31,15 @@ export default (options) => {
     }
   };
 
+  // del
+  redis.del = async (key) => {
+    try {
+      return await client.del(key);
+    } catch (error) {
+      logger.error('redis.del', 'error', error);
+    }
+  };
+
   // get
   redis.get = async (key) => {
     try {
@@ -40,12 +49,22 @@ export default (options) => {
     }
   };
 
-  // del
-  redis.del = async (key) => {
+  // cache
+  redis.cache = async (key, expire, cacheFunction) => {
     try {
-      return await client.del(key);
+      // cache
+      const cacheValue = await client.get(key);
+      if (cacheValue) return cacheValue;
+
+      // value
+      const value = cacheFunction();
+      const setRes = await client.set(key, value, expire);
+      if (setRes) return value;
+
+      // error
+      logger.error('redis.cache', 'set fail');
     } catch (error) {
-      logger.error('redis.del', 'error', error);
+      logger.error('redis.cache', 'error', error);
     }
   };
 
