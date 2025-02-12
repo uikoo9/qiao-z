@@ -51,6 +51,11 @@ const handleRequest = async (request, plugins) => {
     req.db = plugins.db;
   }
 
+  // redis
+  if (plugins && plugins.redis) {
+    req.redis = plugins.redis;
+  }
+
   return req;
 };
 

@@ -212,6 +212,12 @@ var initPlugins = (options) => {
     plugins.db = options.mysql(options.config.db);
   }
 
+  // redis
+  if (options && options.redis) {
+    debug$6(methodName$4, 'options.redis');
+    plugins.redis = options.redis(options.redisOptions);
+  }
+
   // upload
   if (options && options.upload) {
     debug$6(methodName$4, 'options.upload');
@@ -407,6 +413,11 @@ const handleRequest = async (request, plugins) => {
   // mysql
   if (plugins && plugins.db) {
     req.db = plugins.db;
+  }
+
+  // redis
+  if (plugins && plugins.redis) {
+    req.redis = plugins.redis;
   }
 
   return req;

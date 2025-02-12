@@ -49,6 +49,12 @@ export default (options) => {
     plugins.db = options.mysql(options.config.db);
   }
 
+  // redis
+  if (options && options.redis) {
+    debug(methodName, 'options.redis');
+    plugins.redis = options.redis(options.redisOptions);
+  }
+
   // upload
   if (options && options.upload) {
     debug(methodName, 'options.upload');
