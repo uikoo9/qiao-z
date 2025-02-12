@@ -10,28 +10,20 @@ const logger = qiao_log_js.Logger('qiao-redis');
  * redis
  */
 var index = (options) => {
+  // client
+  const client = options.cluster ? new Redis.Cluster(options.clusterHosts, options.clusterOptions) : new Redis(options);
+
   // redis
   const redis = {};
 
-  // client
-  redis.client = () => {
-    if (options.cluster) {
-      return new Redis.Cluster(options.clusterHosts, options.clusterOptions);
-    } else {
-      return new Redis(options);
-    }
-  };
-
   // set
   redis.set = async (key, value, expire) => {
-    if (!redis.client) return;
-
     try {
       let res;
       if (expire) {
-        res = await redis.client.set(key, value, 'EX', expire);
+        res = await client.set(key, value, 'EX', expire);
       } else {
-        res = await redis.client.set(key, value);
+        res = await client.set(key, value);
       }
 
       return res === 'OK';
@@ -42,10 +34,8 @@ var index = (options) => {
 
   // get
   redis.get = async (key) => {
-    if (!redis.client) return;
-
     try {
-      return await redis.client.get(key);
+      return await client.get(key);
     } catch (error) {
       logger.error('redis.get', 'error', error);
     }
@@ -53,10 +43,8 @@ var index = (options) => {
 
   // del
   redis.del = async (key) => {
-    if (!redis.client) return;
-
     try {
-      return await redis.client.del(key);
+      return await client.del(key);
     } catch (error) {
       logger.error('redis.del', 'error', error);
     }
