@@ -17,11 +17,18 @@ var index = (options) => {
   redis.client = new Redis(options);
 
   // set
-  redis.set = async (key, value) => {
+  redis.set = async (key, value, expire) => {
     if (!redis.client) return;
 
     try {
-      return await redis.client.set(key, value);
+      let res;
+      if (expire) {
+        res = await redis.client.set(key, value, 'EX', expire);
+      } else {
+        res = await redis.client.set(key, value);
+      }
+
+      return res === 'OK';
     } catch (error) {
       logger.error('redis.set', 'error', error);
     }
