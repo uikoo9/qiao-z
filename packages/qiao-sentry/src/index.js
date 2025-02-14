@@ -11,15 +11,11 @@ export default () => {
 
   // init
   sentry.init = (options) => {
-    // options
-    options.integrations = [];
-
     // profiler
     if (options.profilesSampleRate) options.integrations.push(nodeProfilingIntegration());
 
     // init
     Sentry.init(options);
-    if (options.profilesSampleRate) Sentry.profiler.startProfiler();
   };
 
   // user
