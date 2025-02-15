@@ -12,7 +12,7 @@ export default () => {
   // init
   sentry.init = (options) => {
     // profiler
-    if (options.profilesSampleRate) options.integrations.push(nodeProfilingIntegration());
+    if (options.profilesSampleRate) Sentry.addIntegration(nodeProfilingIntegration());
 
     // init
     Sentry.init(options);
