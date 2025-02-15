@@ -41,11 +41,11 @@ var index = () => {
 
   // init
   sentry.init = (options) => {
-    // profiler
-    if (options.profilesSampleRate) Sentry__namespace.addIntegration(profilingNode.nodeProfilingIntegration());
-
     // init
     Sentry__namespace.init(options);
+
+    // profiler
+    if (options.profilesSampleRate) Sentry__namespace.addIntegration(profilingNode.nodeProfilingIntegration());
   };
 
   // user
