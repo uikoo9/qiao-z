@@ -29,7 +29,7 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "qiao-ajax": "^5.1.0",
+    "qiao-ajax": "^5.2.1",
     "qiao.log.js": "^3.7.3"
   },
   "nx": {
