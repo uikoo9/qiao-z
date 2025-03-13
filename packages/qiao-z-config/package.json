@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-config",
-  "version": "5.4.0",
+  "version": "5.5.2",
   "description": "qiao-z config module",
   "keywords": [
     "qiao-z",
@@ -19,6 +19,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "qiao-z-service": "^5.3.9"
+    "qiao-z-service": "^5.5.2"
   }
 }
