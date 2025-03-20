@@ -50,6 +50,15 @@ var index = (options) => {
     }
   };
 
+  // mget
+  redis.mget = async (keys) => {
+    try {
+      return await client.mget(keys);
+    } catch (error) {
+      logger.error('redis.mget', 'error', error);
+    }
+  };
+
   // cache
   redis.cache = async (key, expire, cacheFunction) => {
     try {
