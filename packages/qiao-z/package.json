@@ -28,7 +28,7 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "art-template": "4.13.2",
+    "art-template": "4.13.4",
     "cookie": "^1.0.2",
     "debug": "^4.4.0",
     "parseurl": "^1.3.3",
