@@ -20,7 +20,7 @@
   "scripts": {},
   "dependencies": {
     "qiao-cache": "^5.1.9",
-    "qiao-encode": "^4.7.4",
+    "qiao-encode": "^4.9.4",
     "qiao-z-service": "^5.5.2"
   }
 }
