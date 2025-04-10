@@ -90,7 +90,7 @@ const reviewByShumei = async (options) => {
     }
 
     // return
-    return res.data.riskLevel === 'PASS';
+    return res.data.riskLevel;
   } catch (error) {
     logger.error(methodName, error);
   }
