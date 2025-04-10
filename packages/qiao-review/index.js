@@ -58,11 +58,10 @@ const reviewByShumei = async (options) => {
     logger.error(methodName, msg);
     return;
   }
-  logger.error(methodName, options);
 
   // go
   try {
-    // data
+    // review data
     const reviewData = { tokenId: options.tokenId };
     if (options.text) reviewData.text = options.text;
     if (options.img) reviewData.img = options.img;
@@ -76,15 +75,19 @@ const reviewByShumei = async (options) => {
       });
     }
 
+    // all data
+    const allData = {
+      appId: options.appId,
+      accessKey: options.accessKey,
+      eventId: options.eventId,
+      type: options.type,
+      data: reviewData,
+    };
+    logger.error(methodName, 'allData', allData);
+
     // review
     const res = await qiaoAjax.post(options.url, {
-      data: {
-        appId: options.appId,
-        accessKey: options.accessKey,
-        eventId: options.eventId,
-        type: options.type,
-        data: reviewData,
-      },
+      data: allData,
     });
     if (!res || res.status !== 200) {
       const msg = `ajax fail: ${res}`;
