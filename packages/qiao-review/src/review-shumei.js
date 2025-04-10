@@ -46,8 +46,8 @@ export const reviewByShumei = async (options) => {
     logger.error(methodName, msg);
     return;
   }
-  if (!options.text && !options.img) {
-    const msg = 'need options.text or options.img';
+  if (!options.text && !options.img && !options.imgs) {
+    const msg = 'need options.text or options.img or options.imgs';
     logger.error(methodName, msg);
     return;
   }
@@ -64,6 +64,12 @@ export const reviewByShumei = async (options) => {
     const reviewData = { tokenId: options.tokenId };
     if (options.text) reviewData.text = options.text;
     if (options.img) reviewData.img = options.img;
+    if (options.imgs) {
+      reviewData.imgs = options.imgs.map((item, index) => ({
+        btid: `${index}`,
+        img: item,
+      }));
+    }
 
     // review
     const res = await post(options.url, {
@@ -89,7 +95,7 @@ export const reviewByShumei = async (options) => {
     }
 
     // return
-    return res.data.riskLevel;
+    return options.imgs ? res.data.imgs : res.data.riskLevel;
   } catch (error) {
     logger.error(methodName, error);
   }
