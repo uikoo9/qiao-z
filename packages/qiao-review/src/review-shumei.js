@@ -1,5 +1,6 @@
 // qiao
 import { post } from 'qiao-ajax';
+import { uuid } from 'qiao-encode';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -65,10 +66,13 @@ export const reviewByShumei = async (options) => {
     if (options.text) reviewData.text = options.text;
     if (options.img) reviewData.img = options.img;
     if (options.imgs) {
-      reviewData.imgs = options.imgs.map((item, index) => ({
-        btid: `${index}`,
-        img: item,
-      }));
+      reviewData.imgs = options.imgs.map((item) => {
+        const btid = uuid().split('-').join('').substring(0, 30);
+        return {
+          btid: btid,
+          img: item,
+        };
+      });
     }
 
     // review

@@ -1,6 +1,7 @@
 'use strict';
 
 var qiaoAjax = require('qiao-ajax');
+var qiaoEncode = require('qiao-encode');
 var qiao_log_js = require('qiao.log.js');
 
 // qiao
@@ -66,10 +67,13 @@ const reviewByShumei = async (options) => {
     if (options.text) reviewData.text = options.text;
     if (options.img) reviewData.img = options.img;
     if (options.imgs) {
-      reviewData.imgs = options.imgs.map((item, index) => ({
-        btid: `${index}`,
-        img: item,
-      }));
+      reviewData.imgs = options.imgs.map((item) => {
+        const btid = qiaoEncode.uuid().split('-').join('').substring(0, 30);
+        return {
+          btid: btid,
+          img: item,
+        };
+      });
     }
 
     // review
