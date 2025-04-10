@@ -78,10 +78,7 @@ export const reviewByShumei = async (options) => {
         accessKey: options.accessKey,
         eventId: options.eventId,
         type: options.type,
-        data: {
-          text: options.text,
-          tokenId: options.tokenId,
-        },
+        data: reviewData,
       },
     });
     if (!res || res.status !== 200) {
