@@ -62,7 +62,7 @@ const reviewByShumei = async (options) => {
   // go
   try {
     // review data
-    const reviewData = { tokenId: options.tokenId };
+    const reviewData = { tokenId: options.tokenId, lang: 'auto' };
     if (options.text) reviewData.text = options.text;
     if (options.img) reviewData.img = options.img;
     if (options.imgs) {
