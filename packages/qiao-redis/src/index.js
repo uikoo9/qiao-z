@@ -58,6 +58,42 @@ export default (options) => {
     }
   };
 
+  // lrange
+  redis.lrange = async (key, start, stop) => {
+    try {
+      return await client.lrange(key, start, stop);
+    } catch (error) {
+      logger.error('redis.lrange', 'error', error);
+    }
+  };
+
+  // llen
+  redis.llen = async (key) => {
+    try {
+      return await client.llen(key);
+    } catch (error) {
+      logger.error('redis.llen', 'error', error);
+    }
+  };
+
+  // ltrim
+  redis.ltrim = async (key, start, stop) => {
+    try {
+      return await client.ltrim(key, start, stop);
+    } catch (error) {
+      logger.error('redis.ltrim', 'error', error);
+    }
+  };
+
+  // rpush
+  redis.rpush = async (key, value) => {
+    try {
+      return await client.rpush(key, value);
+    } catch (error) {
+      logger.error('redis.rpush', 'error', error);
+    }
+  };
+
   // cache
   redis.cache = async (key, expire, cacheFunction) => {
     try {
