@@ -4,7 +4,8 @@
   "version": "5.5.4",
   "scripts": {
     "gen-init": "node bin/qzcoder.js gen-init ",
-    "gen": "node bin/qzcoder.js gen "
+    "gen": "node bin/qzcoder.js gen ",
+    "gen1": "node bin/qzcoder.js gen1 "
   },
   "dependencies": {
     "art-template": "4.13.4",

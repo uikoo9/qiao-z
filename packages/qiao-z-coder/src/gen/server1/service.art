@@ -1,0 +1,161 @@
+// sql
+const sql = require('../sql/{{tableName1}}-{{tableName2}}-sql.json');
+
+/**
+ * {{tableName1}} {{tableName2}} list
+ * @param {*} req
+ * @param {*} res
+ */
+exports.{{className2}}List = async (req, res) => {
+  // vars
+  {{each params}}const {{$value.name2}} = req.body.{{$value.name2}};
+  {{/each}}
+  // sql and params
+  const sqlcount = [sql.{{className2}}ListCount];
+  const paramscount = [];
+  
+  const sqlquery = [sql.{{className2}}ListQuery];
+  const paramsquery = [];
+
+  // query
+  {{each params}}if ({{$value.name2}}) {
+    sqlcount.push(' and t.{{$value.name1}} = ?');
+    paramscount.push({{$value.name2}});
+
+    sqlquery.push(' and t.{{$value.name1}} = ?');
+    paramsquery.push({{$value.name2}});
+  }
+  {{/each}}
+  // order and page
+  sqlquery.push(' order by t.? ? limit ?,?');
+  const order = req.body.order || 'desc';
+  const orderby = req.body.orderby || 'id';
+  const pagesize = parseInt(req.body.rows || 10);
+  const pagenumber = parseInt(req.body.page || 1);
+  const start = (pagenumber - 1) * pagesize;
+  paramsquery.push(req.db.mysql.raw(orderby));
+  paramsquery.push(req.db.mysql.raw(order));
+  paramsquery.push(start);
+  paramsquery.push(pagesize);
+  
+  // db
+  try {
+    const rs = await req.db.query(sqlcount.join(''), paramscount);
+    const rows = await req.db.query(sqlquery.join(''), paramsquery);
+
+    // result
+    const result = {};
+    result.total = rs[0]['tcount'];
+    result.rows = rows;
+    result.sumpage = Math.ceil(result.total / pagesize);
+    result.pagenumber = pagenumber;
+    result.pagesize = pagesize;
+
+    res.jsonSuccess('query success', result);
+  } catch (e) {
+    req.logger.error(e);
+    res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
+  }
+};
+
+/**
+ * {{tableName1}} {{tableName2}} get
+ * @param {*} req
+ * @param {*} res
+ */
+exports.{{className2}}Get = async (req, res) => {
+  // check
+  if (!req.body) {
+    res.jsonFail('缺少参数！');
+    return;
+  }
+  if (!req.body.id) {
+    res.jsonFail('缺少参数id！');
+    return;
+  }
+
+  // db
+  try {
+    const params = [];
+    params.push(req.body.id);
+
+    const rows = await req.db.query(sql.{{className2}}GetById, params);
+    res.jsonSuccess('query success', { rows: rows });
+  } catch (e) {
+    req.logger.error(e);
+    res.jsonFail('query failed', { errName: e.name, errMsg: e.message });
+  }
+};
+
+/**
+ * {{tableName1}} {{tableName2}} save
+ * @param {*} req
+ * @param {*} res
+ */
+exports.{{className2}}Save = async (req, res) => {
+  // check
+  if (!req.body) {
+    res.jsonFail('缺少参数！');
+    return;
+  }
+  {{each params}}if (!req.body.{{$value.name2}}) {
+    res.jsonFail('缺少参数{{$value.name2}}！');
+    return;
+  }
+  {{/each}}
+  // vars
+  let id = req.body.id;
+  {{each params}}const {{$value.name2}} = req.body.{{$value.name2}};
+  {{/each}}
+  // db
+  try {
+    const params = [];
+    
+    if (!id) {
+      {{each params}}params.push({{$value.name2}});
+      {{/each}}
+      
+      const rs = await req.db.query(sql.{{className2}}Add, params);
+      id = rs && rs.insertId ? rs.insertId : id;
+    } else {
+      {{each params}}params.push({{$value.name2}});
+      {{/each}}
+      
+      await req.db.query(sql.{{className2}}Edit, params);
+    }
+
+    res.jsonSuccess('save success', { id: id });
+  } catch (e) {
+    req.logger.error(e);
+    res.jsonFail('save failed', { errName: e.name, errMsg: e.message });
+  }
+};
+
+/**
+ * {{tableName1}} {{tableName2}} del
+ * @param {*} req
+ * @param {*} res
+ */
+exports.{{className2}}Del = async (req, res) => {
+  // check
+  if (!req.body) {
+    res.jsonFail('缺少参数！');
+    return;
+  }
+  if (!req.body.ids) {
+    res.jsonFail('缺少参数ids！');
+    return;
+  }
+
+  // db
+  try {
+    const params = [];
+    params.push(req.body.ids.split(','));
+
+    await req.db.query(sql.{{className2}}Del, params);
+    res.jsonSuccess('del success');
+  } catch (e) {
+    req.logger.error(e);
+    res.jsonFail('del failed', { errName: e.name, errMsg: e.message });
+  }
+};

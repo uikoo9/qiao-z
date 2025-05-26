@@ -63,6 +63,38 @@ exports.gen = async function (tableName, destFolder) {
   await genFile('./server/sql.art', sqlDest, data);
 };
 
+/**
+ * gen1
+ * 	tableName 	: table name, like t_blog_type
+ * 	destFolder	: dest folder
+ */
+exports.gen1 = async function (tableName, destFolder) {
+  const data = await parseTable(tableName);
+  data.params = data.params.filter((item) => item.name1 !== 'create_date');
+  console.log(data);
+
+  // controller
+  const controllerDest = path.resolve(
+    destFolder,
+    `./packages/admin-api/server/${data.tableName1}/controller/${data.className1}Controller.js`,
+  );
+  await genFile('./server1/controller.art', controllerDest, data);
+
+  // service
+  const serviceDest = path.resolve(
+    destFolder,
+    `./packages/admin-api/server/${data.tableName1}/service/${data.className1}Service.js`,
+  );
+  await genFile('./server1/service.art', serviceDest, data);
+
+  // sql
+  const sqlDest = path.resolve(
+    destFolder,
+    `./packages/admin-api/server/${data.tableName1}/sql/${data.tableName1}-${data.tableName2}-sql.json`,
+  );
+  await genFile('./server1/sql.art', sqlDest, data);
+};
+
 // gen file
 async function genFile(pageTemp, pageDest, data) {
   console.log();
