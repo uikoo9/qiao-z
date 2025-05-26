@@ -120,6 +120,7 @@ exports.{{className2}}Save = async (req, res) => {
     } else {
       {{each params}}params.push({{$value.name2}});
       {{/each}}
+      params.push(id);
       
       await req.db.query(sql.{{className2}}Edit, params);
     }

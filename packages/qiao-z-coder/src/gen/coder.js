@@ -73,6 +73,10 @@ exports.gen1 = async function (tableName, destFolder) {
   data.params = data.params.filter((item) => item.name1 !== 'create_date');
   console.log(data);
 
+  // page
+  const pageDest = path.resolve(destFolder, `./packages/admin-web/src/components/${data.className1}.jsx`);
+  await genFile('./server1/page.art', pageDest, data);
+
   // controller
   const controllerDest = path.resolve(
     destFolder,

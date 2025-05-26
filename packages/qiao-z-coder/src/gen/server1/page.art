@@ -1,0 +1,276 @@
+// react
+import React, { useState, useEffect } from 'react';
+
+// antd
+import { Flex, Button, Popconfirm, Table, Modal, Input, Space, message } from 'antd';
+
+// ajax
+import { post } from '@util/fetch.js';
+
+// constants
+import { host } from '@util/constants.js';
+
+/**
+ * Wishes
+ */
+export const Wishes = () => {
+  // state
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(0);
+  const [current, setCurrent] = useState(1);
+  const [pagesize, setPagesize] = useState(10);
+  const [rowKeys, setRowKeys] = useState([]);
+  const [searching, setSearching] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState('添加');
+  const [id, setId] = useState('');
+  {{each params}}const [{{$value.name2}}, set{{$value.name3}}] = useState('');
+  {{/each}}
+
+  // effect
+  useEffect(() => {
+    init();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // reset
+  const reset = () => {
+    setRowKeys([]);
+    setId('');
+    {{each params}}set{{$value.name3}}('');
+    {{/each}}
+  };
+
+  // init
+  const init = async (page, pageSize) => {
+    // options
+    const options = {
+      page: page || current || 1,
+      rows: pageSize || pagesize || 10,
+    };
+    {{each params}}if ({{$value.name2}}) options.{{$value.name2}} = {{$value.name2}};
+    {{/each}}
+
+    // list
+    const listDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/list`, options);
+    setLoading(false);
+    if (listDataRes.type !== 'success') {
+      message.error('获取列表数据失败！');
+      return;
+    }
+
+    // obj
+    const obj = listDataRes.obj;
+    setData(
+      obj.rows.map((row) => {
+        row.key = row.id;
+        row.item = row;
+        return row;
+      }),
+    );
+
+    // pagination
+    setTotal(obj.total);
+    setCurrent(obj.pagenumber);
+    setPagesize(obj.pagesize);
+  };
+
+  // on del
+  const onDel = async () => {
+    if (!rowKeys.length) {
+      message.error('请选择要删除的列！');
+      return;
+    }
+
+    const ids = rowKeys.join(',');
+    const delDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/del`, {
+      ids: ids,
+    });
+    if (delDataRes.type !== 'success') {
+      message.error('删除数据失败！');
+      return;
+    }
+
+    await init();
+    reset();
+  };
+
+  // get detail
+  const getDetail = async (id) => {
+    const getDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/get`, {
+      id: id,
+    });
+    if (getDataRes.type !== 'success') {
+      message.error('获取数据失败！');
+      return;
+    }
+    if (!getDataRes.obj || !getDataRes.obj.rows || !getDataRes.obj.rows.length) {
+      message.error('获取数据失败！');
+      return;
+    }
+
+    const item = getDataRes.obj.rows[0];
+    setModalTitle('编辑');
+    setModalOpen(true);
+    setSearching(false);
+    setId(id);
+    {{each params}}set{{$value.name3}}(item.{{$value.name1}});
+    {{/each}}
+  };
+
+  // on save
+  const onSave = async () => {
+    // check
+    {{each params}}if (!{{$value.name2}}) {
+      message.error('缺少必填项！');
+      return;
+    }
+    {{/each}}
+
+    // save
+    const options = {
+      {{each params}}{{$value.name2}},
+      {{/each}}
+    };
+    if (id) options.id = id;
+    const saveDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/save`, options);
+    setModalOpen(false);
+    if (saveDataRes.type !== 'success') {
+      message.error('编辑数据失败！');
+      return;
+    }
+
+    await init();
+    reset();
+  };
+
+  // on search
+  const onSearch = async () => {
+    await init();
+    setModalOpen(false);
+  };
+
+  // const
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {{each params}}
+    {
+      title: '{{$value.name1}}',
+      dataIndex: '{{$value.name1}}',
+      key: '{{$value.name1}}',
+    },
+    {{/each}}
+    {
+      title: '操作',
+      dataIndex: 'item',
+      key: 'item',
+      render: (item) => {
+        return (
+          <Space size="middle">
+            <a
+              onClick={() => {
+                getDetail(item.id);
+              }}
+            >
+              编辑
+            </a>
+          </Space>
+        );
+      },
+    },
+  ];
+
+  // r
+  return (
+    <div>
+      {/* tools */}
+      <Flex gap="small" wrap>
+        <Button
+          type="primary"
+          onClick={() => {
+            setModalTitle('搜索');
+            setModalOpen(true);
+            setSearching(true);
+          }}
+        >
+          搜索
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            reset();
+            setModalTitle('添加');
+            setModalOpen(true);
+            setSearching(false);
+          }}
+        >
+          添加
+        </Button>
+        <Popconfirm title="确认删除这些数据？" onConfirm={onDel} okText="是" cancelText="否">
+          <Button danger>删除</Button>
+        </Popconfirm>
+      </Flex>
+
+      {/* table */}
+      <Table
+        columns={columns}
+        dataSource={data}
+        loading={loading}
+        pagination={
+          {
+            total: total,
+            current: current,
+            pageSize: pagesize,
+            position: ['bottomCenter'],
+            pageSizeOptions: [10, 50, 100],
+            onChange: init,
+          }
+        }
+        rowSelection={
+          {
+            getCheckboxProps: (item) => ({
+              name: item.id,
+            }),
+            onChange: (selectedRowKeys) => {
+              setRowKeys(selectedRowKeys);
+            },
+          }
+        }
+      />
+
+      {/* modal */}
+      <Modal
+        title={modalTitle}
+        open={modalOpen}
+        onOk={() => {
+          searching ? onSearch() : onSave();
+        }}
+        onCancel={() => {
+          setModalOpen(false);
+          reset();
+        }}
+      >
+        <Flex vertical gap={16}>
+          {{each params}}
+          <div>
+            <Input
+              type="text"
+              placeholder="{{$value.name2}}"
+              value={
+                {{$value.name2}}
+              }
+              onChange={(e) => {
+                set{{$value.name3}}(e.target.value);
+              }}
+            />
+          </div>
+          {{/each}}
+        </Flex>
+      </Modal>
+    </div>
+  );
+};
