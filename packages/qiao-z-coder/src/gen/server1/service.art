@@ -1,5 +1,5 @@
 // sql
-const sql = require('../sql/{{tableName1}}-{{tableName2}}-sql.json');
+const sql = require('../sql/{{className1}}SQL.js');
 
 /**
  * {{tableName1}} {{tableName2}} list
