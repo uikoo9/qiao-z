@@ -11,9 +11,9 @@ import { post } from '@util/fetch.js';
 import { host } from '@util/constants.js';
 
 /**
- * Wishes
+ * {{className1}}
  */
-export const Wishes = () => {
+export const {{className1}} = () => {
   // state
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
