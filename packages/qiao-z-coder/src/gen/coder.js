@@ -94,7 +94,7 @@ exports.gen1 = async function (tableName, destFolder) {
   // sql
   const sqlDest = path.resolve(
     destFolder,
-    `./packages/admin-api/server/${data.tableName1}/sql/${data.tableName1}-${data.tableName2}-sql.json`,
+    `./packages/admin-api/server/${data.tableName1}/sql/${data.className1}SQL.js`,
   );
   await genFile('./server1/sql.art', sqlDest, data);
 };
