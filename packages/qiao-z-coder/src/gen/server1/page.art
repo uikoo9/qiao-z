@@ -30,7 +30,7 @@ export const {{className1}} = () => {
 
   // effect
   useEffect(() => {
-    init();
+    list();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // reset
@@ -41,8 +41,8 @@ export const {{className1}} = () => {
     {{/each}}
   };
 
-  // init
-  const init = async (page, pageSize) => {
+  // list
+  const list = async (page, pageSize {{each params}}, {{$value.name2}}{{/each}}) => {
     // options
     const options = {
       page: page || current || 1,
@@ -91,8 +91,8 @@ export const {{className1}} = () => {
       return;
     }
 
-    await init();
-    reset();
+    list();
+    setRowKeys([]);
   };
 
   // get detail
@@ -140,13 +140,13 @@ export const {{className1}} = () => {
       return;
     }
 
-    await init();
+    list();
     reset();
   };
 
   // on search
   const onSearch = async () => {
-    await init();
+    list(current, pagesize {{each params}}, {{$value.name2}}{{/each}});
     setModalOpen(false);
   };
 
@@ -155,25 +155,22 @@ export const {{className1}} = () => {
     {
       title: 'ID',
       dataIndex: 'id',
-      key: 'id',
     },
     {{each params}}
     {
       title: '{{$value.name1}}',
       dataIndex: '{{$value.name1}}',
-      key: '{{$value.name1}}',
     },
     {{/each}}
     {
       title: '操作',
-      dataIndex: 'item',
-      key: 'item',
-      render: (item) => {
+      dataIndex: 'id',
+      render: (id) => {
         return (
           <Space size="middle">
             <a
               onClick={() => {
-                getDetail(item.id);
+                getDetail(id);
               }}
             >
               编辑
@@ -227,7 +224,7 @@ export const {{className1}} = () => {
             pageSize: pagesize,
             position: ['bottomCenter'],
             pageSizeOptions: [10, 50, 100],
-            onChange: init,
+            onChange: list,
           }
         }
         rowSelection={
