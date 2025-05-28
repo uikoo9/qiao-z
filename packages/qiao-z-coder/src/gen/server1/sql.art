@@ -13,7 +13,7 @@ exports.{{className2}}Add = `
   insert into 
     {{tableName}}(id, {{each params}}{{$value.name1}}, {{/each}}create_date, del_tag) 
   values
-    (null, ?, ?, ?, ?, now(), '0')
+    (null, {{each params}}?, {{/each}} now(), '0')
 `;
 
 exports.{{className2}}Edit = `
