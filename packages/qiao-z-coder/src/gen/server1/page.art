@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Flex, Button, Popconfirm, Table, Modal, Input, Space, message } from 'antd';
 
 // ajax
-import { post } from '@util/fetch.js';
+import { postWithToken } from '@util/fetch.js';
 
 // constants
 import { host } from '@util/constants.js';
@@ -52,7 +52,7 @@ export const {{className1}} = () => {
     {{/each}}
 
     // list
-    const listDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/list`, options);
+    const listDataRes = await postWithToken(`${host}/{{tableName1}}/{{tableName2}}/list`, options);
     setLoading(false);
     if (listDataRes.type !== 'success') {
       message.error('获取列表数据失败！');
@@ -83,7 +83,7 @@ export const {{className1}} = () => {
     }
 
     const ids = rowKeys.join(',');
-    const delDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/del`, {
+    const delDataRes = await postWithToken(`${host}/{{tableName1}}/{{tableName2}}/del`, {
       ids: ids,
     });
     if (delDataRes.type !== 'success') {
@@ -97,7 +97,7 @@ export const {{className1}} = () => {
 
   // get detail
   const getDetail = async (id) => {
-    const getDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/get`, {
+    const getDataRes = await postWithToken(`${host}/{{tableName1}}/{{tableName2}}/get`, {
       id: id,
     });
     if (getDataRes.type !== 'success') {
@@ -133,7 +133,7 @@ export const {{className1}} = () => {
       {{/each}}
     };
     if (id) options.id = id;
-    const saveDataRes = await post(`${host}/{{tableName1}}/{{tableName2}}/save`, options);
+    const saveDataRes = await postWithToken(`${host}/{{tableName1}}/{{tableName2}}/save`, options);
     setModalOpen(false);
     if (saveDataRes.type !== 'success') {
       message.error('编辑数据失败！');
