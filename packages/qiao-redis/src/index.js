@@ -94,6 +94,15 @@ export default (options) => {
     }
   };
 
+  // flushdb
+  redis.flushdb = async () => {
+    try {
+      return await client.flushdb();
+    } catch (error) {
+      logger.error('redis.flushdb', 'error', error);
+    }
+  };
+
   // cache
   redis.cache = async (key, expire, cacheFunction) => {
     try {
