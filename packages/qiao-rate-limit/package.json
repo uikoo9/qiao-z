@@ -1,6 +1,6 @@
 {
   "name": "qiao-rate-limit",
-  "version": "5.1.9",
+  "version": "5.6.5",
   "description": "nodejs rate limit",
   "keywords": [
     "nodejs",
