@@ -33,7 +33,7 @@ const handleRequest = async (request, plugins) => {
   req.body = await handleBody(req, plugins);
 
   // ip
-  const ip = req.headers['x-real-ip'];
+  const ip = req.headers['x-real-ip'] || req.headers['x-forwarded-for'];
   if (ip) req.ip = ip;
 
   // logger
