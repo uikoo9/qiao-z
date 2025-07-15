@@ -178,7 +178,7 @@ const rateLimitCheck = (req, res, rateLimit, rateLimitMaxCount) => {
   // rate limit
   const rateLimitRes = rateLimit(ip, rateLimitMaxCount);
   if (rateLimitRes) {
-    res.send('rate limit');
+    res.jsonFail('rate limit');
     return;
   }
 
