@@ -29,12 +29,13 @@ export default (options) => {
     // init
     global.rateLimitItems = [];
     const rateLimitLib = options.rateLimitOptions.lib;
+    const rateLimitInterval = options.rateLimitOptions.interval;
     const rateLimitDuration = options.rateLimitOptions.duration;
     const rateLimitMaxCount = options.rateLimitOptions.maxCount;
     const { clearIntervalRateLimit, rateLimit } = rateLimitLib;
 
     // clear
-    clearIntervalRateLimit(rateLimitDuration);
+    clearIntervalRateLimit(rateLimitDuration, rateLimitInterval);
 
     // checks
     options.checks = options.checks || [];

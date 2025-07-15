@@ -45,25 +45,30 @@ const rateLimit = (ip, maxCount) => {
  * @param {*} duration
  * @returns
  */
-const clearIntervalRateLimit = (duration) => {
+const clearIntervalRateLimit = (duration, interval) => {
   if (!global.rateLimitItems) {
     console.log('need global.rateLimitItems');
     return;
   }
 
-  setInterval(() => {
-    const now = new Date();
-    for (let i = global.rateLimitItems.length - 1; i >= 0; i--) {
-      const item = global.rateLimitItems[i];
-      const times = now - item.time;
-      if (times > duration) {
-        global.rateLimitItems.splice(i, 1);
-      }
-    }
-
-    console.log('clear rate limit items', global.rateLimitItems);
-  }, 1000);
+  clearRateLimit(duration, interval);
 };
+
+// clear rate limit
+function clearRateLimit(duration, interval) {
+  const now = new Date();
+  for (let i = global.rateLimitItems.length - 1; i >= 0; i--) {
+    const item = global.rateLimitItems[i];
+    if (now - item.time > duration) {
+      global.rateLimitItems.splice(i, 1);
+    }
+  }
+  console.log('clear rate limit items', global.rateLimitItems);
+
+  setTimeout(() => {
+    clearRateLimit(duration, interval);
+  }, interval);
+}
 
 exports.clearIntervalRateLimit = clearIntervalRateLimit;
 exports.rateLimit = rateLimit;
