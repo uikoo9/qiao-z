@@ -162,7 +162,31 @@ function operateTaskFile(cron, serverFile) {
   }
 }
 
-// logger
+/**
+ * rateLimitCheck
+ * @param {*} req
+ * @param {*} res
+ * @param {*} rateLimit
+ * @param {*} rateLimitMaxCount
+ * @returns
+ */
+const rateLimitCheck = (req, res, rateLimit, rateLimitMaxCount) => {
+  // ip
+  const ip = req.ip;
+  if (!ip) return true;
+
+  // rate limit
+  const rateLimitRes = rateLimit(ip, rateLimitMaxCount);
+  if (rateLimitRes) {
+    res.send('rate limit');
+    return;
+  }
+
+  // r
+  return true;
+};
+
+// rate limit
 const debug$6 = Debug('qiao-z');
 const methodName$4 = 'initPlugins';
 
@@ -181,6 +205,27 @@ const crosOptions = {
 var initPlugins = (options) => {
   // plugins
   const plugins = {};
+
+  // rateLimit
+  if (options && options.rateLimitOptions) {
+    debug$6(methodName$4, 'options.rateLimitOptions');
+
+    // init
+    global.rateLimitItems = [];
+    const rateLimitLib = options.rateLimitOptions.lib;
+    const rateLimitDuration = options.rateLimitOptions.duration;
+    const rateLimitMaxCount = options.rateLimitOptions.maxCount;
+    const { clearIntervalRateLimit, rateLimit } = rateLimitLib;
+
+    // clear
+    clearIntervalRateLimit(rateLimitDuration);
+
+    // checks
+    options.checks = options.checks || [];
+    options.checks.push((req, res) => {
+      return rateLimitCheck(req, res, rateLimit, rateLimitMaxCount);
+    });
+  }
 
   // checks
   if (options && options.checks) {

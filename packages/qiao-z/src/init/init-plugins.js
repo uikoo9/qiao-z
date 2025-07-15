@@ -1,3 +1,6 @@
+// rate limit
+import { rateLimitCheck } from './rate-limit.js';
+
 // logger
 import Debug from 'debug';
 const debug = Debug('qiao-z');
@@ -18,6 +21,27 @@ const crosOptions = {
 export default (options) => {
   // plugins
   const plugins = {};
+
+  // rateLimit
+  if (options && options.rateLimitOptions) {
+    debug(methodName, 'options.rateLimitOptions');
+
+    // init
+    global.rateLimitItems = [];
+    const rateLimitLib = options.rateLimitOptions.lib;
+    const rateLimitDuration = options.rateLimitOptions.duration;
+    const rateLimitMaxCount = options.rateLimitOptions.maxCount;
+    const { clearIntervalRateLimit, rateLimit } = rateLimitLib;
+
+    // clear
+    clearIntervalRateLimit(rateLimitDuration);
+
+    // checks
+    options.checks = options.checks || [];
+    options.checks.push((req, res) => {
+      return rateLimitCheck(req, res, rateLimit, rateLimitMaxCount);
+    });
+  }
 
   // checks
   if (options && options.checks) {
