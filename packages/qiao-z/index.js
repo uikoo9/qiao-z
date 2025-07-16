@@ -211,12 +211,12 @@ var initPlugins = (options) => {
   const plugins = {};
 
   // rateLimit
-  if (options && options.rateLimitOptions) {
+  if (options && options.rateLimitLib && options.rateLimitOptions) {
     debug$6(methodName$4, 'options.rateLimitOptions');
 
     // init
     global.rateLimitItems = [];
-    const rateLimitLib = options.rateLimitOptions.lib;
+    const rateLimitLib = options.rateLimitLib;
     const rateLimitInterval = options.rateLimitOptions.interval;
     const rateLimitDuration = options.rateLimitOptions.duration;
     const rateLimitMaxCount = options.rateLimitOptions.maxCount;
