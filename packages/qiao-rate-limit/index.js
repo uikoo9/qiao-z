@@ -63,7 +63,11 @@ function clearRateLimit(duration, interval) {
       global.rateLimitItems.splice(i, 1);
     }
   }
-  console.log('clear rate limit items', global.rateLimitItems);
+
+  // log
+  if (global.rateLimitItems.length) {
+    console.log('clear rate limit items', global.rateLimitItems);
+  }
 
   setTimeout(() => {
     clearRateLimit(duration, interval);
