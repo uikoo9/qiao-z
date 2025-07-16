@@ -20,7 +20,7 @@ const rateLimit = (ip, maxCount) => {
     global.rateLimitItems.push({
       ip: ip,
       time: new Date(),
-      count: 0,
+      count: 1,
     });
 
     return;
