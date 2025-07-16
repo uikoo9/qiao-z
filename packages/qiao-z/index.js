@@ -220,10 +220,11 @@ var initPlugins = (options) => {
     const rateLimitInterval = options.rateLimitOptions.interval;
     const rateLimitDuration = options.rateLimitOptions.duration;
     const rateLimitMaxCount = options.rateLimitOptions.maxCount;
+    const rateLimitFreezeTime = options.rateLimitOptions.freezeTime;
     const { clearIntervalRateLimit, rateLimit } = rateLimitLib;
 
     // clear
-    clearIntervalRateLimit(rateLimitDuration, rateLimitInterval);
+    clearIntervalRateLimit(rateLimitDuration, rateLimitInterval, rateLimitMaxCount, rateLimitFreezeTime);
 
     // checks
     options.checks = options.checks || [];
