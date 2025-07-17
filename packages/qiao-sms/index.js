@@ -12,7 +12,21 @@ const logger = qiao_log_js.Logger('qiao-sms');
  * @returns
  */
 const submailSMS = async (options) => {
-  const methodName = 'sms';
+  return await sendSubmailSMS('https://api-v4.mysubmail.com/sms/send', options);
+};
+
+/**
+ * submailInternationalSMS
+ * @param {*} options
+ * @returns
+ */
+const submailInternationalSMS = async (options) => {
+  return await sendSubmailSMS('https://api-v4.mysubmail.com/internationalsms/send', options);
+};
+
+// send submail sms
+async function sendSubmailSMS(url, options) {
+  const methodName = 'sendSubmailSMS';
 
   // const
   const resMsg = {
@@ -53,7 +67,6 @@ const submailSMS = async (options) => {
 
   // go
   try {
-    const url = 'https://api-v4.mysubmail.com/sms/send';
     const res = await qiaoAjax.post(url, {
       data: {
         appid: options.appid,
@@ -76,6 +89,7 @@ const submailSMS = async (options) => {
     resMsg.msg = error;
     return resMsg;
   }
-};
+}
 
+exports.submailInternationalSMS = submailInternationalSMS;
 exports.submailSMS = submailSMS;
