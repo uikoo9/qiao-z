@@ -40,7 +40,7 @@ export default (options) => {
 
     // checks
     options.checks = options.checks || [];
-    options.checks.push((req, res) => {
+    options.checks.unshift((req, res) => {
       return rateLimitCheck(req, res, rateLimit, rateLimitMaxCount);
     });
   }
