@@ -1,5 +1,10 @@
 'use strict';
 
+var Debug = require('debug');
+
+// logger
+const debug = Debug('qiao-rate-limit');
+
 /**
  * rateLimit
  * @param {*} ip
@@ -7,15 +12,18 @@
  * @returns
  */
 const rateLimit = (ip, maxCount) => {
+  const methodName = 'rateLimit';
+
+  // check
   if (!global.rateLimitItems) {
-    console.log('need global.rateLimitItems');
+    debug(methodName, 'need global.rateLimitItems');
     return;
   }
 
   // set
   const ipItem = global.rateLimitItems.find((item) => item.ip === ip);
   if (!ipItem) {
-    console.log('init global.rateLimitItems');
+    debug(methodName, 'init global.rateLimitItems');
 
     global.rateLimitItems.push({
       ip: ip,
@@ -31,10 +39,10 @@ const rateLimit = (ip, maxCount) => {
 
   // check
   if (ipItem.count <= maxCount) {
-    console.log('normal request');
+    debug(methodName, 'normal request');
     return;
   } else {
-    console.log('rate limit request');
+    console.log(methodName, 'rate limit request');
     return true;
   }
 };
@@ -47,8 +55,11 @@ const rateLimit = (ip, maxCount) => {
  * @returns
  */
 const clearIntervalRateLimit = (duration, interval, maxCount, freezeTime) => {
+  const methodName = 'clearIntervalRateLimit';
+
+  // check
   if (!global.rateLimitItems) {
-    console.log('need global.rateLimitItems');
+    debug(methodName, 'need global.rateLimitItems');
     return;
   }
 
@@ -57,6 +68,9 @@ const clearIntervalRateLimit = (duration, interval, maxCount, freezeTime) => {
 
 // clear rate limit
 function clearRateLimit(duration, interval, maxCount, freezeTime) {
+  const methodName = 'clearRateLimit';
+
+  // go
   const now = new Date();
   for (let i = global.rateLimitItems.length - 1; i >= 0; i--) {
     const item = global.rateLimitItems[i];
@@ -74,7 +88,7 @@ function clearRateLimit(duration, interval, maxCount, freezeTime) {
 
   // log
   if (global.rateLimitItems.length) {
-    console.log('clear rate limit items', global.rateLimitItems);
+    debug(methodName, 'clear rate limit items', global.rateLimitItems);
   }
 
   setTimeout(() => {
