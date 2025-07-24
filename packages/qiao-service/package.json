@@ -23,7 +23,7 @@
   "dependencies": {
     "qiao-ajax": "^5.2.1",
     "qiao-json": "^5.1.9",
-    "qiao.log.js": "^3.7.3"
+    "qiao.log.js": "^3.7.5"
   },
   "nx": {
     "namedInputs": {

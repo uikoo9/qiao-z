@@ -24,6 +24,6 @@
     "qiao-encode": "^4.9.4",
     "qiao-z-service": "^5.5.2",
     "qiao-z-user": "^5.7.5",
-    "qiao.log.js": "^3.7.3"
+    "qiao.log.js": "^3.7.5"
   }
 }

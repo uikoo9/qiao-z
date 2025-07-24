@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "qiao-ajax": "^5.2.1",
-    "qiao.log.js": "^3.7.3"
+    "qiao.log.js": "^3.7.5"
   },
   "nx": {
     "namedInputs": {

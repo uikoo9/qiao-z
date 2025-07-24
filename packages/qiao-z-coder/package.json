@@ -10,10 +10,10 @@
   "dependencies": {
     "art-template": "4.13.4",
     "qiao-cli": "^4.7.2",
-    "qiao-downloader": "^4.9.4",
-    "qiao-file": "^4.9.4",
+    "qiao-downloader": "^4.9.8",
+    "qiao-file": "^4.9.8",
     "qiao-mysql": "^5.1.9",
     "qiao-string": "^5.1.9",
-    "qiao-zip": "^4.9.4"
+    "qiao-zip": "^4.9.8"
   }
 }

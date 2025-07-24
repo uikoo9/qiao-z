@@ -30,7 +30,7 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "formidable": "^3.5.2"
+    "formidable": "^3.5.4"
   },
   "nx": {
     "namedInputs": {
