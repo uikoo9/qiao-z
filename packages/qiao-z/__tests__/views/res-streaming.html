@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    (async () => {
+      // 或使用Fetch API
+      const response = await fetch('http://localhost:5277/res/streaming');
+      const reader = response.body.getReader();
+      while(true) {
+        const { done, value } = await reader.read();
+        if(done) break;
+        const chunk = new TextDecoder().decode(value);
+        // 处理数据块
+        console.log(chunk);
+      }
+
+    })();
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

@@ -27,4 +27,5 @@ module.exports = function (app) {
   require('./res/res-render-file.js')(app);
   require('./res/res-render-html.js')(app);
   require('./res/res-static-render.js')(app);
+  require('./res/res-streaming.js')(app);
 };

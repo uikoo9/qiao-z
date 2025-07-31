@@ -924,6 +924,39 @@ function responseData(proxyRes, proxyCallback) {
   }
 }
 
+/**
+ * streamingStart
+ * @param {*} res
+ */
+const streamingStart = (res) => {
+  res.response.writeHeader(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    Connection: 'keep-alive',
+  });
+};
+
+/**
+ * streamingEnd
+ * @param {*} res
+ */
+const streamingEnd = (res) => {
+  res.response.end();
+};
+
+/**
+ * streaming
+ * @param {*} res
+ */
+/**
+ * streaming
+ * @param {*} res
+ * @param {*} msg
+ */
+const streaming = (res, msg) => {
+  res.response.write(msg);
+};
+
 // res methods
 
 /**
@@ -997,6 +1030,17 @@ const handleRes = (request, response, plugins) => {
   // proxy
   res.proxy = (proxyOptions, proxyCallback) => {
     proxy(request, response, proxyOptions, proxyCallback);
+  };
+
+  // streaming
+  res.streamingStart = () => {
+    streamingStart(res);
+  };
+  res.streamingEnd = () => {
+    streamingEnd(res);
+  };
+  res.streaming = (msg) => {
+    streaming(res, msg);
   };
 
   return res;

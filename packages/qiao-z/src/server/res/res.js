@@ -9,6 +9,7 @@ import { clearCookie, setCookie } from './res-cookie.js';
 import render from './res-render.js';
 import staticRender from './res-static-render.js';
 import proxy from './res-proxy.js';
+import { streamingStart, streamingEnd, streaming } from './res-streaming.js';
 
 /**
  * res
@@ -81,6 +82,17 @@ const handleRes = (request, response, plugins) => {
   // proxy
   res.proxy = (proxyOptions, proxyCallback) => {
     proxy(request, response, proxyOptions, proxyCallback);
+  };
+
+  // streaming
+  res.streamingStart = () => {
+    streamingStart(res);
+  };
+  res.streamingEnd = () => {
+    streamingEnd(res);
+  };
+  res.streaming = (msg) => {
+    streaming(res, msg);
   };
 
   return res;
