@@ -15,6 +15,15 @@ export default (options) => {
   // redis
   const redis = {};
 
+  // keys
+  redis.keys = async (key) => {
+    try {
+      return await client.keys(key);
+    } catch (error) {
+      logger.error('redis.keys', 'error', error);
+    }
+  };
+
   // set
   redis.set = async (key, value, expire) => {
     try {
