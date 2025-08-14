@@ -1,5 +1,4 @@
 // qiao
-const { cache } = require('qiao-cache');
 const { randomNumber } = require('qiao-encode');
 const { sendSms } = require('qiao-z-service');
 
@@ -21,7 +20,18 @@ exports.sms = async (req, res) => {
       content: content,
     }),
   );
-  if (json.type === 'success') cache(`code-${mobile}`, code);
+  if (json.type === 'success') {
+    if (!req.redis) {
+      res.jsonFail('/sms, need req.redis');
+      return;
+    }
+
+    const redisRes = await req.redis.set(`code-${mobile}`, code);
+    if (!redisRes) {
+      res.jsonFail('/sms, set redis fail');
+      return;
+    }
+  }
 
   // send
   res.json(json);
