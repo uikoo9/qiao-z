@@ -9,9 +9,9 @@ const { userLogin, userCheck } = require('qiao-z-service');
 exports.userLoginFn = async (req, res) => {
   // send
   const json = await userLogin({
-    url: global.QZ_CONFIG.app.url,
-    appId: global.QZ_CONFIG.app.appId,
-    appKey: global.QZ_CONFIG.app.appKey,
+    url: global.QZ_CONFIG.user.url,
+    appId: global.QZ_CONFIG.user.appId,
+    appKey: global.QZ_CONFIG.user.appKey,
     mobile: req.body.mobile,
     code: req.body.code,
   });
@@ -29,13 +29,13 @@ exports.userCheckFn = async (req, res) => {
   // send
   const json = await userCheck(
     {
-      userid: req.headers.userid,
-      usertoken: req.headers.usertoken,
+      url: global.QZ_CONFIG.user.url,
+      appId: global.QZ_CONFIG.user.appId,
+      appKey: global.QZ_CONFIG.user.appKey,
     },
     {
-      url: global.QZ_CONFIG.app.url,
-      appId: global.QZ_CONFIG.app.appId,
-      appKey: global.QZ_CONFIG.app.appKey,
+      userid: req.headers.userid,
+      usertoken: req.headers.usertoken,
     },
   );
 
