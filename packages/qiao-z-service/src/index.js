@@ -15,3 +15,6 @@ export * from './service/recommend.js';
 
 // sms
 export * from './service/sms.js';
+
+// sms
+export * from './service/user.js';

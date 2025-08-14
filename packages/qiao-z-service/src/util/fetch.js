@@ -12,14 +12,16 @@ const logger = Logger('qiao-z-service');
  * fetch
  * @param {*} url
  * @param {*} data
+ * @param {*} headers
  * @returns
  */
-export const fetch = async (url, data) => {
+export const fetch = async (url, data, headers) => {
   const methodName = 'fetch';
 
   // send
   try {
     const res = await post(url, {
+      headers: headers,
       data: data,
     });
 

@@ -11,14 +11,16 @@ const logger = qiao_log_js.Logger('qiao-z-service');
  * fetch
  * @param {*} url
  * @param {*} data
+ * @param {*} headers
  * @returns
  */
-const fetch = async (url, data) => {
+const fetch = async (url, data, headers) => {
   const methodName = 'fetch';
 
   // send
   try {
     const res = await qiaoAjax.post(url, {
+      headers: headers,
       data: data,
     });
 
@@ -154,6 +156,27 @@ const sendSms = async (options) => {
   return await fetch(options.url, options);
 };
 
+// util
+
+/**
+ * userLogin
+ * @param {*} options
+ * @returns
+ */
+const userLogin = async (options) => {
+  return await fetch(options.url + 'user/login', options);
+};
+
+/**
+ * userCheck
+ * @param {*} options
+ * @param {*} headers
+ * @returns
+ */
+const userCheck = async (options, headers) => {
+  return await fetch(options.url + 'user/check', options, headers);
+};
+
 exports.addRecommend = addRecommend;
 exports.appUpdate = appUpdate;
 exports.changeRecommend = changeRecommend;
@@ -163,3 +186,5 @@ exports.cosToken = cosToken;
 exports.listRecommend = listRecommend;
 exports.sendMsgToFeishu = sendMsgToFeishu;
 exports.sendSms = sendSms;
+exports.userCheck = userCheck;
+exports.userLogin = userLogin;
