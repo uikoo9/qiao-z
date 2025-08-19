@@ -3,11 +3,16 @@
  * @param {*} res
  */
 export const streamingStart = (res) => {
-  res.response.writeHeader(200, {
+  // options
+  let options = {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
     Connection: 'keep-alive',
-  });
+  };
+  if (res.cros) options = Object.assign({}, res.cros, options);
+
+  // go
+  res.response.writeHeader(200, options);
 };
 
 /**
