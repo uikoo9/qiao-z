@@ -36,4 +36,3 @@ app.listen(port);
 ## 内置路由
 
 - `/user/login`: 用户登录
-- `/user/check`: 用户检查
