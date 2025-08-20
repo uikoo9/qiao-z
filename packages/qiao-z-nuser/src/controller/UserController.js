@@ -9,9 +9,4 @@ module.exports = (app) => {
   app.post('/user/login', (req, res) => {
     service.userLoginFn(req, res);
   });
-
-  // /user/check
-  app.post('/user/check', (req, res) => {
-    service.userCheckFn(req, res);
-  });
 };
