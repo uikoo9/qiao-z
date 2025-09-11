@@ -1,7 +1,7 @@
 {
   "name": "qiao-z-coder",
   "private": true,
-  "version": "5.8.4",
+  "version": "5.8.5",
   "scripts": {
     "gen-init": "node bin/qzcoder.js gen-init ",
     "gen": "node bin/qzcoder.js gen ",
@@ -12,7 +12,7 @@
     "qiao-cli": "^5.0.0",
     "qiao-downloader": "^5.0.0",
     "qiao-file": "^5.0.0",
-    "qiao-mysql": "^5.8.4",
+    "qiao-mysql": "^5.8.5",
     "qiao-string": "^5.7.6",
     "qiao-zip": "^5.0.0"
   }
