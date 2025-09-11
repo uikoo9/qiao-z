@@ -1,6 +1,9 @@
 // util
 import { lib, getConnection, getPool, query, getColumns, getTypes } from './util.js';
 
+// connections
+import { watchConnections } from './connections.js';
+
 /**
  * init
  * @param {*} config
@@ -23,6 +26,9 @@ const init = (config) => {
     return await getColumns(app, tableName);
   };
   app.getTypes = getTypes;
+
+  // watch
+  watchConnections(app);
 
   // return
   return app;

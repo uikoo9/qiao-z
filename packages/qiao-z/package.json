@@ -37,10 +37,10 @@
     "qiao-ua": "^5.1.9",
     "qiao.log.js": "^3.7.5",
     "qs": "^6.14.0",
-    "raw-body": "^3.0.0"
+    "raw-body": "^3.0.1"
   },
   "devDependencies": {
-    "qiao-llm": "^0.1.8",
+    "qiao-llm": "^0.2.0",
     "qiao-timer": "^5.7.6"
   },
   "nx": {

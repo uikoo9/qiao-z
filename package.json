@@ -29,7 +29,7 @@
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
     "lerna": "^8.2.3",
-    "lint-staged": "^16.1.2",
+    "lint-staged": "^16.1.6",
     "nx": "^20.7.2",
     "qiao-project": "^5.0.0"
   }
