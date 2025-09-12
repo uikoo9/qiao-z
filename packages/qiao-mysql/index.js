@@ -129,13 +129,12 @@ const getTypes = (mysqlType) => {
  * @returns
  */
 const watchConnections = (app) => {
-  const methodName = 'watchConnections';
-
   // check
-  if (!app.config.connectionLimit || !app.config.watch) return;
+  if (!app.config.connectionLimit || !app.config.watch || !app.config.watchCallback) return;
 
   // const
   const intervalTime = app.config.watchInterval || 1000;
+  const watchCallback = app.config.watchCallback;
 
   // pool
   const pool = app.pool;
@@ -145,13 +144,13 @@ const watchConnections = (app) => {
     const activeConnections = totalConnections - idleConnections;
     const waitingConnections = pool._connectionQueue?.length || 0;
 
-    // logs
-    console.log(methodName, 'time', new Date().getTime());
-    console.log(methodName, 'totalConnections', totalConnections);
-    console.log(methodName, 'idleConnections', idleConnections);
-    console.log(methodName, 'activeConnections', activeConnections);
-    console.log(methodName, 'waitingConnections', waitingConnections);
-    console.log();
+    // callback
+    watchCallback({
+      totalConnections,
+      idleConnections,
+      activeConnections,
+      waitingConnections,
+    });
   }, intervalTime);
 };
 
