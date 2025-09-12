@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-cos",
-  "version": "5.8.5",
+  "version": "5.8.6",
   "description": "qiao-z cos module",
   "keywords": [
     "qiao-z",
@@ -20,6 +20,6 @@
   "scripts": {},
   "dependencies": {
     "qiao-z-service": "^5.8.0",
-    "qiao-z-user": "^5.8.5"
+    "qiao-z-user": "^5.8.6"
   }
 }
