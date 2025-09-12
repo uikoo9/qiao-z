@@ -19,7 +19,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "qiao-z-service": "^5.8.0",
-    "qiao-z-user": "^5.8.6"
+    "qiao-z-service": "^5.8.0"
   }
 }

@@ -1,6 +1,3 @@
-// user
-const { checkUserAuthByReq } = require('qiao-z-user');
-
 // model
 const { listRecommend, changeRecommend, payRecommend } = require('../model/RecommendModel.js');
 
@@ -16,10 +13,6 @@ const logger = Logger('qiao-z-recommend');
  */
 exports.recommendList = async (req, res) => {
   const methodName = 'recommendList';
-
-  // check user
-  const checkUserRes = await checkUserAuthByReq(req, res);
-  if (!checkUserRes) return;
 
   // const
   const userId = req.query.userid || req.cookies.userid || req.headers.userid;
@@ -47,10 +40,6 @@ exports.recommendChange = async (req, res) => {
     res.jsonFail(msg);
     return;
   }
-
-  // check user
-  const checkUserRes = await checkUserAuthByReq(req, res);
-  if (!checkUserRes) return;
 
   // const
   const userId = req.query.userid || req.cookies.userid || req.headers.userid;
