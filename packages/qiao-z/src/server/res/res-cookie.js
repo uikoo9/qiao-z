@@ -11,16 +11,17 @@ import cookie from 'cookie';
  * @returns
  */
 export const setCookie = (res, key, value, maxAge, path) => {
-  // check
   if (!res || !key || !value) return;
+  const finalMaxAge = maxAge !== undefined ? maxAge : 60 * 60 * 24 * 7;
+  const finalPath = path !== undefined ? path : '/';
 
   res.response.setHeader(
     'Set-Cookie',
     cookie.serialize(key, String(value), {
       secure: true,
       sameSite: 'none',
-      maxAge: maxAge || 60 * 60 * 24 * 7, // 1 week
-      path: path || '/',
+      maxAge: finalMaxAge,
+      path: finalPath,
     }),
   );
 };

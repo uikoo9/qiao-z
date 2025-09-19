@@ -30,9 +30,9 @@
   "dependencies": {
     "art-template": "4.13.4",
     "cookie": "^1.0.2",
-    "debug": "^4.4.1",
+    "debug": "^4.4.3",
     "parseurl": "^1.3.3",
-    "qiao-file": "^5.0.0",
+    "qiao-file": "^5.0.1",
     "qiao-json": "^5.1.9",
     "qiao-ua": "^5.1.9",
     "qiao.log.js": "^3.7.5",
