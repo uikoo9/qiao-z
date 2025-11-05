@@ -21,9 +21,19 @@ const initController = async (app) => {
 
   // init
   serverFiles.files.forEach((serverFile) => {
-    if (/Controller\.js$/.test(serverFile.path) && serverFile.path.indexOf('node_modules') === -1) {
-      debug(methodName, 'filename', serverFile.path);
-      require(serverFile.path)(app);
+    let needCheckController = false;
+    const serverFilePath = serverFile.path;
+    const isShunJs = serverFilePath.indexOf('/@shun-js/') > -1;
+    const nodeModulesIndex = serverFilePath.match(/node_modules/g);
+    const nodeModulesLength = nodeModulesIndex ? nodeModulesIndex.length : 0;
+    if (nodeModulesLength === 0) needCheckController = true;
+    if (nodeModulesLength === 1 && isShunJs) needCheckController = true;
+    if (!needCheckController) return;
+
+    // check controller
+    if (/Controller\.js$/.test(serverFilePath)) {
+      debug(methodName, 'filename', serverFilePath);
+      require(serverFilePath)(app);
       debug(methodName, 'require success');
     }
   });
