@@ -23,13 +23,13 @@
     "gen": "npm run gen -w qiao-z-coder"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "ava": "^6.4.1",
     "husky": "^9.1.7",
-    "jsdom": "^27.0.0",
+    "jsdom": "^27.1.0",
     "lerna": "^8.2.4",
-    "lint-staged": "^16.1.6",
+    "lint-staged": "^16.2.6",
     "nx": "^20.7.2",
     "qiao-project": "^5.0.2"
   }

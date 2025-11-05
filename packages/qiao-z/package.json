@@ -40,7 +40,7 @@
     "raw-body": "^3.0.1"
   },
   "devDependencies": {
-    "qiao-llm": "^0.2.0",
+    "qiao-llm": "^0.2.5",
     "qiao-timer": "^5.8.4"
   },
   "nx": {

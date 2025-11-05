@@ -19,7 +19,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "dayjs": "^1.11.18",
+    "dayjs": "^1.11.19",
     "qiao-cache": "^5.1.9",
     "qiao-encode": "^5.0.1",
     "qiao-z-service": "^5.8.8",
