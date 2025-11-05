@@ -1,6 +1,6 @@
 {
   "name": "qiao-redis",
-  "version": "5.8.4",
+  "version": "5.8.9",
   "description": "nodejs redis cache",
   "keywords": [
     "nodejs",
