@@ -86,7 +86,7 @@ async function sendSubmailSMS(url, options) {
     return res.data;
   } catch (error) {
     logger.error(methodName, error);
-    resMsg.msg = error;
+    resMsg.msg = `request submail sms error, url is ${url}, options is ${JSON.stringify(options)}`;
     return resMsg;
   }
 }
