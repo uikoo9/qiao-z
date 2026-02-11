@@ -36,3 +36,4 @@ app.listen(port);
 ## 内置路由
 
 - `/user/login`: 用户登录
+- `/github/auth`: 跳转到github登录(nuser.initGithub)

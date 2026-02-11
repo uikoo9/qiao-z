@@ -4,6 +4,7 @@ const logger = Logger('qiao-z-nuser');
 
 // controller
 const userController = require('./src/controller/UserController.js');
+const githubController = require('./src/controller/GithubController.js');
 
 /**
  * init
@@ -18,4 +19,19 @@ exports.init = function (app) {
 
   // init controller
   userController(app);
+};
+
+/**
+ * initGithub
+ * @param {*} app qz app
+ */
+exports.initGithub = function (app) {
+  // check app
+  if (!app) {
+    logger.info('init', 'need app');
+    return;
+  }
+
+  // init controller
+  githubController(app);
 };
