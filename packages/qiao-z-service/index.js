@@ -177,6 +177,16 @@ const userCheck = async (options, headers) => {
   return await fetch(options.url + 'user/check', options, headers);
 };
 
+/**
+ * userGithub
+ * @param {*} options
+ * @param {*} headers
+ * @returns
+ */
+const userGithub = async (options, headers) => {
+  return await fetch(options.url + 'user/github', options, headers);
+};
+
 exports.addRecommend = addRecommend;
 exports.appUpdate = appUpdate;
 exports.changeRecommend = changeRecommend;
@@ -187,4 +197,5 @@ exports.listRecommend = listRecommend;
 exports.sendMsgToFeishu = sendMsgToFeishu;
 exports.sendSms = sendSms;
 exports.userCheck = userCheck;
+exports.userGithub = userGithub;
 exports.userLogin = userLogin;

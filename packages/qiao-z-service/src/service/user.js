@@ -19,3 +19,13 @@ export const userLogin = async (options) => {
 export const userCheck = async (options, headers) => {
   return await fetch(options.url + 'user/check', options, headers);
 };
+
+/**
+ * userGithub
+ * @param {*} options
+ * @param {*} headers
+ * @returns
+ */
+export const userGithub = async (options, headers) => {
+  return await fetch(options.url + 'user/github', options, headers);
+};
