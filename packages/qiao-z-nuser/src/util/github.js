@@ -1,12 +1,12 @@
-// encode
-const { uuid } = require('qiao-encode');
+// crypto
+const crypto = require('crypto');
 
 /**
  * getGitHubAuthUrl
  * @returns
  */
 exports.getGitHubAuthUrl = () => {
-  const state = uuid();
+  const state = crypto.randomBytes(16).toString('hex');
   const params = new URLSearchParams({
     client_id: global.QZ_CONFIG.github.clientID,
     redirect_uri: global.QZ_CONFIG.github.callbackUrl,
