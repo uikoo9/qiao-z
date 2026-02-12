@@ -70,7 +70,9 @@ exports.githubCallback = async (req, res) => {
 
   // r
   if (json.type === 'success') {
-    res.redirect(`${fallbackUrl}`);
+    // params
+    const params = new URLSearchParams(json.obj);
+    res.redirect(`${fallbackUrl}?${params.toString()}`);
   } else {
     res.redirect(fallbackUrl);
   }
