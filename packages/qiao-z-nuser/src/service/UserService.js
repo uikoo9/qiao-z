@@ -12,6 +12,7 @@ exports.userLoginFn = async (req, res) => {
     url: global.QZ_CONFIG.user.url,
     appId: global.QZ_CONFIG.user.appId,
     appKey: global.QZ_CONFIG.user.appKey,
+    from: global.QZ_CONFIG.user.from,
     mobile: req.body.mobile,
     code: req.body.code,
   });
