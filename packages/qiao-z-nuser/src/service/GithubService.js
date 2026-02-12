@@ -65,6 +65,7 @@ exports.githubCallback = async (req, res) => {
   // send
   const json = await userGithub({
     url: global.QZ_CONFIG.user.url,
+    from: global.QZ_CONFIG.user.from,
     code: queryCode,
   });
 
