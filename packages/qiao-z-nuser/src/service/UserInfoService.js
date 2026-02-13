@@ -10,7 +10,7 @@ exports.userInfoFn = async (req, res) => {
   // send
   const json = await userInfo({
     url: global.QZ_CONFIG.user.url,
-    userid: req.body.userid,
+    userid: req.headers.userid,
   });
 
   // send
