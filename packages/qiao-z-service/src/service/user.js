@@ -21,6 +21,16 @@ export const userCheck = async (options, headers) => {
 };
 
 /**
+ * userInfo
+ * @param {*} options
+ * @param {*} headers
+ * @returns
+ */
+export const userInfo = async (options, headers) => {
+  return await fetch(options.url + 'user/info', options, headers);
+};
+
+/**
  * userGithub
  * @param {*} options
  * @param {*} headers

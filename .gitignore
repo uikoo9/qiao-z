@@ -178,5 +178,6 @@ dist
 
 ## -- qiao-nodejs --
 .nx
+.npmrc
 config.json
 packages/qiao-log/__tests__/*.log

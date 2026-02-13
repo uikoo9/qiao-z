@@ -178,6 +178,16 @@ const userCheck = async (options, headers) => {
 };
 
 /**
+ * userInfo
+ * @param {*} options
+ * @param {*} headers
+ * @returns
+ */
+const userInfo = async (options, headers) => {
+  return await fetch(options.url + 'user/info', options, headers);
+};
+
+/**
  * userGithub
  * @param {*} options
  * @param {*} headers
@@ -198,4 +208,5 @@ exports.sendMsgToFeishu = sendMsgToFeishu;
 exports.sendSms = sendSms;
 exports.userCheck = userCheck;
 exports.userGithub = userGithub;
+exports.userInfo = userInfo;
 exports.userLogin = userLogin;
