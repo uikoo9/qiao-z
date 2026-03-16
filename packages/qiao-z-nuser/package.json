@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-nuser",
-  "version": "5.9.8",
+  "version": "5.9.9",
   "description": "qiao-z new user module",
   "keywords": [
     "qiao-z",
@@ -19,6 +19,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "qiao-z-service": "^5.9.7"
+    "qiao-z-service": "^5.9.9"
   }
 }
