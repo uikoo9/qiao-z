@@ -30,7 +30,6 @@ const fetch = async (url, data, headers) => {
       return json.fail(`res.status is ${res.status}`);
     }
     if (res.data.type !== 'success') {
-      logger.error(methodName, 'res', res);
       return json.fail(res.data.msg);
     }
 
