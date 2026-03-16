@@ -559,12 +559,13 @@ const redirect = (res, url) => {
  * res.send
  * @param {*} res
  * @param {*} msg
+ * @param {*} mimetype
  * @returns
  */
-const send = (res, msg) => {
+const send = (res, msg, mimetype) => {
   if (!res || msg === undefined) return;
 
-  res.head(200, { 'Content-Type': 'text/plain' });
+  res.head(200, { 'Content-Type': mimetype || 'text/plain' });
   res.end(msg);
 };
 
@@ -1007,8 +1008,8 @@ const handleRes = (request, response, plugins) => {
   };
 
   // send
-  res.send = (msg) => {
-    send(res, msg);
+  res.send = (msg, mimetype) => {
+    send(res, msg, mimetype);
   };
 
   // html

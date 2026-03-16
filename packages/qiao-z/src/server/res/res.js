@@ -43,8 +43,8 @@ const handleRes = (request, response, plugins) => {
   };
 
   // send
-  res.send = (msg) => {
-    send(res, msg);
+  res.send = (msg, mimetype) => {
+    send(res, msg, mimetype);
   };
 
   // html
