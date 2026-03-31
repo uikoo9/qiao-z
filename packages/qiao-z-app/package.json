@@ -1,6 +1,6 @@
 {
   "name": "qiao-z-app",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "qiao-z app module",
   "keywords": [
     "qiao-z",
@@ -19,6 +19,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "qiao-z-service": "^6.0.0"
+    "qiao-z-service": "^6.0.1"
   }
 }
