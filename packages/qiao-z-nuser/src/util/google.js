@@ -8,7 +8,7 @@ const crypto = require('crypto');
 exports.getGoogleAuthUrl = () => {
   const state = crypto.randomBytes(16).toString('hex');
   const params = new URLSearchParams({
-    client_id: global.QZ_CONFIG.google.clientId,
+    client_id: global.QZ_CONFIG.google.clientID,
     redirect_uri: global.QZ_CONFIG.google.callbackUrl,
     response_type: 'code',
     scope: 'openid email profile',
