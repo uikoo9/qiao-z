@@ -6,6 +6,7 @@ const logger = Logger('qiao-z-nuser');
 const userController = require('./src/controller/UserController.js');
 const userInfoController = require('./src/controller/UserInfoController.js');
 const githubController = require('./src/controller/GithubController.js');
+const googleController = require('./src/controller/GoogleController.js');
 
 /**
  * init
@@ -50,4 +51,19 @@ exports.initGithub = function (app) {
 
   // init controller
   githubController(app);
+};
+
+/**
+ * initGoogle
+ * @param {*} app qz app
+ */
+exports.initGoogle = function (app) {
+  // check app
+  if (!app) {
+    logger.info('init', 'need app');
+    return;
+  }
+
+  // init controller
+  googleController(app);
 };

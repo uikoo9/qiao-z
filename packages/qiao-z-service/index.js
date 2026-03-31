@@ -196,6 +196,16 @@ const userGithub = async (options, headers) => {
   return await fetch(options.url + 'user/github', options, headers);
 };
 
+/**
+ * userGoogle
+ * @param {*} options
+ * @param {*} headers
+ * @returns
+ */
+const userGoogle = async (options, headers) => {
+  return await fetch(options.url + 'user/google', options, headers);
+};
+
 exports.addRecommend = addRecommend;
 exports.appUpdate = appUpdate;
 exports.changeRecommend = changeRecommend;
@@ -207,5 +217,6 @@ exports.sendMsgToFeishu = sendMsgToFeishu;
 exports.sendSms = sendSms;
 exports.userCheck = userCheck;
 exports.userGithub = userGithub;
+exports.userGoogle = userGoogle;
 exports.userInfo = userInfo;
 exports.userLogin = userLogin;

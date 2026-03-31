@@ -39,3 +39,13 @@ export const userInfo = async (options, headers) => {
 export const userGithub = async (options, headers) => {
   return await fetch(options.url + 'user/github', options, headers);
 };
+
+/**
+ * userGoogle
+ * @param {*} options
+ * @param {*} headers
+ * @returns
+ */
+export const userGoogle = async (options, headers) => {
+  return await fetch(options.url + 'user/google', options, headers);
+};
