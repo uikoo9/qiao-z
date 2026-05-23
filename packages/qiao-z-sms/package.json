@@ -19,7 +19,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "qiao-encode": "^5.0.1",
+    "qiao-encode": "^5.0.6",
     "qiao-z-service": "^6.0.1"
   }
 }

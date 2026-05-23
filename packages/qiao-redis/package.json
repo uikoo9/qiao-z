@@ -26,7 +26,7 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "ioredis": "^5.8.2",
+    "ioredis": "^5.10.1",
     "qiao.log.js": "^3.7.5"
   },
   "nx": {

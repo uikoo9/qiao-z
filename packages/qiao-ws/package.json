@@ -26,10 +26,10 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "bufferutil": "^4.0.9",
+    "bufferutil": "^4.1.0",
     "qiao.log.js": "^3.7.5",
-    "utf-8-validate": "^6.0.5",
-    "ws": "^8.18.3"
+    "utf-8-validate": "^6.0.6",
+    "ws": "^8.21.0"
   },
   "nx": {
     "namedInputs": {
