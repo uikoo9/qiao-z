@@ -13,7 +13,9 @@ exports.userInfoFn = async (req, res) => {
       url: global.QZ_CONFIG.user.url,
       userid: req.headers.userid,
     },
-    req.headers,
+    {
+      userid: req.headers.userid,
+    },
   );
 
   // send
