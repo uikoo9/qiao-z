@@ -179,31 +179,37 @@ const userCheck = async (options, headers) => {
 /**
  * userInfo
  * @param {*} options
- * @param {*} headers
  * @returns
  */
-const userInfo = async (options, headers) => {
-  return await fetch(options.url + 'user/info', options, headers);
+const userInfo = async (options) => {
+  return await fetch(options.url + 'user/info', options);
+};
+
+/**
+ * userSearch
+ * @param {*} options
+ * @returns
+ */
+const userSearch = async (options) => {
+  return await fetch(options.url + 'user/search', options);
 };
 
 /**
  * userGithub
  * @param {*} options
- * @param {*} headers
  * @returns
  */
-const userGithub = async (options, headers) => {
-  return await fetch(options.url + 'user/github', options, headers);
+const userGithub = async (options) => {
+  return await fetch(options.url + 'user/github', options);
 };
 
 /**
  * userGoogle
  * @param {*} options
- * @param {*} headers
  * @returns
  */
-const userGoogle = async (options, headers) => {
-  return await fetch(options.url + 'user/google', options, headers);
+const userGoogle = async (options) => {
+  return await fetch(options.url + 'user/google', options);
 };
 
 exports.addRecommend = addRecommend;
@@ -220,3 +226,4 @@ exports.userGithub = userGithub;
 exports.userGoogle = userGoogle;
 exports.userInfo = userInfo;
 exports.userLogin = userLogin;
+exports.userSearch = userSearch;

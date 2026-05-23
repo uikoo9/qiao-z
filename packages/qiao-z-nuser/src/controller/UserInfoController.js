@@ -9,4 +9,9 @@ module.exports = (app) => {
   app.post('/user/info', (req, res) => {
     service.userInfoFn(req, res);
   });
+
+  // /user/search
+  app.post('/user/search', (req, res) => {
+    service.userSearchFn(req, res);
+  });
 };

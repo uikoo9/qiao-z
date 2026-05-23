@@ -23,29 +23,35 @@ export const userCheck = async (options, headers) => {
 /**
  * userInfo
  * @param {*} options
- * @param {*} headers
  * @returns
  */
-export const userInfo = async (options, headers) => {
-  return await fetch(options.url + 'user/info', options, headers);
+export const userInfo = async (options) => {
+  return await fetch(options.url + 'user/info', options);
+};
+
+/**
+ * userSearch
+ * @param {*} options
+ * @returns
+ */
+export const userSearch = async (options) => {
+  return await fetch(options.url + 'user/search', options);
 };
 
 /**
  * userGithub
  * @param {*} options
- * @param {*} headers
  * @returns
  */
-export const userGithub = async (options, headers) => {
-  return await fetch(options.url + 'user/github', options, headers);
+export const userGithub = async (options) => {
+  return await fetch(options.url + 'user/github', options);
 };
 
 /**
  * userGoogle
  * @param {*} options
- * @param {*} headers
  * @returns
  */
-export const userGoogle = async (options, headers) => {
-  return await fetch(options.url + 'user/google', options, headers);
+export const userGoogle = async (options) => {
+  return await fetch(options.url + 'user/google', options);
 };
