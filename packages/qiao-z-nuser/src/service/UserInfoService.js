@@ -8,15 +8,10 @@ const { userInfo } = require('qiao-z-service');
  */
 exports.userInfoFn = async (req, res) => {
   // send
-  const json = await userInfo(
-    {
-      url: global.QZ_CONFIG.user.url,
-      userid: req.headers.userid,
-    },
-    {
-      userid: req.headers.userid,
-    },
-  );
+  const json = await userInfo({
+    url: global.QZ_CONFIG.user.url,
+    userid: req.headers.userid,
+  });
 
   // send
   res.json(json);
